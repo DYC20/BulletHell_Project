@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aa456e2a0cd0f242acf9f0a34127cb0, type: 3}
   m_Name: Sniper_01_ProjectileConfig
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileConfigSO
-  damage: 1
+  ammoType: 0
+  ammoPerShot: 1
+  damage: 10
   speed: 18
   lifetime: 1.2
   destroyOnHit: 1

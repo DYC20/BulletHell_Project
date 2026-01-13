@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 1860067411817801725}
   - component: {fileID: 8300974754029284164}
   m_Layer: 0
-  m_Name: VFXG_Smoke_01
+  m_Name: VFXG__01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -540,7 +540,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5a03a9e44f0b11b40940acff95512241, type: 2}
+  - {fileID: 2100000, guid: 9cf54021420d9584ea4bde2e866e1b52, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -589,7 +589,7 @@ GameObject:
   - component: {fileID: 4617696185290520617}
   - component: {fileID: 4530344942465681658}
   m_Layer: 0
-  m_Name: Projectile_BulletStandard 1
+  m_Name: Projectile_BulletUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -665,7 +665,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 30b20d07ee8a64740a662ddd4fc4abc8, type: 3}
-  m_Color: {r: 0.71875274, g: 0.735849, b: 0.19090424, a: 1}
+  m_Color: {r: 0.96996236, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
@@ -929,8 +929,8 @@ Transform:
   m_GameObject: {fileID: 9081968317359800796}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0044, y: -0.039, z: 0}
-  m_LocalScale: {x: 0.21036513, y: 0.38734427, z: 0.2391}
+  m_LocalPosition: {x: -0.0013, y: -0.038899995, z: 0}
+  m_LocalScale: {x: 0.23383626, y: 0.40297988, z: 0.2391}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3555076057351509061}
@@ -961,7 +961,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 557b1d9ef9af6ac448a16f4f00453c34, type: 2}
+  - {fileID: 2100000, guid: 09c2ac91a9266624e9b59eff21751f8e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

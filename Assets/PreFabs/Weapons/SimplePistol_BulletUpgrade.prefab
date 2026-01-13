@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 4245128646552802643}
   - component: {fileID: 3876630089003948474}
   m_Layer: 0
-  m_Name: SimplePistol
+  m_Name: SimplePistol_BulletUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +118,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.4575472, b: 0.4575472, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -154,9 +154,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimplePistol
   firePoint: {fileID: 6907175310484751001}
-  shotsPerSecond: 4
-  projectileId: 0
-  projectileConfig: {fileID: 11400000, guid: cb8650d02a64b4e4081594d24b58320a, type: 2}
+  shotsPerSecond: 6
+  projectileId: 1
+  projectileConfig: {fileID: 11400000, guid: 80fa68fe217061f4eaeca1aaaa5159b2, type: 2}
   recoilImpulse: {fileID: 0}
   recoilStrength: 0.2
 --- !u!114 &4245128646552802643

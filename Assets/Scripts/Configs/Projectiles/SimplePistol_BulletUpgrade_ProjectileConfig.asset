@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9aa456e2a0cd0f242acf9f0a34127cb0, type: 3}
-  m_Name: SimplePistol_ProjectileConfig
+  m_Name: SimplePistol_BulletUpgrade_ProjectileConfig
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileConfigSO
   ammoType: 0
   ammoPerShot: 1
-  damage: 1
-  speed: 7
+  damage: 2
+  speed: 10
   lifetime: 3
   destroyOnHit: 0
   impactEffect: {fileID: 429630121617948818, guid: e4b83454776503d4c8e5b9a9570bd912, type: 3}
