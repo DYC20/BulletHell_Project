@@ -7,6 +7,8 @@ public class PooledProjectile : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private ProjectileMovement kinematics;
     [SerializeField] private ProjectileHitEffect hitEffect;
+    [SerializeField] private ProjectileShootEffect shootEffect;
+
 
     private ProjectilePool _pool;
 
@@ -23,6 +25,7 @@ public class PooledProjectile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         kinematics = GetComponent<ProjectileMovement>();
         hitEffect = GetComponent<ProjectileHitEffect>();
+        shootEffect = GetComponent<ProjectileShootEffect>();
     }
 
     private void OnEnable()
@@ -46,6 +49,12 @@ public class PooledProjectile : MonoBehaviour
             kinematics.Apply(rb, config, direction);
         else if (rb != null && config != null)
             rb.linearVelocity = direction.normalized * config.speed;
+
+        if (shootEffect != null)
+        {
+            shootEffect.Apply(_config.shootEffect, _owner.transform.position, _owner.transform.rotation);
+            Debug.Log("ShootEffect Applied"+_owner.name);
+        }
     }
 
     private void Update()

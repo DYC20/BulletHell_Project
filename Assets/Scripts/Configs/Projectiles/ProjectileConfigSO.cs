@@ -22,6 +22,9 @@ public class ProjectileConfigSO : ScriptableObject
     
     [Header("Hit Effect")]
     public VisualEffect impactEffect;
+    
+    [Header("Shoot Effect")]
+    public VisualEffect shootEffect;
 
     [Tooltip("If enabled, projectile will ignore targets on same team as owner.")]
     public bool preventFriendlyFire = true;
