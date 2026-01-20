@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 4617696185290520617}
   - component: {fileID: 4530344942465681658}
   - component: {fileID: 6914143285634286568}
-  - component: {fileID: 4907884122978986227}
-  - component: {fileID: 8681357516744176684}
   m_Layer: 0
   m_Name: BulletBase
   m_TagString: Untagged
@@ -82,8 +80,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1773462389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
@@ -172,33 +170,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f3974048596684aa5d302312f59766, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BulletMovement
-  speed: 15
---- !u!114 &4907884122978986227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5472023798288352605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d05f0d4f5582d8347a82ea69a7b75300, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::projectileDamage
-  damage: 10
-  lifetime: 5
-  owner: {fileID: 0}
---- !u!114 &8681357516744176684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5472023798288352605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f65df83a786c364c8512186d57a246b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PooledBullet
-  pool: {fileID: 0}
-  lifetime: 5

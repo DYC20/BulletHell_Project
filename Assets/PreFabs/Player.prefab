@@ -37,7 +37,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: -0.48050666, w: 0.8769911}
   m_LocalPosition: {x: -0.24481028, y: 0.13413136, z: 0}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1819663273497137966}
@@ -57,10 +57,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   speed: 6
-  rotationSpeed: 60
   accel: 90
   decel: 120
   turnBoost: 2
+  weaponHolder: {fileID: 1819663273497137966}
+  holderRotationSpeed: 25
+  playerRenderer: {fileID: 3295990972532290228}
+  spriteUp: {fileID: 5000927251509650613, guid: 1b5b7b1184d4a944fb567458ceb42f53, type: 3}
+  spriteRight: {fileID: 5895540913150188443, guid: 6e50dca168c279f4982fbb12f982a8a8, type: 3}
+  spriteDown: {fileID: 9040879190431018056, guid: eafd55ccd74c3844e9357a507a43314e, type: 3}
+  spriteLeft: {fileID: 4699842155992170130, guid: a371714ea223fe140ac3d85033f59be4, type: 3}
 --- !u!114 &1270092636334221037
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,16 +214,16 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1773462389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 9040879190431018056, guid: eafd55ccd74c3844e9357a507a43314e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.75, y: 5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -354,7 +360,7 @@ Transform:
   m_GameObject: {fileID: 2360986955400251495}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4968, z: 0}
+  m_LocalPosition: {x: -0.349, y: -0.38, z: 0}
   m_LocalScale: {x: 0.8212, y: 0.8212, z: 0.8212}
   m_ConstrainProportionsScale: 0
   m_Children: []

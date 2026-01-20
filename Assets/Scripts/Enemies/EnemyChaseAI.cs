@@ -2,7 +2,12 @@ using UnityEngine;
 
 public class EnemyChaseAI : MonoBehaviour
 {
-   [Header("Target")]
+    [Header("Directional Sprites (4-way)")]
+    [SerializeField] private SpriteRenderer renderer; // assign in Inspector
+    [SerializeField] private Sprite spriteLeft;
+    [SerializeField] private Sprite spriteRight;
+    
+    [Header("Target")]
     [SerializeField] private Transform player;           // assign in Inspector (recommended)
     [SerializeField] private string playerTag = "Player"; // fallback if not assigned
 
@@ -70,8 +75,18 @@ public class EnemyChaseAI : MonoBehaviour
             float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg -90;
 
             // smooth rotation with fixed timestep
-            float z = Mathf.LerpAngle(rb.rotation, targetAngle, ratationSpeed * Time.fixedDeltaTime);
-            rb.MoveRotation(z);
+           // float z = Mathf.LerpAngle(rb.rotation, targetAngle, ratationSpeed * Time.fixedDeltaTime);
+            //rb.MoveRotation(z);
+            
+            if (renderer != null)
+            {
+                // angle where: right=0, up=90, left=180/-180, down=-90
+               // float a = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+                // 4-way thresholds at 45 degrees
+                if (targetAngle >= -180f && targetAngle < 180f)              renderer.sprite = spriteRight;
+                else                                   renderer.sprite = spriteLeft;
+            }
         }
     }
     /*

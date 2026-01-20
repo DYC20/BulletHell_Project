@@ -162,8 +162,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1773462389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
@@ -188,6 +188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10db39c2f5425fe4788450c5c6f31a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  renderer: {fileID: 0}
+  spriteLeft: {fileID: 0}
+  spriteRight: {fileID: 0}
   player: {fileID: 0}
   playerTag: Player
   moveSpeed: 3.5
@@ -206,7 +209,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ContactDamage
   damage: 10
   hitCooldown: 0.5
-  playerTag: Player
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  preventFriendlyFire: 1
+  overrideAttackerTeam: 1
+  useOverrideTeam: 1
+  damageEnabled: 1
 --- !u!114 &4512831738462525030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,7 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1977cdc2352fe174ea1340bc696da058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
-  maxHP: 100
+  team: 0
+  maxHealth: 5
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -235,6 +245,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1463634952154556267
 MonoBehaviour:
   m_ObjectHideFlags: 0

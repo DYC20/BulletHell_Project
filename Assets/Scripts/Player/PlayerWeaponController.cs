@@ -9,6 +9,7 @@ public class PlayerWeaponController : MonoBehaviour,IWeaponEquipper
     [SerializeField] private WeaponBase equippedWeapon;
 
     private bool _isFiring;
+    public Transform CurrentFirePoint { get; private set; }
     
     private void Awake()
     {
@@ -28,6 +29,7 @@ public class PlayerWeaponController : MonoBehaviour,IWeaponEquipper
         {
             Debug.Log($"Equipped weapon: {equippedWeapon.name}");
             equippedWeapon.SetOwner(gameObject, Teams.Player);
+            
         }
             
     }
@@ -57,6 +59,8 @@ public class PlayerWeaponController : MonoBehaviour,IWeaponEquipper
 
         var weapon = weaponGO.GetComponent<WeaponBase>();
         Equip(weapon);
+        
+        CurrentFirePoint = (weapon != null) ? weapon.FirePoint : null;
     }
 
     

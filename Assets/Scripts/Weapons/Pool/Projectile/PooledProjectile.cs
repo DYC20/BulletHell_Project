@@ -36,7 +36,7 @@ public class PooledProjectile : MonoBehaviour
 
     public void AssignPool(ProjectilePool pool) => _pool = pool;
 
-    public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction)
+    public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction, Transform spawnTf)
     {
         _owner = owner;
         _ownerTeam = ownerTeam;
@@ -50,9 +50,9 @@ public class PooledProjectile : MonoBehaviour
         else if (rb != null && config != null)
             rb.linearVelocity = direction.normalized * config.speed;
 
-        if (shootEffect != null)
+        if (shootEffect != null && _config != null && spawnTf != null)
         {
-            shootEffect.Apply(_config.shootEffect, _owner.transform.position, _owner.transform.rotation);
+            shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
             Debug.Log("ShootEffect Applied"+_owner.name);
         }
     }

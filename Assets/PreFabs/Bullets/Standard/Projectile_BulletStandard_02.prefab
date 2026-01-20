@@ -141,6 +141,7 @@ MonoBehaviour:
   rb: {fileID: 3250106613970485413}
   kinematics: {fileID: 4124142701063531577}
   hitEffect: {fileID: 5580016079290541308}
+  shootEffect: {fileID: 0}
 --- !u!50 &3250106613970485413
 Rigidbody2D:
   serializedVersion: 5
@@ -582,8 +583,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1773462389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 253005588072490991, guid: 4bf9073c0bccded4c9f787670960c572, type: 3}
@@ -673,8 +674,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1773462389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 253005588072490991, guid: 4bf9073c0bccded4c9f787670960c572, type: 3}

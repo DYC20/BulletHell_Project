@@ -184,11 +184,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1773462389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 1108981373729593120, guid: 48799aba08cafe14f95c9d3a6a1b912a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -210,6 +210,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10db39c2f5425fe4788450c5c6f31a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  renderer: {fileID: 8231304215381964811}
+  spriteLeft: {fileID: -2992012109108649277, guid: 5ea652866f5baca4baaca860bfdcf1cc, type: 3}
+  spriteRight: {fileID: 1108981373729593120, guid: 48799aba08cafe14f95c9d3a6a1b912a, type: 3}
   player: {fileID: 0}
   playerTag: Player
   moveSpeed: 3.5
@@ -264,6 +267,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1463634952154556267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,7 +321,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.97, y: 0.925}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -349,4 +355,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

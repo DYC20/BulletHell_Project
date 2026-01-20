@@ -12,6 +12,8 @@ public abstract class WeaponBase : MonoBehaviour
     protected IAmmoConsumer ammoConsumer;
 
     private float _nextFireTime;
+    
+    public Transform FirePoint => firePoint;
 
     public void SetOwner(GameObject ownerGo, Teams team)
     {
