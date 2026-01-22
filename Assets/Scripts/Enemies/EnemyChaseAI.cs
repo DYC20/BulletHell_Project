@@ -12,7 +12,7 @@ public class EnemyChaseAI : MonoBehaviour
     [SerializeField] private string playerTag = "Player"; // fallback if not assigned
 
     [Header("Movement")]
-    [SerializeField] private float moveSpeed = 3.5f;
+    [SerializeField] public float moveSpeed = 3.5f;
     [SerializeField] private float ratationSpeed = 3.5f;
 /*  [Header("Contact Damage")]
     [SerializeField] private float contactDamage = 10f;

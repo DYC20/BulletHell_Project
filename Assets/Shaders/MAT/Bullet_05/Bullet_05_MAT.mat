@@ -55,10 +55,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _Clip: 0.26
+    - _Noise_Power: 3.78
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _Color: {r: 1.6055588, g: 1.6055588, b: 1.6055588, a: 0}
+    - _Color: {r: 1.6055586, g: 1.6055586, b: 1.6055586, a: 0}
+    - _Main_Tex_Scale: {r: 1, g: 1, b: 0, a: 0}
+    - _Noise_Scale: {r: 1, g: 1, b: 0, a: 0}
+    - _Noise_Speed: {r: 0.5, g: 0, b: 0, a: 0}
+    - _Sofs_Tex_Scale: {r: 1.5, g: 1.5, b: 0, a: 0}
     - _Speed: {r: 0.7, g: 0, b: 0, a: 0}
     - _Vector2: {r: -35.41, g: -42.84, b: 0, a: 0}
   m_BuildTextureStacks: []

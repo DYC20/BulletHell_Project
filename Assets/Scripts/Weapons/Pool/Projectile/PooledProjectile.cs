@@ -1,5 +1,8 @@
+using System;
 using UnityEngine;
 using UnityEngine.VFX;
+using System.Collections.Generic;
+using Unity.VisualScripting;
 
 [RequireComponent(typeof(Collider2D))]
 public class PooledProjectile : MonoBehaviour
@@ -8,6 +11,10 @@ public class PooledProjectile : MonoBehaviour
     [SerializeField] private ProjectileMovement kinematics;
     [SerializeField] private ProjectileHitEffect hitEffect;
     [SerializeField] private ProjectileShootEffect shootEffect;
+    
+    [SerializeField]  private Renderer renderer;
+    private MaterialPropertyBlock mpb;
+   
 
 
     private ProjectilePool _pool;
@@ -15,13 +22,23 @@ public class PooledProjectile : MonoBehaviour
     // Runtime state
     private GameObject _owner;
     private Teams _ownerTeam;
+    
     private ProjectileConfigSO _config;
-    private int _remainingPierce;
+    private ProjectileStats _stats;
+    private List<ProjectileModifierSO> _mods;
 
+    private int _remainingPierce;
     private float _lifeTimer;
+
+    private void Awake()
+    {
+        if (renderer == null) renderer = GetComponent<Renderer>();
+        mpb ??= new MaterialPropertyBlock();
+    }
 
     private void Reset()
     {
+        renderer = GetComponent<Renderer>();
         rb = GetComponent<Rigidbody2D>();
         kinematics = GetComponent<ProjectileMovement>();
         hitEffect = GetComponent<ProjectileHitEffect>();
@@ -36,12 +53,36 @@ public class PooledProjectile : MonoBehaviour
 
     public void AssignPool(ProjectilePool pool) => _pool = pool;
 
-    public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction, Transform spawnTf)
+    public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction, Transform spawnTf,
+        IReadOnlyList<ProjectileModifierSO> modifiers)
     {
         _owner = owner;
         _ownerTeam = ownerTeam;
         _config = config;
         _remainingPierce = config != null ? config.pierceCount : 0;
+        //Set Modifiers
+        _stats = ProjectileStatsBuilder.FromConfig(config);
+        _mods = modifiers != null ? new List<ProjectileModifierSO>(modifiers) : null;
+        Color _baseColor = renderer.material.color;
+        
+        if (_mods != null)
+            for (int i = 0; i < _mods.Count; i++)
+                _mods[i].ModifyStats(ref _stats);
+        
+        if (mpb != null && _mods != null)
+        {
+            renderer.GetPropertyBlock(mpb);
+            mpb.Clear();
+            
+            mpb.SetColor("_Color", _baseColor);
+            mpb.GetColor("_Color"); // reset baseline
+            for (int i = 0; i < _mods.Count; i++)
+                _mods[i].ApplyVisuals(mpb);
+            Debug.Log($"Applying MPB color: {mpb.GetVector("_Color")} to {name}");
+            renderer.SetPropertyBlock(mpb);
+        }
+        
+        
 
         _lifeTimer = 0f;
 
@@ -97,8 +138,14 @@ public class PooledProjectile : MonoBehaviour
             hitEffect.Apply(_config.impactEffect, other.transform.position, other.transform.rotation);
             Debug.Log("HitEffect Applied");
         }
-        
-        
+
+        if (_mods != null)
+        {
+            for (int i = 0; i < _mods.Count; i++)
+                _mods[i].OnHit(other.gameObject, _owner.gameObject);
+            Debug.Log($"OnHit target: {other.gameObject.name}"+ "has been slowed");
+        }
+     
             
         /*
         if(impactEffect)
@@ -131,6 +178,10 @@ Debug.LogError("HitEffect NULL");*/
 
     public void Despawn()
     {
+        renderer.GetPropertyBlock(mpb);
+        mpb.Clear();
+        renderer.SetPropertyBlock(mpb);
+        
         // Stop physics motion to avoid “ghost velocity” on reuse
         if (rb != null)
             rb.linearVelocity = Vector2.zero;

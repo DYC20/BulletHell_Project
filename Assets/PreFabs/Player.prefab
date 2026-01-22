@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4659646963908602787}
   - component: {fileID: 7648055334554408466}
   - component: {fileID: 1270092636334221037}
+  - component: {fileID: 3387304630536963846}
   - component: {fileID: 9068079182792239901}
   - component: {fileID: 2126853010358055112}
   - component: {fileID: 7348839678402795322}
@@ -81,6 +82,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponController
   weaponSocket: {fileID: 1819663273497137966}
   equippedWeapon: {fileID: 0}
+--- !u!114 &3387304630536963846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1884716801075859592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dbd28673fdf47543952115218554e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileModifierSet
+  active: []
 --- !u!114 &9068079182792239901
 MonoBehaviour:
   m_ObjectHideFlags: 0

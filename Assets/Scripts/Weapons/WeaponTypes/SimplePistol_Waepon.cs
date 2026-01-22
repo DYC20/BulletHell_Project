@@ -69,7 +69,8 @@ public class SimplePistol_Waepon : WeaponBase
 
         // In your setup, firePoint.up should be your forward shooting direction.
         Vector2 fireDirection = firePoint.up;
-        proj.Init(owner, ownerTeam, projectileConfig, fireDirection, firePoint);
+        var mods = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
+        proj.Init(owner, ownerTeam, projectileConfig, fireDirection, firePoint, mods != null ? mods.Active : null);
         
 
         if (recoilImpulse != null)
