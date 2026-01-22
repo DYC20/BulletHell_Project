@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Upgrades/Projectile Modifiers/Freeze")]
-public class FreezeModifierSO : ProjectileModifierSO
+public class TargetMovementModifierSO : ProjectileModifierSO
 {
     [SerializeField, ColorUsage(true, true)] private Color tint ;
     [SerializeField] private float slowDuration = 1.5f;
@@ -15,9 +15,10 @@ public class FreezeModifierSO : ProjectileModifierSO
 
     public override void OnHit(GameObject target, GameObject instigator)
     {
-        var slow = target.GetComponentInParent<EnemyChaseAI>(); // your status system
-        if (slow != null)
-            slow.moveSpeed *= slowFactor;
+        var enemyAI = target.GetComponentInParent<EnemyChaseAI>(); // your status system
+        if (enemyAI != null)
+            
+            enemyAI.MoveSpeed *= slowFactor;
             //slow.ApplySlow(slowFactor, slowDuration);
     }
 }

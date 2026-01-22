@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2401572708906723957}
   - component: {fileID: 6789498977137230511}
   m_Layer: 0
-  m_Name: Freeze_Mod
+  m_Name: FreezeEnemy_Mod
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c66d198a13e38ad4ea0dbb4d9ff4c20d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FreezePickup
-  freezeConfig: {fileID: 11400000, guid: d577666556df97a49a4d26122eecb180, type: 2}
+  freezeConfig: {fileID: 11400000, guid: 870080ec09a9dcd41857a83fc73e3edc, type: 2}
   destroyAfterPickup: 1
 --- !u!70 &6789498977137230511
 CapsuleCollider2D:

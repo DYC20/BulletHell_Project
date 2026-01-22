@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FreezePickup : MonoBehaviour, IPickup
 {
-    [SerializeField] private FreezeModifierSO freezeConfig;
+    [SerializeField] private TargetMovementModifierSO freezeConfig;
     [SerializeField] private bool destroyAfterPickup = true;
 
     public bool CanPickup(GameObject picker)

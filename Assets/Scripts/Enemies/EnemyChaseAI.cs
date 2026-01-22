@@ -12,8 +12,13 @@ public class EnemyChaseAI : MonoBehaviour
     [SerializeField] private string playerTag = "Player"; // fallback if not assigned
 
     [Header("Movement")]
-    [SerializeField] public float moveSpeed = 3.5f;
+    [SerializeField] private float moveSpeed = 3.5f;
     [SerializeField] private float ratationSpeed = 3.5f;
+    public float MoveSpeed
+    {
+        get => moveSpeed;
+        set => moveSpeed = Mathf.Max(0f, value);
+    }
 /*  [Header("Contact Damage")]
     [SerializeField] private float contactDamage = 10f;
     [SerializeField] private float hitCooldown = 0.5f;   // seconds between hits while touching
