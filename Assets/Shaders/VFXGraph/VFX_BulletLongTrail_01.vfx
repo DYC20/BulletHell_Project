@@ -166,8 +166,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: -9
     y: -645
-    width: 5887
-    height: 2811
+    width: 5885
+    height: 2800
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -437,7 +437,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661614629}
-  m_UIPosition: {x: 705, y: 461}
+  m_UIPosition: {x: 705, y: 593}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -824,7 +824,7 @@ MonoBehaviour:
   m_Children:
   - {fileID: 8926484042661614584}
   - {fileID: 8926484042661614589}
-  m_UIPosition: {x: 705, y: 672}
+  m_UIPosition: {x: 705, y: 806}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -1945,7 +1945,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.1
+      m_SerializableObject: 0.07
     m_Space: -1
   m_Property:
     name: B
@@ -2100,7 +2100,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.25860926508903506,"g":1.7151490449905396,"b":12.348603248596192,"a":1.0},"time":0.0},{"color":{"r":2.046865224838257,"g":3.2275516986846926,"b":4.030425548553467,"a":1.0},"time":0.9174639582633972}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}],"gradientMode":0}'
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.031372521072626117,"g":0.20806892216205598,"b":1.4980392456054688,"a":1.0},"time":0.0},{"color":{"r":2.046865224838257,"g":3.2275516986846926,"b":4.030425548553467,"a":1.0},"time":0.9174639582633972}],"alphaKeys":[{"alpha":0.0,"time":0.0},{"alpha":1.0,"time":0.07336537539958954},{"alpha":1.0,"time":1.0}],"gradientMode":0}'
     m_Space: -1
   m_Property:
     name: gradient
@@ -2691,7 +2691,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: -90
+      m_SerializableObject: -180
     m_Space: -1
   m_Property:
     name: A
@@ -2725,7 +2725,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 90
+      m_SerializableObject: 180
     m_Space: -1
   m_Property:
     name: B
@@ -2903,7 +2903,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614675}
   - {fileID: 8926484042661614726}
   - {fileID: 8926484042661614858}
-  m_UIPosition: {x: 2154, y: -233}
+  m_UIPosition: {x: 2154, y: -173}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -4032,7 +4032,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614681}
   - {fileID: 8926484042661614796}
   - {fileID: 8926484042661614894}
-  m_UIPosition: {x: 2154, y: 793}
+  m_UIPosition: {x: 2154, y: 913}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -8847,7 +8847,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614964}
   - {fileID: 8926484042661614966}
   - {fileID: 8926484042661614968}
-  m_UIPosition: {x: 3698, y: 759}
+  m_UIPosition: {x: 3698, y: 819}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []

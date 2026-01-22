@@ -68,6 +68,12 @@ public class PooledProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.CompareTag("Walls"))
+        {
+            Despawn();
+            Debug.Log("Wall Collision");
+        }
+        
         if (_config == null) return;
 
         // Optional layer mask filter
@@ -91,6 +97,8 @@ public class PooledProjectile : MonoBehaviour
             hitEffect.Apply(_config.impactEffect, other.transform.position, other.transform.rotation);
             Debug.Log("HitEffect Applied");
         }
+        
+        
             
         /*
         if(impactEffect)
@@ -118,6 +126,8 @@ Debug.LogError("HitEffect NULL");*/
             Despawn();
         }
     }
+
+    
 
     public void Despawn()
     {

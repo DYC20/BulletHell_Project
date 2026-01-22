@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sniper_01_Halo_01_MAT
-  m_Shader: {fileID: -6465566751694194690, guid: 4f32d3f6e9c0efc4d81dd4343cac0c71, type: 3}
+  m_Name: Bullet_05_MAT
+  m_Shader: {fileID: -6465566751694194690, guid: a3c8b31454ac2a84bb1b3fccd9043fe5, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -25,11 +25,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b370a6bd3def41844bf62adaa3ed3773, type: 3}
+        m_Texture: {fileID: 2800000, guid: 39ad5d250c7dd9946ac6ae112acd04ff, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_7322c664c0b14d85940f04f216f766c0_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 50bf8ab49507cb645b18e1d3e20764aa, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Soft:
+        m_Texture: {fileID: 2800000, guid: 69c6b504c62bd6043817b6d9b5cd2c8f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: 576982e91ab6cc5458c8f05fb756c63c, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -46,20 +54,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Edge_Width: 4.47
-    - _Glow_Strength: 0
+    - _Clip: 0.26
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Tint_Amount: 0.5
     m_Colors:
-    - White: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Emissive_Color: {r: 23.96863, g: 4.264012, b: 0, a: 1}
-    - _HaloLocation: {r: 0.5, g: 0.55, b: 0, a: 0}
-    - _HaloScale: {r: -0.12, g: -0.05, b: 0, a: 0}
+    - _Color: {r: 1.6055588, g: 1.6055588, b: 1.6055588, a: 0}
+    - _Speed: {r: 0.7, g: 0, b: 0, a: 0}
+    - _Vector2: {r: -35.41, g: -42.84, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &3790221561004667554
+--- !u!114 &5649903503397311264
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
