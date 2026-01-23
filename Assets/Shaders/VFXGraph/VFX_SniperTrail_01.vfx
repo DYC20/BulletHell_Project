@@ -16,7 +16,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661614557}
-  m_UIPosition: {x: 705, y: -478}
+  m_UIPosition: {x: 703, y: -541}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -86,10 +86,10 @@ MonoBehaviour:
   - title: Minimal
     position:
       serializedVersion: 2
-      x: 680
-      y: -537
-      width: 476
-      height: 1481
+      x: 664
+      y: -600
+      width: 490
+      height: 1531
     contents:
     - model: {fileID: 114023846229194376}
       id: 0
@@ -166,9 +166,9 @@ MonoBehaviour:
   uiBounds:
     serializedVersion: 2
     x: -9
-    y: -583
+    y: -601
     width: 4059
-    height: 2589
+    height: 2607
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children:
   - {fileID: 8926484042661614629}
-  m_UIPosition: {x: 705, y: 806}
+  m_UIPosition: {x: 703, y: 735}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -575,7 +575,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615562}
   - {fileID: 8926484042661614631}
   - {fileID: 8926484042661615320}
-  m_UIPosition: {x: 705, y: -205}
+  m_UIPosition: {x: 689, y: -280}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
@@ -678,8 +678,8 @@ VisualEffectResource:
       shadowCastingMode: 1
     m_CullingFlags: 3
     m_UpdateMode: 0
-    m_PreWarmDeltaTime: 0.1
-    m_PreWarmStepCount: 1
+    m_PreWarmDeltaTime: 0.15000002
+    m_PreWarmStepCount: 20
     m_InitialEventName: OnPlay
     m_InstancingMode: 0
     m_InstancingCapacity: 64

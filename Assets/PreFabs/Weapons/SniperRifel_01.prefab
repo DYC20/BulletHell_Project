@@ -43,6 +43,8 @@ GameObject:
   - component: {fileID: 2792846607914155463}
   - component: {fileID: 7028442816849000167}
   - component: {fileID: 4245128646552802643}
+  - component: {fileID: -8344795409528390355}
+  - component: {fileID: 3940092321410527907}
   m_Layer: 0
   m_Name: SniperRifel_01
   m_TagString: Untagged
@@ -138,11 +140,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimplePistol
   firePoint: {fileID: 6907175310484751001}
-  shotsPerSecond: 6
-  projectileId: 2
+  shotsPerSecond: 1
+  projectileId: 4
   projectileConfig: {fileID: 11400000, guid: 3240182682f184c46a7f92c4a64eb4df, type: 2}
   recoilImpulse: {fileID: 4245128646552802643}
-  recoilStrength: 0.2
+  recoilStrength: 1
 --- !u!114 &4245128646552802643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,3 +198,54 @@ MonoBehaviour:
     DissipationDistance: 100
     PropagationSpeed: 343
   DefaultVelocity: {x: 0, y: 0, z: 0}
+--- !u!114 &-8344795409528390355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5782139036240968308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a12568b8b2d1a644a7db1414d4ae42a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponPickup
+  weaponPrefab: {fileID: 5782139036240968308}
+  destroyAfterPickup: 1
+--- !u!70 &3940092321410527907
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5782139036240968308}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.14139843}
+  m_Size: {x: 0.9999999, y: 0.8601302}
+  m_Direction: 0

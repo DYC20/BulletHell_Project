@@ -14,13 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileConfigSO
   ammoType: 0
   ammoPerShot: 1
-  damage: 10
-  speed: 18
-  lifetime: 1.2
+  damage: 30
+  speed: 25
+  lifetime: 1
   destroyOnHit: 1
   impactEffect: {fileID: 429630121617948818, guid: e4b83454776503d4c8e5b9a9570bd912, type: 3}
+  shootEffect: {fileID: 3744974188407950299, guid: c58f384d5cbcfaf4e9840e3cc772d186, type: 3}
   preventFriendlyFire: 1
   hitMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  pierceCount: 0
+  pierceCount: 1

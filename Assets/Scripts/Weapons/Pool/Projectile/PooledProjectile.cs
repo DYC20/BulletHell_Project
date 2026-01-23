@@ -75,7 +75,6 @@ public class PooledProjectile : MonoBehaviour
             mpb.Clear();
             
             mpb.SetColor("_Color", _baseColor);
-            mpb.GetColor("_Color"); // reset baseline
             for (int i = 0; i < _mods.Count; i++)
                 _mods[i].ApplyVisuals(mpb);
             Debug.Log($"Applying MPB color: {mpb.GetVector("_Color")} to {name}");
