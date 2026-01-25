@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,21 +8,21 @@ public class ShiftPlayerLayer : MonoBehaviour
 {
     [SerializeField] GameObject highlandTilemapGO;
     [SerializeField] GameObject lowlandTilemapGO;
-    
+
 
     private int lowLayer;
     private int highLayer;
-    
+
     private readonly Dictionary<GameObject, int> _insideCount = new Dictionary<GameObject, int>();
 
 
     private void Awake()
     {
-        lowLayer  = LayerMask.NameToLayer("Player_Low");
+        lowLayer = LayerMask.NameToLayer("Player_Low");
         highLayer = LayerMask.NameToLayer("Player_High");
 
         if (lowLayer < 0 || highLayer < 0)
-            Debug.LogError("Missing Player_Low / Player_High layers. Check Tags & Layers.");
+            Debug.LogError("Missing Player_Low / Player_High lyers. Check Tags & Layers.");
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -64,7 +65,8 @@ public class ShiftPlayerLayer : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning($"ShiftPlayerLayer: Player root '{playerRoot.name}' is on unexpected layer {current} ({LayerMask.LayerToName(current)}).");
+            Debug.LogWarning(
+                $"ShiftPlayerLayer: Player root '{playerRoot.name}' is on unexpected layer {current} ({LayerMask.LayerToName(current)}).");
         }
 
         //LogLayers(playerRoot);
@@ -130,9 +132,11 @@ public class ShiftPlayerLayer : MonoBehaviour
     {
         Debug.LogWarning($"PLAYER ROOT: {root.name} | layer={LayerMask.LayerToName(root.layer)} ({root.layer})");
         foreach (Transform child in root.transform)
-            Debug.LogWarning($" └─ CHILD: {child.name} | layer={LayerMask.LayerToName(child.gameObject.layer)} ({child.gameObject.layer})");
+            Debug.LogWarning(
+                $" └─ CHILD: {child.name} | layer={LayerMask.LayerToName(child.gameObject.layer)} ({child.gameObject.layer})");
     }
-/// ///////////////////////////////////////////////////////////////
+}
+/// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
     private void Awake()
     {
@@ -267,4 +271,4 @@ public class ShiftPlayerLayer : MonoBehaviour
     }
 
 */
-}
+

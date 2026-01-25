@@ -61,10 +61,12 @@
     <Compile Include="Assets\Scripts\Weapons\Pool\PooledBullet.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\IAmmoConsumer.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHitFlash.cs" />
+    <Compile Include="Assets\Scripts\Enemies\GroundLayerAutoAssign.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\WeaponPickup.cs" />
     <Compile Include="Assets\Scripts\Configs\Modifiers\Backend\ProjectileModifierSO.cs" />
     <Compile Include="Assets\Scripts\Configs\Modifiers\Backend\ProjectileStatsBuilder.cs" />
     <Compile Include="Assets\Scripts\Configs\Modifiers\Backend\ProjectileStats.cs" />
+    <Compile Include="Assets\Scripts\LevelGroundProvider.cs" />
     <Compile Include="Assets\Scripts\Weapons\WeaponTypes\SimplePistol_Waepon.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\HealthPickup.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyShooterAI.cs" />
