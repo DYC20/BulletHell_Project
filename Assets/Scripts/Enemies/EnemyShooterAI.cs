@@ -77,7 +77,7 @@ public class EnemyShooterAI : MonoBehaviour
             // If WeaponBase has TryFire() / Fire() call it here.
             // Example:
             weapon.TryFire();
-            Debug.Log("Sniper Fired");
+//            Debug.Log("Sniper Fired");
         }
     }
 

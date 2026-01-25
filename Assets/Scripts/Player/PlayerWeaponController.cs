@@ -18,8 +18,8 @@ public class PlayerWeaponController : MonoBehaviour,IWeaponEquipper
 
         if (equippedWeapon != null)
             Equip(equippedWeapon);
-        else
-            Debug.LogWarning("PlayerWeaponController: No WeaponBase found under player.");
+       // else
+            //Debug.LogWarning("PlayerWeaponController: No WeaponBase found under player.");
     }
     
     public void Equip(WeaponBase weapon)
@@ -27,7 +27,7 @@ public class PlayerWeaponController : MonoBehaviour,IWeaponEquipper
         equippedWeapon = weapon;
         if (equippedWeapon != null)
         {
-            Debug.Log($"Equipped weapon: {equippedWeapon.name}");
+            //Debug.Log($"Equipped weapon: {equippedWeapon.name}");
             equippedWeapon.SetOwner(gameObject, Teams.Player);
             
         }

@@ -14,8 +14,6 @@ public class PooledProjectile : MonoBehaviour
     
     [SerializeField]  private Renderer renderer;
     private MaterialPropertyBlock mpb;
-   
-
 
     private ProjectilePool _pool;
 
@@ -26,12 +24,14 @@ public class PooledProjectile : MonoBehaviour
     private ProjectileConfigSO _config;
     private ProjectileStats _stats;
     private List<ProjectileModifierSO> _mods;
+    
 
     private int _remainingPierce;
     private float _lifeTimer;
 
     private void Awake()
     {
+        
         if (renderer == null) renderer = GetComponent<Renderer>();
         mpb ??= new MaterialPropertyBlock();
     }
@@ -93,7 +93,7 @@ public class PooledProjectile : MonoBehaviour
         if (shootEffect != null && _config != null && spawnTf != null)
         {
             shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
-            Debug.Log("ShootEffect Applied"+_owner.name);
+//            Debug.Log("ShootEffect Applied"+_owner.name);
         }
     }
 
@@ -108,10 +108,9 @@ public class PooledProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Walls"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Walls"))
         {
             Despawn();
-            Debug.Log("Wall Collision");
         }
         
         if (_config == null) return;

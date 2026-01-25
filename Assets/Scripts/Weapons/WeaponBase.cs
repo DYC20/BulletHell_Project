@@ -31,7 +31,7 @@ public abstract class WeaponBase : MonoBehaviour
 
     public bool TryFire()
     {
-        Debug.Log("TryFire");
+        //Debug.Log("TryFire");
         if (Time.time < _nextFireTime)
             return false;
 
