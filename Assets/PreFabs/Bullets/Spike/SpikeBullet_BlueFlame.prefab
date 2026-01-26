@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 615331751073990461}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.412, z: 0}
+  m_LocalPosition: {x: 0, y: 0.26, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -144,7 +144,7 @@ Transform:
   m_GameObject: {fileID: 3115755149292128574}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.054, z: -0.031}
+  m_LocalPosition: {x: 0, y: -0.1083, z: -0.0235}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2391}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -204,7 +204,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 2.2756052, y: 4.2054124}
+  m_Size: {x: 1.1792345, y: 3.4094894}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -235,7 +235,7 @@ Transform:
   m_GameObject: {fileID: 8151447417161259868}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.051, z: 0}
+  m_LocalPosition: {x: 0, y: -0.1107, z: -0.0075}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2391}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -295,7 +295,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 1
-  m_Size: {x: 2.6817155, y: 4.6211457}
+  m_Size: {x: 1.3896837, y: 3.7465403}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 8968578119167312521}
   - component: {fileID: 6138777378682991152}
   - component: {fileID: 1834326801081619564}
+  - component: {fileID: 4583469487015288061}
   - component: {fileID: 1986122839540615811}
   - component: {fileID: 2658486897380669179}
   - component: {fileID: 7848808490081845616}
@@ -332,7 +333,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.72, y: 1.72, z: 1.72}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7552472697951433743}
@@ -423,6 +424,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b0e0dcde445354db7d46e4a222e1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileHitEffect
+--- !u!114 &4583469487015288061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8609953063695804392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ae72bbaa5d66024a982f22b1fc07565, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileShootEffect
 --- !u!114 &1986122839540615811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,7 +451,8 @@ MonoBehaviour:
   rb: {fileID: 2658486897380669179}
   kinematics: {fileID: 6138777378682991152}
   hitEffect: {fileID: 1834326801081619564}
-  shootEffect: {fileID: 0}
+  shootEffect: {fileID: 4583469487015288061}
+  OutlineMaterialRenderer: {fileID: 5624215049255140783}
 --- !u!50 &2658486897380669179
 Rigidbody2D:
   serializedVersion: 5

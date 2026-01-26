@@ -17,16 +17,16 @@ public abstract class WeaponBase : MonoBehaviour
 
     public void SetOwner(GameObject ownerGo, Teams team)
     {
-        Debug.Log($"{name}.SetOwner called for {ownerGo.name}");
+        //Debug.Log($"{name}.SetOwner called for {ownerGo.name}");
 
         owner = ownerGo;
         ownerTeam = team;
         
         ammoConsumer = owner != null ? owner.GetComponentInParent<IAmmoConsumer>() : null;
-        Debug.Log($"{name}.SetOwner => owner={owner.name}, ammoConsumer={(ammoConsumer==null ? "NULL" : ammoConsumer.GetType().Name)}");
-        
-        if (ammoConsumer == null && owner != null)
-            Debug.LogWarning($"{name}: No IAmmoConsumer found on owner parent chain. Owner={owner.name}");
+       // Debug.Log($"{name}.SetOwner => owner={owner.name}, ammoConsumer={(ammoConsumer==null ? "NULL" : ammoConsumer.GetType().Name)}");
+
+       if (ammoConsumer == null && owner != null) ;
+       // Debug.LogWarning($"{name}: No IAmmoConsumer found on owner parent chain. Owner={owner.name}");
     }
 
     public bool TryFire()

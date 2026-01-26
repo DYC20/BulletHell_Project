@@ -10,23 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9aa456e2a0cd0f242acf9f0a34127cb0, type: 3}
-  m_Name: Sniper_01_ProjectileConfig 1
+  m_Name: Shotgun_01_ProjectileConfig
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileConfigSO
-  ammoType: 0
+  ammoType: 1
   ammoPerShot: 1
-  damage: 30
-  speed: 25
-  lifetime: 1
-  projectilesPerShot: 1
-  spreadAngleDeg: 6
+  damage: 1
+  speed: 3
+  lifetime: 0.5
+  projectilesPerShot: 6
+  spreadAngleDeg: 60
   randomSpread: 1
   centerProjectile: 0
-  spawnPosJitter: 0
+  spawnPosJitter: 0.1
+  speedMultiplierMin: 0.8
+  speedMultiplierMax: 0.6
   destroyOnHit: 1
-  impactEffect: {fileID: 429630121617948818, guid: e4b83454776503d4c8e5b9a9570bd912, type: 3}
+  impactEffect: {fileID: 0}
   shootEffect: {fileID: 3744974188407950299, guid: c58f384d5cbcfaf4e9840e3cc772d186, type: 3}
   preventFriendlyFire: 1
   hitMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  pierceCount: 1
+  pierceCount: 0

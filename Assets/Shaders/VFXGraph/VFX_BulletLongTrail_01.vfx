@@ -166,8 +166,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: -9
     y: -645
-    width: 5885
-    height: 2800
+    width: 5887
+    height: 2811
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -645,8 +645,8 @@ VisualEffectResource:
       shadowCastingMode: 1
     m_CullingFlags: 3
     m_UpdateMode: 0
-    m_PreWarmDeltaTime: 0.1
-    m_PreWarmStepCount: 1
+    m_PreWarmDeltaTime: 0.15
+    m_PreWarmStepCount: 20
     m_InitialEventName: OnPlay
     m_InstancingMode: 0
     m_InstancingCapacity: 64
@@ -1562,7 +1562,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1
+      m_SerializableObject: 1.2
     m_Space: -1
   m_Property:
     name: _Lifetime

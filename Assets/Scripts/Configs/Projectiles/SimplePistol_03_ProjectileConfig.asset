@@ -17,6 +17,11 @@ MonoBehaviour:
   damage: 2
   speed: 10
   lifetime: 3
+  projectilesPerShot: 1
+  spreadAngleDeg: 0
+  randomSpread: 1
+  centerProjectile: 1
+  spawnPosJitter: 0.2
   destroyOnHit: 0
   impactEffect: {fileID: 429630121617948818, guid: e4b83454776503d4c8e5b9a9570bd912, type: 3}
   shootEffect: {fileID: 3744974188407950299, guid: c58f384d5cbcfaf4e9840e3cc772d186, type: 3}

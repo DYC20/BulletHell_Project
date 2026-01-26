@@ -12,7 +12,7 @@ public class PooledProjectile : MonoBehaviour
     [SerializeField] private ProjectileHitEffect hitEffect;
     [SerializeField] private ProjectileShootEffect shootEffect;
     
-    [SerializeField]  private Renderer renderer;
+    [SerializeField]  private Renderer OutlineMaterialRenderer;
     private MaterialPropertyBlock mpb;
 
     private ProjectilePool _pool;
@@ -32,13 +32,13 @@ public class PooledProjectile : MonoBehaviour
     private void Awake()
     {
         
-        if (renderer == null) renderer = GetComponent<Renderer>();
+        if (OutlineMaterialRenderer == null) OutlineMaterialRenderer = GetComponent<Renderer>();
         mpb ??= new MaterialPropertyBlock();
     }
 
     private void Reset()
     {
-        renderer = GetComponent<Renderer>();
+        OutlineMaterialRenderer = GetComponent<Renderer>();
         rb = GetComponent<Rigidbody2D>();
         kinematics = GetComponent<ProjectileMovement>();
         hitEffect = GetComponent<ProjectileHitEffect>();
@@ -53,7 +53,7 @@ public class PooledProjectile : MonoBehaviour
 
     public void AssignPool(ProjectilePool pool) => _pool = pool;
 
-    public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction, Transform spawnTf,
+    public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction, float speedOverride, Transform spawnTf,
         IReadOnlyList<ProjectileModifierSO> modifiers)
     {
         _owner = owner;
@@ -63,7 +63,7 @@ public class PooledProjectile : MonoBehaviour
         //Set Modifiers
         _stats = ProjectileStatsBuilder.FromConfig(config);
         _mods = modifiers != null ? new List<ProjectileModifierSO>(modifiers) : null;
-        Color _baseColor = renderer.material.color;
+        Color _baseColor = OutlineMaterialRenderer.material.color;
         
         if (_mods != null)
             for (int i = 0; i < _mods.Count; i++)
@@ -71,37 +71,49 @@ public class PooledProjectile : MonoBehaviour
         
         if (mpb != null && _mods != null)
         {
-            renderer.GetPropertyBlock(mpb);
+            OutlineMaterialRenderer.GetPropertyBlock(mpb);
             mpb.Clear();
             
             mpb.SetColor("_Color", _baseColor);
             for (int i = 0; i < _mods.Count; i++)
                 _mods[i].ApplyVisuals(mpb);
-            Debug.Log($"Applying MPB color: {mpb.GetVector("_Color")} to {name}");
-            renderer.SetPropertyBlock(mpb);
+            //Debug.Log($"Applying MPB color: {mpb.GetVector("_Color")} to {name}");
+            OutlineMaterialRenderer.SetPropertyBlock(mpb);
         }
-        
-        
 
         _lifeTimer = 0f;
 
+        float speed = speedOverride > 0f ? speedOverride : config.speed;
+        
         if (kinematics != null)
-            kinematics.Apply(rb, config, direction);
+            kinematics.Apply(rb, config, direction, speed);
         else if (rb != null && config != null)
             rb.linearVelocity = direction.normalized * config.speed;
+        
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg-90f;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
         if (shootEffect != null && _config != null && spawnTf != null)
         {
             shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
-//            Debug.Log("ShootEffect Applied"+_owner.name);
+            Debug.Log("ShootEffect Applied"+_owner.name);
+        }
+        else if (shootEffect == null || _config == null || spawnTf == null)
+        {
+            Debug.LogWarning("shoot effect/config/spawnTF is null");
         }
     }
 
     private void Update()
     {
         if (_config == null) return;
+        
+        Vector3 startSize = Vector3.one;
+        Vector3 endSize = Vector3.zero;
 
         _lifeTimer += Time.deltaTime;
+        float t = (_config.lifetime <= 0f) ? 1f : Mathf.Clamp01(_lifeTimer / _config.lifetime);
+        transform.localScale = Vector3.Lerp(startSize, endSize, t);
         if (_lifeTimer >= _config.lifetime)
             Despawn();
     }
@@ -141,7 +153,7 @@ public class PooledProjectile : MonoBehaviour
         {
             for (int i = 0; i < _mods.Count; i++)
                 _mods[i].OnHit(other.gameObject, _owner.gameObject);
-            Debug.Log($"OnHit target: {other.gameObject.name}"+ "has been slowed");
+           // Debug.Log($"OnHit target: {other.gameObject.name}"+ "has been slowed");
         }
      
             
@@ -176,9 +188,10 @@ Debug.LogError("HitEffect NULL");*/
 
     public void Despawn()
     {
-        renderer.GetPropertyBlock(mpb);
+        transform.localScale = Vector3.one;
+        OutlineMaterialRenderer.GetPropertyBlock(mpb);
         mpb.Clear();
-        renderer.SetPropertyBlock(mpb);
+        OutlineMaterialRenderer.SetPropertyBlock(mpb);
         
         // Stop physics motion to avoid “ghost velocity” on reuse
         if (rb != null)

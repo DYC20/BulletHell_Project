@@ -7,6 +7,7 @@ public enum ProjectileId
     SimplePistol_Bullet_03,
     SimplePistol_Bullet_Upgrade,
     Sniper_01_bullet,
-    
+    Arrow_01,
+    Shotgun_01,
 }
 
