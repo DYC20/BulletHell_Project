@@ -108,12 +108,16 @@ public class PooledProjectile : MonoBehaviour
     {
         if (_config == null) return;
         
-        Vector3 startSize = Vector3.one;
-        Vector3 endSize = Vector3.zero;
-
         _lifeTimer += Time.deltaTime;
-        float t = (_config.lifetime <= 0f) ? 1f : Mathf.Clamp01(_lifeTimer / _config.lifetime);
-        transform.localScale = Vector3.Lerp(startSize, endSize, t);
+        
+        if (_config.dissapateOverLifetime == true)
+                {
+                     Vector3 startSize = Vector3.one;
+                     Vector3 endSize = Vector3.zero;
+                     float t = (_config.lifetime <= 0f) ? 1f : Mathf.Clamp01(_lifeTimer / _config.lifetime);
+                     transform.localScale = Vector3.Lerp(startSize, endSize, t);
+                }
+        
         if (_lifeTimer >= _config.lifetime)
             Despawn();
     }

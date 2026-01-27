@@ -35,6 +35,9 @@ public class ProjectileConfigSO : ScriptableObject
     [Header("Shoot Effect")]
     public VisualEffect shootEffect;
 
+    [Header("Dissapate")] 
+    public bool dissapateOverLifetime;
+
     [Tooltip("If enabled, projectile will ignore targets on same team as owner.")]
     public bool preventFriendlyFire = true;
 

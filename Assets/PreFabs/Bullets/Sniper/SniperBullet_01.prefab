@@ -117,8 +117,8 @@ Transform:
   m_GameObject: {fileID: 2734323570286045651}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0004, y: 0.036199987, z: -0.0103}
-  m_LocalScale: {x: 0.12601642, y: 0.39294177, z: 0.39294177}
+  m_LocalPosition: {x: 0.0004, y: 0.036199987, z: -0.0135}
+  m_LocalScale: {x: 0.07193777, y: 0.2586648, z: 0.32012966}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 285408734062528771}
@@ -342,7 +342,7 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 1, g: 1, b: 1, a: 1}
+          key0: {r: 4, g: 4, b: 4, a: 1}
           key1: {r: 1, g: 1, b: 1, a: 1}
           key2: {r: 0, g: 0, b: 0, a: 1}
           key3: {r: 0, g: 0, b: 0, a: 0}
@@ -367,7 +367,7 @@ VisualEffect:
           atime6: 0
           atime7: 0
           m_Mode: 0
-          m_ColorSpace: -1
+          m_ColorSpace: 1
           m_NumColorKeys: 2
           m_NumAlphaKeys: 3
         m_Name: Color
@@ -452,8 +452,8 @@ Transform:
   m_GameObject: {fileID: 4328287875531225590}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0001, y: 0.051, z: -0.0428}
-  m_LocalScale: {x: 0.109949306, y: 0.37424162, z: 0.41184288}
+  m_LocalPosition: {x: 0.0003, y: 0.046, z: -0.04}
+  m_LocalScale: {x: 0.062765695, y: 0.2463549, z: 0.3355284}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 285408734062528771}
@@ -692,8 +692,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0056169927, y: -0.0113378465}
-  m_Size: {x: 0.41578728, y: 0.74044317}
+  m_Offset: {x: 0.0029067993, y: -0.073667526}
+  m_Size: {x: 0.074329376, y: 0.6157838}
   m_Direction: 0
 --- !u!114 &7985142843861681838
 MonoBehaviour:
@@ -735,4 +735,4 @@ MonoBehaviour:
   kinematics: {fileID: 6815184697106162655}
   hitEffect: {fileID: 7985142843861681838}
   shootEffect: {fileID: -6359636138660983499}
-  renderer: {fileID: 9088844441770291605}
+  OutlineMaterialRenderer: {fileID: 8663662714343850931}
