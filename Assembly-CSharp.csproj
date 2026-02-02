@@ -56,6 +56,7 @@
     <Compile Include="Assets\Scripts\Weapons\WeaponBase.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyChaseAI.cs" />
     <Compile Include="Assets\Scripts\Weapons\Shooter.cs" />
+    <Compile Include="Assets\Scripts\Configs\Projectiles\ProjectileVisual_SpriteTint.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerWeaponController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerGroundState.cs" />
     <Compile Include="Assets\Scripts\Weapons\Pool\PooledBullet.cs" />
@@ -95,9 +96,11 @@
     <Compile Include="Assets\Scripts\Player\PickUps\IHealable.cs" />
     <Compile Include="Assets\Scripts\Weapons\WeaponTypes\SimplePistol1.cs" />
     <Compile Include="Assets\Scripts\Weapons\Pool\Projectile\ProjectileID.cs" />
+    <Compile Include="Assets\Scripts\Configs\Projectiles\ProjectileVisual_VFXGraph.cs" />
     <Compile Include="Assets\Scripts\Player\AmmoInventory.cs" />
     <Compile Include="Assets\Scripts\Weapons\WeaponTypes\ContactDamage.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\IWeaponEquipper.cs" />
+    <Compile Include="Assets\Scripts\Configs\Projectiles\IProjectileVisualReciever.cs" />
     <None Include="Library\PackageCache\com.unity.bindings.openimageio@94e2abc0bc65\package.json" />
     <None Include="Library\PackageCache\com.unity.settings-manager@0b8638c5ce86\package.json" />
     <None Include="Library\PackageCache\com.unity.burst@21aa83e7fd8f\package.json" />
