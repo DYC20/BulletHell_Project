@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa456e2a0cd0f242acf9f0a34127cb0, type: 3}
+  m_Name: Shotgun_01_ProjectileConfig
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileConfigSO
+  ammoType: 1
+  ammoPerShot: 1
+  damage: 1
+  speed: 3
+  lifetime: 0.5
+  projectilesPerShot: 6
+  spreadAngleDeg: 60
+  randomSpread: 1
+  centerProjectile: 0
+  spawnPosJitter: 0.1
+  speedMultiplierMin: 0.8
+  speedMultiplierMax: 0.6
+  destroyOnHit: 1
+  impactEffect: {fileID: 0}
+  shootEffect: {fileID: 3744974188407950299, guid: c58f384d5cbcfaf4e9840e3cc772d186, type: 3}
+  dissapateOverLifetime: 1
+  preventFriendlyFire: 1
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  pierceCount: 0

@@ -12,24 +12,26 @@ public abstract class WeaponBase : MonoBehaviour
     protected IAmmoConsumer ammoConsumer;
 
     private float _nextFireTime;
+    
+    public Transform FirePoint => firePoint;
 
     public void SetOwner(GameObject ownerGo, Teams team)
     {
-        Debug.Log($"{name}.SetOwner called for {ownerGo.name}");
+        //Debug.Log($"{name}.SetOwner called for {ownerGo.name}");
 
         owner = ownerGo;
         ownerTeam = team;
         
         ammoConsumer = owner != null ? owner.GetComponentInParent<IAmmoConsumer>() : null;
-        Debug.Log($"{name}.SetOwner => owner={owner.name}, ammoConsumer={(ammoConsumer==null ? "NULL" : ammoConsumer.GetType().Name)}");
-        
-        if (ammoConsumer == null && owner != null)
-            Debug.LogWarning($"{name}: No IAmmoConsumer found on owner parent chain. Owner={owner.name}");
+       // Debug.Log($"{name}.SetOwner => owner={owner.name}, ammoConsumer={(ammoConsumer==null ? "NULL" : ammoConsumer.GetType().Name)}");
+
+       if (ammoConsumer == null && owner != null) ;
+       // Debug.LogWarning($"{name}: No IAmmoConsumer found on owner parent chain. Owner={owner.name}");
     }
 
     public bool TryFire()
     {
-        Debug.Log("TryFire");
+        //Debug.Log("TryFire");
         if (Time.time < _nextFireTime)
             return false;
 

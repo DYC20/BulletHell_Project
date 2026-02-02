@@ -2,13 +2,23 @@ using UnityEngine;
 
 public class EnemyChaseAI : MonoBehaviour
 {
-   [Header("Target")]
+    [Header("Directional Sprites (4-way)")]
+    [SerializeField] private SpriteRenderer renderer; // assign in Inspector
+    [SerializeField] private Sprite spriteLeft;
+    [SerializeField] private Sprite spriteRight;
+    
+    [Header("Target")]
     [SerializeField] private Transform player;           // assign in Inspector (recommended)
     [SerializeField] private string playerTag = "Player"; // fallback if not assigned
 
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3.5f;
     [SerializeField] private float ratationSpeed = 3.5f;
+    public float MoveSpeed
+    {
+        get => moveSpeed;
+        set => moveSpeed = Mathf.Max(0f, value);
+    }
 /*  [Header("Contact Damage")]
     [SerializeField] private float contactDamage = 10f;
     [SerializeField] private float hitCooldown = 0.5f;   // seconds between hits while touching
@@ -70,8 +80,18 @@ public class EnemyChaseAI : MonoBehaviour
             float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg -90;
 
             // smooth rotation with fixed timestep
-            float z = Mathf.LerpAngle(rb.rotation, targetAngle, ratationSpeed * Time.fixedDeltaTime);
-            rb.MoveRotation(z);
+           // float z = Mathf.LerpAngle(rb.rotation, targetAngle, ratationSpeed * Time.fixedDeltaTime);
+            //rb.MoveRotation(z);
+            
+            if (renderer != null)
+            {
+                // angle where: right=0, up=90, left=180/-180, down=-90
+               // float a = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+                // 4-way thresholds at 45 degrees
+                if (targetAngle >= -180f && targetAngle < 180f)              renderer.sprite = spriteRight;
+                else                                   renderer.sprite = spriteLeft;
+            }
         }
     }
     /*

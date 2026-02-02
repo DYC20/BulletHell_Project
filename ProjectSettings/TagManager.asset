@@ -2,20 +2,23 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
-  tags: []
+  serializedVersion: 3
+  tags:
+  - Walls
+  - Weapon
+  - GroundCollider
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player_Low
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Walls
+  - Highland
+  - Player_High
+  - Projectile_Low
+  - Projectile_High
   - 
   - 
   - 
@@ -41,3 +44,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BG
+    uniqueID: 939380927
+    locked: 0
+  - name: Ground
+    uniqueID: 2761008333
+    locked: 0
+  - name: Kinematic
+    uniqueID: 1773462389
+    locked: 0
+  - name: Forground
+    uniqueID: 473961047
+    locked: 0
+  - name: VFX
+    uniqueID: 4054289071
+    locked: 0
+  m_RenderingLayers:
+  - Default

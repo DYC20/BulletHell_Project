@@ -67,7 +67,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.017612606, y: -0.017612725}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -77,7 +77,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.43638587, y: 0.7710319}
   m_EdgeRadius: 0
 --- !u!114 &1009744389262302966
 MonoBehaviour:
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 2852274010122127103}
   - component: {fileID: 8231304215381964811}
   - component: {fileID: 1169601690724343359}
-  - component: {fileID: 8405730803204492194}
+  - component: {fileID: 5317710675763339801}
   - component: {fileID: 4512831738462525030}
   - component: {fileID: 1463634952154556267}
   - component: {fileID: 1809575182489146792}
@@ -184,11 +184,11 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1773462389
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 1108981373729593120, guid: 48799aba08cafe14f95c9d3a6a1b912a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -210,24 +210,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10db39c2f5425fe4788450c5c6f31a72, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  renderer: {fileID: 8231304215381964811}
+  spriteLeft: {fileID: -2992012109108649277, guid: 5ea652866f5baca4baaca860bfdcf1cc, type: 3}
+  spriteRight: {fileID: 1108981373729593120, guid: 48799aba08cafe14f95c9d3a6a1b912a, type: 3}
   player: {fileID: 0}
   playerTag: Player
   moveSpeed: 3.5
   ratationSpeed: 3.5
---- !u!114 &8405730803204492194
+--- !u!114 &5317710675763339801
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4241822828982040726}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b4719ad6bd820b42b01b939d06a4d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ContactDamage
   damage: 10
-  hitCooldown: 0.1
+  hitCooldown: 0.5
   targetMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -264,6 +267,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  onDamaged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1463634952154556267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,7 +321,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.97, y: 0.925}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -335,7 +341,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.3
+  m_Mass: 4
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -349,4 +355,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4

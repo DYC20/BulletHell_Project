@@ -9,6 +9,7 @@ public class PlayerWeaponController : MonoBehaviour,IWeaponEquipper
     [SerializeField] private WeaponBase equippedWeapon;
 
     private bool _isFiring;
+    public Transform CurrentFirePoint { get; private set; }
     
     private void Awake()
     {
@@ -17,8 +18,8 @@ public class PlayerWeaponController : MonoBehaviour,IWeaponEquipper
 
         if (equippedWeapon != null)
             Equip(equippedWeapon);
-        else
-            Debug.LogWarning("PlayerWeaponController: No WeaponBase found under player.");
+       // else
+            //Debug.LogWarning("PlayerWeaponController: No WeaponBase found under player.");
     }
     
     public void Equip(WeaponBase weapon)
@@ -26,8 +27,9 @@ public class PlayerWeaponController : MonoBehaviour,IWeaponEquipper
         equippedWeapon = weapon;
         if (equippedWeapon != null)
         {
-            Debug.Log($"Equipped weapon: {equippedWeapon.name}");
+            //Debug.Log($"Equipped weapon: {equippedWeapon.name}");
             equippedWeapon.SetOwner(gameObject, Teams.Player);
+            
         }
             
     }
@@ -57,6 +59,8 @@ public class PlayerWeaponController : MonoBehaviour,IWeaponEquipper
 
         var weapon = weaponGO.GetComponent<WeaponBase>();
         Equip(weapon);
+        
+        CurrentFirePoint = (weapon != null) ? weapon.FirePoint : null;
     }
 
     
