@@ -50,7 +50,7 @@
     <Compile Include="Assets\Scripts\Player\FreezePickup.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemieDeathController.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\AmmoPickup.cs" />
-    <Compile Include="Assets\Scripts\Player\PlayerCollisionTest.cs" />
+    <Compile Include="Assets\Scripts\Elevation_Entry.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\IPickup.cs" />
     <Compile Include="Assets\Scripts\ProjectileHitEffect.cs" />
     <Compile Include="Assets\Scripts\Weapons\WeaponBase.cs" />
@@ -59,11 +59,13 @@
     <Compile Include="Assets\Scripts\Configs\Projectiles\ProjectileVisual_SpriteTint.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerWeaponController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerGroundState.cs" />
+    <Compile Include="Assets\Scripts\LightFllicker.cs" />
     <Compile Include="Assets\Scripts\Weapons\Pool\PooledBullet.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\IAmmoConsumer.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHitFlash.cs" />
     <Compile Include="Assets\Scripts\Enemies\GroundLayerAutoAssign.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\WeaponPickup.cs" />
+    <Compile Include="Assets\Scripts\Elevation_Exit.cs" />
     <Compile Include="Assets\Scripts\Configs\Modifiers\Backend\ProjectileModifierSO.cs" />
     <Compile Include="Assets\Scripts\Configs\Modifiers\Backend\ProjectileStatsBuilder.cs" />
     <Compile Include="Assets\Scripts\Configs\Modifiers\Backend\ProjectileStats.cs" />
