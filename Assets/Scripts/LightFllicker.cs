@@ -5,24 +5,49 @@ using UnityEngine.Rendering.Universal;
 public class LightFllicker : MonoBehaviour
 {
     [SerializeField] private Light2D light;
-    [SerializeField] private float fllickerTime = 0.2f;
-    [SerializeField] private float fllickerRadius = 0.2f;
     [SerializeField] private float fllickerSpeed = 0.2f;
+    [SerializeField] private float fllickerRadiusSpeed = 0.2f;
+    [SerializeField] private float fllickerRadiusMax = 6f;
+    [SerializeField] private float fllickerRadiusMin = 6f;
     [SerializeField] private float fllickerIntencityMax = 0.2f;
     [SerializeField] private float fllickerIntencityMin = 0.2f;
+    float flickerTimer;
+    float radiusTimer;
+    float fromRadius;
+    float toRadius;
+    float fromIntensity;
+    float toIntensity;
 
-    private void Update()
+    void Start()
     {
-        Fllicker();
+        PickNewFlickerTarget();
+        PickNewRadiusTarget();
     }
 
-    private void Fllicker()
+    void Update()
     {
-        float fllickerRange1 = Random.Range(fllickerIntencityMin, fllickerIntencityMax);
-        float fllickerRange2 = Random.Range(fllickerIntencityMin, fllickerIntencityMax);
-        
-        float flickerPerform = Mathf.Lerp(fllickerRange1, fllickerRange2, fllickerSpeed * Time.deltaTime);
+        flickerTimer += Time.deltaTime * fllickerSpeed;
+        radiusTimer += Time.deltaTime * fllickerRadiusSpeed;
 
-        light.intensity = flickerPerform;
+        light.intensity = Mathf.Lerp(fromIntensity, toIntensity, flickerTimer);
+        light.pointLightOuterRadius = Mathf.Lerp(fromRadius, toRadius, radiusTimer);
+
+        if (flickerTimer >= 1f)
+            PickNewFlickerTarget();
+        if (radiusTimer >= 1F)
+            PickNewRadiusTarget();
+    }
+
+    void PickNewFlickerTarget()
+    {
+        flickerTimer = 0f;
+        fromIntensity = light.intensity;
+        toIntensity = Random.Range(fllickerIntencityMin, fllickerIntencityMax);
+    }
+    void PickNewRadiusTarget()
+    {
+        radiusTimer = 0f;
+        fromRadius = light.pointLightOuterRadius; 
+        toRadius = Random.Range(fllickerRadiusMin, fllickerRadiusMax);
     }
 }

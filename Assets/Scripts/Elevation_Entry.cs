@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Elevation_Entry : MonoBehaviour
 {
-    public Collider2D[] mountainColliders;
-    public Collider2D[] boundryColliders;
+    [SerializeField] private Collider2D[] mountainColliders;
+    [SerializeField] private Collider2D[] boundryColliders;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -18,8 +18,11 @@ public class Elevation_Entry : MonoBehaviour
                 _Boundry.enabled = true;
             }
         }
-
-        other.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 20;
+        foreach (SpriteRenderer sr in other.GetComponentsInChildren<SpriteRenderer>(true))
+        {
+            sr.sortingLayerName = "High";
+            sr.sortingOrder = 2;
+        }
 
     }
 }

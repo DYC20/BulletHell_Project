@@ -126,7 +126,8 @@ public class PooledProjectile : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Walls"))
         {
-            Despawn();
+            hitEffect.Apply(_config.impactEffect, other.transform.position, other.transform.rotation);
+            Despawn(); 
         }
         
         if (_config == null) return;
