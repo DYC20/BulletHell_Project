@@ -53,6 +53,7 @@
     <Compile Include="Assets\Scripts\Elevation_Entry.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\IPickup.cs" />
     <Compile Include="Assets\Scripts\ProjectileHitEffect.cs" />
+    <Compile Include="Assets\Scripts\ProjectileShootEffectPS.cs" />
     <Compile Include="Assets\Scripts\Weapons\WeaponBase.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyChaseAI.cs" />
     <Compile Include="Assets\Scripts\Weapons\Shooter.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Assets\Scripts\Weapons\WeaponTypes\SimplePistol_Waepon.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\HealthPickup.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyShooterAI.cs" />
+    <Compile Include="Assets\Scripts\CursorController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Weapons\projectileDamage.cs" />
     <Compile Include="Assets\Scripts\Weapons\Pool\Projectile\ProjectilePool.cs" />

@@ -43,8 +43,8 @@ public class ContactDamage : MonoBehaviour
 
         // Ensure trigger is set (contact damage needs trigger volume)
         var col = GetComponent<Collider2D>();
-        if (!col.isTrigger)
-            Debug.LogWarning($"{name}: ContactDamage works best with a Trigger collider (isTrigger = true).");
+        //if (!col.isTrigger)
+         //   Debug.LogWarning($"{name}: ContactDamage works best with a Trigger collider (isTrigger = true).");
     }
 
     private void OnTriggerStay2D(Collider2D other)

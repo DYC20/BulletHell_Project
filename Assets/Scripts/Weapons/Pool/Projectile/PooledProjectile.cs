@@ -11,6 +11,7 @@ public class PooledProjectile : MonoBehaviour
     [SerializeField] private ProjectileMovement kinematics;
     [SerializeField] private ProjectileHitEffect hitEffect;
     [SerializeField] private ProjectileShootEffect shootEffect;
+    [SerializeField] private ProjectileShootEffectPS shootEffectPS;
     
     [SerializeField]  private Renderer OutlineMaterialRenderer;
     private MaterialPropertyBlock mpb;
@@ -43,6 +44,7 @@ public class PooledProjectile : MonoBehaviour
         kinematics = GetComponent<ProjectileMovement>();
         hitEffect = GetComponent<ProjectileHitEffect>();
         shootEffect = GetComponent<ProjectileShootEffect>();
+        shootEffectPS = GetComponent<ProjectileShootEffectPS>();
     }
 
     private void OnEnable()
@@ -95,7 +97,27 @@ public class PooledProjectile : MonoBehaviour
 
         if (shootEffect != null && _config != null && spawnTf != null)
         {
-            shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
+            for (int FX = 0; FX < _config.shootEffect.Count; FX++)
+            {
+                VisualEffect shootFX = _config.shootEffect[FX];
+                shootEffect.Apply(shootFX, spawnTf.position, spawnTf.rotation);
+            }
+            //shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
+            Debug.Log("ShootEffect Applied"+_owner.name);
+        }
+        else if (shootEffect == null || _config == null || spawnTf == null)
+        {
+            Debug.LogWarning("shoot effect/config/spawnTF is null");
+        }
+        
+        if (shootEffectPS != null && _config != null && spawnTf != null)
+        {
+            for (int FX = 0; FX < _config.shootEffectPS.Count; FX++)
+            {
+                ParticleSystem shootFX = _config.shootEffectPS[FX];
+                shootEffectPS.Apply(shootFX, spawnTf.position, spawnTf.rotation);
+            }
+            //shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
             Debug.Log("ShootEffect Applied"+_owner.name);
         }
         else if (shootEffect == null || _config == null || spawnTf == null)
@@ -109,7 +131,7 @@ public class PooledProjectile : MonoBehaviour
         if (_config == null) return;
         
         _lifeTimer += Time.deltaTime;
-        
+         Debug.LogWarning("lifeTimer:" + _lifeTimer);
         if (_config.dissapateOverLifetime == true)
                 {
                      Vector3 startSize = Vector3.one;
@@ -117,9 +139,13 @@ public class PooledProjectile : MonoBehaviour
                      float t = (_config.lifetime <= 0f) ? 1f : Mathf.Clamp01(_lifeTimer / _config.lifetime);
                      transform.localScale = Vector3.Lerp(startSize, endSize, t);
                 }
-        
+
         if (_lifeTimer >= _config.lifetime)
+        {
             Despawn();
+           
+        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -189,7 +215,7 @@ Debug.LogError("HitEffect NULL");*/
         }
     }
 
-    
+
 
     public void Despawn()
     {

@@ -107,7 +107,12 @@ public class PlayerController : MonoBehaviour
       
 
 
-        Vector2 toMouse = mouseWorld - rb.position;
+        Vector2 origin = GetComponent<PlayerWeaponController>()?.CurrentFirePoint != null
+            ? (Vector2)GetComponent<PlayerWeaponController>().CurrentFirePoint.position
+            : (weaponHolder != null ? (Vector2)weaponHolder.position : rb.position);
+
+        Vector2 toMouse = mouseWorld - origin;
+
 
         if (toMouse.sqrMagnitude < 0.0001f)
             return;

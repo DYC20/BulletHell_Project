@@ -78,16 +78,17 @@ public class SimplePistol_Waepon : WeaponBase
         bool fromHighland = shooterRoot != null && shooterRoot.layer == playerHighLayer;
         int projectileLayer = fromHighland ? projectileHighLayer : projectileLowLayer;
 
-        Debug.LogWarning($"SHOTGUN DEBUG: count={count}, spread={cone}, frame={Time.frameCount}");
+        //Debug.LogWarning($"SHOTGUN DEBUG: count={count}, spread={cone}, frame={Time.frameCount}");
         for (int i = 0; i < count; i++)
         {
             var proj = pool.Get(firePoint.position,  Quaternion.identity);
-            Debug.LogWarning(
+            /*
+             Debug.LogWarning(
                 $"pellet {i}/{count - 1}: proj={(proj ? proj.name : "NULL")} " +
                 $"id={(proj ? proj.GetInstanceID().ToString() : "null")} " +
                 $"active={(proj ? proj.gameObject.activeSelf.ToString() : "n/a")}");
             if (proj == null) continue;
-
+            */
             SetLayerRecursively(proj.gameObject, projectileLayer);
 
             // Spread: either random within cone, or evenly spaced across cone

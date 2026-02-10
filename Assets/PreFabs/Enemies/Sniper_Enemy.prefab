@@ -277,7 +277,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbd1f8f93c6c9c448eb3bd15b5e5c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemieDeathHandler
-  deathSmokePrefab: {fileID: 3792533882726015559, guid: 114df9ddad10b804ea70ae02a5dc6637, type: 3}
+  deathSmokePrefab:
+  - {fileID: 7280059789822280813, guid: aa71f436f07c8a34c801d793fe5f4983, type: 3}
+  - {fileID: 6668916617724155443, guid: e4b83454776503d4c8e5b9a9570bd912, type: 3}
+  ammoPrefab: {fileID: 0}
 --- !u!114 &2243936387353959673
 MonoBehaviour:
   m_ObjectHideFlags: 0
