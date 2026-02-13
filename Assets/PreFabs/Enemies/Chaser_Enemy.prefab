@@ -67,7 +67,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.017612606, y: -0.017612725}
+  m_Offset: {x: 0.024374425, y: -0.32864285}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -77,7 +77,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.43638587, y: 0.7710319}
+  m_Size: {x: 0.78798485, y: 0.39238667}
   m_EdgeRadius: 0
 --- !u!114 &1009744389262302966
 MonoBehaviour:
@@ -184,8 +184,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 1773462389
-  m_SortingLayer: 3
+  m_SortingLayerID: -1533958963
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1108981373729593120, guid: 48799aba08cafe14f95c9d3a6a1b912a, type: 3}
@@ -215,7 +215,7 @@ MonoBehaviour:
   spriteRight: {fileID: 1108981373729593120, guid: 48799aba08cafe14f95c9d3a6a1b912a, type: 3}
   player: {fileID: 0}
   playerTag: Player
-  moveSpeed: 3.5
+  moveSpeed: 3
   ratationSpeed: 3.5
 --- !u!114 &5317710675763339801
 MonoBehaviour:
@@ -282,7 +282,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dbd1f8f93c6c9c448eb3bd15b5e5c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemieDeathHandler
-  deathSmokePrefab: {fileID: 3792533882726015559, guid: 114df9ddad10b804ea70ae02a5dc6637, type: 3}
+  deathSmokePrefab:
+  - {fileID: 7280059789822280813, guid: aa71f436f07c8a34c801d793fe5f4983, type: 3}
+  - {fileID: 6668916617724155443, guid: e4b83454776503d4c8e5b9a9570bd912, type: 3}
+  ammoPrefab: {fileID: 5362075109300470657, guid: 5fd1a51192926e24c92af290e64f0562, type: 3}
 --- !u!61 &1809575182489146792
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -317,7 +320,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.05332172, y: -0.04189551}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -327,7 +330,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.4515469, y: 0.8095648}
   m_EdgeRadius: 0
 --- !u!50 &4933905431315199958
 Rigidbody2D:

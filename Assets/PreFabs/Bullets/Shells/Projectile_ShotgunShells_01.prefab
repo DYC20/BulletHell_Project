@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8488122799573839415}
   - component: {fileID: 4361183904634148549}
   - component: {fileID: 5164655207921999921}
+  - component: {fileID: -7363887207052164825}
   - component: {fileID: 3516138570704444126}
   - component: {fileID: 1955884628445460395}
   - component: {fileID: 1922452841970364557}
@@ -140,6 +141,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae72bbaa5d66024a982f22b1fc07565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileShootEffect
+--- !u!114 &-7363887207052164825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112807520458817672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4094b93482be15c478a97449f77c619b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileShootEffectPS
 --- !u!114 &3516138570704444126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,7 +169,8 @@ MonoBehaviour:
   kinematics: {fileID: 8488122799573839415}
   hitEffect: {fileID: 4361183904634148549}
   shootEffect: {fileID: 5164655207921999921}
-  OutlineMaterialRenderer: {fileID: 0}
+  shootEffectPS: {fileID: -7363887207052164825}
+  OutlineMaterialRenderer: {fileID: 9199918622919697984}
 --- !u!50 &1955884628445460395
 Rigidbody2D:
   serializedVersion: 5
