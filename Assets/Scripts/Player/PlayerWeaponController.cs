@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 public class PlayerWeaponController : MonoBehaviour,IWeaponEquipper
 {
     [Header("Weapon")]
+
     [SerializeField] private Transform weaponSocket;
     [SerializeField] private WeaponBase equippedWeapon;
 

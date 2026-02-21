@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23c4153838e1e9248bef8d632d29844b, type: 3}
+  m_Name: Projectile_BulletStandard_03_Pool
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
+  poolSize: 40
+  prefabe: {fileID: 112807520458817672, guid: e24e10d87c3f67c4db1a2b5a58c702ad, type: 3}

@@ -6,6 +6,8 @@ public class SimplePistol_Waepon : WeaponBase
     [Header("Projectile")]
     [SerializeField] private ProjectileId projectileId = ProjectileId.SimplePistol_Bullet;         // Pool_BulletStandard
     [SerializeField] private ProjectileConfigSO projectileConfig; // PistolProjectileConfig
+
+    [SerializeField] private ObjectPool ProjectilePool;
     
     private int projectileLowLayer;
     private int projectileHighLayer;
@@ -49,8 +51,8 @@ public class SimplePistol_Waepon : WeaponBase
     {
         if (projectileConfig == null) return;
 
-        var pool = PoolRegistry.Instance != null ? PoolRegistry.Instance.GetPool(projectileId) : null;
-        if (pool == null) return;
+        //var pool = PoolRegistry.Instance != null ? PoolRegistry.Instance.GetPool(projectileId) : null;
+        //if (pool == null) return;
 
         // Consume ammo ONCE per shot (not per pellet) — typical shotgun behavior.
         // If you want ammo per pellet, multiply by projectilesPerShot.
@@ -81,7 +83,8 @@ public class SimplePistol_Waepon : WeaponBase
         Debug.LogWarning($"SHOTGUN DEBUG: count={count}, spread={cone}, frame={Time.frameCount}");
         for (int i = 0; i < count; i++)
         {
-            var proj = pool.Get(firePoint.position,  Quaternion.identity);
+            GameObject proj = ProjectilePool.GetInstance(firePoint.position,  Quaternion.identity);
+            //var proj = pool.Get(firePoint.position,  Quaternion.identity);
             Debug.LogWarning(
                 $"pellet {i}/{count - 1}: proj={(proj ? proj.name : "NULL")} " +
                 $"id={(proj ? proj.GetInstanceID().ToString() : "null")} " +
@@ -110,7 +113,8 @@ public class SimplePistol_Waepon : WeaponBase
             Vector2 dir = Rotate(baseDir, angle);
             float mult = Random.Range(projectileConfig.speedMultiplierMin, projectileConfig.speedMultiplierMax);
             float pelletSpeed = projectileConfig.speed * mult;
-            proj.Init(owner, ownerTeam, projectileConfig, dir, pelletSpeed, firePoint, activeMods);
+            var pg = proj.GetComponent<PooledProjectile>();
+            pg.Init(owner, ownerTeam, projectileConfig, dir, pelletSpeed, firePoint, activeMods);
         }
 
         // Recoil once per shot
