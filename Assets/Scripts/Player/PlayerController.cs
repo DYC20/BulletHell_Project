@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private Camera cam;
     private Rigidbody2D rb;
 
+    private Vector3 HoldOrigin;
+
     private void Awake()
     {
         cam = Camera.main;
@@ -39,6 +41,8 @@ public class PlayerController : MonoBehaviour
 
         // Optional auto-find if you forgot to drag them in Inspector:
         if (playerRenderer == null) playerRenderer = GetComponentInChildren<SpriteRenderer>();
+
+        HoldOrigin = weaponHolder.transform.localPosition;
     }
 
     public void OnMove(InputValue value)
@@ -104,6 +108,8 @@ public class PlayerController : MonoBehaviour
                 targetRot,
                 holderRotationSpeed * Time.deltaTime
             );
+            bool oriantation = weaponHolder.rotation.eulerAngles.z < 180;
+            weaponHolder.localPosition = HoldOrigin + (oriantation ? Vector3.left : Vector3.right) * 0.349f;
         }
 
         // 2) Swap player sprite based on mouse direction (4-way)

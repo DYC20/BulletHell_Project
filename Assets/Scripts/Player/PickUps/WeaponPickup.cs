@@ -2,34 +2,27 @@ using UnityEngine;
 
 public class WeaponPickup : MonoBehaviour, IPickup
 {
-    [SerializeField] private GameObject weaponPrefab;
     [SerializeField] private bool destroyAfterPickup = true;
 
 
     public bool CanPickup(GameObject picker)
     {
-        if (weaponPrefab == null)
-        {
-            Debug.Log("weaponPrefab NULL");
-            return false;
-        }
-        
         var equipper = picker.GetComponentInParent<IWeaponEquipper>();
-        return equipper != null && equipper.CanEquip(weaponPrefab);
+        return equipper != null && equipper.CanEquip(this.gameObject);
         
     }
 
     public void Pickup(GameObject picker)
     {
-        Debug.Log($"Picking weapon: {weaponPrefab.name}");
+        Debug.Log($"Picking weapon: {this.gameObject.name}");
         var equipper = picker.GetComponentInParent<IWeaponEquipper>();
-        if (equipper == null || weaponPrefab == null) return;
+        if (equipper == null) return;
 
-        equipper.Equip(weaponPrefab);
-        if (destroyAfterPickup)
+        equipper.Equip(this.gameObject);
+        /*if (destroyAfterPickup)
         {
             Destroy(gameObject);
-        }
+        }*/
         Debug.Log("Weapon Equipped");
     }
 }

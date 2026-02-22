@@ -7,7 +7,7 @@ public class PlayerWeaponController : MonoBehaviour,IWeaponEquipper
     [Header("Weapon")]
 
     [SerializeField] private Transform weaponSocket;
-    [SerializeField] private WeaponBase equippedWeapon;
+    [SerializeField] public WeaponBase equippedWeapon;
 
     private bool _isFiring;
     public Transform CurrentFirePoint { get; private set; }
@@ -25,13 +25,21 @@ public class PlayerWeaponController : MonoBehaviour,IWeaponEquipper
     
     public void Equip(WeaponBase weapon)
     {
-        equippedWeapon = weapon;
         if (equippedWeapon != null)
         {
-            //Debug.Log($"Equipped weapon: {equippedWeapon.name}");
-            equippedWeapon.SetOwner(gameObject, Teams.Player);
-            
+            equippedWeapon.transform.SetParent(null, true);
+            equippedWeapon.gameObject.transform.rotation = Quaternion.Euler(0f,0f,0f);
+            equippedWeapon.GetComponent<Collider2D>().enabled = true;
         }
+        equippedWeapon = weapon;
+        //Debug.Log($"Equipped weapon: {equippedWeapon.name}");
+        equippedWeapon.SetOwner(gameObject, Teams.Player);
+                    equippedWeapon.GetComponent<Collider2D>().enabled = false;
+        equippedWeapon.gameObject.transform.parent = weaponSocket;
+        equippedWeapon.gameObject.transform.localPosition = Vector3.zero;
+        equippedWeapon.gameObject.transform.localRotation = Quaternion.Euler(0f,0f,90f);
+            
+        
             
     }
 
@@ -51,14 +59,14 @@ public class PlayerWeaponController : MonoBehaviour,IWeaponEquipper
             weaponSocket = transform;
 
         // Destroy old equipped weapon instance (simple for now)
-        if (equippedWeapon != null)
-            Destroy(equippedWeapon.gameObject);
+        /*if (equippedWeapon != null)
+            Destroy(equippedWeapon.gameObject);*/
 
-        var weaponGO = Instantiate(weaponPrefab, weaponSocket);
+        /*var weaponGO = Instantiate(weaponPrefab, weaponSocket);
         weaponGO.transform.localPosition = Vector3.zero;
-        weaponGO.transform.localRotation = Quaternion.identity;
+        weaponGO.transform.localRotation = Quaternion.identity;*/
 
-        var weapon = weaponGO.GetComponent<WeaponBase>();
+        var weapon = weaponPrefab.GetComponent<WeaponBase>();
         Equip(weapon);
         
         CurrentFirePoint = (weapon != null) ? weapon.FirePoint : null;

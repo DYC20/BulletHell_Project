@@ -902,7 +902,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.058369, y: -2.2810602, z: -10}
+  m_LocalPosition: {x: -6.0479136, y: -2.2810602, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8034,6 +8034,10 @@ PrefabInstance:
       propertyPath: rf.useConstant
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1819663273497137966, guid: 459357575a167f94d9eb144a5932f3f1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1884716801075859592, guid: 459357575a167f94d9eb144a5932f3f1, type: 3}
       propertyPath: m_Name
       value: Player
@@ -8045,6 +8049,10 @@ PrefabInstance:
     - target: {fileID: 2360986955400251495, guid: 459357575a167f94d9eb144a5932f3f1, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3295990972532290228, guid: 459357575a167f94d9eb144a5932f3f1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4659646963908602787, guid: 459357575a167f94d9eb144a5932f3f1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8089,6 +8097,10 @@ PrefabInstance:
     - target: {fileID: 5080892887194069032, guid: 459357575a167f94d9eb144a5932f3f1, type: 3}
       propertyPath: m_IncludeLayers.m_Bits
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5984038432675935078, guid: 459357575a167f94d9eb144a5932f3f1, type: 3}
+      propertyPath: ScanLayerMask.m_Bits
+      value: 2048
       objectReference: {fileID: 0}
     - target: {fileID: 7674721219674868580, guid: 459357575a167f94d9eb144a5932f3f1, type: 3}
       propertyPath: m_Layer

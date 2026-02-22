@@ -24,13 +24,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3602286800176898790}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.574, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0.5, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 88992705989351331}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &5782139036240968308
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 7028442816849000167}
   - component: {fileID: 4245128646552802643}
   - component: {fileID: 3876630089003948474}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SimplePistol_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,9 +115,9 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1773462389
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
+  m_Sprite: {fileID: -5602695544594733931, guid: 2ab4d72037a31531bac5bd1f266959dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -139,7 +139,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a12568b8b2d1a644a7db1414d4ae42a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponPickup
-  weaponPrefab: {fileID: 5782139036240968308}
   destroyAfterPickup: 1
 --- !u!114 &7028442816849000167
 MonoBehaviour:
@@ -157,6 +156,7 @@ MonoBehaviour:
   shotsPerSecond: 4
   projectileId: 0
   projectileConfig: {fileID: 11400000, guid: cb8650d02a64b4e4081594d24b58320a, type: 2}
+  rd: {fileID: 0}
   ProjectilePool: {fileID: 11400000, guid: fb093fc22e21f7392b0d36b8bd0a7317, type: 2}
   recoilImpulse: {fileID: 0}
   recoilStrength: 0.2
@@ -250,8 +250,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0.21133333}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.28866667}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.3812499, y: 0.47375}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
