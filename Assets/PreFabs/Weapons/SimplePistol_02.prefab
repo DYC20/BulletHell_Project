@@ -24,13 +24,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3602286800176898790}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.574, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 88992705989351331}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &5782139036240968308
 GameObject:
   m_ObjectHideFlags: 0
@@ -157,6 +157,7 @@ MonoBehaviour:
   shotsPerSecond: 4
   projectileId: 1
   projectileConfig: {fileID: 11400000, guid: 907dc8254ede17742b3a1a553602f374, type: 2}
+  ProjectilePool: {fileID: 11400000, guid: 30b53c62c0a024721bf4be4ed6ef3f93, type: 2}
   recoilImpulse: {fileID: 0}
   recoilStrength: 0.2
 --- !u!114 &4245128646552802643
