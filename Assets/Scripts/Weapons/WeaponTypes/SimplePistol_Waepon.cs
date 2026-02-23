@@ -5,26 +5,28 @@ using Unity.VectorGraphics;
 public class SimplePistol_Waepon : WeaponBase
 {
     [Header("Projectile")]
-    [SerializeField] private ProjectileId projectileId = ProjectileId.SimplePistol_Bullet;         // Pool_BulletStandard
+    //[SerializeField] private ProjectileId projectileId = ProjectileId.SimplePistol_Bullet;         // Pool_BulletStandard
     [SerializeField] private ProjectileConfigSO projectileConfig; // PistolProjectileConfig
 
-    [SerializeField] private SpriteRenderer rd;
+    private SpriteRenderer rd;
     [SerializeField] private ObjectPool ProjectilePool;
-    
+
     private int projectileLowLayer;
     private int projectileHighLayer;
-    
+
     [Header("Camera Shake")]
     [SerializeField] private CinemachineImpulseSource recoilImpulse;
     [SerializeField] private float recoilStrength = 0.2f;
-    
+
+    private bool _IsSpriteRenderer = false;
+
     protected void Awake()
     {
-        rd = GetComponent<SpriteRenderer>();
-        projectileLowLayer  = LayerMask.NameToLayer("Projectile_Low");
+        _IsSpriteRenderer = TryGetComponent<SpriteRenderer>(out rd);
+        projectileLowLayer = LayerMask.NameToLayer("Projectile_Low");
         projectileHighLayer = LayerMask.NameToLayer("Projectile_High");
     }
-    
+
     protected override bool CanFire()
     {
         if (projectileConfig == null)
@@ -86,7 +88,7 @@ public class SimplePistol_Waepon : WeaponBase
         Debug.LogWarning($"SHOTGUN DEBUG: count={count}, spread={cone}, frame={Time.frameCount}");
         for (int i = 0; i < count; i++)
         {
-            GameObject proj = ProjectilePool.GetInstance(firePoint.position,  Quaternion.identity);
+            GameObject proj = ProjectilePool.GetInstance(firePoint.position, Quaternion.identity);
             //var proj = pool.Get(firePoint.position,  Quaternion.identity);
             Debug.LogWarning(
                 $"pellet {i}/{count - 1}: proj={(proj ? proj.name : "NULL")} " +
@@ -129,7 +131,12 @@ public class SimplePistol_Waepon : WeaponBase
 
     private void Update()
     {
-        rd.flipY = this.transform.rotation.eulerAngles.z < 270 && this.transform.rotation.eulerAngles.z  > 90;
+        if (_IsSpriteRenderer)
+        {
+            rd.flipY = this.transform.rotation.eulerAngles.z < 270 && this.transform.rotation.eulerAngles.z > 90;
+            //bool oriantation = this.transform.parent.rotation.eulerAngles.z < 45f && this.transform.parent.rotation.eulerAngles.z > -45;
+            if(this.transform.parent != null)rd.sortingOrder = Vector3.Dot(this.transform.parent.up, Vector3.up) < 0.6f ? 1 : -1;
+        }
     }
 
     /*   Old FireInternal

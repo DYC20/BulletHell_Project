@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1244125989776741800}
   - component: {fileID: 8830071433134316353}
+  - component: {fileID: 4491797281449188905}
   m_Layer: 3
   m_Name: TarrainCollider
   m_TagString: Untagged
@@ -69,6 +70,18 @@ CapsuleCollider2D:
   m_Offset: {x: -0.0035868282, y: -0.49210888}
   m_Size: {x: 0.67934054, y: 0.248925}
   m_Direction: 1
+--- !u!114 &4491797281449188905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734518301316456942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e141ddb1f9bf2424cb440e82fb8b561a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCollisionTest
 --- !u!1 &1884716801075859592
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponController
   weaponSocket: {fileID: 1819663273497137966}
+  gunDistance: 0.6
   equippedWeapon: {fileID: 0}
 --- !u!114 &3387304630536963846
 MonoBehaviour:
@@ -325,6 +339,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteractor
   maxPickDistance: 1
+  _IsPickInArea: 0
+  PickList: []
+  scanInterval: 4
+  heightOffset: 1
+  detectionRadius: 1
+  ScanLayerMask:
+    serializedVersion: 2
+    m_Bits: 2048
 --- !u!50 &5080892887194069032
 Rigidbody2D:
   serializedVersion: 5
@@ -344,7 +366,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -408,7 +430,7 @@ Transform:
   m_GameObject: {fileID: 2360986955400251495}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.349, y: -0.38, z: 0}
+  m_LocalPosition: {x: 0, y: -0.16, z: 0}
   m_LocalScale: {x: 0.8212, y: 0.8212, z: 0.8212}
   m_ConstrainProportionsScale: 0
   m_Children: []

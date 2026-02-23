@@ -108,8 +108,7 @@ public class PlayerController : MonoBehaviour
                 targetRot,
                 holderRotationSpeed * Time.deltaTime
             );
-            bool oriantation = weaponHolder.rotation.eulerAngles.z < 180;
-            weaponHolder.localPosition = HoldOrigin + (oriantation ? Vector3.left : Vector3.right) * 0.349f;
+            //weaponHolder.localPosition = Vector3.up * HoldOrigin.y + (oriantation ? Vector3.left : Vector3.right) * Mathf.Abs(HoldOrigin.x);
         }
 
         // 2) Swap player sprite based on mouse direction (4-way)

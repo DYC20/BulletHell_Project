@@ -115,7 +115,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1773462389
   m_SortingLayer: 3
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -7997763129637122941, guid: 2ab4d72037a31531bac5bd1f266959dd, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -141,9 +141,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SimplePistol
   firePoint: {fileID: 6907175310484751001}
   shotsPerSecond: 4
-  projectileId: 1
   projectileConfig: {fileID: 11400000, guid: 907dc8254ede17742b3a1a553602f374, type: 2}
-  rd: {fileID: 0}
+  rd: {fileID: 2792846607914155463}
   ProjectilePool: {fileID: 11400000, guid: 30b53c62c0a024721bf4be4ed6ef3f93, type: 2}
   recoilImpulse: {fileID: 0}
   recoilStrength: 0.2
