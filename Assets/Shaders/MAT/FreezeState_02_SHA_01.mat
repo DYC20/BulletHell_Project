@@ -12,6 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
+  - _ALPHATEST_ON
   - _SURFACE_TYPE_TRANSPARENT
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -59,21 +60,26 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha: -0.38
-    - _AlphaClip: 0
+    - _AlphaClip: 1
     - _AlphaToMask: 0
     - _Blend: 0
+    - _Blend_Amount: 1
     - _CastShadows: 0
+    - _Clliping_Progression: 0
     - _Cull: 2
     - _DstBlend: 10
     - _DstBlendAlpha: 10
-    - _Float: 0.12
+    - _Float: -2.01
     - _Fresnel: 2.05
     - _Fresnel_Power: 1
+    - _Ice_Power: 1
     - _Multi: 0.95
+    - _Normal_Scale: 1
     - _Power: -0.45
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Refrac_Strength: -0.07
+    - _Render_Power: 1
     - _SrcBlend: 5
     - _SrcBlendAlpha: 1
     - _Surface: 1
@@ -83,10 +89,14 @@ Material:
     - _edge_1: 0.35
     - _edge_2: 17.79
     m_Colors:
+    - _Alpha_Pos: {r: 0.5, g: 1, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Pos: {r: 0, g: 0.46, b: 0, a: 0}
     - _Position: {r: 0.15, g: 0.15, b: 0, a: 0}
+    - _Scale: {r: 0.71, g: 1, b: 0, a: 0}
     - _Tiling: {r: 0.7, g: 0.7, b: 0, a: 0}
-    - _Vector2: {r: 0.9, g: 0.9, b: 0, a: 0}
+    - _Tint: {r: 1, g: 1, b: 1, a: 0}
+    - _Vector2: {r: 0.5, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &7642480956527253055
