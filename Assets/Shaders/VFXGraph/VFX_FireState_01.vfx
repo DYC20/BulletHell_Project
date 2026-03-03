@@ -154,15 +154,6 @@ MonoBehaviour:
     - model: {fileID: 8926484042661615710}
       id: 0
       isStickyNote: 0
-    - model: {fileID: 8926484042661615626}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661615631}
-      id: 0
-      isStickyNote: 0
-    - model: {fileID: 8926484042661615610}
-      id: 0
-      isStickyNote: 0
   stickyNoteInfos: []
   categories:
   - name: Burst
@@ -446,22 +437,6 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: Color 1
-    path: Color 1
-    tooltip: 
-    space: -1
-    spaceable: 0
-    sheetType: m_Gradient
-    realType: Gradient
-    defaultValue:
-      m_Type:
-        m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.24528300762176515,"g":0.009255962446331978,"b":0.0,"a":1.0},"time":0.0},{"color":{"r":8.0,"g":2.094484567642212,"b":0.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}],"gradientMode":0}'
-    min: -Infinity
-    max: Infinity
-    enumValues: []
-    descendantCount: 0
   - name: FlipBook
     path: FlipBook
     tooltip: 
@@ -506,6 +481,22 @@ MonoBehaviour:
         m_SerializableType: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
       m_SerializableObject: False
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 0
+  - name: Color 1
+    path: Color 1
+    tooltip: 
+    space: -1
+    spaceable: 0
+    sheetType: m_Gradient
+    realType: Gradient
+    defaultValue:
+      m_Type:
+        m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"colorKeys":[{"color":{"r":0.24528300762176515,"g":0.009255962446331978,"b":0.0,"a":1.0},"time":0.0},{"color":{"r":8.0,"g":2.094484567642212,"b":0.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}],"gradientMode":0}'
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -3555,7 +3546,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615337}
   m_ExposedName: Color
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 2
   m_Category: Flame
   m_Min:
     m_Type:
@@ -3651,7 +3642,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615339}
   m_ExposedName: Fresnel Power
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 3
   m_Category: Flame
   m_Min:
     m_Type:
@@ -4549,7 +4540,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615429}
   m_ExposedName: Max Lifetime
   m_Exposed: 1
-  m_Order: 6
+  m_Order: 4
   m_Category: Flame
   m_Min:
     m_Type:
@@ -4636,7 +4627,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615431}
   m_ExposedName: Min Lifetime
   m_Exposed: 1
-  m_Order: 8
+  m_Order: 5
   m_Category: Flame
   m_Min:
     m_Type:
@@ -6722,7 +6713,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615503}
   m_ExposedName: FlipBook
   m_Exposed: 1
-  m_Order: 9
+  m_Order: 6
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -6803,7 +6794,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615510}
   m_ExposedName: Flipbook Lifetime
   m_Exposed: 1
-  m_Order: 10
+  m_Order: 7
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -7189,7 +7180,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615547}
   m_ExposedName: Create Smoke
   m_Exposed: 1
-  m_Order: 12
+  m_Order: 8
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -11226,7 +11217,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615676}
   m_ExposedName: Lifetime Min
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 9
   m_Category: Burst
   m_Min:
     m_Type:
@@ -11307,7 +11298,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615678}
   m_ExposedName: Lifetime Max
   m_Exposed: 1
-  m_Order: 7
+  m_Order: 10
   m_Category: Burst
   m_Min:
     m_Type:
@@ -11805,7 +11796,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615693}
   m_ExposedName: Color 1
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 11
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -11927,7 +11918,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615707}
   m_ExposedName: Amount
   m_Exposed: 1
-  m_Order: 13
+  m_Order: 12
   m_Category: Burst
   m_Min:
     m_Type:
@@ -12008,7 +11999,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615711}
   m_ExposedName: Duration
   m_Exposed: 1
-  m_Order: 11
+  m_Order: 13
   m_Category: Flame
   m_Min:
     m_Type:
