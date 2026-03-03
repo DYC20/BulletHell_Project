@@ -25,7 +25,13 @@ MonoBehaviour:
   speedMultiplierMin: 1
   speedMultiplierMax: 1
   destroyOnHit: 0
-  impactEffect: {fileID: 5040749496242317001, guid: 42c9d895cbb9d524e9aefb3a64b4520b, type: 3}
+  hitEffect:
+  - {fileID: 429630121617948818, guid: e4b83454776503d4c8e5b9a9570bd912, type: 3}
+  hitEffectPS:
+  - {fileID: 3370062852713752785, guid: 9bf92113db579a04c9590a14119b62c9, type: 3}
+  wallhitEffect: []
+  wallhitEffectPS:
+  - {fileID: 1707121828431647151, guid: f96badbc542a2b445bbcb94356bad8cb, type: 3}
   shootEffect: []
   shootEffectPS:
   - {fileID: 678938928091686416, guid: c3aaf77bcc93f2b40a5febbcfb00e059, type: 3}

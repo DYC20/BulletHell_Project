@@ -31,7 +31,11 @@ public class ProjectileConfigSO : ScriptableObject
     public bool destroyOnHit = true;
     
     [Header("Hit Effect")]
-    public VisualEffect impactEffect;
+    public List<VisualEffect> hitEffect;
+    public List<ParticleSystem> hitEffectPS;
+    
+    public List<VisualEffect> wallhitEffect;
+    public List<ParticleSystem> wallhitEffectPS;
     
     [Header("Shoot Effect")]
     public List<VisualEffect> shootEffect;

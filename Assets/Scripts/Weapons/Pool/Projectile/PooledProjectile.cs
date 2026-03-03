@@ -10,6 +10,7 @@ public class PooledProjectile : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private ProjectileMovement kinematics;
     [SerializeField] private ProjectileHitEffect hitEffect;
+    [SerializeField] private ProjectileHitEffectPS hitEffectPS;
     [SerializeField] private ProjectileShootEffect shootEffect;
     [SerializeField] private ProjectileShootEffectPS shootEffectPS;
     
@@ -23,6 +24,7 @@ public class PooledProjectile : MonoBehaviour
     private ProjectileConfigSO _config;
     private ProjectileStats _stats;
     private List<ProjectileModifierSO> _mods;
+    private Quaternion projectileOrientation;
     
 
     private int _remainingPierce;
@@ -41,6 +43,7 @@ public class PooledProjectile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         kinematics = GetComponent<ProjectileMovement>();
         hitEffect = GetComponent<ProjectileHitEffect>();
+        hitEffectPS = GetComponent<ProjectileHitEffectPS>();
         shootEffect = GetComponent<ProjectileShootEffect>();
         shootEffectPS = GetComponent<ProjectileShootEffectPS>();
     }
@@ -90,6 +93,7 @@ public class PooledProjectile : MonoBehaviour
         
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg-90f;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        projectileOrientation = transform.rotation;
 
         if (shootEffect != null && _config != null && spawnTf != null)
         {
@@ -148,7 +152,39 @@ public class PooledProjectile : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Walls"))
         {
-            hitEffect.Apply(_config.impactEffect, other.transform.position, other.transform.rotation);
+            projectileOrientation = Quaternion.Euler(projectileOrientation.eulerAngles.x, projectileOrientation.eulerAngles.y
+                , projectileOrientation.eulerAngles.z - 90f);
+            if (hitEffect != null && _config != null)
+            {Debug.Log("projectileOrientation:" + projectileOrientation);
+                for (int FX = 0; FX < _config.wallhitEffect.Count; FX++)
+                {
+                    
+                    VisualEffect hitFX = _config.wallhitEffect[FX];
+                    hitEffect.Apply(hitFX, other.transform.position, projectileOrientation);
+                }
+                //shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
+                Debug.Log("hitEffect Applied"+_owner.name);
+            }
+            else if (hitEffect == null || _config == null)
+            {
+                Debug.LogWarning("hit effect/config is null");
+            }
+        
+            if (hitEffectPS != null && _config != null)
+            {
+                for (int FX = 0; FX < _config.wallhitEffectPS.Count; FX++)
+                {
+                    ParticleSystem hitFX = _config.wallhitEffectPS[FX];
+                    shootEffectPS.Apply(hitFX, other.transform.position, projectileOrientation);
+                }
+                //shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
+                Debug.Log("hit Applied"+_owner.name);
+            }
+            else if (hitEffect == null || _config == null)
+            {
+                Debug.LogWarning("hit effect/config is null");
+            }
+            
             Despawn(); 
         }
         
@@ -170,11 +206,42 @@ public class PooledProjectile : MonoBehaviour
         if (_config.preventFriendlyFire && damageable.Team == _ownerTeam)
             return;
 
-        if (hitEffect != null)
-        {
-            hitEffect.Apply(_config.impactEffect, other.transform.position, other.transform.rotation);
+        if (!other.CompareTag("Enemy")) return;
+        
+        if (hitEffect != null && _config != null)
+            {
+
+                for (int FX = 0; FX < _config.hitEffect.Count; FX++)
+                {
+                    VisualEffect hitFX = _config.hitEffect[FX];
+                    hitEffect.Apply(hitFX, other.transform.position, other.transform.rotation);
+                }
+
+                //shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
+                Debug.Log("hitEffect Applied" + other.gameObject.name);
+            }
+            else if (hitEffect == null || _config == null)
+            {
+                Debug.LogWarning("hit effect/config is null");
+            }
+
+            if (hitEffectPS != null && _config != null)
+            {
+                for (int FX = 0; FX < _config.hitEffectPS.Count; FX++)
+                {
+                    ParticleSystem hitFX = _config.hitEffectPS[FX];
+                    shootEffectPS.Apply(hitFX, other.transform.position, other.transform.rotation);
+                }
+
+                //shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
+                Debug.Log("hit Applied" + _owner.name);
+            }
+            else if (hitEffect == null || _config == null)
+            {
+                Debug.LogWarning("hit effect/config is null");
+            }
+
             Debug.Log("HitEffect Applied");
-        }
 
         if (_mods != null)
         {
@@ -219,6 +286,7 @@ Debug.LogError("HitEffect NULL");*/
         OutlineMaterialRenderer.GetPropertyBlock(mpb);
         mpb.Clear();
         OutlineMaterialRenderer.SetPropertyBlock(mpb);
+       
         
         // Stop physics motion to avoid “ghost velocity” on reuse
         if (rb != null)

@@ -118,7 +118,7 @@ GameObject:
   - component: {fileID: 4933905431315199958}
   m_Layer: 0
   m_Name: Chaser_Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -186,7 +186,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1533958963
   m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 1108981373729593120, guid: 48799aba08cafe14f95c9d3a6a1b912a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -284,7 +284,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemieDeathHandler
   deathSmokePrefab:
   - {fileID: 7280059789822280813, guid: aa71f436f07c8a34c801d793fe5f4983, type: 3}
-  - {fileID: 6668916617724155443, guid: e4b83454776503d4c8e5b9a9570bd912, type: 3}
   ammoPrefab: {fileID: 5362075109300470657, guid: 5fd1a51192926e24c92af290e64f0562, type: 3}
 --- !u!61 &1809575182489146792
 BoxCollider2D:

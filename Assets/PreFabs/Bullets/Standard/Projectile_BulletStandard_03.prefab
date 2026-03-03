@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2839993938717429653}
   - component: {fileID: 8488122799573839415}
   - component: {fileID: 4361183904634148549}
+  - component: {fileID: -596124624765486420}
   - component: {fileID: 5164655207921999921}
   - component: {fileID: -8955935111617131742}
   - component: {fileID: 3516138570704444126}
@@ -130,6 +131,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b0e0dcde445354db7d46e4a222e1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileHitEffect
+--- !u!114 &-596124624765486420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112807520458817672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d48cfbac535435478450afd428dbb43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectilrHitEffectPS
 --- !u!114 &5164655207921999921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,6 +182,7 @@ MonoBehaviour:
   rb: {fileID: 1955884628445460395}
   kinematics: {fileID: 8488122799573839415}
   hitEffect: {fileID: 4361183904634148549}
+  hitEffectPS: {fileID: -596124624765486420}
   shootEffect: {fileID: 5164655207921999921}
   shootEffectPS: {fileID: -8955935111617131742}
   OutlineMaterialRenderer: {fileID: 4398625868787656555}
