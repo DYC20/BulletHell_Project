@@ -29,18 +29,20 @@ public class SimplePistol_Waepon : WeaponBase
 
     protected override bool CanFire()
     {
-        if (projectileConfig == null)
+        var mods = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
+        ProjectileConfigSO cfg = projectileConfig;
+        if (mods != null) cfg = mods.GetModifiedConfig(projectileConfig) ?? projectileConfig;
+
+        if (cfg == null)
         {
-            Debug.LogWarning($"{projectileConfig}: is null.");
+            Debug.LogWarning($"{name}: projectileConfig is null.");
             return false;
         }
 
-        // If ammoPerShot is 0, treat as infinite ammo for this weapon.
-        if (projectileConfig.ammoPerShot <= 0) return true;
-
+        if (cfg.ammoPerShot <= 0) return true;
         if (ammoConsumer == null) return false;
 
-        return ammoConsumer.HasAmmo(projectileConfig.ammoType, projectileConfig.ammoPerShot);
+        return ammoConsumer.HasAmmo(cfg.ammoType, cfg.ammoPerShot);
         /*       // Owner must have ammo inventory to consume ammo
         var ammo = owner != null ? owner.GetComponentInParent<IAmmoConsumer>() : null;
         if (ammo == null)
@@ -54,79 +56,64 @@ public class SimplePistol_Waepon : WeaponBase
 
     protected override void FireInternal()
     {
-        if (projectileConfig == null) return;
+  var mods = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
+    ProjectileConfigSO cfg = projectileConfig;
+    ObjectPool pool = ProjectilePool;
+    if (mods != null)
+    {
+        cfg = mods.GetModifiedConfig(projectileConfig) ?? projectileConfig;
+        pool = mods.GetModifiedPool(ProjectilePool) ?? ProjectilePool;
+    }
 
-        //var pool = PoolRegistry.Instance != null ? PoolRegistry.Instance.GetPool(projectileId) : null;
-        //if (pool == null) return;
+    if (cfg == null || pool == null) return;
 
-        // Consume ammo ONCE per shot (not per pellet) — typical shotgun behavior.
-        // If you want ammo per pellet, multiply by projectilesPerShot.
-        if (projectileConfig.ammoPerShot > 0)
+    // consume ammo based on cfg
+    if (cfg.ammoPerShot > 0)
+    {
+        var ammo = owner != null ? owner.GetComponentInParent<IAmmoConsumer>() : null;
+        if (ammo == null) return;
+
+        if (!ammo.TryConsumeAmmo(cfg.ammoType, cfg.ammoPerShot))
+            return;
+    }
+
+    int count = Mathf.Max(1, cfg.projectilesPerShot);
+    float cone = Mathf.Max(0f, cfg.spreadAngleDeg);
+    Vector2 baseDir = firePoint.up;
+
+    var activeMods = mods != null ? mods.Active : null;
+
+    int playerHighLayer = LayerMask.NameToLayer("Player_High");
+    var shooterRoot = owner != null ? owner.transform.root.gameObject : null;
+    bool fromHighland = shooterRoot != null && shooterRoot.layer == playerHighLayer;
+    int projectileLayer = fromHighland ? projectileHighLayer : projectileLowLayer;
+
+    for (int i = 0; i < count; i++)
+    {
+        GameObject proj = ProjectilePool.GetInstance(firePoint.position, Quaternion.identity);
+        if (proj == null) continue;
+
+        SetLayerRecursively(proj.gameObject, projectileLayer);
+
+        float angle;
+        if (cone <= 0f || count == 1) angle = 0f;
+        else if (cfg.randomSpread) angle = Random.Range(-cone * 0.5f, cone * 0.5f);
+        else
         {
-            var ammo = owner != null ? owner.GetComponentInParent<IAmmoConsumer>() : null;
-            if (ammo == null) return;
-
-            if (!ammo.TryConsumeAmmo(projectileConfig.ammoType, projectileConfig.ammoPerShot))
-                return;
+            float t = (count == 1) ? 0.5f : (i / (float)(count - 1));
+            angle = Mathf.Lerp(-cone * 0.5f, cone * 0.5f, t);
         }
 
-        int count = Mathf.Max(1, projectileConfig.projectilesPerShot);
-        float cone = Mathf.Max(0f, projectileConfig.spreadAngleDeg);
+        Vector2 dir = Rotate(baseDir, angle);
+        float mult = Random.Range(cfg.speedMultiplierMin, cfg.speedMultiplierMax);
+        float pelletSpeed = cfg.speed * mult;
 
-        Vector2 baseDir = firePoint.up;
+        var pg = proj.GetComponent<PooledProjectile>();
+        pg.Init(owner, ownerTeam, cfg, dir, pelletSpeed, firePoint, activeMods);
+    }
 
-        // Pre-calc modifiers once
-        var mods = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
-        var activeMods = mods != null ? mods.Active : null;
-
-        // Determine layer once (based on root layer)
-        int playerHighLayer = LayerMask.NameToLayer("Player_High");
-        var shooterRoot = owner != null ? owner.transform.root.gameObject : null;
-        bool fromHighland = shooterRoot != null && shooterRoot.layer == playerHighLayer;
-        int projectileLayer = fromHighland ? projectileHighLayer : projectileLowLayer;
-
-        Debug.LogWarning($"SHOTGUN DEBUG: count={count}, spread={cone}, frame={Time.frameCount}");
-        for (int i = 0; i < count; i++)
-        {
-            GameObject proj = ProjectilePool.GetInstance(firePoint.position, Quaternion.identity);
-            //var proj = pool.Get(firePoint.position,  Quaternion.identity);
-            Debug.LogWarning(
-                $"pellet {i}/{count - 1}: proj={(proj ? proj.name : "NULL")} " +
-                $"id={(proj ? proj.GetInstanceID().ToString() : "null")} " +
-                $"active={(proj ? proj.gameObject.activeSelf.ToString() : "n/a")}");
-            if (proj == null) continue;
-
-            SetLayerRecursively(proj.gameObject, projectileLayer);
-
-            // Spread: either random within cone, or evenly spaced across cone
-            float angle;
-            if (cone <= 0f || count == 1)
-            {
-                angle = 0f;
-            }
-            else if (projectileConfig.randomSpread)
-            {
-                angle = Random.Range(-cone * 0.5f, cone * 0.5f);
-            }
-            else
-            {
-                // Even spacing from -cone/2 to +cone/2
-                float t = (count == 1) ? 0.5f : (i / (float)(count - 1));
-                angle = Mathf.Lerp(-cone * 0.5f, cone * 0.5f, t);
-            }
-
-            Vector2 dir = Rotate(baseDir, angle);
-            float mult = Random.Range(projectileConfig.speedMultiplierMin, projectileConfig.speedMultiplierMax);
-            float pelletSpeed = projectileConfig.speed * mult;
-            var pg = proj.GetComponent<PooledProjectile>();
-            pg.Init(owner, ownerTeam, projectileConfig, dir, pelletSpeed, firePoint, activeMods);
-        }
-
-        // Recoil once per shot
-        if (recoilImpulse != null)
-        {
-            recoilImpulse.GenerateImpulse(new Vector3(baseDir.x, baseDir.y, 0f) * recoilStrength);
-        }
+    if (recoilImpulse != null)
+        recoilImpulse.GenerateImpulse(new Vector3(baseDir.x, baseDir.y, 0f) * recoilStrength);
     }
 
     private void Update()

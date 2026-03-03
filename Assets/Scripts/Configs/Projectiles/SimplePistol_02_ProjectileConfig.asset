@@ -16,20 +16,25 @@ MonoBehaviour:
   ammoPerShot: 1
   damage: 1
   speed: 4
-  lifetime: 3
+  lifetime: 1
   projectilesPerShot: 1
-  spreadAngleDeg: 0
+  spreadAngleDeg: 15
   randomSpread: 1
   centerProjectile: 1
-  spawnPosJitter: 0
+  spawnPosJitter: 0.2
   speedMultiplierMin: 1
   speedMultiplierMax: 1
   destroyOnHit: 0
-  impactEffect: {fileID: 5040749496242317001, guid: 42c9d895cbb9d524e9aefb3a64b4520b, type: 3}
+  hitEffect: []
+  hitEffectPS:
+  - {fileID: 3370062852713752785, guid: 9bf92113db579a04c9590a14119b62c9, type: 3}
+  wallhitEffect: []
+  wallhitEffectPS:
+  - {fileID: 1707121828431647151, guid: f96badbc542a2b445bbcb94356bad8cb, type: 3}
   shootEffect:
   - {fileID: 3744974188407950299, guid: bb8c66d0206170d4893d049ac9c2d579, type: 3}
   shootEffectPS:
-  - {fileID: 7287459377472171884, guid: afbcef387b238f643a405e6da46fb5bd, type: 3}
+  - {fileID: 678938928091686416, guid: c3aaf77bcc93f2b40a5febbcfb00e059, type: 3}
   dissapateOverLifetime: 0
   preventFriendlyFire: 1
   hitMask:

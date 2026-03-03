@@ -25,6 +25,7 @@ public class PooledProjectile : MonoBehaviour
     private ProjectileStats _stats;
     private List<ProjectileModifierSO> _mods;
     private Quaternion projectileOrientation;
+    private ProjectileModifierSet _modifierSet;
     
 
     private int _remainingPierce;
@@ -58,14 +59,15 @@ public class PooledProjectile : MonoBehaviour
         IReadOnlyList<ProjectileModifierSO> modifiers)
     {
         _owner = owner;
+        _modifierSet = _owner != null ? _owner.GetComponentInParent<ProjectileModifierSet>() : null;
         _ownerTeam = ownerTeam;
         _config = config;
         _remainingPierce = config != null ? config.pierceCount : 0;
         //Set Modifiers
         _stats = ProjectileStatsBuilder.FromConfig(config);
-        _mods = modifiers != null ? new List<ProjectileModifierSO>(modifiers) : null;
-        Color _baseColor = OutlineMaterialRenderer.material.color;
-        
+        //_mods = modifiers != null ? new List<ProjectileModifierSO>(modifiers) : null;
+        //Color _baseColor = OutlineMaterialRenderer.material.color;
+        /*
         if (_mods != null)
             for (int i = 0; i < _mods.Count; i++)
                 _mods[i].ModifyStats(ref _stats);
@@ -81,7 +83,7 @@ public class PooledProjectile : MonoBehaviour
             //Debug.Log($"Applying MPB color: {mpb.GetVector("_Color")} to {name}");
             OutlineMaterialRenderer.SetPropertyBlock(mpb);
         }
-
+*/
         _lifeTimer = 0f;
 
         float speed = speedOverride > 0f ? speedOverride : config.speed;
@@ -154,6 +156,7 @@ public class PooledProjectile : MonoBehaviour
         {
             projectileOrientation = Quaternion.Euler(projectileOrientation.eulerAngles.x, projectileOrientation.eulerAngles.y
                 , projectileOrientation.eulerAngles.z - 90f);
+            
             if (hitEffect != null && _config != null)
             {Debug.Log("projectileOrientation:" + projectileOrientation);
                 for (int FX = 0; FX < _config.wallhitEffect.Count; FX++)
@@ -175,7 +178,7 @@ public class PooledProjectile : MonoBehaviour
                 for (int FX = 0; FX < _config.wallhitEffectPS.Count; FX++)
                 {
                     ParticleSystem hitFX = _config.wallhitEffectPS[FX];
-                    shootEffectPS.Apply(hitFX, other.transform.position, projectileOrientation);
+                    hitEffectPS.Apply(hitFX, other.transform.position, projectileOrientation);
                 }
                 //shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
                 Debug.Log("hit Applied"+_owner.name);
@@ -207,6 +210,8 @@ public class PooledProjectile : MonoBehaviour
             return;
 
         if (!other.CompareTag("Enemy")) return;
+        
+        _modifierSet?.NotifyHitEnemy(_owner, other.gameObject, other.transform.position, other.transform.rotation);
         
         if (hitEffect != null && _config != null)
             {
@@ -243,7 +248,7 @@ public class PooledProjectile : MonoBehaviour
 
             Debug.Log("HitEffect Applied");
 
-        if (_mods != null)
+       /* if (_mods != null)
         {
             for (int i = 0; i < _mods.Count; i++)
                 _mods[i].OnHit(other.gameObject, _owner.gameObject);

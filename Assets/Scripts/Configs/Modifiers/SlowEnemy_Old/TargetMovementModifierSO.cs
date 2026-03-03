@@ -1,19 +1,12 @@
 using UnityEngine;
 using UnityEngine.VFX;
 
-[CreateAssetMenu(menuName = "Upgrades/Projectile Modifiers/Freeze")]
+/*[CreateAssetMenu(menuName = "Upgrades/Projectile Modifiers/Freeze")]
 public class TargetMovementModifierSO : ProjectileModifierSO
 {
-    [SerializeField, ColorUsage(true, true)] private Color tint ;
     [SerializeField] private ParticleSystem hitEffect;
     [SerializeField] private float slowDuration = 1.5f;
     [SerializeField] private float slowFactor = 0.5f;
-
-    public override void ApplyVisuals( MaterialPropertyBlock mpb)
-    {
-        mpb.SetColor("_Color", tint);
-        Debug.LogWarning("FreezeModifierSO: ApplyVisuals called");
-    }
 
     public override void OnHit(GameObject target, GameObject instigator)
     {
@@ -29,4 +22,4 @@ public class TargetMovementModifierSO : ProjectileModifierSO
     }
 
 
-}
+}*/

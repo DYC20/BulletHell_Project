@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 [RequireComponent(typeof(SpriteRenderer))]
 public class ProjectileVisual_SpriteTint : MonoBehaviour, IProjectileVisualReciever
 {
@@ -31,4 +31,4 @@ public class ProjectileVisual_SpriteTint : MonoBehaviour, IProjectileVisualRecie
 
         sr.SetPropertyBlock(mpb);
     }
-}
+}*/

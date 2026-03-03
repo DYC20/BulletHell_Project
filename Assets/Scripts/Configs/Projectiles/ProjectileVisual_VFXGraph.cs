@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
-
+/*
 public class ProjectileVisual_VFXGraph : MonoBehaviour, IProjectileVisualReciever
 {
     [SerializeField] private VisualEffect vfx;
@@ -26,4 +26,4 @@ public class ProjectileVisual_VFXGraph : MonoBehaviour, IProjectileVisualRecieve
             }
         }
     }
-}
+}*/

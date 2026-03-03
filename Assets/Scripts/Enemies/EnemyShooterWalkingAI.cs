@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyShooterWalkingAI : MonoBehaviour
+public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireInterval
 {
     private enum State { Wander, CombatChase, CombatReposition, CombatFiring }
 
@@ -443,6 +443,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour
         
         return center + offset;
     }
+    
 
     // -------------------------
     // Wall collision -> repick wander target immediately
@@ -560,5 +561,34 @@ public class EnemyShooterWalkingAI : MonoBehaviour
             prev = next;
         }
     }
+    
+    //////////////////////////////////////////////
+    ////, IEnemyMoveSpeed, IEnemyFireInterval////
+    //////////////////////////////////////////////
+    public float MoveSpeed
+    {
+        get => moveSpeed;
+        set => moveSpeed = Mathf.Max(0f, value);
+    }
 
+    public float FireInterval
+    {
+        get => (fireRateMin + fireRateMax) * 0.5f;
+        set
+        {
+            value = Mathf.Max(0.02f, value);
+
+            float currentAvg = (fireRateMin + fireRateMax) * 0.5f;
+            if (currentAvg <= 0.0001f)
+            {
+                fireRateMin = value;
+                fireRateMax = value;
+                return;
+            }
+
+            float scale = value / currentAvg;
+            fireRateMin = Mathf.Max(0.02f, fireRateMin * scale);
+            fireRateMax = Mathf.Max(fireRateMin, fireRateMax * scale);
+        }
+    }
 }
