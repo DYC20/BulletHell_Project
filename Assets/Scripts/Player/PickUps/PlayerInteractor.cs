@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,59 +7,99 @@ public class PlayerInteractor : MonoBehaviour
 {
     [SerializeField] private float maxPickDistance = 2.5f; // optional if you want distance filtering
 
-    private readonly List<IPickup> _candidates = new();
-    private bool _pickupPressed;
+
+    [SerializeField] private bool _IsPickInArea = false;
+    [SerializeField] private Collider2D[] PickList;
 
     // Input System action name "Interact" -> "OnInteract"
     public void OnInteract(InputValue E)
     {
-        //Debug.Log($"OnInteract called. isPressed={E.isPressed} frame={Time.frameCount}");
-        _pickupPressed = true;
-    }
-
-    private void Update()
-    {
-        //Debug.Log("Entered Update");
-        if (!_pickupPressed) return;
-        _pickupPressed = false; // treat as "press" (not hold)
-        var best = GetBestCandidate();
-        //Debug.Log(best == null ? "No pickup candidate" : $"Trying pickup: {((MonoBehaviour)best).name} ({best.GetType().Name})");
-        if (best == null) return;
-        
-        if (best != null)
+        if (_IsPickInArea)
         {
-            bool can = best.CanPickup(gameObject);
-            Debug.Log($"CanPickup={can}");
-            if (can) best.Pickup(gameObject);
-        }
+            var best = GetClosestPickable();
+            Debug.Log("Trying To Pickup");
+            //Debug.Log(best == null ? "No pickup candidate" : $"Trying pickup: {((MonoBehaviour)best).name} ({best.GetType().Name})");
+            if (best == null) return;
+            else
+            {
+                Debug.Log("Can be Equiped ?");
+                if(best.CanPickup(gameObject))
+                {
+                    Debug.Log("Yes");
+                    best.Pickup(gameObject);
+                }
+            }
+            ScanForIPickups(out PickList);
+            
+            /*if (best != null)
+            {
+                bool can = best.CanPickup(gameObject);
+                Debug.Log($"CanPickup={can}");
+                if (can) best.Pickup(gameObject);
+            }
 
-        if (best.CanPickup(gameObject))
-            best.Pickup(gameObject);
+            if (best.CanPickup(gameObject))
+                best.Pickup(gameObject);*/
+        }
     }
 
-    private IPickup GetBestCandidate()
+
+    private IPickup GetClosestPickable()
     {
         // simplest: last in range
         // better: closest; here’s closest if pickup is a MonoBehaviour
         float bestDist = float.MaxValue;
         IPickup best = null;
 
-        foreach (var p in _candidates)
+        foreach (var p in PickList)
         {
-            if (p is not MonoBehaviour mb || mb == null) continue;
-            float d = Vector2.Distance(transform.position, mb.transform.position);
+            IPickup mb = null;
+            if(!p.gameObject.TryGetComponent<IPickup>(out mb))
+            {
+                Debug.Log("Not Pickable");
+                continue;
+            }
+            float d = Vector2.Distance(transform.position, p.transform.position);
             if (d < bestDist)
             {
                 bestDist = d;
-                best = p;
+                best = mb;
             }
             //Debug.Log("Number of candidates found:" + _candidates.Count);
         }
 
         return best;
     }
+    private float scanTimer = 0f;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    [Header("Collecter Settings")]
+    [SerializeField] private float scanInterval = 4f;
+    [SerializeField] private float heightOffset = 1f;
+    [SerializeField] private float detectionRadius = 1;
+    [SerializeField] private LayerMask ScanLayerMask;
+
+    private bool ScanForIPickups(out Collider2D[] locEnviroment)
+    {
+        Vector2 pos = Get2DPosition(transform.position) + Vector2.up * heightOffset;
+
+        locEnviroment = Physics2D.OverlapCircleAll(pos, detectionRadius, ScanLayerMask);
+        return locEnviroment.Length > 0;
+    }
+    void FixedUpdate()
+    {
+        scanTimer += Time.deltaTime;
+        if (scanTimer > (1 / scanInterval))
+        {
+            _IsPickInArea = ScanForIPickups(out PickList);
+        }
+    }
+    private Vector2 Get2DPosition(Vector3 Position)
+    {
+        Vector2 Pos = new Vector2(Position.x, Position.y);
+        return Pos;
+    }
+
+    /*private void OnTriggerEnter2D(Collider2D other)
     {
         var pickup = other.GetComponentInParent<IPickup>();
         if (pickup == null) return;
@@ -72,5 +113,5 @@ public class PlayerInteractor : MonoBehaviour
         var pickup = other.GetComponentInParent<IPickup>();
         if (pickup == null) return;
         _candidates.Remove(pickup);
-    }
+    }*/
 }

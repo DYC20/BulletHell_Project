@@ -16,8 +16,6 @@ public class PooledProjectile : MonoBehaviour
     [SerializeField]  private Renderer OutlineMaterialRenderer;
     private MaterialPropertyBlock mpb;
 
-    private ProjectilePool _pool;
-
     // Runtime state
     private GameObject _owner;
     private Teams _ownerTeam;
@@ -52,8 +50,6 @@ public class PooledProjectile : MonoBehaviour
         // Important: ensure collider works immediately, but timer resets on Init
         _lifeTimer = 0f;
     }
-
-    public void AssignPool(ProjectilePool pool) => _pool = pool;
 
     public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction, float speedOverride, Transform spawnTf,
         IReadOnlyList<ProjectileModifierSO> modifiers)
@@ -231,9 +227,6 @@ Debug.LogError("HitEffect NULL");*/
         _owner = null;
         _config = null;
 
-        if (_pool != null)
-            _pool.Return(this);
-        else
             gameObject.SetActive(false);
     }
 }

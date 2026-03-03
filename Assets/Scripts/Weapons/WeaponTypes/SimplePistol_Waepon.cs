@@ -1,25 +1,32 @@
 using UnityEngine;
 using Unity.Cinemachine;
+using Unity.VectorGraphics;
 
 public class SimplePistol_Waepon : WeaponBase
 {
     [Header("Projectile")]
-    [SerializeField] private ProjectileId projectileId = ProjectileId.SimplePistol_Bullet;         // Pool_BulletStandard
+    //[SerializeField] private ProjectileId projectileId = ProjectileId.SimplePistol_Bullet;         // Pool_BulletStandard
     [SerializeField] private ProjectileConfigSO projectileConfig; // PistolProjectileConfig
-    
+
+    private SpriteRenderer rd;
+    [SerializeField] private ObjectPool ProjectilePool;
+
     private int projectileLowLayer;
     private int projectileHighLayer;
-    
+
     [Header("Camera Shake")]
     [SerializeField] private CinemachineImpulseSource recoilImpulse;
     [SerializeField] private float recoilStrength = 0.2f;
-    
+
+    private bool _IsSpriteRenderer = false;
+
     protected void Awake()
     {
-        projectileLowLayer  = LayerMask.NameToLayer("Projectile_Low");
+        _IsSpriteRenderer = TryGetComponent<SpriteRenderer>(out rd);
+        projectileLowLayer = LayerMask.NameToLayer("Projectile_Low");
         projectileHighLayer = LayerMask.NameToLayer("Projectile_High");
     }
-    
+
     protected override bool CanFire()
     {
         if (projectileConfig == null)
@@ -49,8 +56,8 @@ public class SimplePistol_Waepon : WeaponBase
     {
         if (projectileConfig == null) return;
 
-        var pool = PoolRegistry.Instance != null ? PoolRegistry.Instance.GetPool(projectileId) : null;
-        if (pool == null) return;
+        //var pool = PoolRegistry.Instance != null ? PoolRegistry.Instance.GetPool(projectileId) : null;
+        //if (pool == null) return;
 
         // Consume ammo ONCE per shot (not per pellet) — typical shotgun behavior.
         // If you want ammo per pellet, multiply by projectilesPerShot.
@@ -78,17 +85,17 @@ public class SimplePistol_Waepon : WeaponBase
         bool fromHighland = shooterRoot != null && shooterRoot.layer == playerHighLayer;
         int projectileLayer = fromHighland ? projectileHighLayer : projectileLowLayer;
 
-        //Debug.LogWarning($"SHOTGUN DEBUG: count={count}, spread={cone}, frame={Time.frameCount}");
+        Debug.LogWarning($"SHOTGUN DEBUG: count={count}, spread={cone}, frame={Time.frameCount}");
         for (int i = 0; i < count; i++)
         {
-            var proj = pool.Get(firePoint.position,  Quaternion.identity);
-            /*
-             Debug.LogWarning(
+            GameObject proj = ProjectilePool.GetInstance(firePoint.position, Quaternion.identity);
+            //var proj = pool.Get(firePoint.position,  Quaternion.identity);
+            Debug.LogWarning(
                 $"pellet {i}/{count - 1}: proj={(proj ? proj.name : "NULL")} " +
                 $"id={(proj ? proj.GetInstanceID().ToString() : "null")} " +
                 $"active={(proj ? proj.gameObject.activeSelf.ToString() : "n/a")}");
             if (proj == null) continue;
-            */
+
             SetLayerRecursively(proj.gameObject, projectileLayer);
 
             // Spread: either random within cone, or evenly spaced across cone
@@ -111,13 +118,24 @@ public class SimplePistol_Waepon : WeaponBase
             Vector2 dir = Rotate(baseDir, angle);
             float mult = Random.Range(projectileConfig.speedMultiplierMin, projectileConfig.speedMultiplierMax);
             float pelletSpeed = projectileConfig.speed * mult;
-            proj.Init(owner, ownerTeam, projectileConfig, dir, pelletSpeed, firePoint, activeMods);
+            var pg = proj.GetComponent<PooledProjectile>();
+            pg.Init(owner, ownerTeam, projectileConfig, dir, pelletSpeed, firePoint, activeMods);
         }
 
         // Recoil once per shot
         if (recoilImpulse != null)
         {
             recoilImpulse.GenerateImpulse(new Vector3(baseDir.x, baseDir.y, 0f) * recoilStrength);
+        }
+    }
+
+    private void Update()
+    {
+        if (_IsSpriteRenderer)
+        {
+            rd.flipY = this.transform.rotation.eulerAngles.z < 270 && this.transform.rotation.eulerAngles.z > 90;
+            //bool oriantation = this.transform.parent.rotation.eulerAngles.z < 45f && this.transform.parent.rotation.eulerAngles.z > -45;
+            if(this.transform.parent != null)rd.sortingOrder = Vector3.Dot(this.transform.parent.up, Vector3.up) < 0.6f ? 1 : -1;
         }
     }
 
@@ -160,36 +178,36 @@ public class SimplePistol_Waepon : WeaponBase
     /*GameObject shooterRoot = owner != null && owner.GetComponent<Rigidbody2D>() != null
         ? owner
         : owner != null ? owner.transform.root.gameObject : null;*/
-       /* var shooterRoot = owner != null ? owner.transform.root.gameObject : null;
-        
-        
-        Debug.Log($"owner={owner.name} layer={LayerMask.LayerToName(owner.layer)} ({owner.layer})");
-        Debug.Log($"owner.root={owner.transform.root.name} layer={LayerMask.LayerToName(owner.transform.root.gameObject.layer)} ({owner.transform.root.gameObject.layer})");
-        Debug.Log($"playerHighLayer={playerHighLayer}, playerLowLayer={playerLowLayer}");
-        
-        bool fromHighland = shooterRoot != null && shooterRoot.layer == playerHighLayer;
-
-        int projectileLayer = fromHighland ? projectileHighLayer : projectileLowLayer;
-        
-        SetLayerRecursively(proj.gameObject, projectileLayer);
-        Debug.LogWarning($"fromHighland={fromHighland} -> projectileLayer={LayerMask.LayerToName(projectileLayer)} ({projectileLayer})");
-        Debug.LogWarning($"proj actual layer NOW = {LayerMask.LayerToName(proj.gameObject.layer)} ({proj.gameObject.layer})");
-
-        Vector2 fireDirection = firePoint.up;
-        var mods = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
-        proj.Init(owner, ownerTeam, projectileConfig, fireDirection, firePoint, mods != null ? mods.Active : null);
+    /* var shooterRoot = owner != null ? owner.transform.root.gameObject : null;
 
 
-        if (recoilImpulse != null)
-        {
-            Vector2 recoilDir = fireDirection;
-            recoilImpulse.GenerateImpulse(new Vector3(recoilDir.x, recoilDir.y, 0f) * recoilStrength);
-        }
+     Debug.Log($"owner={owner.name} layer={LayerMask.LayerToName(owner.layer)} ({owner.layer})");
+     Debug.Log($"owner.root={owner.transform.root.name} layer={LayerMask.LayerToName(owner.transform.root.gameObject.layer)} ({owner.transform.root.gameObject.layer})");
+     Debug.Log($"playerHighLayer={playerHighLayer}, playerLowLayer={playerLowLayer}");
 
-        Debug.LogWarning(
-            $"Projectile layer: {LayerMask.LayerToName(proj.gameObject.layer)} ({proj.gameObject.layer})"
-        );
-    }*/
+     bool fromHighland = shooterRoot != null && shooterRoot.layer == playerHighLayer;
+
+     int projectileLayer = fromHighland ? projectileHighLayer : projectileLowLayer;
+
+     SetLayerRecursively(proj.gameObject, projectileLayer);
+     Debug.LogWarning($"fromHighland={fromHighland} -> projectileLayer={LayerMask.LayerToName(projectileLayer)} ({projectileLayer})");
+     Debug.LogWarning($"proj actual layer NOW = {LayerMask.LayerToName(proj.gameObject.layer)} ({proj.gameObject.layer})");
+
+     Vector2 fireDirection = firePoint.up;
+     var mods = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
+     proj.Init(owner, ownerTeam, projectileConfig, fireDirection, firePoint, mods != null ? mods.Active : null);
+
+
+     if (recoilImpulse != null)
+     {
+         Vector2 recoilDir = fireDirection;
+         recoilImpulse.GenerateImpulse(new Vector3(recoilDir.x, recoilDir.y, 0f) * recoilStrength);
+     }
+
+     Debug.LogWarning(
+         $"Projectile layer: {LayerMask.LayerToName(proj.gameObject.layer)} ({proj.gameObject.layer})"
+     );
+ }*/
     //Helpers//
     void SetLayerRecursively(GameObject obj, int layer)
     {
