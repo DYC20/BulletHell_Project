@@ -14,21 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileConfigSO
   ammoType: 1
   ammoPerShot: 1
-  damage: 1
+  damage: 0.3
   speed: 2
-  lifetime: 0.5
+  lifetime: 2
   projectilesPerShot: 6
-  spreadAngleDeg: 30
+  spreadAngleDeg: 45
   randomSpread: 1
   centerProjectile: 0
   spawnPosJitter: 0.1
   speedMultiplierMin: 0.8
   speedMultiplierMax: 0.6
   destroyOnHit: 1
-  hitEffect:
-  - {fileID: 429630121617948818, guid: e4b83454776503d4c8e5b9a9570bd912, type: 3}
+  hitEffect: []
   hitEffectPS:
-  - {fileID: 3370062852713752785, guid: 9bf92113db579a04c9590a14119b62c9, type: 3}
+  - {fileID: 3370062852713752785, guid: c3bda0b032346ac4caeb4e5a4e99f555, type: 3}
   wallhitEffect: []
   wallhitEffectPS:
   - {fileID: 1707121828431647151, guid: f96badbc542a2b445bbcb94356bad8cb, type: 3}
