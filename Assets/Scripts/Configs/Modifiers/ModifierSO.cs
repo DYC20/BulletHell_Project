@@ -28,6 +28,7 @@ public class ModifierSO : ProjectileModifierSO
         return projectileConfig != null ? projectileConfig : null;
     }
     public override ObjectPool ModifyPool(ObjectPool current)
+    
         => poolOverride != null ? poolOverride : null;
 
     public override void OnHitEnemy(GameObject attacker, GameObject enemy, Vector3 hitPos, Quaternion hitRot)

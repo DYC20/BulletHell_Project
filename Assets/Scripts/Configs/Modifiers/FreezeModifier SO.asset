@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd0faba9dde93c940ab32c43397ab157, type: 3}
   m_Name: FreezeModifier SO
   m_EditorClassIdentifier: Assembly-CSharp::ModifierSO
-  bulletOverride: {fileID: 0}
+  projectileConfig: {fileID: 11400000, guid: b4c8cce2cf7418f49a26028a814c8b81, type: 2}
+  poolOverride: {fileID: 11400000, guid: 034e9fc9a3ee39647ba1295de98c9b39, type: 2}
   hitsToTrigger: 3
   debuffDuration: 3
-  moveSpeedMultiplier: 0.7
+  moveSpeedMultiplier: 0
   fireIntervalMultiplier: 1.4
-  fullEffectPrefab: {fileID: 0}
+  fullEffectPrefab: {fileID: 502300022835104705, guid: 49c3d8e377d8f5d43b972771b023ff38, type: 3}

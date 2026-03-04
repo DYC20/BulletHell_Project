@@ -10,23 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9aa456e2a0cd0f242acf9f0a34127cb0, type: 3}
-  m_Name: Shotgun_01_ProjectileConfig
+  m_Name: IceBullet_ProjectileConfig
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileConfigSO
-  ammoType: 1
+  ammoType: 0
   ammoPerShot: 1
   damage: 1
-  speed: 3
-  lifetime: 0.5
-  projectilesPerShot: 6
-  spreadAngleDeg: 60
+  speed: 2.5
+  lifetime: 5
+  projectilesPerShot: 1
+  spreadAngleDeg: 11
   randomSpread: 1
-  centerProjectile: 0
+  centerProjectile: 1
   spawnPosJitter: 0.1
   speedMultiplierMin: 0.8
-  speedMultiplierMax: 0.6
+  speedMultiplierMax: 1
   destroyOnHit: 1
-  hitEffect:
-  - {fileID: 429630121617948818, guid: e4b83454776503d4c8e5b9a9570bd912, type: 3}
+  hitEffect: []
   hitEffectPS:
   - {fileID: 3370062852713752785, guid: 9bf92113db579a04c9590a14119b62c9, type: 3}
   wallhitEffect: []
@@ -34,8 +33,8 @@ MonoBehaviour:
   - {fileID: 1707121828431647151, guid: f96badbc542a2b445bbcb94356bad8cb, type: 3}
   shootEffect: []
   shootEffectPS:
-  - {fileID: 4332314021170902862, guid: 7f9bbf6c82e5a694caf81d0f36d9a65e, type: 3}
-  dissapateOverLifetime: 1
+  - {fileID: 678938928091686416, guid: c3aaf77bcc93f2b40a5febbcfb00e059, type: 3}
+  dissapateOverLifetime: 0
   preventFriendlyFire: 1
   hitMask:
     serializedVersion: 2

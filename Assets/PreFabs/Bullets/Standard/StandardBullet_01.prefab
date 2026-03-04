@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 2839993938717429653}
   - component: {fileID: 8488122799573839415}
   - component: {fileID: 4361183904634148549}
+  - component: {fileID: -596124624765486420}
   - component: {fileID: 5164655207921999921}
-  - component: {fileID: -7363887207052164825}
+  - component: {fileID: -8955935111617131742}
   - component: {fileID: 3516138570704444126}
   - component: {fileID: 1955884628445460395}
   - component: {fileID: 1922452841970364557}
   m_Layer: 0
-  m_Name: Projectile_ShotgunShells_01
+  m_Name: StandardBullet_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +38,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6215349042394564058}
+  - {fileID: 6214718634863139476}
+  - {fileID: 3827452164310428481}
   - {fileID: 2272989900806094546}
   - {fileID: 2923294384674509540}
   - {fileID: 5153084680187034790}
@@ -129,6 +131,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13b0e0dcde445354db7d46e4a222e1bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileHitEffect
+--- !u!114 &-596124624765486420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112807520458817672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d48cfbac535435478450afd428dbb43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectilrHitEffectPS
 --- !u!114 &5164655207921999921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ae72bbaa5d66024a982f22b1fc07565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileShootEffect
---- !u!114 &-7363887207052164825
+--- !u!114 &-8955935111617131742
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -168,9 +182,10 @@ MonoBehaviour:
   rb: {fileID: 1955884628445460395}
   kinematics: {fileID: 8488122799573839415}
   hitEffect: {fileID: 4361183904634148549}
+  hitEffectPS: {fileID: -596124624765486420}
   shootEffect: {fileID: 5164655207921999921}
-  shootEffectPS: {fileID: -7363887207052164825}
-  OutlineMaterialRenderer: {fileID: 9199918622919697984}
+  shootEffectPS: {fileID: -8955935111617131742}
+  OutlineMaterialRenderer: {fileID: 4398625868787656555}
 --- !u!50 &1955884628445460395
 Rigidbody2D:
   serializedVersion: 5
@@ -232,8 +247,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.003006488, y: 0.00016021729}
-  m_Size: {x: 0.22607094, y: 0.5104842}
+  m_Offset: {x: -0.0030064583, y: 0.00016021729}
+  m_Size: {x: 0.08973813, y: 0.5104842}
   m_Direction: 0
 --- !u!1 &1590394747879743476
 GameObject:
@@ -261,11 +276,11 @@ Transform:
   m_GameObject: {fileID: 1590394747879743476}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.0049, z: -0.072}
-  m_LocalScale: {x: 0.12043169, y: 0.12670726, z: 0.16643302}
+  m_LocalPosition: {x: -0, y: 0.011, z: -0.072}
+  m_LocalScale: {x: 0.12043169, y: 0.28238747, z: 0.16643302}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6215349042394564058}
+  m_Father: {fileID: 5534935560467015888}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9199918622919697984
 SpriteRenderer:
@@ -314,7 +329,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1773462389
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 39ad5d250c7dd9946ac6ae112acd04ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -353,10 +368,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.12956609, y: 0.13631766, z: 0.25361693}
+  m_LocalScale: {x: 0.12956609, y: 0.30380577, z: 0.25361693}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 6215349042394564058}
+  m_Father: {fileID: 5534935560467015888}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4398625868787656555
 SpriteRenderer:
@@ -405,7 +420,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1773462389
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 39ad5d250c7dd9946ac6ae112acd04ff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1071,36 +1086,3 @@ VFXRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
---- !u!1 &8724166177870568246
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6215349042394564058}
-  m_Layer: 0
-  m_Name: Shell_01
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6215349042394564058
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8724166177870568246}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 6214718634863139476}
-  - {fileID: 3827452164310428481}
-  m_Father: {fileID: 5534935560467015888}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

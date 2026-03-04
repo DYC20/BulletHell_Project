@@ -59,10 +59,13 @@ public class SimplePistol_Waepon : WeaponBase
   var mods = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
     ProjectileConfigSO cfg = projectileConfig;
     ObjectPool pool = ProjectilePool;
+    Debug.Log($"Active mods: {(mods != null ? mods.Active.Count : 0)}");
     if (mods != null)
     {
         cfg = mods.GetModifiedConfig(projectileConfig) ?? projectileConfig;
         pool = mods.GetModifiedPool(ProjectilePool) ?? ProjectilePool;
+        foreach (var m in mods.Active)
+            Debug.Log($"Mod={m.name} ModifyPool returns: {(m.ModifyPool(ProjectilePool) ? m.ModifyPool(ProjectilePool).name : "null")}");
     }
 
     if (cfg == null || pool == null) return;
@@ -90,7 +93,7 @@ public class SimplePistol_Waepon : WeaponBase
 
     for (int i = 0; i < count; i++)
     {
-        GameObject proj = ProjectilePool.GetInstance(firePoint.position, Quaternion.identity);
+        GameObject proj = pool.GetInstance(firePoint.position, Quaternion.identity);
         if (proj == null) continue;
 
         SetLayerRecursively(proj.gameObject, projectileLayer);
