@@ -26,6 +26,7 @@ public class PooledProjectile : MonoBehaviour
     private List<ProjectileModifierSO> _mods;
     private Quaternion projectileOrientation;
     private ProjectileModifierSet _modifierSet;
+    private AmmoType _shotAmmoType;
     
 
     private int _remainingPierce;
@@ -55,10 +56,10 @@ public class PooledProjectile : MonoBehaviour
         _lifeTimer = 0f;
     }
 
-    public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction, float speedOverride, Transform spawnTf,
-        IReadOnlyList<ProjectileModifierSO> modifiers)
+    public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction, float speedOverride, Transform spawnTf)
     {
         _owner = owner;
+        _shotAmmoType = config != null ? config.ammoType : AmmoType.Bullet;
         _modifierSet = _owner != null ? _owner.GetComponentInParent<ProjectileModifierSet>() : null;
         _ownerTeam = ownerTeam;
         _config = config;
@@ -211,7 +212,7 @@ public class PooledProjectile : MonoBehaviour
 
         if (!other.CompareTag("Enemy")) return;
         
-        _modifierSet?.NotifyHitEnemy(_owner, other.gameObject, other.transform.position, other.transform.rotation);
+        _modifierSet?.NotifyHitEnemy(_shotAmmoType, _owner, other.gameObject, other.transform.position, other.transform.rotation);
         
         if (hitEffect != null && _config != null)
             {

@@ -4,32 +4,47 @@ using UnityEngine.VFX;
 [CreateAssetMenu(menuName = "Upgrades/Projectile Modifiers")]
 public class ModifierSO : ProjectileModifierSO
 {
-    [Header("Config Override")]
-    [SerializeField] private ProjectileConfigSO projectileConfig;
+    [System.Serializable]
+    private struct OverrideSet
+    {
+        public ProjectileConfigSO config;
+        public ObjectPool pool;
+    }
+    [Header("Override Sets (choose based on CURRENT config ammoType)")]
     
-    [Header("Pool Override")]
-    [SerializeField] private ObjectPool poolOverride;
+    [SerializeField] private OverrideSet bulletSet;
+    [SerializeField] private OverrideSet shellSet;
+    //[SerializeField] private OverrideSet rifleSet;
 
     [Header("Hit Counting")]
     [SerializeField] private int hitsToTrigger = 3;
 
     [Header("Timed Enemy Debuff")]
     [SerializeField] private float debuffDuration = 3f;
-
-    // Multipliers: 1 = no change, 0.7 = slower, 1.3 = faster, etc.
     [SerializeField] private float moveSpeedMultiplier = 0.7f;
     [SerializeField] private float fireIntervalMultiplier = 1.4f; // higher interval => shoots slower
 
     [Header("FX Prefab (ParticleSystem or VFX Graph)")]
     [SerializeField] private GameObject fullEffectPrefab;
 
-    public override ProjectileConfigSO ModifyConfig(ProjectileConfigSO current)
+
+    public override void Modify(ref ProjectileConfigSO config, ref ObjectPool pool)
     {
-        return projectileConfig != null ? projectileConfig : null;
+        if (config == null) return;
+
+        OverrideSet set = default;
+
+        switch (config.ammoType)
+        {
+            case AmmoType.Bullet: set = bulletSet; break;
+            case AmmoType.Shell:  set = shellSet;  break;
+           // case AmmoType.Rifle:  set = rifleSet;  break;
+            default: return;
+        }
+
+        if (set.config != null) config = set.config;
+        if (set.pool != null) pool = set.pool;
     }
-    public override ObjectPool ModifyPool(ObjectPool current)
-    
-        => poolOverride != null ? poolOverride : null;
 
     public override void OnHitEnemy(GameObject attacker, GameObject enemy, Vector3 hitPos, Quaternion hitRot)
     {

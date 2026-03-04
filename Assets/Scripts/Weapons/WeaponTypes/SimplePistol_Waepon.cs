@@ -2,7 +2,7 @@ using UnityEngine;
 using Unity.Cinemachine;
 using Unity.VectorGraphics;
 
-public class SimplePistol_Waepon : WeaponBase
+public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
 {
     [Header("Projectile")]
     //[SerializeField] private ProjectileId projectileId = ProjectileId.SimplePistol_Bullet;         // Pool_BulletStandard
@@ -29,10 +29,14 @@ public class SimplePistol_Waepon : WeaponBase
 
     protected override bool CanFire()
     {
-        var mods = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
+        var set = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
+        
         ProjectileConfigSO cfg = projectileConfig;
-        if (mods != null) cfg = mods.GetModifiedConfig(projectileConfig) ?? projectileConfig;
+        ObjectPool pool = ProjectilePool;
 
+        if (set != null)
+            set.ApplyForCurrentAmmo(projectileConfig.ammoType, ref cfg, ref pool);
+        
         if (cfg == null)
         {
             Debug.LogWarning($"{name}: projectileConfig is null.");
@@ -56,18 +60,16 @@ public class SimplePistol_Waepon : WeaponBase
 
     protected override void FireInternal()
     {
-  var mods = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
+    var set = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
+    
+    AmmoType currentAmmo = projectileConfig.ammoType;
+  
     ProjectileConfigSO cfg = projectileConfig;
     ObjectPool pool = ProjectilePool;
-    Debug.Log($"Active mods: {(mods != null ? mods.Active.Count : 0)}");
-    if (mods != null)
-    {
-        cfg = mods.GetModifiedConfig(projectileConfig) ?? projectileConfig;
-        pool = mods.GetModifiedPool(ProjectilePool) ?? ProjectilePool;
-        foreach (var m in mods.Active)
-            Debug.Log($"Mod={m.name} ModifyPool returns: {(m.ModifyPool(ProjectilePool) ? m.ModifyPool(ProjectilePool).name : "null")}");
-    }
-
+    
+    if (set != null)
+        set.ApplyForCurrentAmmo(currentAmmo, ref cfg, ref pool);
+    
     if (cfg == null || pool == null) return;
 
     // consume ammo based on cfg
@@ -84,7 +86,6 @@ public class SimplePistol_Waepon : WeaponBase
     float cone = Mathf.Max(0f, cfg.spreadAngleDeg);
     Vector2 baseDir = firePoint.up;
 
-    var activeMods = mods != null ? mods.Active : null;
 
     int playerHighLayer = LayerMask.NameToLayer("Player_High");
     var shooterRoot = owner != null ? owner.transform.root.gameObject : null;
@@ -112,7 +113,7 @@ public class SimplePistol_Waepon : WeaponBase
         float pelletSpeed = cfg.speed * mult;
 
         var pg = proj.GetComponent<PooledProjectile>();
-        pg.Init(owner, ownerTeam, cfg, dir, pelletSpeed, firePoint, activeMods);
+        pg.Init(owner, ownerTeam, cfg, dir, pelletSpeed, firePoint);
     }
 
     if (recoilImpulse != null)
@@ -213,4 +214,5 @@ public class SimplePistol_Waepon : WeaponBase
         return new Vector2(cos * v.x - sin * v.y, sin * v.x + cos * v.y);
     }
 
+    public ProjectileConfigSO BaseConfig => projectileConfig;
 }

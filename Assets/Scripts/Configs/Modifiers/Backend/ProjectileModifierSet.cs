@@ -3,54 +3,40 @@ using System.Collections.Generic;
 
 public class ProjectileModifierSet : MonoBehaviour
 {
-    [SerializeField] private List<ProjectileModifierSO> active = new();
+    [SerializeField] private List<AmmoType> debugKeys = new();
 
-    public IReadOnlyList<ProjectileModifierSO> Active => active;
-    public bool HasModifier(ProjectileModifierSO mod) => mod != null && active.Contains(mod);
-    
-    public void AddModifier(ProjectileModifierSO mod)
+    private readonly Dictionary<AmmoType, ProjectileModifierSO> _perAmmo = new();
+
+    public ProjectileModifierSO GetModifierFor(AmmoType ammoType)
+        => _perAmmo.TryGetValue(ammoType, out var mod) ? mod : null;
+
+    /// Adds or REPLACES the modifier for this ammo type (no stacking).
+    public void SetModifierFor(AmmoType ammoType, ProjectileModifierSO mod)
     {
-        if (mod != null && !active.Contains(mod))
-            active.Add(mod);
+        if (mod == null) return;
+        _perAmmo[ammoType] = mod;
+        RefreshDebugKeys();
     }
 
-    public void RemoveModifier(ProjectileModifierSO mod)
+    public void ClearModifierFor(AmmoType ammoType)
     {
-        if (mod != null)
-            active.Remove(mod);
-        
-        var state = GetComponentInParent<ModifierRuntimeState>();
-        if (state != null) state.ClearModifier(mod);
+        _perAmmo.Remove(ammoType);
+        RefreshDebugKeys();
     }
-    /// Call this when selecting the config to shoot with.
-    public ProjectileConfigSO GetModifiedConfig(ProjectileConfigSO baseConfig)
+    public void ApplyForCurrentAmmo(AmmoType ammoType, ref ProjectileConfigSO config, ref ObjectPool pool)
     {
-        ProjectileConfigSO current = baseConfig;
-
-        for (int i = 0; i < active.Count; i++)
-        {
-            var ov = active[i].ModifyConfig(current);
-            if (ov != null) current = ov;
-        }
-
-        return current;
+        if (_perAmmo.TryGetValue(ammoType, out var mod) && mod != null)
+            mod.Modify(ref config, ref pool);
     }
 
-    public ObjectPool GetModifiedPool(ObjectPool basePool)
+    public void NotifyHitEnemy(AmmoType ammoType, GameObject attacker, GameObject enemy, Vector3 hitPos, Quaternion hitRot)
     {
-        ObjectPool current = basePool;
-        for (int i = 0; i < active.Count; i++)
-        {
-            var ov = active[i].ModifyPool(current);
-            if (ov != null) current = ov;
-        }
-        return current;
+        if (_perAmmo.TryGetValue(ammoType, out var mod) && mod != null)
+            mod.OnHitEnemy(attacker, enemy, hitPos, hitRot);
     }
-    
-    /// Call this from projectile hit logic (only after Enemy tag check).
-    public void NotifyHitEnemy(GameObject attacker, GameObject enemy, Vector3 hitPos, Quaternion hitRot)
+    private void RefreshDebugKeys()
     {
-        for (int i = 0; i < active.Count; i++)
-            active[i].OnHitEnemy(attacker, enemy, hitPos, hitRot);
+        debugKeys.Clear();
+        foreach (var k in _perAmmo.Keys) debugKeys.Add(k);
     }
 }

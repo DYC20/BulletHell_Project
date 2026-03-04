@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd0faba9dde93c940ab32c43397ab157, type: 3}
   m_Name: FreezeModifier SO
   m_EditorClassIdentifier: Assembly-CSharp::ModifierSO
-  projectileConfig: {fileID: 11400000, guid: b4c8cce2cf7418f49a26028a814c8b81, type: 2}
-  poolOverride: {fileID: 11400000, guid: 034e9fc9a3ee39647ba1295de98c9b39, type: 2}
+  bulletSet:
+    config: {fileID: 11400000, guid: b4c8cce2cf7418f49a26028a814c8b81, type: 2}
+    pool: {fileID: 11400000, guid: 034e9fc9a3ee39647ba1295de98c9b39, type: 2}
+  shellSet:
+    config: {fileID: 11400000, guid: 23c80e9c9cc8a274ca70cf29532662cb, type: 2}
+    pool: {fileID: 11400000, guid: beec8f682ca13f64b9196e053df0ff64, type: 2}
   hitsToTrigger: 3
   debuffDuration: 3
   moveSpeedMultiplier: 0

@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd0faba9dde93c940ab32c43397ab157, type: 3}
   m_Name: BurnModifier SO
   m_EditorClassIdentifier: Assembly-CSharp::ModifierSO
-  projectileConfig: {fileID: 11400000, guid: 907dc8254ede17742b3a1a553602f374, type: 2}
-  poolOverride: {fileID: 11400000, guid: d1a2b8a74ea27324d91560eb9cbe1a66, type: 2}
+  bulletSet:
+    config: {fileID: 11400000, guid: 907dc8254ede17742b3a1a553602f374, type: 2}
+    pool: {fileID: 11400000, guid: d1a2b8a74ea27324d91560eb9cbe1a66, type: 2}
+  shellSet:
+    config: {fileID: 11400000, guid: 3878b0bfaaef5524ebe624835a09e068, type: 2}
+    pool: {fileID: 11400000, guid: 2d4efa6fb20288e449b4d417e6845681, type: 2}
   hitsToTrigger: 3
   debuffDuration: 3
   moveSpeedMultiplier: 1.8
