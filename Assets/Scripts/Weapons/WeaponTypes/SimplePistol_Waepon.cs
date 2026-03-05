@@ -19,12 +19,18 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     [SerializeField] private float recoilStrength = 0.2f;
 
     private bool _IsSpriteRenderer = false;
+    
+    private Vector3 firePointDefaultLocalPos; //firepoint orientation
+    private bool lastFlipState;
 
     protected void Awake()
     {
         _IsSpriteRenderer = TryGetComponent<SpriteRenderer>(out rd);
         projectileLowLayer = LayerMask.NameToLayer("Projectile_Low");
         projectileHighLayer = LayerMask.NameToLayer("Projectile_High");
+        
+        if (firePoint != null)
+            firePointDefaultLocalPos = firePoint.localPosition;
     }
 
     protected override bool CanFire()
@@ -124,81 +130,25 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     {
         if (_IsSpriteRenderer)
         {
-            rd.flipY = this.transform.rotation.eulerAngles.z < 270 && this.transform.rotation.eulerAngles.z > 90;
-            //bool oriantation = this.transform.parent.rotation.eulerAngles.z < 45f && this.transform.parent.rotation.eulerAngles.z > -45;
-            if(this.transform.parent != null)rd.sortingOrder = Vector3.Dot(this.transform.parent.up, Vector3.up) < 0.6f ? 1 : -1;
+            bool flip = transform.rotation.eulerAngles.z > 90f && transform.rotation.eulerAngles.z < 270f;
+
+            rd.flipY = flip;
+
+            if (flip != lastFlipState)
+            {
+                Vector3 p = firePointDefaultLocalPos;
+                p.x = flip ? -Mathf.Abs(p.x) : Mathf.Abs(p.x);
+                firePoint.localPosition = p;
+
+                lastFlipState = flip;
+            }
+
+            if (transform.parent != null)
+                rd.sortingOrder = Vector3.Dot(transform.parent.up, Vector3.up) < 0.6f ? 1 : -1;
         }
     }
 
-    /*   Old FireInternal
-    if (projectileConfig == null)
-    {
-        Debug.LogWarning($"{name}: Missing pool or config.");
-        return;
-    }
-
-    var pool = PoolRegistry.Instance != null
-        ? PoolRegistry.Instance.GetPool(projectileId)
-        : null;
-
-    if (pool == null)
-        return;
-
-    if (projectileConfig.ammoPerShot > 0)
-    {
-        var ammo = owner != null ? owner.GetComponentInParent<IAmmoConsumer>() : null;
-        if (ammo == null) return;
-
-        if (!ammo.TryConsumeAmmo(projectileConfig.ammoType, projectileConfig.ammoPerShot))
-        {
-            Debug.Log($"{name}: Projectile {projectileConfig.ammoType} TryConsumeAmmo Failed");
-            return; // no ammo => no shot
-        }
-
-        Debug.Log($"{name}: Projectile {projectileConfig.ammoType} TryConsumeAmmo Successful");
-    }
-
-    var proj = pool.Get(firePoint.position, firePoint.rotation);
-    if (proj == null)
-        return;
-
-    int playerHighLayer = LayerMask.NameToLayer("Player_High");
-    int playerLowLayer  = LayerMask.NameToLayer("Player_Low");
-    //Debug.Log($"{name}.SetOwner called for {owner.name}");
-
-    /*GameObject shooterRoot = owner != null && owner.GetComponent<Rigidbody2D>() != null
-        ? owner
-        : owner != null ? owner.transform.root.gameObject : null;*/
-    /* var shooterRoot = owner != null ? owner.transform.root.gameObject : null;
-
-
-     Debug.Log($"owner={owner.name} layer={LayerMask.LayerToName(owner.layer)} ({owner.layer})");
-     Debug.Log($"owner.root={owner.transform.root.name} layer={LayerMask.LayerToName(owner.transform.root.gameObject.layer)} ({owner.transform.root.gameObject.layer})");
-     Debug.Log($"playerHighLayer={playerHighLayer}, playerLowLayer={playerLowLayer}");
-
-     bool fromHighland = shooterRoot != null && shooterRoot.layer == playerHighLayer;
-
-     int projectileLayer = fromHighland ? projectileHighLayer : projectileLowLayer;
-
-     SetLayerRecursively(proj.gameObject, projectileLayer);
-     Debug.LogWarning($"fromHighland={fromHighland} -> projectileLayer={LayerMask.LayerToName(projectileLayer)} ({projectileLayer})");
-     Debug.LogWarning($"proj actual layer NOW = {LayerMask.LayerToName(proj.gameObject.layer)} ({proj.gameObject.layer})");
-
-     Vector2 fireDirection = firePoint.up;
-     var mods = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
-     proj.Init(owner, ownerTeam, projectileConfig, fireDirection, firePoint, mods != null ? mods.Active : null);
-
-
-     if (recoilImpulse != null)
-     {
-         Vector2 recoilDir = fireDirection;
-         recoilImpulse.GenerateImpulse(new Vector3(recoilDir.x, recoilDir.y, 0f) * recoilStrength);
-     }
-
-     Debug.LogWarning(
-         $"Projectile layer: {LayerMask.LayerToName(proj.gameObject.layer)} ({proj.gameObject.layer})"
-     );
- }*/
+   
     //Helpers//
     void SetLayerRecursively(GameObject obj, int layer)
     {

@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 4129969376939518295}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 27.457, y: -14.132, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1359,7 +1359,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   ColorModule:
-    enabled: 1
+    enabled: 0
     gradient:
       serializedVersion: 2
       minMaxState: 1
@@ -1367,16 +1367,16 @@ ParticleSystem:
       maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
-        key0: {r: 1, g: 0.9510112, b: 0.28616333, a: 1}
-        key1: {r: 1, g: 0.9510112, b: 0.28616333, a: 1}
+        key0: {r: 0.99215686, g: 0.8501466, b: 0.37254906, a: 1}
+        key1: {r: 0.62352943, g: 0, b: 0.043042116, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 1}
         key3: {r: 0, g: 0, b: 0, a: 1}
         key4: {r: 0, g: 0, b: 0, a: 0.8392157}
         key5: {r: 0, g: 0, b: 0, a: 0}
         key6: {r: 0, g: 0, b: 0, a: 0}
         key7: {r: 0, g: 0, b: 0, a: 0}
-        ctime0: 0
-        ctime1: 65535
+        ctime0: 52
+        ctime1: 65457
         ctime2: 0
         ctime3: 0
         ctime4: 0
@@ -1384,7 +1384,7 @@ ParticleSystem:
         ctime6: 0
         ctime7: 0
         atime0: 0
-        atime1: 3724
+        atime1: 65535
         atime2: 65535
         atime3: 32382
         atime4: 36494
@@ -1394,7 +1394,7 @@ ParticleSystem:
         m_Mode: 0
         m_ColorSpace: 0
         m_NumColorKeys: 2
-        m_NumAlphaKeys: 3
+        m_NumAlphaKeys: 2
       minGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1539,7 +1539,7 @@ ParticleSystem:
         m_RotationOrder: 4
     speedRange: {x: 0, y: 1}
     tilesX: 3
-    tilesY: 3
+    tilesY: 5
     animationType: 0
     rowIndex: 0
     cycles: 1

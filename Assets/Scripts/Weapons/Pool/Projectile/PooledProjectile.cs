@@ -14,8 +14,8 @@ public class PooledProjectile : MonoBehaviour
     [SerializeField] private ProjectileShootEffect shootEffect;
     [SerializeField] private ProjectileShootEffectPS shootEffectPS;
     
-    [SerializeField]  private Renderer OutlineMaterialRenderer;
-    private MaterialPropertyBlock mpb;
+    //[SerializeField]  private Renderer OutlineMaterialRenderer;
+    //private MaterialPropertyBlock mpb;
 
     // Runtime state
     private GameObject _owner;
@@ -31,17 +31,17 @@ public class PooledProjectile : MonoBehaviour
 
     private int _remainingPierce;
     private float _lifeTimer;
-
+/*
     private void Awake()
     {
         
         if (OutlineMaterialRenderer == null) OutlineMaterialRenderer = GetComponent<Renderer>();
         mpb ??= new MaterialPropertyBlock();
     }
-
+*/
     private void Reset()
     {
-        OutlineMaterialRenderer = GetComponent<Renderer>();
+       // OutlineMaterialRenderer = GetComponent<Renderer>();
         rb = GetComponent<Rigidbody2D>();
         kinematics = GetComponent<ProjectileMovement>();
         hitEffect = GetComponent<ProjectileHitEffect>();
@@ -63,6 +63,11 @@ public class PooledProjectile : MonoBehaviour
         _modifierSet = _owner != null ? _owner.GetComponentInParent<ProjectileModifierSet>() : null;
         _ownerTeam = ownerTeam;
         _config = config;
+        
+        Debug.Log($"[INIT] proj={name} cfg={_config.name} ammo={_config.ammoType} " +
+                  $"shootComp(VFX)={(shootEffect!=null)} shootList(VFX)={_config.shootEffect?.Count ?? -1} " +
+                  $"shootComp(PS)={(shootEffectPS!=null)} shootList(PS)={_config.shootEffectPS?.Count ?? -1}");
+        
         _remainingPierce = config != null ? config.pierceCount : 0;
         //Set Modifiers
         _stats = ProjectileStatsBuilder.FromConfig(config);
@@ -104,9 +109,9 @@ public class PooledProjectile : MonoBehaviour
             {
                 VisualEffect shootFX = _config.shootEffect[FX];
                 shootEffect.Apply(shootFX, spawnTf.position, spawnTf.rotation);
+                Debug.Log("ShootEffect Applied:"+ shootFX.name);
             }
-            //shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
-            Debug.Log("ShootEffect Applied"+_owner.name);
+           
         }
         else if (shootEffect == null || _config == null || spawnTf == null)
         {
@@ -118,10 +123,12 @@ public class PooledProjectile : MonoBehaviour
             for (int FX = 0; FX < _config.shootEffectPS.Count; FX++)
             {
                 ParticleSystem shootFX = _config.shootEffectPS[FX];
+                Debug.Log($"[MUZZLE PS] cfg={_config.name} index={FX} ps={(shootFX ? shootFX.name : "NULL")}");
+                if (shootFX == null) continue;
                 shootEffectPS.Apply(shootFX, spawnTf.position, spawnTf.rotation);
+                Debug.Log("ShootEffect PS Applied:" + shootFX.name);
             }
-            //shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
-            Debug.Log("ShootEffect Applied"+_owner.name);
+            
         }
         else if (shootEffect == null || _config == null || spawnTf == null)
         {
@@ -165,9 +172,9 @@ public class PooledProjectile : MonoBehaviour
                     
                     VisualEffect hitFX = _config.wallhitEffect[FX];
                     hitEffect.Apply(hitFX, other.transform.position, projectileOrientation);
+                    Debug.Log("hitEffect Applied:" + hitFX.name);
                 }
-                //shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
-                Debug.Log("hitEffect Applied"+_owner.name);
+                
             }
             else if (hitEffect == null || _config == null)
             {
@@ -179,10 +186,12 @@ public class PooledProjectile : MonoBehaviour
                 for (int FX = 0; FX < _config.wallhitEffectPS.Count; FX++)
                 {
                     ParticleSystem hitFX = _config.wallhitEffectPS[FX];
+                    Debug.Log($"[WALL HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
+                    if (hitFX == null) continue;
                     hitEffectPS.Apply(hitFX, other.transform.position, projectileOrientation);
+                    Debug.Log("hit PS Applied"+ hitFX.name);
                 }
-                //shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
-                Debug.Log("hit Applied"+_owner.name);
+                
             }
             else if (hitEffect == null || _config == null)
             {
@@ -210,6 +219,19 @@ public class PooledProjectile : MonoBehaviour
         if (_config.preventFriendlyFire && damageable.Team == _ownerTeam)
             return;
 
+        Debug.Log($"[CFG CHECK] cfgName={_config.name} cfgID={_config.GetInstanceID()} path={UnityEditor.AssetDatabase.GetAssetPath(_config)}");
+
+        for (int i = 0; i < _config.hitEffectPS.Count; i++)
+        {
+            var ps = _config.hitEffectPS[i];
+            Debug.Log($"[CFG hitEffectPS] i={i} val={(ps ? ps.name : "NULL")}");
+        }
+        for (int i = 0; i < _config.hitEffect.Count; i++)
+        {
+            var vfx = _config.hitEffect[i];
+            Debug.Log($"[CFG hitEffect VFX] i={i} val={(vfx ? vfx.name : "NULL")}");
+        }
+        
         if (!other.CompareTag("Enemy")) return;
         
         _modifierSet?.NotifyHitEnemy(_shotAmmoType, _owner, other.gameObject, other.transform.position, other.transform.rotation);
@@ -221,10 +243,9 @@ public class PooledProjectile : MonoBehaviour
                 {
                     VisualEffect hitFX = _config.hitEffect[FX];
                     hitEffect.Apply(hitFX, other.transform.position, other.transform.rotation);
+                    Debug.Log("hitEffect Applied" + hitFX.name);
                 }
-
-                //shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
-                Debug.Log("hitEffect Applied" + other.gameObject.name);
+                
             }
             else if (hitEffect == null || _config == null)
             {
@@ -236,11 +257,12 @@ public class PooledProjectile : MonoBehaviour
                 for (int FX = 0; FX < _config.hitEffectPS.Count; FX++)
                 {
                     ParticleSystem hitFX = _config.hitEffectPS[FX];
-                    shootEffectPS.Apply(hitFX, other.transform.position, other.transform.rotation);
+                    Debug.Log($"[ENEMY HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
+                    if (hitFX == null) continue;
+                    hitEffectPS.Apply(hitFX, other.transform.position, other.transform.rotation);
+                    Debug.Log("hit PS Applied" + hitFX.name);
                 }
-
-                //shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
-                Debug.Log("hit Applied" + _owner.name);
+                
             }
             else if (hitEffect == null || _config == null)
             {
@@ -287,12 +309,12 @@ Debug.LogError("HitEffect NULL");*/
 
 
     public void Despawn()
-    {
+    {/*
         transform.localScale = Vector3.one;
         OutlineMaterialRenderer.GetPropertyBlock(mpb);
         mpb.Clear();
         OutlineMaterialRenderer.SetPropertyBlock(mpb);
-       
+       */
         
         // Stop physics motion to avoid “ghost velocity” on reuse
         if (rb != null)

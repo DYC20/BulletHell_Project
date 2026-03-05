@@ -1,4 +1,4 @@
-using System.Collections;
+                    using System.Collections;
 using UnityEngine;
 
 public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireInterval
@@ -208,7 +208,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
         // firePoint.up is forward → compensate for sprite orientation
-        float offset = aimWithFirePointUp ? -90f : 0f;
+        float offset = aimWithFirePointUp ? 00f : 0f;
 
         weaponPivot.rotation = Quaternion.Euler(0f, 0f, angle + offset);
     }
