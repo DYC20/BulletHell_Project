@@ -8,7 +8,6 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     //[SerializeField] private ProjectileId projectileId = ProjectileId.SimplePistol_Bullet;         // Pool_BulletStandard
     [SerializeField] private ProjectileConfigSO projectileConfig; // PistolProjectileConfig
 
-    private SpriteRenderer rd;
     [SerializeField] private ObjectPool ProjectilePool;
 
     private int projectileLowLayer;
@@ -25,7 +24,6 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
 
     protected void Awake()
     {
-        _IsSpriteRenderer = TryGetComponent<SpriteRenderer>(out rd);
         projectileLowLayer = LayerMask.NameToLayer("Projectile_Low");
         projectileHighLayer = LayerMask.NameToLayer("Projectile_High");
         
@@ -131,20 +129,6 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
         if (_IsSpriteRenderer)
         {
             bool flip = transform.rotation.eulerAngles.z > 90f && transform.rotation.eulerAngles.z < 270f;
-
-            rd.flipY = flip;
-
-            if (flip != lastFlipState)
-            {
-                Vector3 p = firePointDefaultLocalPos;
-                p.x = flip ? -Mathf.Abs(p.x) : Mathf.Abs(p.x);
-                firePoint.localPosition = p;
-
-                lastFlipState = flip;
-            }
-
-            if (transform.parent != null)
-                rd.sortingOrder = Vector3.Dot(transform.parent.up, Vector3.up) < 0.6f ? 1 : -1;
         }
     }
 
