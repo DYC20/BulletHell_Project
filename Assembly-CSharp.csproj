@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Weapons\ProjectileMovement.cs" />
-    <Compile Include="Assets\Scripts\Player\FreezePickup.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemieDeathController.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\AmmoPickup.cs" />
     <Compile Include="Assets\Scripts\Elevation_Entry.cs" />
@@ -65,8 +64,10 @@
     <Compile Include="Assets\Scripts\Enemies\EnemyShooterWalkingAI.cs" />
     <Compile Include="Assets\Scripts\Resources\Referenced Veriables\Veriables\LongVariable.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerGroundState.cs" />
+    <Compile Include="Assets\Scripts\Configs\Modifiers\Backend\EnemyModifierInterface.cs" />
     <Compile Include="Assets\Scripts\LightFllicker.cs" />
     <Compile Include="Assets\Scripts\Weapons\Pool\PooledBullet.cs" />
+    <Compile Include="Assets\Scripts\Player\ModifierPickup.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\IAmmoConsumer.cs" />
     <Compile Include="Assets\Scripts\Resources\Referenced Veriables\Veriables\Vector3Variable.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerHitFlash.cs" />
@@ -81,8 +82,8 @@
     <Compile Include="Assets\Scripts\Configs\Modifiers\Backend\ProjectileStatsBuilder.cs" />
     <Compile Include="Assets\Scripts\Configs\Modifiers\Backend\ProjectileStats.cs" />
     <Compile Include="Assets\Scripts\LevelGroundProvider.cs" />
-    <Compile Include="Assets\Scripts\Interfaces\NewEmptyCSharpScript.cs" />
     <Compile Include="Assets\Scripts\PSDestroy.cs" />
+    <Compile Include="Assets\Scripts\Interfaces\NewEmptyCSharpScript.cs" />
     <Compile Include="Assets\Scripts\Resources\Referenced Veriables\Veriables\IntVariable.cs" />
     <Compile Include="Assets\Scripts\Weapons\WeaponTypes\SimplePistol_Waepon.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\HealthPickup.cs" />
@@ -92,22 +93,25 @@
     <Compile Include="Assets\Scripts\Weapons\projectileDamage.cs" />
     <Compile Include="Assets\Scripts\ProjectileShootEffect.cs" />
     <Compile Include="Assets\Scripts\Resources\Referenced Veriables\Veriables\FloatVariable.cs" />
+    <Compile Include="Assets\Scripts\WeaponVisualFlip.cs" />
     <Compile Include="Assets\Scripts\ShiftPlayerLayer.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\IAmmoReceiver.cs" />
     <Compile Include="Assets\Scripts\Health.cs" />
     <Compile Include="Assets\Scripts\Configs\Projectiles\ProjectileConfigSO.cs" />
     <Compile Include="Assets\Scripts\Enums\AmmoTypeEnum.cs" />
-    <Compile Include="Assets\Scripts\Configs\Modifiers\SlowEnemy\TargetMovementModifierSO.cs" />
     <Compile Include="Assets\Scripts\Weapons\Pool\Projectile\PooledProjectile.cs" />
     <Compile Include="Assets\Scripts\Configs\Modifiers\Backend\ProjectileModifierSet.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerDeathHandler.cs" />
     <Compile Include="Assets\Scripts\Weapons\BulletDamage.cs" />
+    <Compile Include="Assets\Scripts\Configs\Modifiers\Backend\IWeaponProjectileBase.cs" />
     <Compile Include="Assets\Scripts\IDamageable.cs" />
     <Compile Include="Assets\Scripts\Enums\Teams.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\PlayerInteractor.cs" />
+    <Compile Include="Assets\Scripts\Configs\Modifiers\SlowEnemy_Old\TargetMovementModifierSO.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyGroupActivator.cs" />
     <Compile Include="Assets\Scripts\VFXDestroy.cs" />
     <Compile Include="Assets\Scripts\Weapons\Pool\BulletPool.cs" />
+    <Compile Include="Assets\Scripts\Configs\Modifiers\Backend\ModifierRuntimeState.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemieDeathHandler.cs" />
     <Compile Include="Assets\Scripts\Player\PickUps\IHealable.cs" />
     <Compile Include="Assets\Scripts\Weapons\WeaponTypes\SimplePistol1.cs" />
