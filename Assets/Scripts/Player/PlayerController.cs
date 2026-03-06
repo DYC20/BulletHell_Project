@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float speed = 6f;
     [SerializeField] private Animator animator;
-    [SerializeField] private Transform playerVisual;
+    [SerializeField] private SpriteRenderer playerVisual;
 
     [Header("Movement Behavior")]
     public float accel = 60f;
@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
 
     private Camera cam;
     private Rigidbody2D rb;
+    
+    private Vector3 HoldOrigin;
 
     private void Awake()
     {
@@ -31,9 +33,12 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = 0f;
         rb.freezeRotation = true; // keep the root stable
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        
+        if (playerVisual == null) playerVisual = GetComponentInChildren<SpriteRenderer>();
 
         animator.SetBool("isIdle", true);
-       
+        
+        HoldOrigin = weaponHolder.transform.localPosition;
     }
 
     public void OnMove(InputValue value)
@@ -96,6 +101,7 @@ public class PlayerController : MonoBehaviour
         ));
 
         Vector2 mouseWorld = mouseWorld3;
+        Vector2 toMouse = mouseWorld - rb.position;
         DrawDebugCircle(mouseWorld, 0.2f, Color.green, 0f);
       
 
@@ -106,18 +112,18 @@ public class PlayerController : MonoBehaviour
 
         Vector2 toMouse = mouseWorld - origin;
 */
-        Vector2 origin = weaponHolder != null ? (Vector2)weaponHolder.position : rb.position;
-        Vector2 toMouse = mouseWorld - origin;
+       // Vector2 origin = weaponHolder != null ? (Vector2)weaponHolder.position : rb.position;
+       // Vector2 toMouse = mouseWorld - origin;
 
         if (toMouse.sqrMagnitude < 0.0001f)
             return;
 
-        Vector2 aimDir = toMouse.normalized;
+       // Vector2 aimDir = toMouse.normalized;
         
         // 1) Rotate ONLY the weapon holder toward mouse
         if (weaponHolder != null)
         {
-            float angle = Mathf.Atan2(toMouse.y, toMouse.x) * Mathf.Rad2Deg -90f;
+            float angle = Mathf.Atan2(toMouse.y, toMouse.x) * Mathf.Rad2Deg - 90f;
             Quaternion targetRot = Quaternion.Euler(0f, 0f, angle);
 
             weaponHolder.rotation = Quaternion.Slerp(
@@ -125,21 +131,28 @@ public class PlayerController : MonoBehaviour
                 targetRot,
                 holderRotationSpeed * Time.deltaTime
             );
-            // Flip only the sprite visuals (NOT firepoint)
-            var flip = weaponHolder.GetComponentInChildren<WeaponVisualFlip>();
-            if (flip != null)
-                flip.ApplyFlipFromAimDirection(aimDir);
         }
-        var fp = GetComponent<PlayerWeaponController>()?.CurrentFirePoint;
-        if (fp != null)
+        if (playerVisual != null)
         {
-            Debug.DrawRay(fp.position, fp.up * 2f, Color.cyan, 0f);   // fire direction
-            Debug.DrawRay(fp.position, aimDir * 2f, Color.magenta, 0f); // mouse direction
-        }
-        // 2) Swap player sprite based on mouse direction (4-way)
-       
             SetSpriteFromDirection(toMouse);
-        
+        }
+        /*
+        // Flip only the sprite visuals (NOT firepoint)
+        var flip = weaponHolder.GetComponentInChildren<WeaponVisualFlip>();
+        if (flip != null)
+            flip.ApplyFlipFromAimDirection(aimDir);
+
+    }
+    var fp = GetComponent<PlayerWeaponController>()?.CurrentFirePoint;
+    if (fp != null)
+    {
+        Debug.DrawRay(fp.position, fp.up * 2f, Color.cyan, 0f);   // fire direction
+        Debug.DrawRay(fp.position, aimDir * 2f, Color.magenta, 0f); // mouse direction
+    }
+    // 2) Swap player sprite based on mouse direction (4-way)
+
+        SetSpriteFromDirection(toMouse);
+    */
     }
 
     private void SetSpriteFromDirection(Vector2 dir)
@@ -148,10 +161,10 @@ public class PlayerController : MonoBehaviour
         float a = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
         // 4-way thresholds at 45 degrees
-        if (a >= -45f && a < 45f)              playerVisual.localScale = new Vector3(1f, 1f, 1f);//gameObject.transform.localScale.Set(1f, 1f, 1f);
-        else if (a >= 45f && a < 135f)         playerVisual.localScale = new Vector3(1f, 1f, 1f);//gameObject.transform.localScale.Set(1f, 1f, 1f);
-        else if (a >= -135f && a < -45f)       playerVisual.localScale = new Vector3(-1f, 1f, 1f);//gameObject.transform.localScale.Set(-1f, 1f, 1f);
-        else                                   playerVisual.localScale = new Vector3(-1f, 1f, 1f);//gameObject.transform.localScale.Set(-1f, 1f, 1f);
+        if (a >= -45f && a < 45f)              playerVisual.transform.localScale = new Vector3(1f, 1f, 1f);//gameObject.transform.localScale.Set(1f, 1f, 1f);
+        else if (a >= 45f && a < 135f)         playerVisual.transform.localScale = new Vector3(1f, 1f, 1f);//gameObject.transform.localScale.Set(1f, 1f, 1f);
+        else if (a >= -135f && a < -45f)       playerVisual.transform.localScale = new Vector3(-1f, 1f, 1f);//gameObject.transform.localScale.Set(-1f, 1f, 1f);
+        else                                   playerVisual.transform.localScale = new Vector3(-1f, 1f, 1f);//gameObject.transform.localScale.Set(-1f, 1f, 1f);
     }
     private void DrawDebugCircle(Vector2 center, float radius, Color color, float duration)
     {

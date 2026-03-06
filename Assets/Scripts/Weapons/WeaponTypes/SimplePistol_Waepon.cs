@@ -9,6 +9,8 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     [SerializeField] private ProjectileConfigSO projectileConfig; // PistolProjectileConfig
 
     [SerializeField] private ObjectPool ProjectilePool;
+    
+    private SpriteRenderer rd;
 
     private int projectileLowLayer;
     private int projectileHighLayer;
@@ -19,16 +21,18 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
 
     private bool _IsSpriteRenderer = false;
     
-    private Vector3 firePointDefaultLocalPos; //firepoint orientation
-    private bool lastFlipState;
+    //private Vector3 firePointDefaultLocalPos; //firepoint orientation
+    //private bool lastFlipState;
 
     protected void Awake()
     {
+        _IsSpriteRenderer = TryGetComponent<SpriteRenderer>(out rd);
         projectileLowLayer = LayerMask.NameToLayer("Projectile_Low");
         projectileHighLayer = LayerMask.NameToLayer("Projectile_High");
-        
+        /*
         if (firePoint != null)
             firePointDefaultLocalPos = firePoint.localPosition;
+            */
     }
 
     protected override bool CanFire()
@@ -88,6 +92,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
 
     int count = Mathf.Max(1, cfg.projectilesPerShot);
     float cone = Mathf.Max(0f, cfg.spreadAngleDeg);
+    
     Vector2 baseDir = firePoint.up;
 
 
@@ -128,7 +133,9 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     {
         if (_IsSpriteRenderer)
         {
-            bool flip = transform.rotation.eulerAngles.z > 90f && transform.rotation.eulerAngles.z < 270f;
+            rd.flipY = this.transform.rotation.eulerAngles.z < 270 && this.transform.rotation.eulerAngles.z > 90;
+            //bool oriantation = this.transform.parent.rotation.eulerAngles.z < 45f && this.transform.parent.rotation.eulerAngles.z > -45;
+            if(this.transform.parent != null)rd.sortingOrder = Vector3.Dot(this.transform.parent.up, Vector3.up) < 0.6f ? 1 : -1;
         }
     }
 

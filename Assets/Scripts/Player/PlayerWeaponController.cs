@@ -41,7 +41,7 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
         equippedWeapon.GetComponent<Collider2D>().enabled = false;
         equippedWeapon.gameObject.transform.parent = weaponSocket;
         equippedWeapon.gameObject.transform.localPosition = Vector3.up * gunDistance;
-        equippedWeapon.gameObject.transform.localRotation = Quaternion.Euler(0f, 0f,-90f);
+        equippedWeapon.gameObject.transform.localRotation = Quaternion.Euler(0f, 0f,90f);
 
 
 
