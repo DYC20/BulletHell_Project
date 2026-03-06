@@ -29,10 +29,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
         _IsSpriteRenderer = TryGetComponent<SpriteRenderer>(out rd);
         projectileLowLayer = LayerMask.NameToLayer("Projectile_Low");
         projectileHighLayer = LayerMask.NameToLayer("Projectile_High");
-        /*
-        if (firePoint != null)
-            firePointDefaultLocalPos = firePoint.localPosition;
-            */
+            
     }
 
     protected override bool CanFire()
@@ -134,6 +131,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
         if (_IsSpriteRenderer)
         {
             rd.flipY = this.transform.rotation.eulerAngles.z < 270 && this.transform.rotation.eulerAngles.z > 90;
+         
             //bool oriantation = this.transform.parent.rotation.eulerAngles.z < 45f && this.transform.parent.rotation.eulerAngles.z > -45;
             if(this.transform.parent != null)rd.sortingOrder = Vector3.Dot(this.transform.parent.up, Vector3.up) < 0.6f ? 1 : -1;
         }

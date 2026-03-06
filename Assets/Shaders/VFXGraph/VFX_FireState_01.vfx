@@ -279,22 +279,6 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: Amount
-    path: Amount
-    tooltip: 
-    space: -1
-    spaceable: 0
-    sheetType: m_Int
-    realType: Int32
-    defaultValue:
-      m_Type:
-        m_SerializableType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
-          PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0
-    min: -Infinity
-    max: Infinity
-    enumValues: []
-    descendantCount: 0
   - name: Flame
     path: 
     tooltip: 
@@ -433,6 +417,22 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: 
       m_SerializableObject: 
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 0
+  - name: Amount
+    path: Amount
+    tooltip: 
+    space: -1
+    spaceable: 0
+    sheetType: m_Int
+    realType: Int32
+    defaultValue:
+      m_Type:
+        m_SerializableType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 0
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -6713,7 +6713,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615503}
   m_ExposedName: FlipBook
   m_Exposed: 1
-  m_Order: 6
+  m_Order: 1
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -6794,7 +6794,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615510}
   m_ExposedName: Flipbook Lifetime
   m_Exposed: 1
-  m_Order: 7
+  m_Order: 2
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -7180,7 +7180,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615547}
   m_ExposedName: Create Smoke
   m_Exposed: 1
-  m_Order: 8
+  m_Order: 3
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -11796,7 +11796,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615693}
   m_ExposedName: Color 1
   m_Exposed: 1
-  m_Order: 11
+  m_Order: 4
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -11918,8 +11918,8 @@ MonoBehaviour:
   - {fileID: 8926484042661615707}
   m_ExposedName: Amount
   m_Exposed: 1
-  m_Order: 12
-  m_Category: Burst
+  m_Order: 0
+  m_Category: Smoke
   m_Min:
     m_Type:
       m_SerializableType: 
