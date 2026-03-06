@@ -10,10 +10,12 @@ public class PooledProjectile : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private ProjectileMovement kinematics;
     [SerializeField] private ProjectileHitEffect hitEffect;
+    [SerializeField] private ProjectileHitEffectPS hitEffectPS;
     [SerializeField] private ProjectileShootEffect shootEffect;
+    [SerializeField] private ProjectileShootEffectPS shootEffectPS;
     
-    [SerializeField]  private Renderer OutlineMaterialRenderer;
-    private MaterialPropertyBlock mpb;
+    //[SerializeField]  private Renderer OutlineMaterialRenderer;
+    //private MaterialPropertyBlock mpb;
 
     // Runtime state
     private GameObject _owner;
@@ -22,25 +24,30 @@ public class PooledProjectile : MonoBehaviour
     private ProjectileConfigSO _config;
     private ProjectileStats _stats;
     private List<ProjectileModifierSO> _mods;
+    private Quaternion projectileOrientation;
+    private ProjectileModifierSet _modifierSet;
+    private AmmoType _shotAmmoType;
     
 
     private int _remainingPierce;
     private float _lifeTimer;
-
+/*
     private void Awake()
     {
         
         if (OutlineMaterialRenderer == null) OutlineMaterialRenderer = GetComponent<Renderer>();
         mpb ??= new MaterialPropertyBlock();
     }
-
+*/
     private void Reset()
     {
-        OutlineMaterialRenderer = GetComponent<Renderer>();
+       // OutlineMaterialRenderer = GetComponent<Renderer>();
         rb = GetComponent<Rigidbody2D>();
         kinematics = GetComponent<ProjectileMovement>();
         hitEffect = GetComponent<ProjectileHitEffect>();
+        hitEffectPS = GetComponent<ProjectileHitEffectPS>();
         shootEffect = GetComponent<ProjectileShootEffect>();
+        shootEffectPS = GetComponent<ProjectileShootEffectPS>();
     }
 
     private void OnEnable()
@@ -49,18 +56,24 @@ public class PooledProjectile : MonoBehaviour
         _lifeTimer = 0f;
     }
 
-    public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction, float speedOverride, Transform spawnTf,
-        IReadOnlyList<ProjectileModifierSO> modifiers)
+    public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction, float speedOverride, Transform spawnTf)
     {
         _owner = owner;
+        _shotAmmoType = config != null ? config.ammoType : AmmoType.Bullet;
+        _modifierSet = _owner != null ? _owner.GetComponentInParent<ProjectileModifierSet>() : null;
         _ownerTeam = ownerTeam;
         _config = config;
+        
+        Debug.Log($"[INIT] proj={name} cfg={_config.name} ammo={_config.ammoType} " +
+                  $"shootComp(VFX)={(shootEffect!=null)} shootList(VFX)={_config.shootEffect?.Count ?? -1} " +
+                  $"shootComp(PS)={(shootEffectPS!=null)} shootList(PS)={_config.shootEffectPS?.Count ?? -1}");
+        
         _remainingPierce = config != null ? config.pierceCount : 0;
         //Set Modifiers
         _stats = ProjectileStatsBuilder.FromConfig(config);
-        _mods = modifiers != null ? new List<ProjectileModifierSO>(modifiers) : null;
-        Color _baseColor = OutlineMaterialRenderer.material.color;
-        
+        //_mods = modifiers != null ? new List<ProjectileModifierSO>(modifiers) : null;
+        //Color _baseColor = OutlineMaterialRenderer.material.color;
+        /*
         if (_mods != null)
             for (int i = 0; i < _mods.Count; i++)
                 _mods[i].ModifyStats(ref _stats);
@@ -76,7 +89,7 @@ public class PooledProjectile : MonoBehaviour
             //Debug.Log($"Applying MPB color: {mpb.GetVector("_Color")} to {name}");
             OutlineMaterialRenderer.SetPropertyBlock(mpb);
         }
-
+*/
         _lifeTimer = 0f;
 
         float speed = speedOverride > 0f ? speedOverride : config.speed;
@@ -88,11 +101,34 @@ public class PooledProjectile : MonoBehaviour
         
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg-90f;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        projectileOrientation = transform.rotation;
 
         if (shootEffect != null && _config != null && spawnTf != null)
         {
-            shootEffect.Apply(_config.shootEffect, spawnTf.position, spawnTf.rotation);
-            Debug.Log("ShootEffect Applied"+_owner.name);
+            for (int FX = 0; FX < _config.shootEffect.Count; FX++)
+            {
+                VisualEffect shootFX = _config.shootEffect[FX];
+                shootEffect.Apply(shootFX, spawnTf.position, spawnTf.rotation);
+                Debug.Log("ShootEffect Applied:"+ shootFX.name);
+            }
+           
+        }
+        else if (shootEffect == null || _config == null || spawnTf == null)
+        {
+            Debug.LogWarning("shoot effect/config/spawnTF is null");
+        }
+        
+        if (shootEffectPS != null && _config != null && spawnTf != null)
+        {
+            for (int FX = 0; FX < _config.shootEffectPS.Count; FX++)
+            {
+                ParticleSystem shootFX = _config.shootEffectPS[FX];
+                Debug.Log($"[MUZZLE PS] cfg={_config.name} index={FX} ps={(shootFX ? shootFX.name : "NULL")}");
+                if (shootFX == null) continue;
+                shootEffectPS.Apply(shootFX, spawnTf.position, spawnTf.rotation);
+                Debug.Log("ShootEffect PS Applied:" + shootFX.name);
+            }
+            
         }
         else if (shootEffect == null || _config == null || spawnTf == null)
         {
@@ -105,7 +141,7 @@ public class PooledProjectile : MonoBehaviour
         if (_config == null) return;
         
         _lifeTimer += Time.deltaTime;
-        
+         Debug.LogWarning("lifeTimer:" + _lifeTimer);
         if (_config.dissapateOverLifetime == true)
                 {
                      Vector3 startSize = Vector3.one;
@@ -113,16 +149,56 @@ public class PooledProjectile : MonoBehaviour
                      float t = (_config.lifetime <= 0f) ? 1f : Mathf.Clamp01(_lifeTimer / _config.lifetime);
                      transform.localScale = Vector3.Lerp(startSize, endSize, t);
                 }
-        
+
         if (_lifeTimer >= _config.lifetime)
+        {
             Despawn();
+           
+        }
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Walls"))
         {
-            Despawn();
+            projectileOrientation = Quaternion.Euler(projectileOrientation.eulerAngles.x, projectileOrientation.eulerAngles.y
+                , projectileOrientation.eulerAngles.z - 90f);
+            
+            if (hitEffect != null && _config != null)
+            {Debug.Log("projectileOrientation:" + projectileOrientation);
+                for (int FX = 0; FX < _config.wallhitEffect.Count; FX++)
+                {
+                    
+                    VisualEffect hitFX = _config.wallhitEffect[FX];
+                    hitEffect.Apply(hitFX, other.transform.position, projectileOrientation);
+                    Debug.Log("hitEffect Applied:" + hitFX.name);
+                }
+                
+            }
+            else if (hitEffect == null || _config == null)
+            {
+                Debug.LogWarning("hit effect/config is null");
+            }
+        
+            if (hitEffectPS != null && _config != null)
+            {
+                for (int FX = 0; FX < _config.wallhitEffectPS.Count; FX++)
+                {
+                    ParticleSystem hitFX = _config.wallhitEffectPS[FX];
+                    Debug.Log($"[WALL HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
+                    if (hitFX == null) continue;
+                    hitEffectPS.Apply(hitFX, other.transform.position, projectileOrientation);
+                    Debug.Log("hit PS Applied"+ hitFX.name);
+                }
+                
+            }
+            else if (hitEffect == null || _config == null)
+            {
+                Debug.LogWarning("hit effect/config is null");
+            }
+            
+            Despawn(); 
         }
         
         if (_config == null) return;
@@ -143,13 +219,59 @@ public class PooledProjectile : MonoBehaviour
         if (_config.preventFriendlyFire && damageable.Team == _ownerTeam)
             return;
 
-        if (hitEffect != null)
-        {
-            hitEffect.Apply(_config.impactEffect, other.transform.position, other.transform.rotation);
-            Debug.Log("HitEffect Applied");
-        }
+        Debug.Log($"[CFG CHECK] cfgName={_config.name} cfgID={_config.GetInstanceID()} path={UnityEditor.AssetDatabase.GetAssetPath(_config)}");
 
-        if (_mods != null)
+        for (int i = 0; i < _config.hitEffectPS.Count; i++)
+        {
+            var ps = _config.hitEffectPS[i];
+            Debug.Log($"[CFG hitEffectPS] i={i} val={(ps ? ps.name : "NULL")}");
+        }
+        for (int i = 0; i < _config.hitEffect.Count; i++)
+        {
+            var vfx = _config.hitEffect[i];
+            Debug.Log($"[CFG hitEffect VFX] i={i} val={(vfx ? vfx.name : "NULL")}");
+        }
+        
+        if (!other.CompareTag("Enemy")) return;
+        
+        _modifierSet?.NotifyHitEnemy(_shotAmmoType, _owner, other.gameObject, other.transform.position, other.transform.rotation);
+        
+        if (hitEffect != null && _config != null)
+            {
+
+                for (int FX = 0; FX < _config.hitEffect.Count; FX++)
+                {
+                    VisualEffect hitFX = _config.hitEffect[FX];
+                    hitEffect.Apply(hitFX, other.transform.position, other.transform.rotation);
+                    Debug.Log("hitEffect Applied" + hitFX.name);
+                }
+                
+            }
+            else if (hitEffect == null || _config == null)
+            {
+                Debug.LogWarning("hit effect/config is null");
+            }
+
+            if (hitEffectPS != null && _config != null)
+            {
+                for (int FX = 0; FX < _config.hitEffectPS.Count; FX++)
+                {
+                    ParticleSystem hitFX = _config.hitEffectPS[FX];
+                    Debug.Log($"[ENEMY HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
+                    if (hitFX == null) continue;
+                    hitEffectPS.Apply(hitFX, other.transform.position, other.transform.rotation);
+                    Debug.Log("hit PS Applied" + hitFX.name);
+                }
+                
+            }
+            else if (hitEffect == null || _config == null)
+            {
+                Debug.LogWarning("hit effect/config is null");
+            }
+
+            Debug.Log("HitEffect Applied");
+
+       /* if (_mods != null)
         {
             for (int i = 0; i < _mods.Count; i++)
                 _mods[i].OnHit(other.gameObject, _owner.gameObject);
@@ -184,14 +306,15 @@ Debug.LogError("HitEffect NULL");*/
         }
     }
 
-    
+
 
     public void Despawn()
-    {
+    {/*
         transform.localScale = Vector3.one;
         OutlineMaterialRenderer.GetPropertyBlock(mpb);
         mpb.Clear();
         OutlineMaterialRenderer.SetPropertyBlock(mpb);
+       */
         
         // Stop physics motion to avoid “ghost velocity” on reuse
         if (rb != null)

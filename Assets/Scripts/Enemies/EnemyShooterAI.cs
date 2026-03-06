@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyShooterAI : MonoBehaviour
+public class EnemyShooterAI : MonoBehaviour, IEnemyFireInterval
 {
     [Header("Target")]
     [SerializeField] private Transform target;
@@ -91,6 +91,7 @@ public class EnemyShooterAI : MonoBehaviour
         // If we hit something, LOS is blocked
         return hit.collider == null;
     }
+    
 
 #if UNITY_EDITOR
     private void OnDrawGizmosSelected()
@@ -103,4 +104,10 @@ public class EnemyShooterAI : MonoBehaviour
         }
     }
 #endif
+    public float FireInterval
+    { 
+        get => fireInterval;
+        set => fireInterval = Mathf.Max(0.02f, value);
+        
+    } 
 }

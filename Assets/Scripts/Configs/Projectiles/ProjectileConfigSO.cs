@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -30,10 +31,16 @@ public class ProjectileConfigSO : ScriptableObject
     public bool destroyOnHit = true;
     
     [Header("Hit Effect")]
-    public VisualEffect impactEffect;
+    public List<VisualEffect> hitEffect;
+    public List<ParticleSystem> hitEffectPS;
+    
+    public List<VisualEffect> wallhitEffect;
+    public List<ParticleSystem> wallhitEffectPS;
     
     [Header("Shoot Effect")]
-    public VisualEffect shootEffect;
+    public List<VisualEffect> shootEffect;
+
+    public List<ParticleSystem> shootEffectPS;
 
     [Header("Dissapate")] 
     public bool dissapateOverLifetime;

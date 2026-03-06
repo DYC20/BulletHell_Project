@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa456e2a0cd0f242acf9f0a34127cb0, type: 3}
+  m_Name: IceShotgun_01_ProjectileConfig
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileConfigSO
+  ammoType: 1
+  ammoPerShot: 1
+  damage: 0.3
+  speed: 2
+  lifetime: 2
+  projectilesPerShot: 6
+  spreadAngleDeg: 45
+  randomSpread: 1
+  centerProjectile: 0
+  spawnPosJitter: 0.1
+  speedMultiplierMin: 0.8
+  speedMultiplierMax: 0.6
+  destroyOnHit: 1
+  hitEffect: []
+  hitEffectPS:
+  - {fileID: 3370062852713752785, guid: c3bda0b032346ac4caeb4e5a4e99f555, type: 3}
+  wallhitEffect: []
+  wallhitEffectPS:
+  - {fileID: 1707121828431647151, guid: f96badbc542a2b445bbcb94356bad8cb, type: 3}
+  shootEffect: []
+  shootEffectPS:
+  - {fileID: 6656644463458133008, guid: 187ccb99d6a6bd34f96c62ea71e12304, type: 3}
+  dissapateOverLifetime: 1
+  preventFriendlyFire: 1
+  hitMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  pierceCount: 0

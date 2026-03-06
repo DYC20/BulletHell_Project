@@ -84,7 +84,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.93607855, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -105,7 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c66d198a13e38ad4ea0dbb4d9ff4c20d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FreezePickup
-  freezeConfig: {fileID: 11400000, guid: 870080ec09a9dcd41857a83fc73e3edc, type: 2}
+  modifierConfig: {fileID: 11400000, guid: cf5b2d7b601edd5458f80bec662b3e1f, type: 2}
   destroyAfterPickup: 1
 --- !u!70 &6789498977137230511
 CapsuleCollider2D:

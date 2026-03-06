@@ -30,17 +30,18 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
     {
         if (equippedWeapon != null)
         {
+            Debug.Log($" is Null Equipped weapon: {equippedWeapon.name}");
             equippedWeapon.transform.SetParent(null, true);
             equippedWeapon.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             equippedWeapon.GetComponent<Collider2D>().enabled = true;
         }
         equippedWeapon = weapon;
-        //Debug.Log($"Equipped weapon: {equippedWeapon.name}");
+        Debug.Log($" no Null Equipped weapon: {equippedWeapon.name}");
         equippedWeapon.SetOwner(gameObject, Teams.Player);
         equippedWeapon.GetComponent<Collider2D>().enabled = false;
         equippedWeapon.gameObject.transform.parent = weaponSocket;
         equippedWeapon.gameObject.transform.localPosition = Vector3.up * gunDistance;
-        equippedWeapon.gameObject.transform.localRotation = Quaternion.Euler(0f, 0f, 90f);
+        equippedWeapon.gameObject.transform.localRotation = Quaternion.Euler(0f, 0f,90f);
 
 
 

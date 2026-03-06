@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyChaseAI : MonoBehaviour
+public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
 {
     [Header("Directional Sprites (4-way)")]
     [SerializeField] private SpriteRenderer renderer; // assign in Inspector
@@ -10,7 +10,7 @@ public class EnemyChaseAI : MonoBehaviour
     [Header("Target")]
     [SerializeField] private Transform player;           // assign in Inspector (recommended)
     [SerializeField] private string playerTag = "Player"; // fallback if not assigned
-
+                                  
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3.5f;
     [SerializeField] private float ratationSpeed = 3.5f;
@@ -94,6 +94,7 @@ public class EnemyChaseAI : MonoBehaviour
             }
         }
     }
+    
     /*
     private void OnCollisionEnter2D(Collision2D collision)
     {
