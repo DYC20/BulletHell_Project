@@ -15,7 +15,7 @@ MonoBehaviour:
   ammoType: 0
   ammoPerShot: 1
   damage: 1
-  speed: 2.5
+  speed: 2
   lifetime: 5
   projectilesPerShot: 1
   spreadAngleDeg: 11
@@ -34,7 +34,13 @@ MonoBehaviour:
   shootEffect: []
   shootEffectPS:
   - {fileID: 3769249183343581588, guid: 6d3a7ced8cc5cbe439f0fec342f850db, type: 3}
-  dissapateOverLifetime: 0
+  doDissapateOverLifetime: 0
+  dissapateOverLifetime:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   preventFriendlyFire: 1
   hitMask:
     serializedVersion: 2

@@ -107,7 +107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &807359350813784661
 Transform:
   m_ObjectHideFlags: 0
@@ -290,7 +290,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &315018648249140496
 Transform:
   m_ObjectHideFlags: 0
@@ -387,7 +387,7 @@ VFXRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2895870712899226580}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -452,8 +452,8 @@ Transform:
   m_GameObject: {fileID: 4328287875531225590}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.0003, y: 0.046, z: -0.04}
-  m_LocalScale: {x: 0.062765695, y: 0.2463549, z: 0.3355284}
+  m_LocalPosition: {x: 0.11, y: 0.04, z: 0}
+  m_LocalScale: {x: 0.1204317, y: 0.2823875, z: 0.166433}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 285408734062528771}
@@ -484,7 +484,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: ea29a098a41edc44f891636c49a9d4db, type: 2}
+  - {fileID: 2100000, guid: 17510b5002ef7b84e84d07321df262ab, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -734,5 +734,6 @@ MonoBehaviour:
   rb: {fileID: 5440995222320283759}
   kinematics: {fileID: 6815184697106162655}
   hitEffect: {fileID: 7985142843861681838}
+  hitEffectPS: {fileID: 0}
   shootEffect: {fileID: -6359636138660983499}
-  OutlineMaterialRenderer: {fileID: 8663662714343850931}
+  shootEffectPS: {fileID: 0}

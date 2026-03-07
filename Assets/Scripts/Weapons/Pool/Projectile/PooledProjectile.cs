@@ -142,12 +142,11 @@ public class PooledProjectile : MonoBehaviour
         
         _lifeTimer += Time.deltaTime;
          Debug.LogWarning("lifeTimer:" + _lifeTimer);
-        if (_config.dissapateOverLifetime == true)
+        if (_config.doDissapateOverLifetime == true)
                 {
-                     Vector3 startSize = Vector3.one;
-                     Vector3 endSize = Vector3.zero;
                      float t = (_config.lifetime <= 0f) ? 1f : Mathf.Clamp01(_lifeTimer / _config.lifetime);
-                     transform.localScale = Vector3.Lerp(startSize, endSize, t);
+                     float scale = _config.dissapateOverLifetime.Evaluate(t);
+                     transform.localScale = Vector3.one * scale;
                 }
 
         if (_lifeTimer >= _config.lifetime)

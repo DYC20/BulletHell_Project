@@ -43,7 +43,8 @@ public class ProjectileConfigSO : ScriptableObject
     public List<ParticleSystem> shootEffectPS;
 
     [Header("Dissapate")] 
-    public bool dissapateOverLifetime;
+    public bool doDissapateOverLifetime = false;
+    public AnimationCurve dissapateOverLifetime = AnimationCurve.Linear(0, 1, 1, 1);
 
     [Tooltip("If enabled, projectile will ignore targets on same team as owner.")]
     public bool preventFriendlyFire = true;

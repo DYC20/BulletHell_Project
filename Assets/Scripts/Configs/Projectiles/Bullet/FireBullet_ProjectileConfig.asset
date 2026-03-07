@@ -34,7 +34,13 @@ MonoBehaviour:
   shootEffect: []
   shootEffectPS:
   - {fileID: 6758876438703204062, guid: 7dc8f4952bd50614f9d81ee5ef6d0c82, type: 3}
-  dissapateOverLifetime: 0
+  doDissapateOverLifetime: 0
+  dissapateOverLifetime:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   preventFriendlyFire: 1
   hitMask:
     serializedVersion: 2

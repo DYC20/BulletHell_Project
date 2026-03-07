@@ -154,6 +154,9 @@ MonoBehaviour:
     - model: {fileID: 8926484042661615710}
       id: 0
       isStickyNote: 0
+    - model: {fileID: 8926484042661615777}
+      id: 0
+      isStickyNote: 0
   stickyNoteInfos: []
   categories:
   - name: Flame
@@ -207,6 +210,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615653}
   - {fileID: 8926484042661615663}
   - {fileID: 8926484042661615710}
+  - {fileID: 8926484042661615777}
   m_UIPosition: {x: 0, y: 0}
   m_UICollapsed: 1
   m_UISuperCollapsed: 0
@@ -224,6 +228,22 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: 
       m_SerializableObject: 
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 0
+  - name: Size Over
+    path: Size Over
+    tooltip: 
+    space: -1
+    spaceable: 0
+    sheetType: m_AnimationCurve
+    realType: AnimationCurve
+    defaultValue:
+      m_Type:
+        m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.0,"inTangent":1.697225570678711,"outTangent":1.697225570678711,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.23000000417232514,"value":1.0,"inTangent":0.1795870065689087,"outTangent":0.1795870065689087,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":1.0,"value":0.0,"inTangent":0.06343449652194977,"outTangent":0.06343449652194977,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -923,7 +943,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614577}
   m_OutputSlots: []
   m_Label: 
-  m_Data: {fileID: 8926484042661615772}
+  m_Data: {fileID: 8926484042661615773}
   m_InputFlowSlot:
   - link: []
   m_OutputFlowSlot:
@@ -2708,7 +2728,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615028}
   m_ExposedName: Y Movement
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 1
   m_Category: Flame
   m_Min:
     m_Type:
@@ -2780,7 +2800,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615030}
   m_ExposedName: Position
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 2
   m_Category: Flame
   m_Min:
     m_Type:
@@ -3380,7 +3400,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615337}
   m_ExposedName: Color
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 3
   m_Category: Flame
   m_Min:
     m_Type:
@@ -3470,7 +3490,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615339}
   m_ExposedName: Fresnel Power
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 4
   m_Category: Flame
   m_Min:
     m_Type:
@@ -4366,7 +4386,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615429}
   m_ExposedName: Max Lifetime
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 5
   m_Category: Flame
   m_Min:
     m_Type:
@@ -4453,7 +4473,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615431}
   m_ExposedName: Min Lifetime
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 6
   m_Category: Flame
   m_Min:
     m_Type:
@@ -7252,7 +7272,8 @@ MonoBehaviour:
       m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
   m_Direction: 0
-  m_LinkedSlots: []
+  m_LinkedSlots:
+  - {fileID: 8926484042661615778}
 --- !u!114 &8926484042661615633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8494,7 +8515,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615711}
   m_ExposedName: Rate
   m_Exposed: 1
-  m_Order: 6
+  m_Order: 7
   m_Category: Flame
   m_Min:
     m_Type:
@@ -8586,7 +8607,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
   m_LinkedSlots: []
---- !u!114 &8926484042661615772
+--- !u!114 &8926484042661615773
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8614,3 +8635,84 @@ MonoBehaviour:
   needsComputeBounds: 0
   boundsMode: 0
   m_Space: 0
+--- !u!114 &8926484042661615777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 330e0fca1717dde4aaa144f48232aa64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.VisualEffectGraph.Editor::UnityEditor.VFX.VFXParameter
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 114350483966674976}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 0
+  m_UISuperCollapsed: 0
+  m_InputSlots: []
+  m_OutputSlots:
+  - {fileID: 8926484042661615778}
+  m_ExposedName: Size Over
+  m_Exposed: 1
+  m_Order: 0
+  m_Category: Flame
+  m_Min:
+    m_Type:
+      m_SerializableType: 
+    m_SerializableObject: 
+  m_Max:
+    m_Type:
+      m_SerializableType: 
+    m_SerializableObject: 
+  m_IsOutput: 0
+  m_EnumValues: []
+  m_ValueFilter: 0
+  m_Tooltip: 
+  m_Nodes:
+  - m_Id: 0
+    linkedSlots:
+    - outputSlot: {fileID: 8926484042661615778}
+      inputSlot: {fileID: 8926484042661615632}
+    position: {x: 2971, y: 944}
+    expandedSlots: []
+    expanded: 1
+    supecollapsed: 0
+--- !u!114 &8926484042661615778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c117b74c5c58db542bffe25c78fe92db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.VisualEffectGraph.Editor::UnityEditor.VFX.VFXSlotAnimationCurve
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661615778}
+  m_MasterData:
+    m_Owner: {fileID: 8926484042661615777}
+    m_Value:
+      m_Type:
+        m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.0,"inTangent":1.697225570678711,"outTangent":1.697225570678711,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.23000000417232514,"value":1.0,"inTangent":0.1795870065689087,"outTangent":0.1795870065689087,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":1.0,"value":0.0,"inTangent":0.06343449652194977,"outTangent":0.06343449652194977,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+    m_Space: -1
+  m_Property:
+    name: o
+    m_serializedType:
+      m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+  m_Direction: 1
+  m_LinkedSlots:
+  - {fileID: 8926484042661615632}

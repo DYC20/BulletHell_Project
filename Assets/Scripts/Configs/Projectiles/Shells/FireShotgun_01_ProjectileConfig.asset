@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileConfigSO
   ammoType: 1
   ammoPerShot: 1
-  damage: 1
-  speed: 2.7
-  lifetime: 0.7
+  damage: 0.4
+  speed: 3.3
+  lifetime: 1
   projectilesPerShot: 6
   spreadAngleDeg: 90
   randomSpread: 1
   centerProjectile: 0
   spawnPosJitter: 0.3
   speedMultiplierMin: 0.8
-  speedMultiplierMax: 1
+  speedMultiplierMax: 1.1
   destroyOnHit: 1
   hitEffect: []
   hitEffectPS:
@@ -34,7 +34,31 @@ MonoBehaviour:
   shootEffect: []
   shootEffectPS:
   - {fileID: 9022824745926404130, guid: 8f37f3e5ac9f9f948a48b3525cbb5250, type: 3}
-  dissapateOverLifetime: 1
+  doDissapateOverLifetime: 1
+  dissapateOverLifetime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -3.3445477
+      outSlope: -3.3445477
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.035443068
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   preventFriendlyFire: 1
   hitMask:
     serializedVersion: 2

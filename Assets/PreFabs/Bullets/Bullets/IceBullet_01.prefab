@@ -180,7 +180,6 @@ MonoBehaviour:
   hitEffectPS: {fileID: -596124624765486420}
   shootEffect: {fileID: 5164655207921999921}
   shootEffectPS: {fileID: -8955935111617131742}
-  OutlineMaterialRenderer: {fileID: 4398625868787656555}
 --- !u!50 &1955884628445460395
 Rigidbody2D:
   serializedVersion: 5
@@ -272,7 +271,7 @@ Transform:
   m_GameObject: {fileID: 853322267106011752}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.154, z: 0}
+  m_LocalPosition: {x: 0, y: -0.066, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -296,11 +295,14 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.3
+      - m_Value: 0.2
         m_Name: Size Max
         m_Overridden: 1
       - m_Value: 0.1
         m_Name: Size Min
+        m_Overridden: 1
+      - m_Value: 0.6
+        m_Name: Spiral Lifetime
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
@@ -315,7 +317,68 @@ VisualEffect:
     m_Matrix4x4f:
       m_Array: []
     m_AnimationCurve:
-      m_Array: []
+      m_Array:
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: -1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.6632698
+            value: -1.1481366
+            inSlope: -0.0067590475
+            outSlope: -0.0067590475
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.33333334
+            outWeight: 0.33333334
+          - serializedVersion: 3
+            time: 1
+            value: -1
+            inSlope: 1
+            outSlope: 1
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: Y Movement
+        m_Overridden: 1
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0.0008430481
+            value: -1.0010071
+            inSlope: 3.0963452
+            outSlope: 3.0963452
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.034479734
+          - serializedVersion: 3
+            time: 1.017334
+            value: -0.36515045
+            inSlope: 2.298239
+            outSlope: 2.298239
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.058934662
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: Velocity
+        m_Overridden: 1
     m_Gradient:
       m_Array: []
     m_NamedObject:
@@ -396,7 +459,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.12956609, y: 0.30380577, z: 0.25361693}
+  m_LocalScale: {x: 0.1, y: 0.2, z: 0.25361693}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5534935560467015888}
@@ -487,7 +550,7 @@ Transform:
   m_GameObject: {fileID: 6338579432744875269}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.254, z: 0}
+  m_LocalPosition: {x: 0, y: -0.071, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -511,11 +574,23 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.1
+      - m_Value: 0.05
         m_Name: Size Max
         m_Overridden: 1
-      - m_Value: 0.05
+      - m_Value: 0.001
         m_Name: Size Min
+        m_Overridden: 1
+      - m_Value: 0.4
+        m_Name: Trail Lifetime
+        m_Overridden: 1
+      - m_Value: 0.5
+        m_Name: Velocity X
+        m_Overridden: 1
+      - m_Value: -1
+        m_Name: Velocity Y
+        m_Overridden: 1
+      - m_Value: 3
+        m_Name: Amount
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
@@ -537,17 +612,52 @@ VisualEffect:
           - serializedVersion: 3
             time: 0
             value: 0.16
-            inSlope: 0.9561583
-            outSlope: 0.9561583
+            inSlope: -0.087740354
+            outSlope: -0.087740354
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.044725742
+          - serializedVersion: 3
+            time: 0.99658203
+            value: 0.80332565
+            inSlope: 1.1625316
+            outSlope: 1.1625316
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0.027004154
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: Clip Over Time
+        m_Overridden: 1
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
             tangentMode: 0
             weightedMode: 0
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.99658203
-            value: 0.80332565
-            inSlope: -0.01838701
-            outSlope: -0.01838701
+            time: 0.2
+            value: 0.33282533
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
             tangentMode: 0
             weightedMode: 0
             inWeight: 0
@@ -555,14 +665,17 @@ VisualEffect:
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
-        m_Name: Clip Over Time
+        m_Name: Scale Over
         m_Overridden: 1
     m_Gradient:
       m_Array: []
     m_NamedObject:
       m_Array: []
     m_Bool:
-      m_Array: []
+      m_Array:
+      - m_Value: 1
+        m_Name: Add Aparks
+        m_Overridden: 1
 --- !u!73398921 &4973054536878554371
 VFXRenderer:
   serializedVersion: 1
