@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class AmmoInventory : MonoBehaviour, IAmmoReceiver, IAmmoConsumer
@@ -11,10 +12,17 @@ public class AmmoInventory : MonoBehaviour, IAmmoReceiver, IAmmoConsumer
         public int amount;
         public int maxAmount; // 0 or negative = unlimited cap
     }
-
+    
+    [Header("Starting Ammo")]
     [SerializeField] private AmmoEntry[] startingAmmo;
+    
+    [Header("UI")]
+    [SerializeField] private TextMeshProUGUI ammoText;
+    [SerializeField] private TextMeshProUGUI ammoTextShadow;
 
     private readonly Dictionary<AmmoType, AmmoEntry> _ammo = new();
+    
+    private AmmoType _displayedAmmoType;
 
     private void Awake()
     {
@@ -29,6 +37,7 @@ public class AmmoInventory : MonoBehaviour, IAmmoReceiver, IAmmoConsumer
         {
             if (!_ammo.ContainsKey(t))
                 _ammo[t] = new AmmoEntry { type = t, amount = 0, maxAmount = 0 };
+            UpdateAmmoText();
         }
     }
 
@@ -65,6 +74,10 @@ public class AmmoInventory : MonoBehaviour, IAmmoReceiver, IAmmoConsumer
             e.amount = Mathf.Min(e.amount, e.maxAmount);
 
         _ammo[type] = e;
+        
+        if (type == _displayedAmmoType)
+            UpdateAmmoText();
+        
     }
 
     // IAmmoConsumer
@@ -84,7 +97,23 @@ public class AmmoInventory : MonoBehaviour, IAmmoReceiver, IAmmoConsumer
         e.amount -= amount;
         if (e.amount < 0) e.amount = 0;
         _ammo[type] = e;
+        
+        if (type == _displayedAmmoType)
+            UpdateAmmoText();
 
         return true;
+    }
+    
+    public void SetDisplayedAmmoType(AmmoType type)
+    {
+        _displayedAmmoType = type;
+        UpdateAmmoText();
+    }
+
+    private void UpdateAmmoText()
+    {
+        if (ammoText == null) return;
+        ammoText.text = Get(_displayedAmmoType).ToString();
+        ammoTextShadow.text = Get(_displayedAmmoType).ToString();
     }
 }

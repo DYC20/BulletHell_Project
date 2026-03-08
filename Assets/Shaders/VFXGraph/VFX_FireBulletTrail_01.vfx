@@ -232,22 +232,6 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: Size Over
-    path: Size Over
-    tooltip: 
-    space: -1
-    spaceable: 0
-    sheetType: m_AnimationCurve
-    realType: AnimationCurve
-    defaultValue:
-      m_Type:
-        m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.0,"inTangent":1.697225570678711,"outTangent":1.697225570678711,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.23000000417232514,"value":1.0,"inTangent":0.1795870065689087,"outTangent":0.1795870065689087,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":1.0,"value":0.0,"inTangent":0.06343449652194977,"outTangent":0.06343449652194977,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
-    min: -Infinity
-    max: Infinity
-    enumValues: []
-    descendantCount: 0
   - name: Y Movement
     path: Y Movement
     tooltip: 
@@ -356,6 +340,22 @@ MonoBehaviour:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
       m_SerializableObject: 10
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 0
+  - name: Size Over
+    path: Size Over
+    tooltip: 
+    space: -1
+    spaceable: 0
+    sheetType: m_AnimationCurve
+    realType: AnimationCurve
+    defaultValue:
+      m_Type:
+        m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.0,"inTangent":1.697225570678711,"outTangent":1.697225570678711,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.23000000417232514,"value":1.0,"inTangent":0.1795870065689087,"outTangent":0.1795870065689087,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":1.0,"value":0.0,"inTangent":0.06343449652194977,"outTangent":0.06343449652194977,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -943,7 +943,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614577}
   m_OutputSlots: []
   m_Label: 
-  m_Data: {fileID: 8926484042661615773}
+  m_Data: {fileID: 8926484042661615779}
   m_InputFlowSlot:
   - link: []
   m_OutputFlowSlot:
@@ -2728,7 +2728,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615028}
   m_ExposedName: Y Movement
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 0
   m_Category: Flame
   m_Min:
     m_Type:
@@ -2800,7 +2800,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615030}
   m_ExposedName: Position
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 1
   m_Category: Flame
   m_Min:
     m_Type:
@@ -3400,7 +3400,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615337}
   m_ExposedName: Color
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 2
   m_Category: Flame
   m_Min:
     m_Type:
@@ -3490,7 +3490,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615339}
   m_ExposedName: Fresnel Power
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 3
   m_Category: Flame
   m_Min:
     m_Type:
@@ -4386,7 +4386,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615429}
   m_ExposedName: Max Lifetime
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 4
   m_Category: Flame
   m_Min:
     m_Type:
@@ -4473,7 +4473,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615431}
   m_ExposedName: Min Lifetime
   m_Exposed: 1
-  m_Order: 6
+  m_Order: 5
   m_Category: Flame
   m_Min:
     m_Type:
@@ -8515,7 +8515,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615711}
   m_ExposedName: Rate
   m_Exposed: 1
-  m_Order: 7
+  m_Order: 6
   m_Category: Flame
   m_Min:
     m_Type:
@@ -8607,34 +8607,6 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
   m_LinkedSlots: []
---- !u!114 &8926484042661615773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d78581a96eae8bf4398c282eb0b098bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.VisualEffectGraph.Editor::UnityEditor.VFX.VFXDataParticle
-  m_UIIgnoredErrors: []
-  m_Parent: {fileID: 0}
-  m_Children: []
-  m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
-  m_UISuperCollapsed: 0
-  title: 
-  m_Owners:
-  - {fileID: 8926484042661614539}
-  dataType: 0
-  capacity: 128
-  stripCapacity: 1
-  particlePerStripCount: 128
-  needsComputeBounds: 0
-  boundsMode: 0
-  m_Space: 0
 --- !u!114 &8926484042661615777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8658,7 +8630,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615778}
   m_ExposedName: Size Over
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 7
   m_Category: Flame
   m_Min:
     m_Type:
@@ -8716,3 +8688,31 @@ MonoBehaviour:
   m_Direction: 1
   m_LinkedSlots:
   - {fileID: 8926484042661615632}
+--- !u!114 &8926484042661615779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d78581a96eae8bf4398c282eb0b098bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.VisualEffectGraph.Editor::UnityEditor.VFX.VFXDataParticle
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  title: 
+  m_Owners:
+  - {fileID: 8926484042661614539}
+  dataType: 0
+  capacity: 128
+  stripCapacity: 1
+  particlePerStripCount: 128
+  needsComputeBounds: 0
+  boundsMode: 0
+  m_Space: 0

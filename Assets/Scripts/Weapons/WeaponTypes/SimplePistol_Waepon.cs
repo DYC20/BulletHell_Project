@@ -22,6 +22,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
 
     private bool _IsSpriteRenderer = false;
     
+    
     //private Vector3 firePointDefaultLocalPos; //firepoint orientation
     //private bool lastFlipState;
 
@@ -138,6 +139,21 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
         }
     }
 
+    public override AmmoType GetCurrentAmmoType()
+    {
+        var set = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
+
+        ProjectileConfigSO cfg = projectileConfig;
+        ObjectPool pool = ProjectilePool;
+
+        if (set != null)
+            set.ApplyForCurrentAmmo(projectileConfig.ammoType, ref cfg, ref pool);
+
+        if (cfg == null)
+            return projectileConfig != null ? projectileConfig.ammoType : default;
+
+        return cfg.ammoType;
+    }
    
     //Helpers//
     void SetLayerRecursively(GameObject obj, int layer)

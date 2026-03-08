@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
 {
@@ -9,16 +10,22 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
     [SerializeField] private Transform weaponSocket;
     [SerializeField] private float gunDistance = 0.34f;
     [SerializeField] public WeaponBase equippedWeapon;
+    [SerializeField] private AmmoInventory ammoInventory;
+    [SerializeField] private Image weaponImage;
 
-
+    
 
     private bool _isFiring;
     public Transform CurrentFirePoint { get; private set; }
 
     private void Awake()
     {
+        if (ammoInventory == null)
+            ammoInventory = GetComponentInParent<AmmoInventory>();
         if (equippedWeapon == null)
             equippedWeapon = GetComponentInChildren<WeaponBase>(includeInactive: true);
+        if (equippedWeapon != null && weaponImage != null)
+            weaponImage.sprite = equippedWeapon.GetComponentInParent<SpriteRenderer>().sprite;
 
         if (equippedWeapon != null)
             Equip(equippedWeapon);
@@ -42,8 +49,16 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
         equippedWeapon.gameObject.transform.parent = weaponSocket;
         equippedWeapon.gameObject.transform.localPosition = Vector3.up * gunDistance;
         equippedWeapon.gameObject.transform.localRotation = Quaternion.Euler(0f, 0f,90f);
+        
 
-
+        if (ammoInventory != null)
+            ammoInventory.SetDisplayedAmmoType(equippedWeapon.GetCurrentAmmoType());
+    }
+    
+    public void RefreshAmmoUI()
+    {
+        if (equippedWeapon == null || ammoInventory == null) return;
+        ammoInventory.SetDisplayedAmmoType(equippedWeapon.GetCurrentAmmoType());
     }
 
     // IWeaponEquipper
@@ -71,7 +86,9 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
 
         var weapon = weaponPrefab.GetComponent<WeaponBase>();
         Equip(weapon);
-
+        
+        weaponImage.sprite = equippedWeapon.GetComponentInParent<SpriteRenderer>().sprite;
+Debug.Log("UI weapon sprite changed");
         CurrentFirePoint = (weapon != null) ? weapon.FirePoint : null;
     }
 

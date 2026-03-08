@@ -14,6 +14,8 @@ public abstract class WeaponBase : MonoBehaviour
     private float _nextFireTime;
     
     public Transform FirePoint => firePoint;
+    
+    public abstract AmmoType GetCurrentAmmoType();
 
     public void SetOwner(GameObject ownerGo, Teams team)
     {

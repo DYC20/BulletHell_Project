@@ -218,38 +218,6 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: Amount
-    path: Amount
-    tooltip: 
-    space: -1
-    spaceable: 0
-    sheetType: m_Float
-    realType: Single
-    defaultValue:
-      m_Type:
-        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-          PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 10
-    min: -Infinity
-    max: Infinity
-    enumValues: []
-    descendantCount: 0
-  - name: Scale Over
-    path: Scale Over
-    tooltip: 
-    space: -1
-    spaceable: 0
-    sheetType: m_AnimationCurve
-    realType: AnimationCurve
-    defaultValue:
-      m_Type:
-        m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.0,"inTangent":0.0,"outTangent":0.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.20000000298023225,"value":0.6930313110351563,"inTangent":0.0,"outTangent":0.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":1.0,"value":0.0,"inTangent":0.0,"outTangent":0.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
-    min: -Infinity
-    max: Infinity
-    enumValues: []
-    descendantCount: 0
   - name: Pos Y
     path: Pos Y
     tooltip: 
@@ -262,6 +230,22 @@ MonoBehaviour:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
       m_SerializableObject: 0
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 0
+  - name: Velocity Y
+    path: Velocity Y
+    tooltip: 
+    space: -1
+    spaceable: 0
+    sheetType: m_Float
+    realType: Single
+    defaultValue:
+      m_Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: -1
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -282,8 +266,24 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: Velocity Y
-    path: Velocity Y
+  - name: Scale Over
+    path: Scale Over
+    tooltip: 
+    space: -1
+    spaceable: 0
+    sheetType: m_AnimationCurve
+    realType: AnimationCurve
+    defaultValue:
+      m_Type:
+        m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"frames":[{"time":0.0,"value":0.0,"inTangent":0.0,"outTangent":0.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":0.20000000298023225,"value":0.6930313110351563,"inTangent":0.0,"outTangent":0.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false},{"time":1.0,"value":0.0,"inTangent":0.0,"outTangent":0.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":false}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 0
+  - name: Amount
+    path: Amount
     tooltip: 
     space: -1
     spaceable: 0
@@ -293,7 +293,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: -1
+      m_SerializableObject: 10
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -6931,7 +6931,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615292}
   m_ExposedName: Size Max
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 1
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -7012,7 +7012,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615294}
   m_ExposedName: Clip Over Time
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 2
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -7093,7 +7093,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615296}
   m_ExposedName: Trail Lifetime
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 3
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -7340,7 +7340,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615303}
   m_ExposedName: Add Aparks
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 4
   m_Category: Sparks
   m_Min:
     m_Type:
@@ -7421,7 +7421,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615308}
   m_ExposedName: Pos Y
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 5
   m_Category: Sparks
   m_Min:
     m_Type:
@@ -7502,7 +7502,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615310}
   m_ExposedName: Velocity Y
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 6
   m_Category: Sparks
   m_Min:
     m_Type:
@@ -7586,7 +7586,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615312}
   m_ExposedName: Velocity X
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 7
   m_Category: Sparks
   m_Min:
     m_Type:
@@ -7765,7 +7765,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615319}
   m_ExposedName: Scale Over
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 8
   m_Category: Sparks
   m_Min:
     m_Type:
@@ -7852,7 +7852,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615321}
   m_ExposedName: Amount
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 9
   m_Category: Sparks
   m_Min:
     m_Type:
