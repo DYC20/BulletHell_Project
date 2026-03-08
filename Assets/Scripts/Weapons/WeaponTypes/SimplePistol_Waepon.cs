@@ -11,6 +11,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     [SerializeField] private ObjectPool ProjectilePool;
     
     private SpriteRenderer rd;
+    
 
     private int projectileLowLayer;
     private int projectileHighLayer;

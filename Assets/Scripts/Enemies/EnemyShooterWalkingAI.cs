@@ -67,16 +67,19 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
     private float lastBlockedRepathTime;
     private bool forceReposition;
     private Transform playerAimPos;
+    private Animator animator;
 
 
     private void Reset()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Awake()
     {
         if (!rb) rb = GetComponent<Rigidbody2D>();
+        if (!animator) animator = GetComponent<Animator>();
         startPos = transform.position;
         PickNewWanderTarget();
         
@@ -120,6 +123,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
             case State.CombatFiring:
                 // optional: stay still while firing
                 rb.linearVelocity = Vector2.zero;
+                animator.SetTrigger("isIdle");
                 break;
         }
     }
@@ -170,6 +174,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         // If reached target, wait, then pick new target around START position
         if (HasArrived(currentTarget, arriveDistance))
         {
+            animator.SetTrigger("isIdle");
             rb.linearVelocity = Vector2.zero;
 
             float wait = Random.Range(wanderWaitMin, wanderWaitMax);
@@ -201,7 +206,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
 
         Transform target = playerAimPos != null ? playerAimPos : player;
         if (target == null) return;
-
+       // Debug.Log($"Aiming at: {target.name} | position: {target.position}");
         Vector2 dir = (target.position - weaponPivot.position);
         if (dir.sqrMagnitude < 0.0001f) return;
 
@@ -290,6 +295,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
 
             // --- IN GOOD FIRING POSITION ---
             state = State.CombatFiring;
+            animator.SetTrigger("isIdle");
             rb.linearVelocity = Vector2.zero;
 
             // Refresh anchor once after chase / re-entering firing position
@@ -338,6 +344,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
                 // Plan next reposition time
                
                 rb.linearVelocity = Vector2.zero;
+                animator.SetTrigger("isIdle");
                 state = State.CombatFiring;
 
                 yield return null;
@@ -422,12 +429,14 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         if (dir.sqrMagnitude <= stopThreshold * stopThreshold)
         {
             rb.linearVelocity = Vector2.zero;
+            animator.SetTrigger("isIdle");
             return;
         }
 
         dir.Normalize();
 
         // Simple movement
+        animator.SetTrigger("isWalking");
         rb.linearVelocity = dir * moveSpeed;
     }
 

@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour, IDamageable, IHealable
 {
     [Header("Setup")]
     [SerializeField] private Teams team;
     [SerializeField] private float maxHealth = 5f;
+    [SerializeField] private Slider healthSlider;
 
     public Teams Team => team;
     public float MaxHealth => maxHealth;
@@ -21,6 +23,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     private void Awake()
     {
         ResetHealth();
+        healthSlider.value = CurrentHealth;
     }
 
     /// <summary>
@@ -34,6 +37,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         _hp -= amount;
 Debug.Log("Player Took Damage");
         onDamaged?.Invoke(amount, instigator);
+        healthSlider.value = CurrentHealth;
 
         if (_hp <= 0f)
         {

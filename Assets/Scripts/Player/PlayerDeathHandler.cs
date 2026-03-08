@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 public class PlayerDeathHandler : MonoBehaviour
 {
@@ -30,7 +31,8 @@ public class PlayerDeathHandler : MonoBehaviour
             Debug.Log("Game Over");
             // disable input, show UI, etc.
             
-            Destroy(this.gameObject);
+            //Destroy(this.gameObject);
+            
             // 1. Disable input (THIS is the key line)
             playerInput.enabled = false;
 

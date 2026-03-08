@@ -63,11 +63,11 @@ public class PooledProjectile : MonoBehaviour
         _modifierSet = _owner != null ? _owner.GetComponentInParent<ProjectileModifierSet>() : null;
         _ownerTeam = ownerTeam;
         _config = config;
-        
+        /*
         Debug.Log($"[INIT] proj={name} cfg={_config.name} ammo={_config.ammoType} " +
                   $"shootComp(VFX)={(shootEffect!=null)} shootList(VFX)={_config.shootEffect?.Count ?? -1} " +
                   $"shootComp(PS)={(shootEffectPS!=null)} shootList(PS)={_config.shootEffectPS?.Count ?? -1}");
-        
+        */
         _remainingPierce = config != null ? config.pierceCount : 0;
         //Set Modifiers
         _stats = ProjectileStatsBuilder.FromConfig(config);
@@ -109,10 +109,11 @@ public class PooledProjectile : MonoBehaviour
             {
                 VisualEffect shootFX = _config.shootEffect[FX];
                 shootEffect.Apply(shootFX, spawnTf.position, spawnTf.rotation);
-                Debug.Log("ShootEffect Applied:"+ shootFX.name);
+                //Debug.Log("ShootEffect Applied:"+ shootFX.name);
             }
            
         }
+        
         else if (shootEffect == null || _config == null || spawnTf == null)
         {
             Debug.LogWarning("shoot effect/config/spawnTF is null");
@@ -123,17 +124,19 @@ public class PooledProjectile : MonoBehaviour
             for (int FX = 0; FX < _config.shootEffectPS.Count; FX++)
             {
                 ParticleSystem shootFX = _config.shootEffectPS[FX];
-                Debug.Log($"[MUZZLE PS] cfg={_config.name} index={FX} ps={(shootFX ? shootFX.name : "NULL")}");
+                //Debug.Log($"[MUZZLE PS] cfg={_config.name} index={FX} ps={(shootFX ? shootFX.name : "NULL")}");
                 if (shootFX == null) continue;
                 shootEffectPS.Apply(shootFX, spawnTf.position, spawnTf.rotation);
-                Debug.Log("ShootEffect PS Applied:" + shootFX.name);
+                //Debug.Log("ShootEffect PS Applied:" + shootFX.name);
             }
             
         }
+        /*
         else if (shootEffect == null || _config == null || spawnTf == null)
         {
             Debug.LogWarning("shoot effect/config/spawnTF is null");
         }
+        */
     }
 
     private void Update()
@@ -141,7 +144,7 @@ public class PooledProjectile : MonoBehaviour
         if (_config == null) return;
         
         _lifeTimer += Time.deltaTime;
-         Debug.LogWarning("lifeTimer:" + _lifeTimer);
+        // Debug.LogWarning("lifeTimer:" + _lifeTimer);
         if (_config.doDissapateOverLifetime == true)
                 {
                      float t = (_config.lifetime <= 0f) ? 1f : Mathf.Clamp01(_lifeTimer / _config.lifetime);
@@ -165,38 +168,40 @@ public class PooledProjectile : MonoBehaviour
                 , projectileOrientation.eulerAngles.z - 90f);
             
             if (hitEffect != null && _config != null)
-            {Debug.Log("projectileOrientation:" + projectileOrientation);
+            {//Debug.Log("projectileOrientation:" + projectileOrientation);
                 for (int FX = 0; FX < _config.wallhitEffect.Count; FX++)
                 {
                     
                     VisualEffect hitFX = _config.wallhitEffect[FX];
                     hitEffect.Apply(hitFX, other.transform.position, projectileOrientation);
-                    Debug.Log("hitEffect Applied:" + hitFX.name);
+                    //Debug.Log("hitEffect Applied:" + hitFX.name);
                 }
                 
             }
+            /*
             else if (hitEffect == null || _config == null)
             {
                 Debug.LogWarning("hit effect/config is null");
             }
-        
+        */
             if (hitEffectPS != null && _config != null)
             {
                 for (int FX = 0; FX < _config.wallhitEffectPS.Count; FX++)
                 {
                     ParticleSystem hitFX = _config.wallhitEffectPS[FX];
-                    Debug.Log($"[WALL HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
+                    //Debug.Log($"[WALL HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
                     if (hitFX == null) continue;
                     hitEffectPS.Apply(hitFX, other.transform.position, projectileOrientation);
-                    Debug.Log("hit PS Applied"+ hitFX.name);
+                    //Debug.Log("hit PS Applied"+ hitFX.name);
                 }
                 
             }
+            /*
             else if (hitEffect == null || _config == null)
             {
                 Debug.LogWarning("hit effect/config is null");
             }
-            
+            */
             Despawn(); 
         }
         
@@ -218,92 +223,97 @@ public class PooledProjectile : MonoBehaviour
         if (_config.preventFriendlyFire && damageable.Team == _ownerTeam)
             return;
 
-        Debug.Log($"[CFG CHECK] cfgName={_config.name} cfgID={_config.GetInstanceID()} path={UnityEditor.AssetDatabase.GetAssetPath(_config)}");
+        //Debug.Log($"[CFG CHECK] cfgName={_config.name} cfgID={_config.GetInstanceID()} path={UnityEditor.AssetDatabase.GetAssetPath(_config)}");
 
         for (int i = 0; i < _config.hitEffectPS.Count; i++)
         {
             var ps = _config.hitEffectPS[i];
-            Debug.Log($"[CFG hitEffectPS] i={i} val={(ps ? ps.name : "NULL")}");
+            //Debug.Log($"[CFG hitEffectPS] i={i} val={(ps ? ps.name : "NULL")}");
         }
         for (int i = 0; i < _config.hitEffect.Count; i++)
         {
             var vfx = _config.hitEffect[i];
-            Debug.Log($"[CFG hitEffect VFX] i={i} val={(vfx ? vfx.name : "NULL")}");
+            //Debug.Log($"[CFG hitEffect VFX] i={i} val={(vfx ? vfx.name : "NULL")}");
         }
-        
-        if (!other.CompareTag("Enemy")) return;
-        
-        _modifierSet?.NotifyHitEnemy(_shotAmmoType, _owner, other.gameObject, other.transform.position, other.transform.rotation);
-        
-        if (hitEffect != null && _config != null)
-            {
 
-                for (int FX = 0; FX < _config.hitEffect.Count; FX++)
-                {
-                    VisualEffect hitFX = _config.hitEffect[FX];
-                    hitEffect.Apply(hitFX, other.transform.position, other.transform.rotation);
-                    Debug.Log("hitEffect Applied" + hitFX.name);
-                }
-                
-            }
-            else if (hitEffect == null || _config == null)
-            {
-                Debug.LogWarning("hit effect/config is null");
-            }
-
-            if (hitEffectPS != null && _config != null)
-            {
-                for (int FX = 0; FX < _config.hitEffectPS.Count; FX++)
-                {
-                    ParticleSystem hitFX = _config.hitEffectPS[FX];
-                    Debug.Log($"[ENEMY HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
-                    if (hitFX == null) continue;
-                    hitEffectPS.Apply(hitFX, other.transform.position, other.transform.rotation);
-                    Debug.Log("hit PS Applied" + hitFX.name);
-                }
-                
-            }
-            else if (hitEffect == null || _config == null)
-            {
-                Debug.LogWarning("hit effect/config is null");
-            }
-
-            Debug.Log("HitEffect Applied");
-
-       /* if (_mods != null)
+        if (other.CompareTag("Player") || other.CompareTag("Enemy"))
         {
-            for (int i = 0; i < _mods.Count; i++)
-                _mods[i].OnHit(other.gameObject, _owner.gameObject);
-           // Debug.Log($"OnHit target: {other.gameObject.name}"+ "has been slowed");
-        }
-     
+            _modifierSet?.NotifyHitEnemy(_shotAmmoType, _owner, other.gameObject, other.transform.position, other.transform.rotation);
+                    
+                    if (hitEffect != null && _config != null)
+                        {
             
-        /*
-        if(impactEffect)
-            Instantiate(impactEffect, transform.position, Quaternion.identity);
-Debug.LogError("HitEffect NULL");*/
-        damageable.TakeDamage(_config.damage, _owner);
-
-        if (_config.destroyOnHit)
-        {
-            Despawn();
-            return;
+                            for (int FX = 0; FX < _config.hitEffect.Count; FX++)
+                            {
+                                VisualEffect hitFX = _config.hitEffect[FX];
+                                hitEffect.Apply(hitFX, other.transform.position, other.transform.rotation);
+                                //Debug.Log("hitEffect Applied" + hitFX.name);
+                            }
+                            
+                        }
+                    /*
+                        else if (hitEffect == null || _config == null)
+                        {
+                            Debug.LogWarning("hit effect/config is null");
+                        }
+            */
+                        if (hitEffectPS != null && _config != null)
+                        {
+                            for (int FX = 0; FX < _config.hitEffectPS.Count; FX++)
+                            {
+                                ParticleSystem hitFX = _config.hitEffectPS[FX];
+                                //Debug.Log($"[ENEMY HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
+                                if (hitFX == null) continue;
+                                hitEffectPS.Apply(hitFX, other.transform.position, other.transform.rotation);
+                               // Debug.Log("hit PS Applied" + hitFX.name);
+                            }
+                            
+                        }
+                        /*
+                        else if (hitEffect == null || _config == null)
+                        {
+                            Debug.LogWarning("hit effect/config is null");
+                        }
+            
+                        Debug.Log("HitEffect Applied");
+            
+                    if (_mods != null)
+                    {
+                        for (int i = 0; i < _mods.Count; i++)
+                            _mods[i].OnHit(other.gameObject, _owner.gameObject);
+                       // Debug.Log($"OnHit target: {other.gameObject.name}"+ "has been slowed");
+                    }
+                 
+                        
+                    /*
+                    if(impactEffect)
+                        Instantiate(impactEffect, transform.position, Quaternion.identity);
+            Debug.LogError("HitEffect NULL");*/
+                    damageable.TakeDamage(_config.damage, _owner);
+            
+                    if (_config.destroyOnHit)
+                    {
+                        Despawn();
+                        return;
+                    }
+            
+                    // Piercing logic (optional)
+                    if (_remainingPierce > 0)
+                    {
+                        _remainingPierce--;
+                        if (_remainingPierce <= 0)
+                            Despawn();
+                    }
+                    else
+                    {
+                        // If not piercing and not destroyOnHit, you might still want to despawn.
+                        // Keep minimal default:
+                        Despawn();
+                    }
+                }
         }
-
-        // Piercing logic (optional)
-        if (_remainingPierce > 0)
-        {
-            _remainingPierce--;
-            if (_remainingPierce <= 0)
-                Despawn();
-        }
-        else
-        {
-            // If not piercing and not destroyOnHit, you might still want to despawn.
-            // Keep minimal default:
-            Despawn();
-        }
-    }
+        
+        
 
 
 

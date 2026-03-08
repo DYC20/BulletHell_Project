@@ -16,6 +16,7 @@ public class ModifierRuntimeState : MonoBehaviour
         public float fireInterval;
 
         public Coroutine revertRoutine;
+        public Coroutine damageRoutine;
     }
 
     // modifier -> enemy -> snapshot
@@ -67,7 +68,8 @@ public class ModifierRuntimeState : MonoBehaviour
         GameObject enemy,
         float moveSpeedMul,
         float fireIntervalMul,
-        float durationSeconds
+        float durationSeconds, 
+        float damage
     )
     {
         if (modifier == null || enemy == null) return;
@@ -113,8 +115,24 @@ public class ModifierRuntimeState : MonoBehaviour
         var f = enemy.GetComponentInParent<IEnemyFireInterval>();
         if (snap.hasFire && f != null) f.FireInterval = snap.fireInterval * fireIntervalMul;
 
+        var d = enemy.GetComponentInParent<IDamageable>();
+        if (d == null)
+        {
+            Debug.Log("IDamageable is null");
+        }
+        if (d != null && durationSeconds > 0 && damage > 0)
+        {
+            if (snap.damageRoutine != null)
+                StopCoroutine(snap.damageRoutine);
+
+            snap.damageRoutine = StartCoroutine(DamageOverTime(enemy, damage, durationSeconds, modifier));
+        }
+            
+        
+
         snap.revertRoutine = StartCoroutine(RevertAfter(modKey, enemyKey, enemy, durationSeconds));
     }
+    
 
     private IEnumerator RevertAfter(int modKey, int enemyKey, GameObject enemy, float duration)
     {
@@ -129,8 +147,33 @@ public class ModifierRuntimeState : MonoBehaviour
 
         var f = enemy.GetComponentInParent<IEnemyFireInterval>();
         if (snap.hasFire && f != null) f.FireInterval = snap.fireInterval;
+        
+        if (snap.damageRoutine != null)
+            StopCoroutine(snap.damageRoutine);
 
         perEnemy.Remove(enemyKey);
         if (perEnemy.Count == 0) _snapshots.Remove(modKey);
+    }
+
+    private IEnumerator DamageOverTime(GameObject enemy, float damagePerSecond, float duration, ScriptableObject modifier)
+    {
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            if (enemy == null) yield break;
+
+            var d = enemy.GetComponentInParent<IDamageable>();
+
+            if (d != null)
+            {
+                d.TakeDamage(damagePerSecond, null);
+                Debug.Log($"Damage From Modifier: {modifier.name}, Amount: {damagePerSecond}");
+            }
+
+            yield return new WaitForSeconds(1f);
+
+            timer += 1f;
+        }
     }
 }

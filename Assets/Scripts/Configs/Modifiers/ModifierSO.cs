@@ -23,6 +23,7 @@ public class ModifierSO : ProjectileModifierSO
     [SerializeField] private float debuffDuration = 3f;
     [SerializeField] private float moveSpeedMultiplier = 0.7f;
     [SerializeField] private float fireIntervalMultiplier = 1.4f; // higher interval => shoots slower
+    [SerializeField] private float damagePerSconds = 0f;
 
     [Header("FX Prefab (ParticleSystem or VFX Graph)")]
     [SerializeField] private GameObject fullEffectPrefab;
@@ -57,13 +58,15 @@ public class ModifierSO : ProjectileModifierSO
 
         if (count == hitsToTrigger)
         {
+            var damageable = enemy.GetComponentInParent<IDamageable>();
             // apply timed behavior changes (reverts automatically)
             state.ApplyTimedDebuff(
                 modifier: this,
                 enemy: enemy,
                 moveSpeedMul: moveSpeedMultiplier,
                 fireIntervalMul: fireIntervalMultiplier,
-                durationSeconds: debuffDuration
+                durationSeconds: debuffDuration,
+                damage: damagePerSconds
             );
 
             // spawn FX on enemy and auto-destroy when done

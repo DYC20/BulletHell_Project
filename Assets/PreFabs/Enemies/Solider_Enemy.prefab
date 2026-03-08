@@ -79,6 +79,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2852274010122127103}
   - component: {fileID: 8231304215381964811}
+  - component: {fileID: 5917191980812324282}
   - component: {fileID: 6153788996552450370}
   - component: {fileID: 7299537754286331008}
   - component: {fileID: 8405730803204492194}
@@ -160,7 +161,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1108981373729593120, guid: 48799aba08cafe14f95c9d3a6a1b912a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f152348f38527449ac5b9dc920562bc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -170,6 +171,28 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!95 &5917191980812324282
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4241822828982040726}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: adc3c78b94a953b419cdda1d19b421eb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &6153788996552450370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b4719ad6bd820b42b01b939d06a4d42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ContactDamage
-  damage: 10
+  damage: 0.5
   hitCooldown: 0.5
   targetMask:
     serializedVersion: 2
@@ -356,7 +379,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.97, y: 0.925}
+    oldSize: {x: 2.048, y: 2.048}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -401,11 +424,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 88992705989351331, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.48654032
+      value: 0.29
       objectReference: {fileID: 0}
     - target: {fileID: 88992705989351331, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17322421
+      value: -0.7
       objectReference: {fileID: 0}
     - target: {fileID: 88992705989351331, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -443,6 +466,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: SimplePistol_03
       objectReference: {fileID: 0}
+    - target: {fileID: 5782139036240968308, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7028442816849000167, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
+      propertyPath: ProjectilePool
+      value: 
+      objectReference: {fileID: 11400000, guid: ee82840c78294b14f95fc4f901d691d1, type: 2}
+    - target: {fileID: 7028442816849000167, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
+      propertyPath: recoilStrength
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7028442816849000167, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
+      propertyPath: shotsPerSecond
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7028442816849000167, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
+      propertyPath: projectileConfig
+      value: 
+      objectReference: {fileID: 11400000, guid: 2eac937780c2923498677082a48a14a9, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
