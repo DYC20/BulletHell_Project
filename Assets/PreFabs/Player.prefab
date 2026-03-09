@@ -184,6 +184,8 @@ MonoBehaviour:
   weaponSocket: {fileID: 1819663273497137966}
   gunDistance: 0.3
   equippedWeapon: {fileID: 0}
+  ammoInventory: {fileID: 2126853010358055112}
+  weaponImage: {fileID: 0}
 --- !u!114 &3387304630536963846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +212,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Health
   team: 0
-  maxHealth: 300
+  maxHealth: 8
+  healthSlider: {fileID: 0}
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -225,6 +228,31 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6694485753063431137}
+        m_TargetAssemblyTypeName: UnityEngine.Playables.PlayableDirector, UnityEngine
+        m_MethodName: Play
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 00a3500f1f614564f985c7d6e4742e0e, type: 2}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Playables.PlayableAsset,
+            UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
   onDamaged:
     m_PersistentCalls:
@@ -260,6 +288,8 @@ MonoBehaviour:
   - type: 1
     amount: 50
     maxAmount: 150
+  ammoText: {fileID: 0}
+  ammoTextShadow: {fileID: 0}
 --- !u!114 &7348839678402795322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +297,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1884716801075859592}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcdf6b86a1e8b5f4c9606ef8901b9d81, type: 3}
   m_Name: 
@@ -677,6 +707,8 @@ GameObject:
   - component: {fileID: 6621651594804124837}
   - component: {fileID: 5248867662451768837}
   - component: {fileID: 3479380517774072701}
+  - component: {fileID: 124697837248007792}
+  - component: {fileID: 6694485753063431137}
   m_Layer: 3
   m_Name: PlayerVisuals
   m_TagString: Untagged
@@ -780,6 +812,44 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &124697837248007792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4943365979608157247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcdf6b86a1e8b5f4c9606ef8901b9d81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHitFlash
+  flashColor: {r: 1, g: 0, b: 0, a: 0.48235294}
+  flashDuration: 0.03
+  flashCount: 2
+--- !u!320 &6694485753063431137
+PlayableDirector:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4943365979608157247}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_PlayableAsset: {fileID: 0}
+  m_InitialState: 1
+  m_WrapMode: 0
+  m_DirectorUpdateMode: 1
+  m_InitialTime: 0
+  m_SceneBindings:
+  - key: {fileID: 3513129695844133235, guid: 00a3500f1f614564f985c7d6e4742e0e, type: 2}
+    value: {fileID: 3479380517774072701}
+  - key: {fileID: -7310937038958839277, guid: 00a3500f1f614564f985c7d6e4742e0e, type: 2}
+    value: {fileID: 0}
+  - key: {fileID: 247627479151135665, guid: 00a3500f1f614564f985c7d6e4742e0e, type: 2}
+    value: {fileID: 0}
+  m_ExposedReferences:
+    m_References: []
 --- !u!1 &5037622735364764346
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +875,7 @@ Transform:
   m_GameObject: {fileID: 5037622735364764346}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.65, z: 0}
+  m_LocalPosition: {x: -1.81, y: 0.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
