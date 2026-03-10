@@ -23,7 +23,12 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     private void Awake()
     {
         ResetHealth();
-        healthSlider.value = CurrentHealth;
+        if (healthSlider == null)
+        {
+            healthSlider = GetComponent<Slider>();
+            healthSlider.value = CurrentHealth;
+        }
+        
     }
 
     /// <summary>
@@ -35,9 +40,10 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (amount <= 0f) return;
 
         _hp -= amount;
-Debug.Log("Player Took Damage");
+//Debug.Log("Player Took Damage");
         onDamaged?.Invoke(amount, instigator);
-        healthSlider.value = CurrentHealth;
+        if (healthSlider != null)
+            healthSlider.value = CurrentHealth;
 
         if (_hp <= 0f)
         {

@@ -6,8 +6,12 @@ public class EnemieDeathHandler : MonoBehaviour
 {
     [SerializeField] private List<GameObject> deathSmokePrefab;
     [SerializeField] private GameObject ammoPrefab;
+    [SerializeField] private GameObject healthPrefab;
+    [SerializeField] private int dropProbabillity = 9;
+    [SerializeField] private int healthDropProbability = 3;
     private Rigidbody2D rb;
     private bool droppedAmmo = false;
+    private bool droppedHealth = false;
   
 
     public void OnEnemyDied()
@@ -42,18 +46,30 @@ public class EnemieDeathHandler : MonoBehaviour
             {
                 Instantiate(ammoPrefab, transform.position, Quaternion.identity);
             }
+            if (droppedHealth)
+            {
+                Instantiate(healthPrefab, transform.position, Quaternion.identity);
+            }
         
         Destroy(this.gameObject);
     }
 
     private void AmmoDroppProbability()
     {
-        float rand = UnityEngine.Random.Range(0f, 9f);
-        float randRound = Mathf.Round(rand);
-        if (randRound == 9f)
+        int rand = UnityEngine.Random.Range(1, dropProbabillity);
+        
+        if (rand == dropProbabillity)
         {
-            droppedAmmo = true;
+            int ammoOrHealthPro = UnityEngine.Random.Range(1, healthDropProbability);
+            if (ammoOrHealthPro == healthDropProbability)
+            {
+                droppedHealth = true;
+            }
+            else
+            {
+                droppedAmmo = true;
+            }
         }
-        Debug.LogWarning("AmmoDroppProbability =" + randRound);
+        Debug.LogWarning("AmmoDroppProbability =" + rand);
     }
 }

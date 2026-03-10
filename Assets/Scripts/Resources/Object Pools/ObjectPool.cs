@@ -75,7 +75,7 @@ public class ObjectPool : ScriptableObject
                 obj.transform.position = spawnPoint;
                 obj.transform.rotation = rotation;
                 obj.SetActive(true);
-                Debug.Log($"[POOL] Using pool asset: {name} | prefab: {prefabe.name} | returning: {obj.name}");
+                //Debug.Log($"[POOL] Using pool asset: {name} | prefab: {prefabe.name} | returning: {obj.name}");
                 return obj;
             }
         }

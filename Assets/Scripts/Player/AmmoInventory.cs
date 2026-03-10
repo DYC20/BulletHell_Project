@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AmmoInventory : MonoBehaviour, IAmmoReceiver, IAmmoConsumer
 {
@@ -17,8 +18,7 @@ public class AmmoInventory : MonoBehaviour, IAmmoReceiver, IAmmoConsumer
     [SerializeField] private AmmoEntry[] startingAmmo;
     
     [Header("UI")]
-    [SerializeField] private TextMeshProUGUI ammoText;
-    [SerializeField] private TextMeshProUGUI ammoTextShadow;
+    [SerializeField] private Slider ammoSlider;
 
     private readonly Dictionary<AmmoType, AmmoEntry> _ammo = new();
     
@@ -37,7 +37,7 @@ public class AmmoInventory : MonoBehaviour, IAmmoReceiver, IAmmoConsumer
         {
             if (!_ammo.ContainsKey(t))
                 _ammo[t] = new AmmoEntry { type = t, amount = 0, maxAmount = 0 };
-            UpdateAmmoText();
+            UpdateAmmoValue();
         }
     }
 
@@ -76,7 +76,7 @@ public class AmmoInventory : MonoBehaviour, IAmmoReceiver, IAmmoConsumer
         _ammo[type] = e;
         
         if (type == _displayedAmmoType)
-            UpdateAmmoText();
+            UpdateAmmoValue();
         
     }
 
@@ -99,7 +99,7 @@ public class AmmoInventory : MonoBehaviour, IAmmoReceiver, IAmmoConsumer
         _ammo[type] = e;
         
         if (type == _displayedAmmoType)
-            UpdateAmmoText();
+            UpdateAmmoValue();
 
         return true;
     }
@@ -107,13 +107,14 @@ public class AmmoInventory : MonoBehaviour, IAmmoReceiver, IAmmoConsumer
     public void SetDisplayedAmmoType(AmmoType type)
     {
         _displayedAmmoType = type;
-        UpdateAmmoText();
+        UpdateAmmoValue();
     }
 
-    private void UpdateAmmoText()
+    private void UpdateAmmoValue()
     {
-        if (ammoText == null) return;
-        ammoText.text = Get(_displayedAmmoType).ToString();
-        ammoTextShadow.text = Get(_displayedAmmoType).ToString();
+        if (ammoSlider == null) return;
+        ammoSlider.value = Get(_displayedAmmoType);
+        //ammoText.text = Get(_displayedAmmoType).ToString();
+        //ammoTextShadow.text = Get(_displayedAmmoType).ToString();
     }
 }

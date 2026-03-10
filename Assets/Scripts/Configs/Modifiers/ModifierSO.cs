@@ -72,7 +72,13 @@ public class ModifierSO : ProjectileModifierSO
             // spawn FX on enemy and auto-destroy when done
             if (fullEffectPrefab != null)
             {
-                var fx = Object.Instantiate(fullEffectPrefab, enemy.transform.position, hitRot, enemy.transform);
+                Transform enemyVisualMiddle = enemy.transform.Find("EnemyVisualMiddle");
+                
+                if (enemyVisualMiddle == null)
+                {
+                    Debug.LogWarning("EnemyVisualMiddle not found!");
+                }
+                var fx = Object.Instantiate(fullEffectPrefab, enemyVisualMiddle.position, hitRot, enemy.transform);
             }
         }
     }
