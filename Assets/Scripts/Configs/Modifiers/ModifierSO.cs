@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.VFX;
 
 [CreateAssetMenu(menuName = "Upgrades/Projectile Modifiers")]
@@ -42,6 +43,8 @@ public class ModifierSO : ProjectileModifierSO
            // case AmmoType.Rifle:  set = rifleSet;  break;
             default: return;
         }
+
+        
 
         if (set.config != null) config = set.config;
         if (set.pool != null) pool = set.pool;

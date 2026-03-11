@@ -108,6 +108,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FreezePickup
   modifierConfig: {fileID: 11400000, guid: 2b2ce6e5004999c4dbb523ecb6e4723e, type: 2}
   destroyAfterPickup: 1
+  weaponBG: {fileID: 0}
+  uIEffect: {fileID: 0}
+  newColor: {r: 0.8962264, g: 0.35933605, b: 0.35933605, a: 1}
+  newColorDuration: 2
 --- !u!70 &3963000307865639238
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

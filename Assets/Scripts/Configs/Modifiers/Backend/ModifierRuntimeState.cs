@@ -1,11 +1,21 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public class ModifierRuntimeState : MonoBehaviour
 {
     // modifier -> enemy -> hit count
     private readonly Dictionary<int, Dictionary<int, int>> _hitCounts = new();
+    
+    [Header("UpdateUI")] 
+    [SerializeField] public Image weaponBG;
+    [SerializeField] public VisualEffect fireUIEffect;
+    [SerializeField] public VisualEffect iceUIEffect;
+    [SerializeField] public Color fireNewColor;
+    [SerializeField] public Color iceNewColor;
+    [SerializeField] public float newColorDuration;
 
     private class Snapshot
     {
