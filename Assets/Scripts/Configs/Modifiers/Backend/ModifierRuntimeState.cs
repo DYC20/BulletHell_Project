@@ -16,7 +16,12 @@ public class ModifierRuntimeState : MonoBehaviour
     [SerializeField] public Color fireNewColor;
     [SerializeField] public Color iceNewColor;
     [SerializeField] public float newColorDuration;
+    public static ModifierRuntimeState Instance { get; private set; }
 
+    public bool isIce;
+    [HideInInspector]
+    public bool isModified;
+    
     private class Snapshot
     {
         public bool hasMove;
@@ -32,6 +37,20 @@ public class ModifierRuntimeState : MonoBehaviour
     // modifier -> enemy -> snapshot
     private readonly Dictionary<int, Dictionary<int, Snapshot>> _snapshots = new();
 
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    public void SetIce(bool value)
+    {
+        isIce = value;
+    }
+    public void SetModifiedState(bool value)
+    {
+        isModified = value;
+    }
+    
     public int IncrementHit(ScriptableObject modifier, GameObject enemy)
     {
         if (modifier == null || enemy == null) return 0;
@@ -76,6 +95,7 @@ public class ModifierRuntimeState : MonoBehaviour
     public void ApplyTimedDebuff(
         ScriptableObject modifier,
         GameObject enemy,
+        GameObject damageFX,
         float moveSpeedMul,
         float fireIntervalMul,
         float durationSeconds, 
@@ -135,7 +155,7 @@ public class ModifierRuntimeState : MonoBehaviour
             if (snap.damageRoutine != null)
                 StopCoroutine(snap.damageRoutine);
 
-            snap.damageRoutine = StartCoroutine(DamageOverTime(enemy, damage, durationSeconds, modifier));
+            snap.damageRoutine = StartCoroutine(DamageOverTime(enemy, damage,damageFX, durationSeconds, modifier));
         }
             
         
@@ -165,7 +185,7 @@ public class ModifierRuntimeState : MonoBehaviour
         if (perEnemy.Count == 0) _snapshots.Remove(modKey);
     }
 
-    private IEnumerator DamageOverTime(GameObject enemy, float damagePerSecond, float duration, ScriptableObject modifier)
+    private IEnumerator DamageOverTime(GameObject enemy, float damagePerSecond,GameObject damageFX, float duration, ScriptableObject modifier)
     {
         float timer = 0f;
 
@@ -178,6 +198,8 @@ public class ModifierRuntimeState : MonoBehaviour
             if (d != null)
             {
                 d.TakeDamage(damagePerSecond, null);
+                Transform enemyVisualMiddle = enemy.transform.Find("EnemyVisualMiddle");
+                Instantiate(damageFX, enemyVisualMiddle.transform.position, Quaternion.identity);
                 Debug.Log($"Damage From Modifier: {modifier.name}, Amount: {damagePerSecond}");
             }
 

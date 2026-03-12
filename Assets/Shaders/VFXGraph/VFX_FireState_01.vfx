@@ -104,10 +104,10 @@ MonoBehaviour:
   - title: Minimal
     position:
       serializedVersion: 2
-      x: 1825
-      y: -1021
-      width: 1814
-      height: 2099
+      x: 2508
+      y: -1019
+      width: 1129
+      height: 2078
     contents:
     - model: {fileID: 8926484042661615552}
       id: 0
@@ -165,9 +165,9 @@ MonoBehaviour:
   uiBounds:
     serializedVersion: 2
     x: -2099
-    y: -1021
-    width: 5738
-    height: 2590
+    y: -1020
+    width: 5736
+    height: 2572
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -421,22 +421,6 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: Amount
-    path: Amount
-    tooltip: 
-    space: -1
-    spaceable: 0
-    sheetType: m_Int
-    realType: Int32
-    defaultValue:
-      m_Type:
-        m_SerializableType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
-          PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0
-    min: -Infinity
-    max: Infinity
-    enumValues: []
-    descendantCount: 0
   - name: FlipBook
     path: FlipBook
     tooltip: 
@@ -497,6 +481,22 @@ MonoBehaviour:
         m_SerializableType: UnityEngine.Gradient, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
       m_SerializableObject: '{"colorKeys":[{"color":{"r":0.24528300762176515,"g":0.009255962446331978,"b":0.0,"a":1.0},"time":0.0},{"color":{"r":8.0,"g":2.094484567642212,"b":0.0,"a":1.0},"time":1.0}],"alphaKeys":[{"alpha":1.0,"time":0.0},{"alpha":1.0,"time":1.0}],"gradientMode":0}'
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 0
+  - name: Amount
+    path: Amount
+    tooltip: 
+    space: -1
+    spaceable: 0
+    sheetType: m_Int
+    realType: Int32
+    defaultValue:
+      m_Type:
+        m_SerializableType: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 0
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -3573,7 +3573,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615337}
       inputSlot: {fileID: 8926484042661615641}
-    position: {x: 2616, y: 599.3334}
+    position: {x: 2616, y: 599}
     expandedSlots: []
     expanded: 1
     supecollapsed: 0
@@ -3669,7 +3669,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615339}
       inputSlot: {fileID: 8926484042661615622}
-    position: {x: 2921.3333, y: 695.3334}
+    position: {x: 2921, y: 695}
     expandedSlots: []
     expanded: 1
     supecollapsed: 0
@@ -4565,7 +4565,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615429}
       inputSlot: {fileID: 8926484042661615665}
-    position: {x: 2632, y: -226.66666}
+    position: {x: 2632, y: -227}
     expandedSlots: []
     expanded: 1
     supecollapsed: 0
@@ -4652,7 +4652,7 @@ MonoBehaviour:
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615431}
       inputSlot: {fileID: 8926484042661615664}
-    position: {x: 2632, y: -305.33334}
+    position: {x: 2632, y: -305}
     expandedSlots: []
     expanded: 1
     supecollapsed: 0
@@ -6713,7 +6713,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615503}
   m_ExposedName: FlipBook
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 6
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -6794,7 +6794,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615510}
   m_ExposedName: Flipbook Lifetime
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 7
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -7180,7 +7180,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615547}
   m_ExposedName: Create Smoke
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 8
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -7384,11 +7384,11 @@ MonoBehaviour:
   m_Children:
   - {fileID: 8926484042661615554}
   - {fileID: 8926484042661615557}
-  m_UIPosition: {x: 3188, y: -961}
+  m_UIPosition: {x: 3188, y: -960}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
-  - {fileID: 8926484042661615768}
+  - {fileID: 8926484042661615771}
   - {fileID: 8926484042661615769}
   m_OutputSlots: []
   m_Label: Spawn System
@@ -11796,7 +11796,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615693}
   m_ExposedName: Color 1
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 11
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -11918,7 +11918,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615707}
   m_ExposedName: Amount
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 12
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -12017,8 +12017,10 @@ MonoBehaviour:
   - m_Id: 0
     linkedSlots:
     - outputSlot: {fileID: 8926484042661615711}
-      inputSlot: {fileID: 8926484042661615768}
-    position: {x: 3037.3333, y: -906}
+      inputSlot: {fileID: 0}
+    - outputSlot: {fileID: 8926484042661615711}
+      inputSlot: {fileID: 8926484042661615771}
+    position: {x: 2990, y: -908}
     expandedSlots: []
     expanded: 1
     supecollapsed: 0
@@ -12056,42 +12058,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
   m_Direction: 1
   m_LinkedSlots:
-  - {fileID: 8926484042661615768}
---- !u!114 &8926484042661615768
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.VisualEffectGraph.Editor::UnityEditor.VFX.VFXSlotFloat
-  m_UIIgnoredErrors: []
-  m_Parent: {fileID: 0}
-  m_Children: []
-  m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
-  m_UISuperCollapsed: 0
-  m_MasterSlot: {fileID: 8926484042661615768}
-  m_MasterData:
-    m_Owner: {fileID: 8926484042661615552}
-    m_Value:
-      m_Type:
-        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-          PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 0.1
-    m_Space: -1
-  m_Property:
-    name: LoopDuration
-    m_serializedType:
-      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-  m_Direction: 0
-  m_LinkedSlots:
-  - {fileID: 8926484042661615711}
+  - {fileID: 8926484042661615771}
 --- !u!114 &8926484042661615769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12126,3 +12093,38 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
   m_Direction: 0
   m_LinkedSlots: []
+--- !u!114 &8926484042661615771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f780aa281814f9842a7c076d436932e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.VisualEffectGraph.Editor::UnityEditor.VFX.VFXSlotFloat
+  m_UIIgnoredErrors: []
+  m_Parent: {fileID: 0}
+  m_Children: []
+  m_UIPosition: {x: 0, y: 0}
+  m_UICollapsed: 1
+  m_UISuperCollapsed: 0
+  m_MasterSlot: {fileID: 8926484042661615771}
+  m_MasterData:
+    m_Owner: {fileID: 8926484042661615552}
+    m_Value:
+      m_Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 0.1
+    m_Space: -1
+  m_Property:
+    name: LoopDuration
+    m_serializedType:
+      m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+  m_Direction: 0
+  m_LinkedSlots:
+  - {fileID: 8926484042661615711}

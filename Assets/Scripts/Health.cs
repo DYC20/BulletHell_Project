@@ -26,9 +26,9 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (healthSlider == null)
         {
             healthSlider = GetComponent<Slider>();
-            healthSlider.value = CurrentHealth;
+            
         }
-        
+        healthSlider.value = CurrentHealth;
     }
 
     /// <summary>

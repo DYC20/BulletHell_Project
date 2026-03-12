@@ -108,10 +108,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FreezePickup
   modifierConfig: {fileID: 11400000, guid: 2b2ce6e5004999c4dbb523ecb6e4723e, type: 2}
   destroyAfterPickup: 1
-  weaponBG: {fileID: 0}
-  uIEffect: {fileID: 0}
-  newColor: {r: 0.8962264, g: 0.35933605, b: 0.35933605, a: 1}
-  newColorDuration: 2
+  isIce: 0
 --- !u!70 &3963000307865639238
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -196,6 +193,46 @@ PrefabInstance:
     - target: {fileID: 15851553162537685, guid: 28a636aab642bad46a31cdc2c3a9fd3a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 368366337659497124, guid: 28a636aab642bad46a31cdc2c3a9fd3a, type: 3}
+      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.x
+      value: 7.791516
+      objectReference: {fileID: 0}
+    - target: {fileID: 368366337659497124, guid: 28a636aab642bad46a31cdc2c3a9fd3a, type: 3}
+      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.y
+      value: 1.9564388
+      objectReference: {fileID: 0}
+    - target: {fileID: 368366337659497124, guid: 28a636aab642bad46a31cdc2c3a9fd3a, type: 3}
+      propertyPath: m_PropertySheet.m_Vector4f.m_Array.Array.data[0].m_Value.z
+      value: 1.5803547
+      objectReference: {fileID: 0}
+    - target: {fileID: 368366337659497124, guid: 28a636aab642bad46a31cdc2c3a9fd3a, type: 3}
+      propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key0.b
+      value: 0.39023194
+      objectReference: {fileID: 0}
+    - target: {fileID: 368366337659497124, guid: 28a636aab642bad46a31cdc2c3a9fd3a, type: 3}
+      propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key0.g
+      value: 0.374466
+      objectReference: {fileID: 0}
+    - target: {fileID: 368366337659497124, guid: 28a636aab642bad46a31cdc2c3a9fd3a, type: 3}
+      propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key0.r
+      value: 0.8018868
+      objectReference: {fileID: 0}
+    - target: {fileID: 368366337659497124, guid: 28a636aab642bad46a31cdc2c3a9fd3a, type: 3}
+      propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 368366337659497124, guid: 28a636aab642bad46a31cdc2c3a9fd3a, type: 3}
+      propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key1.g
+      value: 2.0944846
+      objectReference: {fileID: 0}
+    - target: {fileID: 368366337659497124, guid: 28a636aab642bad46a31cdc2c3a9fd3a, type: 3}
+      propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.key1.r
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 368366337659497124, guid: 28a636aab642bad46a31cdc2c3a9fd3a, type: 3}
+      propertyPath: m_PropertySheet.m_Gradient.m_Array.Array.data[0].m_Value.m_ColorSpace
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7784266619592800356, guid: 28a636aab642bad46a31cdc2c3a9fd3a, type: 3}
       propertyPath: m_Name

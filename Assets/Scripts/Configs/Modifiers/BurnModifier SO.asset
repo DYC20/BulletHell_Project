@@ -19,8 +19,9 @@ MonoBehaviour:
     config: {fileID: 11400000, guid: 3878b0bfaaef5524ebe624835a09e068, type: 2}
     pool: {fileID: 11400000, guid: 2d4efa6fb20288e449b4d417e6845681, type: 2}
   hitsToTrigger: 3
-  debuffDuration: 3
+  debuffDuration: 4
   moveSpeedMultiplier: 1.8
   fireIntervalMultiplier: 1.5
-  damagePerSconds: 0.2
+  damagePerSconds: 0.5
+  damageFX: {fileID: 4129969376939518295, guid: 6f020caa6c5497f41a2987dd1a879192, type: 3}
   fullEffectPrefab: {fileID: 5941486622042151722, guid: 0a999efb26dc6e047858133d63dff485, type: 3}

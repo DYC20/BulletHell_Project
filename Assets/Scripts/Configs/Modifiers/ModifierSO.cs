@@ -25,6 +25,7 @@ public class ModifierSO : ProjectileModifierSO
     [SerializeField] private float moveSpeedMultiplier = 0.7f;
     [SerializeField] private float fireIntervalMultiplier = 1.4f; // higher interval => shoots slower
     [SerializeField] private float damagePerSconds = 0f;
+    [SerializeField] private GameObject damageFX;
 
     [Header("FX Prefab (ParticleSystem or VFX Graph)")]
     [SerializeField] private GameObject fullEffectPrefab;
@@ -66,6 +67,7 @@ public class ModifierSO : ProjectileModifierSO
             state.ApplyTimedDebuff(
                 modifier: this,
                 enemy: enemy,
+                damageFX: damageFX,
                 moveSpeedMul: moveSpeedMultiplier,
                 fireIntervalMul: fireIntervalMultiplier,
                 durationSeconds: debuffDuration,

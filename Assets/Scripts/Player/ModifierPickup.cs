@@ -14,7 +14,8 @@ public class ModifierPickup : MonoBehaviour, IPickup
 
     [Header("UpdateUI")] 
      private Image weaponBG;
-     private VisualEffect uIEffect;
+     private VisualEffect fireUIEffect;
+     private VisualEffect iceUIEffect;
      private Color newColor;
      private float newColorDuration;
 
@@ -47,6 +48,9 @@ public class ModifierPickup : MonoBehaviour, IPickup
 
         AssignUIElements();
         
+        ModifierRuntimeState.Instance.SetIce(isIce);
+        ModifierRuntimeState.Instance.SetModifiedState(true);
+        
         var root = picker.transform.root;
 
         var set = root.GetComponentInChildren<ProjectileModifierSet>(true);
@@ -59,8 +63,17 @@ public class ModifierPickup : MonoBehaviour, IPickup
         set.SetModifierFor(currentAmmo, modifierConfig);
         //Debug.Log("Picker:" + picker.name);
         StartCoroutine(ChangeUIColor());
-        
-        uIEffect.Play();
+
+        if (isIce)
+        {
+            fireUIEffect.Reinit();
+            iceUIEffect.Play();
+        }
+        else
+        {
+            fireUIEffect.Play();
+            iceUIEffect.Reinit();
+        }
 
         
         
@@ -73,14 +86,15 @@ public class ModifierPickup : MonoBehaviour, IPickup
     {
         weaponBG = currentPicker.GetComponentInChildren<ModifierRuntimeState>().weaponBG;
         newColorDuration = currentPicker.GetComponentInChildren<ModifierRuntimeState>().newColorDuration;
+        fireUIEffect = currentPicker.GetComponentInChildren<ModifierRuntimeState>().fireUIEffect;
+        iceUIEffect = currentPicker.GetComponentInChildren<ModifierRuntimeState>().iceUIEffect;
+        
         if (isIce)
         {
-            uIEffect = currentPicker.GetComponentInChildren<ModifierRuntimeState>().iceUIEffect;
             newColor = currentPicker.GetComponentInChildren<ModifierRuntimeState>().iceNewColor;
         }
         else
         {
-            uIEffect = currentPicker.GetComponentInChildren<ModifierRuntimeState>().fireUIEffect;
             newColor = currentPicker.GetComponentInChildren<ModifierRuntimeState>().fireNewColor;
         }
             
