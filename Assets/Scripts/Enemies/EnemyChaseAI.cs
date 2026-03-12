@@ -24,6 +24,7 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
     [SerializeField] private float hitCooldown = 0.5f;   // seconds between hits while touching
 */
     private Rigidbody2D rb;
+    private Pathfinding.AIDestinationSetter setter;
     //private Health playerHealth;
     //private float nextTimeCanHit;
     private bool aiEnabled;
@@ -31,6 +32,7 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        setter = GetComponent<Pathfinding.AIDestinationSetter >();
         rb.gravityScale = 0f; // typical for top-down 2D
     }
 
@@ -49,6 +51,7 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
 
     public void SetAIEnabled(bool enabled)
     {
+        setter.target = enabled ? player : null;
         aiEnabled = enabled;
         if (!aiEnabled && rb != null)
             rb.linearVelocity = Vector2.zero;
@@ -61,7 +64,7 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
             playerHealth = player.GetComponent<Health>();
     }
 */    
-    private void FixedUpdate()
+    /*private void FixedUpdate()
     {
         if (!aiEnabled ||player == null)
         {
@@ -93,7 +96,7 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
                 else                                   renderer.sprite = spriteLeft;
             }
         }
-    }
+    }*/
     
     /*
     private void OnCollisionEnter2D(Collision2D collision)

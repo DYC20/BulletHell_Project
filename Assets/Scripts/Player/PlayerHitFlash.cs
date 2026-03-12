@@ -8,7 +8,7 @@ public class PlayerHitFlash : MonoBehaviour
     [SerializeField] private float flashDuration = 0.08f;
     [SerializeField] private int flashCount = 1;
 
-    private SpriteRenderer _renderer;
+    [SerializeField] private SpriteRenderer _renderer;
     private MaterialPropertyBlock _mpb;
     private Coroutine _flashRoutine;
 
@@ -16,7 +16,7 @@ public class PlayerHitFlash : MonoBehaviour
 
     private void Awake()
     {
-        _renderer = GetComponent<SpriteRenderer>();
+        _renderer =_renderer == null ? GetComponentInChildren<SpriteRenderer>() : _renderer;
         _mpb = new MaterialPropertyBlock();
     }
 
