@@ -30,6 +30,7 @@ public class PooledProjectile : MonoBehaviour
     
     private bool isGrounded;
     private bool targetIsGrounded;
+    private bool isSniper;
     
     private int _remainingPierce;
     private float _lifeTimer;
@@ -266,6 +267,8 @@ public class PooledProjectile : MonoBehaviour
 
         if (isGrounded != targetIsGrounded)
         {
+            if(isSniper ) 
+                HitTarget();
             Debug.Log($"Ground mismatch. Shooter: {isGrounded}, Target: {targetIsGrounded}");
             return;
         }
@@ -392,10 +395,18 @@ public class PooledProjectile : MonoBehaviour
             return true;
         }
 
-        EnemyShooterWalkingAI enemyShooterAI = obj.GetComponentInParent<EnemyShooterWalkingAI>();
+        EnemyShooterWalkingAI enemyShooterWalkingAI = obj.GetComponentInParent<EnemyShooterWalkingAI>();
+        if (enemyShooterWalkingAI != null)
+        {
+            grounded = enemyShooterWalkingAI.isEnemyGrounded;
+            return true;
+        }
+        
+        EnemyShooterAI enemyShooterAI = obj.GetComponentInParent<EnemyShooterAI>();
         if (enemyShooterAI != null)
         {
             grounded = enemyShooterAI.isEnemyGrounded;
+            isSniper = true;
             return true;
         }
 
