@@ -24,6 +24,10 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     
     private Vector3 HoldOrigin;
+    
+    [Header("Ground Check")]
+    public bool isPlayerGrounded {get; private set; }
+    
 
     private void Awake()
     {
@@ -39,6 +43,8 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isIdle", true);
         
         HoldOrigin = weaponHolder.transform.localPosition;
+
+        isPlayerGrounded = true;
     }
 
     public void OnMove(InputValue value)
@@ -166,6 +172,12 @@ public class PlayerController : MonoBehaviour
         else if (a >= -135f && a < -45f)       playerVisual.transform.localScale = new Vector3(-1f, 1f, 1f);//gameObject.transform.localScale.Set(-1f, 1f, 1f);
         else                                   playerVisual.transform.localScale = new Vector3(-1f, 1f, 1f);//gameObject.transform.localScale.Set(-1f, 1f, 1f);
     }
+    
+    public void SetPlayerGrounded(bool value)
+    {
+        isPlayerGrounded = value;
+    }
+    
     private void DrawDebugCircle(Vector2 center, float radius, Color color, float duration)
     {
         const int segments = 24;

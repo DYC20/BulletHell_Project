@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Elevation_Entry : MonoBehaviour
 {
@@ -9,9 +10,15 @@ public class Elevation_Entry : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         { 
+            PlayerController controller = other.GetComponentInParent<PlayerController>();
+            
+            if (controller != null)
+                controller.SetPlayerGrounded(false);
+            
             foreach (Collider2D _mountain in mountainColliders)
             {
                 _mountain.enabled = false;
+                
             } 
             foreach (Collider2D _Boundry in boundryColliders)
             {
@@ -20,7 +27,7 @@ public class Elevation_Entry : MonoBehaviour
         }
         foreach (SpriteRenderer sr in other.GetComponentsInChildren<SpriteRenderer>(true))
         {
-            sr.sortingLayerName = "High";
+            sr.sortingLayerName = "HighGround";
             sr.sortingOrder = 2;
         }
 

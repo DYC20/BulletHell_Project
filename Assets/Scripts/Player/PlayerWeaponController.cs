@@ -37,10 +37,12 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
     {
         if (equippedWeapon != null)
         {
-            Debug.Log($" is Null Equipped weapon: {equippedWeapon.name}");
+            GameObject oldWeapon = equippedWeapon.gameObject;
+            Destroy( oldWeapon);
+            /* Debug.Log($" is Null Equipped weapon: {equippedWeapon.name}");
             equippedWeapon.transform.SetParent(null, true);
             equippedWeapon.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-            equippedWeapon.GetComponent<Collider2D>().enabled = true;
+            equippedWeapon.GetComponent<Collider2D>().enabled = true;*/
         }
         equippedWeapon = weapon;
         Debug.Log($" no Null Equipped weapon: {equippedWeapon.name}");

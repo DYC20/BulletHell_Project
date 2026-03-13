@@ -18,6 +18,11 @@ public class Elevation_Exit : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         { 
+            PlayerController controller = other.GetComponentInParent<PlayerController>();
+            
+            if (controller != null)
+                controller.SetPlayerGrounded(true);
+            
             foreach (Collider2D _mountain in mountainColliders)
             {
                 _mountain.enabled = true;
@@ -35,7 +40,7 @@ public class Elevation_Exit : MonoBehaviour
         
             foreach (SpriteRenderer sr in other.GetComponentsInChildren<SpriteRenderer>(true))
             {
-              sr.sortingLayerName = "Player";
+              sr.sortingLayerName = "Ground";
              sr.sortingOrder = 1;
             }
         //other.gameObject.GetComponent<SpriteRenderer>().sortingOrder = 1;

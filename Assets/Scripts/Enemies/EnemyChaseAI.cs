@@ -14,6 +14,8 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3.5f;
     [SerializeField] private float ratationSpeed = 3.5f;
+    
+    public bool isEnemyGrounded {get; private set; }
     public float MoveSpeed
     {
         get => moveSpeed;
@@ -32,6 +34,7 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f; // typical for top-down 2D
+        isEnemyGrounded = true;
     }
 
     private void Start()
@@ -61,6 +64,11 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
             playerHealth = player.GetComponent<Health>();
     }
 */    
+
+    public void SetEnemyGrounded(bool value)
+    {
+        isEnemyGrounded = value;
+    }
     private void FixedUpdate()
     {
         if (!aiEnabled ||player == null)

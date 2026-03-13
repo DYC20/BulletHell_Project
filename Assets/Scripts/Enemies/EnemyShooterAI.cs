@@ -56,9 +56,10 @@ public class EnemyShooterAI : MonoBehaviour, IEnemyFireInterval
         if (firePoint != null)
         {
             Vector2 dir = toTarget.normalized;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f; // because up is forward
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg ; // because up is forward
+            
             weapon.transform.rotation = Quaternion.RotateTowards(
-                firePoint.rotation,
+                weapon.transform.rotation,
                 Quaternion.Euler(0, 0, angle),
                 aimTurnSpeed * Time.deltaTime
             );

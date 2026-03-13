@@ -8,6 +8,7 @@ TagManager:
   - Weapon
   - GroundCollider
   - Enemy
+  - PlayerVisuals
   layers:
   - Default
   - TransparentFX
@@ -51,7 +52,7 @@ TagManager:
   - name: Ground
     uniqueID: 2761008333
     locked: 0
-  - name: Kinematic
+  - name: HighGround
     uniqueID: 1773462389
     locked: 0
   - name: Forground

@@ -68,6 +68,8 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
     private bool forceReposition;
     private Transform playerAimPos;
     private Animator animator;
+    
+    public bool isEnemyGrounded {get; private set; }
 
 
     private void Reset()
@@ -82,6 +84,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         if (!animator) animator = GetComponent<Animator>();
         startPos = transform.position;
         PickNewWanderTarget();
+        isEnemyGrounded = true;
         
         if (weapon != null)
         {
@@ -126,6 +129,11 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
                 animator.SetTrigger("isIdle");
                 break;
         }
+    }
+    
+    public void SetEnemyGrounded(bool value)
+    {
+        isEnemyGrounded = value;
     }
     
     private void Update()

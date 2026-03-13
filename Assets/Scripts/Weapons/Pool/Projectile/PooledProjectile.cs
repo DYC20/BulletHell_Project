@@ -8,7 +8,7 @@ using Unity.VisualScripting;
 public class PooledProjectile : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private ProjectileMovement kinematics;
+    [SerializeField] private ProjectileMovement projMovement;
     [SerializeField] private ProjectileHitEffect hitEffect;
     [SerializeField] private ProjectileHitEffectPS hitEffectPS;
     [SerializeField] private ProjectileShootEffect shootEffect;
@@ -26,11 +26,17 @@ public class PooledProjectile : MonoBehaviour
     private List<ProjectileModifierSO> _mods;
     private Quaternion projectileOrientation;
     private ProjectileModifierSet _modifierSet;
-    private AmmoType _shotAmmoType;
+    private AmmoType _shotAmmoType; 
     
-
+    private bool isGrounded;
+    private bool targetIsGrounded;
+    
     private int _remainingPierce;
     private float _lifeTimer;
+
+    private GameObject target;
+
+    private IDamageable damageable;
 /*
     private void Awake()
     {
@@ -43,7 +49,7 @@ public class PooledProjectile : MonoBehaviour
     {
        // OutlineMaterialRenderer = GetComponent<Renderer>();
         rb = GetComponent<Rigidbody2D>();
-        kinematics = GetComponent<ProjectileMovement>();
+        projMovement = GetComponent<ProjectileMovement>();
         hitEffect = GetComponent<ProjectileHitEffect>();
         hitEffectPS = GetComponent<ProjectileHitEffectPS>();
         shootEffect = GetComponent<ProjectileShootEffect>();
@@ -63,6 +69,14 @@ public class PooledProjectile : MonoBehaviour
         _modifierSet = _owner != null ? _owner.GetComponentInParent<ProjectileModifierSet>() : null;
         _ownerTeam = ownerTeam;
         _config = config;
+        
+        if (!TryGetGroundedState(owner, out isGrounded))
+        {
+            Debug.LogWarning($"Could not determine grounded state for owner {owner.name}");
+            isGrounded = true; // optional fallback
+        }
+        Debug.Log($"owner: {owner} ,is grounded:+ {isGrounded}");
+        
         /*
         Debug.Log($"[INIT] proj={name} cfg={_config.name} ammo={_config.ammoType} " +
                   $"shootComp(VFX)={(shootEffect!=null)} shootList(VFX)={_config.shootEffect?.Count ?? -1} " +
@@ -94,8 +108,8 @@ public class PooledProjectile : MonoBehaviour
 
         float speed = speedOverride > 0f ? speedOverride : config.speed;
         
-        if (kinematics != null)
-            kinematics.Apply(rb, config, direction, speed);
+        if (projMovement != null)
+            projMovement.Apply(rb, config, direction, speed);
         else if (rb != null && config != null)
             rb.linearVelocity = direction.normalized * config.speed;
         
@@ -162,49 +176,60 @@ public class PooledProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log($"Projectile triggered with: {other.name}, layer: {LayerMask.LayerToName(other.gameObject.layer)}, root: {other.transform.root.name}");
         if (other.gameObject.layer == LayerMask.NameToLayer("Walls"))
         {
-            projectileOrientation = Quaternion.Euler(projectileOrientation.eulerAngles.x, projectileOrientation.eulerAngles.y
-                , projectileOrientation.eulerAngles.z - 90f);
-            
-            if (hitEffect != null && _config != null)
-            {//Debug.Log("projectileOrientation:" + projectileOrientation);
-                for (int FX = 0; FX < _config.wallhitEffect.Count; FX++)
+            if (isGrounded)
+            {
+                projectileOrientation = Quaternion.Euler(projectileOrientation.eulerAngles.x,
+                    projectileOrientation.eulerAngles.y
+                    , projectileOrientation.eulerAngles.z - 90f
+                );
+
+                if (hitEffect != null && _config != null)
                 {
-                    
-                    VisualEffect hitFX = _config.wallhitEffect[FX];
-                    hitEffect.Apply(hitFX, other.transform.position, projectileOrientation);
-                    //Debug.Log("hitEffect Applied:" + hitFX.name);
+                    //Debug.Log("projectileOrientation:" + projectileOrientation);
+                    for (int FX = 0; FX < _config.wallhitEffect.Count; FX++)
+                    {
+
+                        VisualEffect hitFX = _config.wallhitEffect[FX];
+                        hitEffect.Apply(hitFX, other.transform.position, projectileOrientation);
+                        //Debug.Log("hitEffect Applied:" + hitFX.name);
+                    }
+
                 }
-                
-            }
-            /*
-            else if (hitEffect == null || _config == null)
-            {
-                Debug.LogWarning("hit effect/config is null");
-            }
-        */
-            if (hitEffectPS != null && _config != null)
-            {
-                for (int FX = 0; FX < _config.wallhitEffectPS.Count; FX++)
+
+                /*
+                else if (hitEffect == null || _config == null)
                 {
-                    ParticleSystem hitFX = _config.wallhitEffectPS[FX];
-                    //Debug.Log($"[WALL HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
-                    if (hitFX == null) continue;
-                    hitEffectPS.Apply(hitFX, other.transform.position, projectileOrientation);
-                    //Debug.Log("hit PS Applied"+ hitFX.name);
+                    Debug.LogWarning("hit effect/config is null");
                 }
-                
-            }
-            /*
-            else if (hitEffect == null || _config == null)
-            {
-                Debug.LogWarning("hit effect/config is null");
-            }
             */
-            Despawn(); 
+                if (hitEffectPS != null && _config != null)
+                {
+                    for (int FX = 0; FX < _config.wallhitEffectPS.Count; FX++)
+                    {
+                        ParticleSystem hitFX = _config.wallhitEffectPS[FX];
+                        //Debug.Log($"[WALL HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
+                        if (hitFX == null) continue;
+                        hitEffectPS.Apply(hitFX, other.transform.position, projectileOrientation);
+                        //Debug.Log("hit PS Applied"+ hitFX.name);
+                    }
+
+                }
+
+                /*
+                else if (hitEffect == null || _config == null)
+                {
+                    Debug.LogWarning("hit effect/config is null");
+                }
+                */
+                Despawn();
+            }
+
+            return; //hit a wall
         }
-        
+
         if (_config == null) return;
 
         // Optional layer mask filter
@@ -216,29 +241,71 @@ public class PooledProjectile : MonoBehaviour
             return;
 
         // Friendly fire rule (team check requires target has Health/IDamageable with a team)
-        var damageable = other.GetComponentInParent<IDamageable>();
-        if (damageable == null)
+        IDamageable hitDamageable = other.GetComponentInParent<IDamageable>();
+        
+        if (hitDamageable == null)
+        {
+            Debug.Log("hitDamageable is null on " + other.name);
+            return;
+        }
+        Debug.Log($"hitDamageable: {other.name}");
+
+        if (_config.preventFriendlyFire && hitDamageable.Team == _ownerTeam)
             return;
 
-        if (_config.preventFriendlyFire && damageable.Team == _ownerTeam)
+        GameObject hitTarget = ((MonoBehaviour)hitDamageable).gameObject;
+        
+        target = hitTarget;
+        damageable = hitDamageable;
+        
+        if (!TryGetGroundedState(hitTarget, out bool targetIsGrounded))
+        {
+            Debug.LogWarning($"Could not determine grounded state for hit target {hitTarget.name}");
             return;
+        }
 
+        if (isGrounded != targetIsGrounded)
+        {
+            Debug.Log($"Ground mismatch. Shooter: {isGrounded}, Target: {targetIsGrounded}");
+            return;
+        }
+        HitTarget();
+    }
         //Debug.Log($"[CFG CHECK] cfgName={_config.name} cfgID={_config.GetInstanceID()} path={UnityEditor.AssetDatabase.GetAssetPath(_config)}");
-
+/*
         for (int i = 0; i < _config.hitEffectPS.Count; i++)
         {
             var ps = _config.hitEffectPS[i];
             //Debug.Log($"[CFG hitEffectPS] i={i} val={(ps ? ps.name : "NULL")}");
         }
+
         for (int i = 0; i < _config.hitEffect.Count; i++)
         {
             var vfx = _config.hitEffect[i];
             //Debug.Log($"[CFG hitEffect VFX] i={i} val={(vfx ? vfx.name : "NULL")}");
         }
-
+*/
+    /*
         if (other.CompareTag("Player") || other.CompareTag("Enemy"))
         {
-            _modifierSet?.NotifyHitEnemy(_shotAmmoType, _owner, other.gameObject, other.transform.position, other.transform.rotation);
+            target = other.gameObject;
+            targetIsGrounded = target.GetComponentInChildren<SpriteRenderer>().sortingLayerName == ("Ground");
+
+            if (targetIsGrounded && isGrounded)
+            {
+                HitTarget();
+            }
+            if (targetIsGrounded == false && isGrounded == false)
+            {
+                HitTarget();
+            }
+        }
+
+    }
+*/
+    private void HitTarget()
+    {
+        _modifierSet?.NotifyHitEnemy(_shotAmmoType, _owner, target.gameObject, target.transform.position, target.transform.rotation);
                     
                     if (hitEffect != null && _config != null)
                         {
@@ -246,17 +313,12 @@ public class PooledProjectile : MonoBehaviour
                             for (int FX = 0; FX < _config.hitEffect.Count; FX++)
                             {
                                 VisualEffect hitFX = _config.hitEffect[FX];
-                                hitEffect.Apply(hitFX, other.transform.position, other.transform.rotation);
+                                hitEffect.Apply(hitFX, target.transform.position, target.transform.rotation);
                                 //Debug.Log("hitEffect Applied" + hitFX.name);
                             }
                             
                         }
-                    /*
-                        else if (hitEffect == null || _config == null)
-                        {
-                            Debug.LogWarning("hit effect/config is null");
-                        }
-            */
+                    
                         if (hitEffectPS != null && _config != null)
                         {
                             for (int FX = 0; FX < _config.hitEffectPS.Count; FX++)
@@ -264,31 +326,12 @@ public class PooledProjectile : MonoBehaviour
                                 ParticleSystem hitFX = _config.hitEffectPS[FX];
                                 //Debug.Log($"[ENEMY HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
                                 if (hitFX == null) continue;
-                                hitEffectPS.Apply(hitFX, other.transform.position, other.transform.rotation);
+                                hitEffectPS.Apply(hitFX, target.transform.position, target.transform.rotation);
                                // Debug.Log("hit PS Applied" + hitFX.name);
                             }
                             
                         }
-                        /*
-                        else if (hitEffect == null || _config == null)
-                        {
-                            Debug.LogWarning("hit effect/config is null");
-                        }
-            
-                        Debug.Log("HitEffect Applied");
-            
-                    if (_mods != null)
-                    {
-                        for (int i = 0; i < _mods.Count; i++)
-                            _mods[i].OnHit(other.gameObject, _owner.gameObject);
-                       // Debug.Log($"OnHit target: {other.gameObject.name}"+ "has been slowed");
-                    }
-                 
-                        
-                    /*
-                    if(impactEffect)
-                        Instantiate(impactEffect, transform.position, Quaternion.identity);
-            Debug.LogError("HitEffect NULL");*/
+                       
                     damageable.TakeDamage(_config.damage, _owner);
             
                     if (_config.destroyOnHit)
@@ -310,11 +353,7 @@ public class PooledProjectile : MonoBehaviour
                         // Keep minimal default:
                         Despawn();
                     }
-                }
-        }
-        
-        
-
+    }
 
 
     public void Despawn()
@@ -333,5 +372,34 @@ public class PooledProjectile : MonoBehaviour
         _config = null;
 
             gameObject.SetActive(false);
+    }
+    
+    private bool TryGetGroundedState(GameObject obj, out bool grounded)
+    {
+        grounded = false;
+
+        PlayerController playerController = obj.GetComponentInParent<PlayerController>();
+        if (playerController != null)
+        {
+            grounded = playerController.isPlayerGrounded;
+            return true;
+        }
+
+        EnemyChaseAI enemyAI = obj.GetComponentInParent<EnemyChaseAI>();
+        if (enemyAI != null)
+        {
+            grounded = enemyAI.isEnemyGrounded;
+            return true;
+        }
+
+        EnemyShooterWalkingAI enemyShooterAI = obj.GetComponentInParent<EnemyShooterWalkingAI>();
+        if (enemyShooterAI != null)
+        {
+            grounded = enemyShooterAI.isEnemyGrounded;
+            return true;
+        }
+
+        Debug.LogWarning($"No grounded-state component found on {obj.name}");
+        return false;
     }
 }
