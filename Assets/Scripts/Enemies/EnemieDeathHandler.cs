@@ -56,11 +56,11 @@ public class EnemieDeathHandler : MonoBehaviour
 
     private void AmmoDroppProbability()
     {
-        int rand = UnityEngine.Random.Range(1, dropProbabillity);
+        int rand = UnityEngine.Random.Range(1, dropProbabillity + 1);
         
         if (rand == dropProbabillity)
         {
-            int ammoOrHealthPro = UnityEngine.Random.Range(1, healthDropProbability);
+            int ammoOrHealthPro = UnityEngine.Random.Range(1, healthDropProbability +1 );
             if (ammoOrHealthPro == healthDropProbability)
             {
                 droppedHealth = true;

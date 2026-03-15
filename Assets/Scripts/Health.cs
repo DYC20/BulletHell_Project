@@ -54,7 +54,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (_hp <= 3f)
         {
             Debug.Log("HP < 3");
-            StartCoroutine(ActivateFullScreenHealth());
+            StartCoroutine(ActivateFullScreenLowHealth());
         }
 
         if (_hp <= 0f)
@@ -91,11 +91,11 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         _hp = Mathf.Min(_hp + amount, maxHealth);
 
         if (_hp > 3f)
-            StartCoroutine(DeactivateFullScreenHealth());
+            StartCoroutine(DeactivateFullScreenLowHealth());
         Debug.Log("Player Healed");
     }
 
-    IEnumerator ActivateFullScreenHealth()
+    IEnumerator ActivateFullScreenLowHealth()
     {
         float duration = 1f;
         float timer = 0f;
@@ -113,7 +113,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         }
     }
     
-     IEnumerator DeactivateFullScreenHealth()
+    IEnumerator DeactivateFullScreenLowHealth()
         {
             float duration = 1f;
             float timer = 0f;
@@ -130,6 +130,11 @@ public class Health : MonoBehaviour, IDamageable, IHealable
                 yield return null;
             }
         }
+
+    public void DeactivateLowHealthFullScreen()
+    {
+        StartCoroutine(DeactivateFullScreenLowHealth());
+    }
 }
 
 

@@ -140,6 +140,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponPickup
   destroyAfterPickup: 1
+  newColor: {r: 0.8039216, g: 0.5176471, b: 0.09019608, a: 1}
+  newColorDuration: 1
 --- !u!114 &7028442816849000167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,7 +155,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimplePistol
   firePoint: {fileID: 6907175310484751001}
-  shotsPerSecond: 1
+  shotsPerSecond: 2
   projectileConfig: {fileID: 11400000, guid: 2c0e9e1b222c80e479aca66f5478c0bb, type: 2}
   ProjectilePool: {fileID: 11400000, guid: 7812b24b1e918db97813241183e4b802, type: 2}
   recoilImpulse: {fileID: 4245128646552802643}

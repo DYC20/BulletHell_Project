@@ -209,12 +209,12 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 7934936571616843970, guid: 2ab4d72037a31531bac5bd1f266959dd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a58b2f85ef8ed9440977c153eedd2f27, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -232,6 +232,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponPickup
   destroyAfterPickup: 1
+  newColor: {r: 0.8039216, g: 0.5176471, b: 0.09019608, a: 1}
+  newColorDuration: 1
 --- !u!114 &7028442816849000167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,7 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SimplePistol
   firePoint: {fileID: 6907175310484751001}
-  shotsPerSecond: 3
+  shotsPerSecond: 2.5
   projectileConfig: {fileID: 11400000, guid: 80fa68fe217061f4eaeca1aaaa5159b2, type: 2}
   ProjectilePool: {fileID: 11400000, guid: 7812b24b1e918db97813241183e4b802, type: 2}
   recoilImpulse: {fileID: 4245128646552802643}
@@ -341,8 +343,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.875, y: 0.55875003}
-    newSize: {x: 1, y: 1}
+    oldSize: {x: 1.28, y: 1.28}
+    newSize: {x: 2.56, y: 2.56}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
