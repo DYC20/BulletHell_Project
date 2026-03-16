@@ -126,15 +126,22 @@ public class Health : MonoBehaviour, IDamageable, IHealable
                 t = Mathf.SmoothStep(1f, 0f, t);
     
                 FullScreenPlayerHit.SetFloat(controlEffect, t);
-    
+                Debug.Log("contrl effect value" + FullScreenPlayerHit.GetFloat(controlEffect));
                 yield return null;
             }
         }
 
     public void DeactivateLowHealthFullScreen()
     {
+        Debug.Log("FSS Deactivated");
         StartCoroutine(DeactivateFullScreenLowHealth());
     }
+
+    public void StopLowHealthEffect()
+    {
+        FullScreenPlayerHit.SetFloat(controlEffect, 0);
+    }
+        
 }
 
 

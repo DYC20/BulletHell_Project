@@ -12,6 +12,15 @@ public class PlayerController : MonoBehaviour
     public float accel = 60f;
     public float decel = 80f;
     public float turnBoost = 1.5f;
+    private bool isWalking;
+    
+    [Header("Movement Effects")]
+    [SerializeField] private GameObject playerFX;
+    [SerializeField] private Color walkingColorRoad;
+    [SerializeField] private Color walkingColorGrass;
+
+    private ParticleSystem walkingFX;
+    private LayerMask roadLayer;
 
     [Header("Aiming")]
     [SerializeField] private Transform weaponHolder;   // assign in Inspector
@@ -37,8 +46,12 @@ public class PlayerController : MonoBehaviour
         rb.gravityScale = 0f;
         rb.freezeRotation = true; // keep the root stable
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        walkingFX = playerFX.transform.Find("Walking_SmokeTrail").gameObject.GetComponent<ParticleSystem>();
+        if (walkingFX == null) Debug.Log("Player walking FX is null");
+        if(walkingFX != null) Debug.Log("walking FX:" + walkingFX.name);
         
         if (playerVisual == null) playerVisual = GetComponentInChildren<SpriteRenderer>();
+        roadLayer = LayerMask.GetMask("Road");
 
         animator.SetBool("isIdle", true);
         
@@ -53,13 +66,24 @@ public class PlayerController : MonoBehaviour
         if (move.sqrMagnitude > 1f) move.Normalize();
         if (move.x != 0 || move.y != 0)
         {
+            isWalking = true;
             animator.SetBool("isWalking", true);
             animator.SetBool("isIdle", false);
-            if (move.x > 0) playerVisual.transform.localScale = new Vector3(1f, 1f, 1f);
-            if (move.x < 0) playerVisual.transform.localScale = new Vector3(-1f, 1f, 1f);
+            if (move.x > 0)
+            {
+                playerVisual.transform.localScale = new Vector3(1f, 1f, 1f);
+                //playerFX.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            }
+
+            if (move.x < 0)
+            {
+                playerVisual.transform.localScale = new Vector3(-1f, 1f, 1f);
+                //playerFX.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            }
         }
         else
         {
+            isWalking = false;
             animator.SetBool("isWalking", false);
             animator.SetBool("isIdle", true);
         }
@@ -109,8 +133,18 @@ public class PlayerController : MonoBehaviour
         Vector2 mouseWorld = mouseWorld3;
         Vector2 toMouse = mouseWorld - rb.position;
         DrawDebugCircle(mouseWorld, 0.2f, Color.green, 0f);
-      
 
+        UpdateWalkingSurface();
+        if (isWalking)
+        {
+            if (!walkingFX.isPlaying)
+                walkingFX.Play();
+        }
+        else
+        {
+            if (walkingFX.isPlaying)
+                walkingFX.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
 /*
         Vector2 origin = GetComponent<PlayerWeaponController>()?.CurrentFirePoint != null
             ? (Vector2)GetComponent<PlayerWeaponController>().CurrentFirePoint.position
@@ -159,6 +193,22 @@ public class PlayerController : MonoBehaviour
 
         SetSpriteFromDirection(toMouse);
     */
+    }
+
+    private void UpdateWalkingSurface()
+    {
+        Vector2 playerFXtf = playerFX.transform.position;
+        Collider2D hit = Physics2D.OverlapCircle(playerFXtf, 0.2f, roadLayer);
+        DrawDebugCircle(playerFXtf, 0.2f, hit ? Color.red : Color.green, 0f);
+        Debug.Log("Road hit: " + (hit ? hit.name : "none"));
+
+        SetWalkingColor(hit ? walkingColorRoad : walkingColorGrass);
+    }
+
+    private void SetWalkingColor(Color color)
+    {
+        var main = walkingFX.main;
+        main.startColor = color;
     }
 
     private void SetSpriteFromDirection(Vector2 dir)
