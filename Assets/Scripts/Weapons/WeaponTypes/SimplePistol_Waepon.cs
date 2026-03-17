@@ -8,6 +8,8 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     //[SerializeField] private ProjectileId projectileId = ProjectileId.SimplePistol_Bullet;         // Pool_BulletStandard
     [SerializeField] private ProjectileConfigSO projectileConfig; // PistolProjectileConfig
 
+    [SerializeField] private Transform weaponFX_tf;
+
     [SerializeField] private ObjectPool ProjectilePool;
     
     private SpriteRenderer rd;
@@ -171,4 +173,6 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     }
 
     public ProjectileConfigSO BaseConfig => projectileConfig;
+    public Transform WeaponFXtf => weaponFX_tf;
+
 }

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a58b2f85ef8ed9440977c153eedd2f27
+guid: 05c4a8f4a1dd3c7439c8aa8e077d361d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3973823031712013617
-    second: Revolver_06_0
+      213: 668064425189688096
+    second: DirtTile_10_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -47,11 +47,11 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
-  spriteExtrude: 32
+  spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 250
+  spritePixelsToUnits: 64
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Revolver_06_0
+      name: DirtTile_10_0
       rect:
         serializedVersion: 2
-        x: 6
-        y: 61
-        width: 246
-        height: 138
+        x: 0
+        y: 0
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 13dd57d3efad52730800000000000000
-      internalID: 3973823031712013617
+      spriteID: 023c18e1e01754900800000000000000
+      internalID: 668064425189688096
       vertices: []
       indices: 
       edges: []
@@ -174,7 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Revolver_06_0: 3973823031712013617
+      DirtTile_10_0: 668064425189688096
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

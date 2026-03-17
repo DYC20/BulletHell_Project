@@ -117,7 +117,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -2408530018317867212, guid: 042f0bb1e387fb74aa3432473c1f61cc, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4f6291685a82ce540927635836253aa6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -157,6 +157,7 @@ MonoBehaviour:
   firePoint: {fileID: 6907175310484751001}
   shotsPerSecond: 2
   projectileConfig: {fileID: 11400000, guid: 2c0e9e1b222c80e479aca66f5478c0bb, type: 2}
+  weaponFX_tf: {fileID: 0}
   ProjectilePool: {fileID: 11400000, guid: 7812b24b1e918db97813241183e4b802, type: 2}
   recoilImpulse: {fileID: 4245128646552802643}
   recoilStrength: 0.2
@@ -251,7 +252,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.85066664, y: 0.25866666}
+    oldSize: {x: 1.024, y: 1.024}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

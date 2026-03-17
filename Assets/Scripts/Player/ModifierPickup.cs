@@ -21,6 +21,12 @@ public class ModifierPickup : MonoBehaviour, IPickup
 
      [SerializeField] private bool isIce;
 
+     [Header("WeaponFX")] 
+     [SerializeField] private VisualEffect weaponFireEffect;
+     [SerializeField] private VisualEffect weaponIceEffect;
+     private Transform weaponFXtf;
+     private VisualEffect currentWeaponFX;
+
     public bool CanPickup(GameObject picker)
     {
         if (picker == null || modifierConfig == null) return false;
@@ -59,6 +65,13 @@ public class ModifierPickup : MonoBehaviour, IPickup
         var weapon = root.GetComponentInChildren<IWeaponProjectileBase>(true);
         if (weapon == null || weapon.BaseConfig == null) return;
 
+        weaponFXtf = weapon.WeaponFXtf;
+        
+        Transform bulletDrum = ((Component)weapon).transform.Find("BulletDrum");
+        SpriteRenderer drumRenderer = bulletDrum.GetComponent<SpriteRenderer>();
+        
+        drumRenderer.enabled = false;
+        
         AmmoType currentAmmo = weapon.BaseConfig.ammoType;
         set.SetModifierFor(currentAmmo, modifierConfig);
         //Debug.Log("Picker:" + picker.name);
@@ -66,11 +79,13 @@ public class ModifierPickup : MonoBehaviour, IPickup
 
         if (isIce)
         {
+            AssignWeaponFX(weaponIceEffect);
             fireUIEffect.Reinit();
             iceUIEffect.Play();
         }
         else
         {
+            AssignWeaponFX(weaponFireEffect);
             fireUIEffect.Play();
             iceUIEffect.Reinit();
         }
@@ -80,6 +95,16 @@ public class ModifierPickup : MonoBehaviour, IPickup
         //Debug.Log($"Picked {modifierConfig.name} for ammo={currentAmmo}. Current mod = {set.GetModifierFor(currentAmmo)?.name}");
 
         
+    }
+
+    private void AssignWeaponFX(VisualEffect visuals)
+    {
+        for (int i = weaponFXtf.childCount - 1; i >= 0; i--)
+        {
+            Destroy(weaponFXtf.GetChild(i).gameObject);
+        }
+
+        currentWeaponFX = Instantiate(visuals, weaponFXtf, false);
     }
 
     private void AssignUIElements()
