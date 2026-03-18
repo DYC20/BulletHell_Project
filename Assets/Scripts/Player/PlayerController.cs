@@ -200,7 +200,7 @@ public class PlayerController : MonoBehaviour
         Vector2 playerFXtf = playerFX.transform.position;
         Collider2D hit = Physics2D.OverlapCircle(playerFXtf, 0.2f, roadLayer);
         DrawDebugCircle(playerFXtf, 0.2f, hit ? Color.red : Color.green, 0f);
-        Debug.Log("Road hit: " + (hit ? hit.name : "none"));
+//        Debug.Log("Road hit: " + (hit ? hit.name : "none"));
 
         SetWalkingColor(hit ? walkingColorRoad : walkingColorGrass);
     }

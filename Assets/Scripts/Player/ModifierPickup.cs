@@ -21,11 +21,24 @@ public class ModifierPickup : MonoBehaviour, IPickup
 
      [SerializeField] private bool isIce;
 
-     [Header("WeaponFX")] 
-     [SerializeField] private VisualEffect weaponFireEffect;
-     [SerializeField] private VisualEffect weaponIceEffect;
+     [Header("RevolverFX")] 
+     [SerializeField] private VisualEffect revolverFireEffect;
+     [SerializeField] private VisualEffect revolverIceEffect;
+     [SerializeField] private Sprite FireRevolverSprite;
+     [SerializeField] private Sprite IceRevolverSprite;
+     private bool isRevolver;
+     
+     [Header("ShotgunFX")] 
+     [SerializeField] private VisualEffect shotgunFireEffect;
+     [SerializeField] private VisualEffect shotgunIceEffect;
+     [SerializeField] private Sprite FireShotgunSprite;
+     [SerializeField] private Sprite IceShotgunSprite;
+     private bool isShotgun;
+     
      private Transform weaponFXtf;
+     private bool revolverOrShotgun;
      private VisualEffect currentWeaponFX;
+     private Sprite newSprite;
 
     public bool CanPickup(GameObject picker)
     {
@@ -42,7 +55,7 @@ public class ModifierPickup : MonoBehaviour, IPickup
         // weapon is usually a child (WeaponPivot/Weapon), so search children
         var weapon = root.GetComponentInChildren<IWeaponProjectileBase>(true);
         if (weapon == null || weapon.BaseConfig == null) return false;
-
+        
         return true;
     }
 
@@ -50,6 +63,8 @@ public class ModifierPickup : MonoBehaviour, IPickup
     {
         VisualEffect visuals = GetComponentInChildren<VisualEffect>();
              visuals.Stop();
+             if (picker == null) Debug.Log("Picker Null");
+             if (modifierConfig == null) Debug.Log("Modifier Config is null");
         if (picker == null || modifierConfig == null) return;
 
         AssignUIElements();
@@ -68,29 +83,60 @@ public class ModifierPickup : MonoBehaviour, IPickup
         weaponFXtf = weapon.WeaponFXtf;
         
         Transform bulletDrum = ((Component)weapon).transform.Find("BulletDrum");
-        SpriteRenderer drumRenderer = bulletDrum.GetComponent<SpriteRenderer>();
+        SpriteRenderer weaponRenderer = ((Component)weapon).GetComponent<SpriteRenderer>();
         
-        drumRenderer.enabled = false;
+        if (bulletDrum != null)
+        {
+             SpriteRenderer drumRenderer = bulletDrum.GetComponent<SpriteRenderer>();
+                    
+                    drumRenderer.enabled = false;
+        }
+
+        isRevolver = weapon.Revolver;
+        isShotgun = weapon.Shotgun;
+
+      
         
         AmmoType currentAmmo = weapon.BaseConfig.ammoType;
         set.SetModifierFor(currentAmmo, modifierConfig);
         //Debug.Log("Picker:" + picker.name);
         StartCoroutine(ChangeUIColor());
-
-        if (isIce)
+        if (isRevolver)
         {
-            AssignWeaponFX(weaponIceEffect);
-            fireUIEffect.Reinit();
-            iceUIEffect.Play();
+               if (isIce)
+                    {
+                        AssignWeaponFX(revolverIceEffect);
+                        newSprite = IceRevolverSprite;
+                        fireUIEffect.Reinit();
+                        iceUIEffect.Play();
+                    }
+                    else
+                    {
+                        AssignWeaponFX(revolverFireEffect);
+                        newSprite = FireRevolverSprite;
+                        fireUIEffect.Play();
+                        iceUIEffect.Reinit();
+                    }
         }
-        else
+     
+        if (isShotgun)
         {
-            AssignWeaponFX(weaponFireEffect);
-            fireUIEffect.Play();
-            iceUIEffect.Reinit();
+            if (isIce)
+            {
+                AssignWeaponFX(shotgunIceEffect);
+                newSprite = IceShotgunSprite;
+                fireUIEffect.Reinit();
+                iceUIEffect.Play();
+            }
+            else
+            {
+                AssignWeaponFX(shotgunFireEffect);
+                newSprite = FireShotgunSprite;
+                fireUIEffect.Play();
+                iceUIEffect.Reinit();
+            }
         }
-
-        
+        weaponRenderer.sprite = newSprite;
         
         //Debug.Log($"Picked {modifierConfig.name} for ammo={currentAmmo}. Current mod = {set.GetModifierFor(currentAmmo)?.name}");
 

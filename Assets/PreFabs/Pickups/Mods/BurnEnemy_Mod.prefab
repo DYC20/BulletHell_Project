@@ -109,8 +109,14 @@ MonoBehaviour:
   modifierConfig: {fileID: 11400000, guid: 2b2ce6e5004999c4dbb523ecb6e4723e, type: 2}
   destroyAfterPickup: 1
   isIce: 0
-  weaponFireEffect: {fileID: 6069291286113882298, guid: 21f6f499b4cb02748b7b57538ff4e138, type: 3}
-  weaponIceEffect: {fileID: 1373940066540405342, guid: 947e9bd450928694782f1e96fac6b004, type: 3}
+  revolverFireEffect: {fileID: 6069291286113882298, guid: 21f6f499b4cb02748b7b57538ff4e138, type: 3}
+  revolverIceEffect: {fileID: 1373940066540405342, guid: 947e9bd450928694782f1e96fac6b004, type: 3}
+  FireRevolverSprite: {fileID: 21300000, guid: d473d979fbb453648bfe3cc62504558d, type: 3}
+  IceRevolverSprite: {fileID: 21300000, guid: aecb565d67813a844a7b91cf7fc97fcc, type: 3}
+  shotgunFireEffect: {fileID: 504222532651878619, guid: 2fc2751dd248ac54fa863d8d99858476, type: 3}
+  shotgunIceEffect: {fileID: 3763743603326468983, guid: 1987cff7378c7e04f9b5ab3368953a88, type: 3}
+  FireShotgunSprite: {fileID: 21300000, guid: 7192651fa21aaf5448a36e3b4504e07d, type: 3}
+  IceShotgunSprite: {fileID: 21300000, guid: 2cbd0190ae5119240a7b050cc559cd8b, type: 3}
 --- !u!70 &3963000307865639238
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
