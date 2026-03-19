@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7723020136862399072}
   - component: {fileID: 2944466993120710712}
   - component: {fileID: 4581938055619371466}
+  - component: {fileID: 7385022856002505666}
   m_Layer: 11
   m_Name: FreezeState_03_FX
   m_TagString: Untagged
@@ -30,7 +31,8 @@ Transform:
   m_LocalPosition: {x: 30.7, y: -13.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7476444148344445174}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!2083052967 &2944466993120710712
@@ -60,7 +62,7 @@ VisualEffect:
       - m_Value: {x: 3.4200518, y: 5.992157, z: 5.992157, w: 0}
         m_Name: FlipBook Color
         m_Overridden: 1
-      - m_Value: {x: 5.412834, y: 13.204498, z: 16.948385, w: 0}
+      - m_Value: {x: 1.5365998, y: 1.5365998, z: 1.5365998, w: 0}
         m_Name: Ice Color
         m_Overridden: 1
     m_Uint:
@@ -123,7 +125,174 @@ VFXRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -240678225
-  m_SortingLayer: 5
+  m_SortingLayerID: 179103593
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_MaskInteraction: 0
+--- !u!114 &7385022856002505666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502300022835104705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8effc5cda35043469949a754b1e90ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  freezeLight: {fileID: 3123442189569257360}
+  freezeEffect: {fileID: 2944466993120710712}
+  lightDuration: 4
+  startRadius: 0.3
+  endRadius: 1.2
+  innerRadiusOffset: 0.7
+  radiusCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0012550354
+      value: 0
+      inSlope: 0.18965566
+      outSlope: 0.18965566
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.12814403
+    - serializedVersion: 3
+      time: 0.2247895
+      value: 0.99965715
+      inSlope: 0.19269079
+      outSlope: 0.19269079
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.23719536
+    - serializedVersion: 3
+      time: 0.69423556
+      value: 0.9818182
+      inSlope: -0.0987012
+      outSlope: -0.0987012
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.22516523
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.99871826
+      value: 0
+      inSlope: -0.0987473
+      outSlope: -0.0987473
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.12244992
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  enablePreviewInEditMode: 1
+  autoPreview: 1
+  previewTime: 0.15462059
+--- !u!1 &2808006504828152840
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7476444148344445174}
+  - component: {fileID: 3123442189569257360}
+  - component: {fileID: 272436863298552452}
+  m_Layer: 11
+  m_Name: Spot Light 2D
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7476444148344445174
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2808006504828152840}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7723020136862399072}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3123442189569257360
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2808006504828152840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.Light2D
+  m_ComponentVersion: 2
+  m_LightType: 3
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.536
+  m_Color: {r: 0.3160377, g: 0.88232917, b: 1, a: 1}
+  m_Intensity: 3
+  m_LightVolumeIntensity: 0
+  m_LightVolumeEnabled: 0
+  m_ApplyToSortingLayers: 00000000bfd0fd37cda491a475e3b4695712401caf8aa7f1217cd987f521358069e7ac0a
+  m_LightCookieSprite: {fileID: 0}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 1
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowsEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowSoftness: 0.3
+  m_ShadowSoftnessFalloffIntensity: 0.5
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0, y: -0.00000011920929, z: 0}
+    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0.2902072
+  m_PointLightOuterRadius: 0.9902072
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
+--- !u!114 &272436863298552452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2808006504828152840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2c1918df5ea43d40bb87e33e59f8da0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LightFllicker
+  light: {fileID: 3123442189569257360}
+  fllickerSpeed: 0.2
+  fllickerRadiusSpeed: 0.2
+  fllickerRadiusMax: 2
+  fllickerRadiusMin: 1.7
+  fllickerIntencityMax: 3.81
+  fllickerIntencityMin: 3

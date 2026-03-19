@@ -38,6 +38,9 @@
         },
         {
             "m_Id": "297d197056ff4499941261cf1b1f5a0b"
+        },
+        {
+            "m_Id": "6374fb10b64c439bb72572e8cccf7821"
         }
     ],
     "m_Keywords": [],
@@ -209,6 +212,9 @@
         },
         {
             "m_Id": "c94d1eebfb714cd48eec0986a2a5d5b6"
+        },
+        {
+            "m_Id": "ba548ab132fe43b182079fd6a2fcf5d3"
         }
     ],
     "m_GroupDatas": [
@@ -455,20 +461,6 @@
                     "m_Id": "3202991142714110bacae0cde83329ef"
                 },
                 "m_SlotId": 0
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
-                    "m_Id": "3544b27720ea4ff4ac30fc3a4027f294"
-                },
-                "m_SlotId": 0
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "1a7f81d6c4df4f3d9cccc8c5498d3d3e"
-                },
-                "m_SlotId": 1
             }
         },
         {
@@ -880,6 +872,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "ba548ab132fe43b182079fd6a2fcf5d3"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "1a7f81d6c4df4f3d9cccc8c5498d3d3e"
+                },
+                "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "bbcdf5037366401d9b2ca34e78054c8f"
                 },
                 "m_SlotId": 0
@@ -1245,6 +1251,19 @@
     "m_EnumValues": [
         0
     ]
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Texture2DMaterialSlot",
+    "m_ObjectId": "085a81b8197043b79dd1aaa0b025d498",
+    "m_Id": 0,
+    "m_DisplayName": "CameraSortingLayerTexture",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_BareResource": false
 }
 
 {
@@ -1835,8 +1854,8 @@
     "m_ObjectId": "1db6647000494f93b132229e5803f27d",
     "m_Title": "Cut-out",
     "m_Position": {
-        "x": -1463.9998779296875,
-        "y": 411.0
+        "x": -1464.666748046875,
+        "y": 410.6665954589844
     }
 }
 
@@ -3132,8 +3151,8 @@
     "m_ObjectId": "51607e7159dd4b85bc47bc06074a1b87",
     "m_Title": "Refrected UV",
     "m_Position": {
-        "x": -2837.99951171875,
-        "y": 329.9999084472656
+        "x": -2838.000244140625,
+        "y": 329.33331298828127
     }
 }
 
@@ -3506,8 +3525,8 @@
     "m_ObjectId": "5f5c76d75f2b4d88b6b827c107ffd22a",
     "m_Title": "Distortion Offset",
     "m_Position": {
-        "x": -3775.99951171875,
-        "y": 414.99993896484377
+        "x": -3776.000244140625,
+        "y": 414.6666259765625
     }
 }
 
@@ -3546,6 +3565,42 @@
     "m_DefaultValue": 0.0,
     "m_Labels": [],
     "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
+    "m_ObjectId": "6374fb10b64c439bb72572e8cccf7821",
+    "m_Guid": {
+        "m_GuidSerialized": "74504e5d-eb11-4a2f-bddf-65aa55ae83e8"
+    },
+    "promotedFromAssetID": "",
+    "promotedFromCategoryName": "",
+    "promotedOrdering": -1,
+    "m_Name": "CameraSortingLayerTexture",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "CameraSortingLayerTexture",
+    "m_DefaultReferenceName": "_CameraSortingLayerTexture",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": false,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": true,
+    "hlslDeclarationOverride": 1,
+    "m_Hidden": false,
+    "m_PerRendererData": false,
+    "m_customAttributes": [],
+    "m_Value": {
+        "m_SerializedTexture": "",
+        "m_Guid": ""
+    },
+    "isMainTexture": false,
+    "useTilingAndOffset": false,
+    "useTexelSize": true,
+    "m_Modifiable": true,
+    "m_DefaultType": 0
 }
 
 {
@@ -4094,6 +4149,9 @@
         },
         {
             "m_Id": "297d197056ff4499941261cf1b1f5a0b"
+        },
+        {
+            "m_Id": "6374fb10b64c439bb72572e8cccf7821"
         }
     ]
 }
@@ -5480,6 +5538,42 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "ba548ab132fe43b182079fd6a2fcf5d3",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -3147.4853515625,
+            "y": -260.4599304199219,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "085a81b8197043b79dd1aaa0b025d498"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "6374fb10b64c439bb72572e8cccf7821"
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "bb651068851449fe82eea5caef43835d",
     "m_Id": 0,
@@ -6214,8 +6308,8 @@
     "m_ObjectId": "d695eff12f3141b284d1f02e12b59e1a",
     "m_Title": "Icw Tex",
     "m_Position": {
-        "x": -2545.999755859375,
-        "y": -185.0
+        "x": -2546.666748046875,
+        "y": -185.3334197998047
     }
 }
 
@@ -6285,8 +6379,8 @@
     "m_ObjectId": "d8e8f954c40f4cee8a16410ff6264d81",
     "m_Title": "Screen UV",
     "m_Position": {
-        "x": -3708.999755859375,
-        "y": 149.0
+        "x": -3709.33349609375,
+        "y": 148.66664123535157
     }
 }
 
@@ -6989,8 +7083,8 @@
     "m_ObjectId": "fff6f5651c3448c1bb758260ee13107b",
     "m_Title": "Reder Tex",
     "m_Position": {
-        "x": -2561.999755859375,
-        "y": 296.0
+        "x": -2562.000244140625,
+        "y": 295.9999084472656
     }
 }
 
