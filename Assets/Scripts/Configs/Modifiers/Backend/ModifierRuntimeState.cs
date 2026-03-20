@@ -19,6 +19,7 @@ public class ModifierRuntimeState : MonoBehaviour
     public static ModifierRuntimeState Instance { get; private set; }
 
     public bool isIce;
+    
     [HideInInspector]
     public bool isModified;
     
@@ -29,6 +30,9 @@ public class ModifierRuntimeState : MonoBehaviour
 
         public bool hasFire;
         public float fireInterval;
+        
+        public bool hasRb2D;
+        public RigidbodyType2D rb2DType;
 
         public Coroutine revertRoutine;
         public Coroutine damageRoutine;
@@ -99,7 +103,8 @@ public class ModifierRuntimeState : MonoBehaviour
         float moveSpeedMul,
         float fireIntervalMul,
         float durationSeconds, 
-        float damage
+        float damage,
+        bool makeBodyKinematic
     )
     {
         if (modifier == null || enemy == null) return;
@@ -130,6 +135,14 @@ public class ModifierRuntimeState : MonoBehaviour
                 snap.hasFire = true;
                 snap.fireInterval = fire.FireInterval;
             }
+            
+            var rb2D = enemy.GetComponentInParent<Rigidbody2D>();
+            if (rb2D != null)
+            {
+                snap.hasRb2D = true;
+                snap.rb2DType = rb2D.bodyType;
+            }
+
 
             perEnemy.Add(enemyKey, snap);
         }
@@ -157,7 +170,12 @@ public class ModifierRuntimeState : MonoBehaviour
 
             snap.damageRoutine = StartCoroutine(DamageOverTime(enemy, damage,damageFX, durationSeconds, modifier));
         }
-            
+        if (makeBodyKinematic)
+        {
+            var rb2D = enemy.GetComponentInParent<Rigidbody2D>();
+            if (snap.hasRb2D && rb2D != null)
+                rb2D.bodyType = RigidbodyType2D.Kinematic;
+        }
         
 
         snap.revertRoutine = StartCoroutine(RevertAfter(modKey, enemyKey, enemy, durationSeconds));
@@ -177,6 +195,10 @@ public class ModifierRuntimeState : MonoBehaviour
 
         var f = enemy.GetComponentInParent<IEnemyFireInterval>();
         if (snap.hasFire && f != null) f.FireInterval = snap.fireInterval;
+        
+        var rb2D = enemy.GetComponentInParent<Rigidbody2D>();
+        if (snap.hasRb2D && rb2D != null)
+            rb2D.bodyType = snap.rb2DType;
         
         if (snap.damageRoutine != null)
             StopCoroutine(snap.damageRoutine);

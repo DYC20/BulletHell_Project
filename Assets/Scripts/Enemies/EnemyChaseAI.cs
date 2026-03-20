@@ -29,6 +29,7 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
     //private Health playerHealth;
     //private float nextTimeCanHit;
     private bool aiEnabled;
+    private Animator animator;
 
     private void Awake()
     {
@@ -39,7 +40,7 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
 
     private void Start()
     {
-        
+        animator = GetComponent<Animator>();
         // If player not set, try find by tag
         if (player == null)
         {
@@ -77,6 +78,14 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
             return;
         }
 
+        if (rb.linearVelocity.magnitude > 0.1f)
+        {
+            animator.StopPlayback();
+        }
+        if (rb.linearVelocity.magnitude < 0.1f)
+        {
+            animator.Play(0);
+        }
         // Move toward player using Rigidbody2D (physics-friendly)
         Vector2 toPlayer = ((Vector2)player.position - rb.position);
         Vector2 dir = toPlayer.sqrMagnitude > 0.0001f ? toPlayer.normalized : Vector2.zero;
