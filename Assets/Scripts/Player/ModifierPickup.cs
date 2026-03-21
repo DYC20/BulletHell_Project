@@ -35,6 +35,13 @@ public class ModifierPickup : MonoBehaviour, IPickup
      [SerializeField] private Sprite IceShotgunSprite;
      private bool isShotgun;
      
+     [Header("ShotgunFX")] 
+     [SerializeField] private VisualEffect grenadeFireEffect;
+     [SerializeField] private VisualEffect grenadeIceEffect;
+     [SerializeField] private Sprite FireGrenadeSprite;
+     [SerializeField] private Sprite IceGrenadeSprite;
+     private bool isGrenade;
+     
      private Transform weaponFXtf;
      private bool revolverOrShotgun;
      private VisualEffect currentWeaponFX;
@@ -94,6 +101,7 @@ public class ModifierPickup : MonoBehaviour, IPickup
 
         isRevolver = weapon.Revolver;
         isShotgun = weapon.Shotgun;
+        isGrenade = weapon.Grenade;
 
       
         
@@ -132,6 +140,23 @@ public class ModifierPickup : MonoBehaviour, IPickup
             {
                 AssignWeaponFX(shotgunFireEffect);
                 newSprite = FireShotgunSprite;
+                fireUIEffect.Play();
+                iceUIEffect.Reinit();
+            }
+        }
+        if (isGrenade)
+        {
+            if (isIce)
+            {
+                AssignWeaponFX(grenadeIceEffect);
+                newSprite = IceGrenadeSprite;
+                fireUIEffect.Reinit();
+                iceUIEffect.Play();
+            }
+            else
+            {
+                AssignWeaponFX(grenadeFireEffect);
+                newSprite = FireGrenadeSprite;
                 fireUIEffect.Play();
                 iceUIEffect.Reinit();
             }

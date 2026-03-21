@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9aa456e2a0cd0f242acf9f0a34127cb0, type: 3}
-  m_Name: Enemy_StandardBullet_ProjectileConfig
+  m_Name: StandardGrenade_ProjectileConfig
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileConfigSO
-  ammoType: 0
+  ammoType: 2
   ammoPerShot: 1
-  damage: 1
-  speed: 2
+  damage: 5
+  speed: 3
   lifetime: 5
   projectilesPerShot: 1
   spreadAngleDeg: 15
@@ -27,13 +27,13 @@ MonoBehaviour:
   destroyOnHit: 1
   hitEffect: []
   hitEffectPS:
-  - {fileID: 3370062852713752785, guid: 4b815a6ed0ba3d945bc76a704fc42f77, type: 3}
+  - {fileID: 3370062852713752785, guid: 9bf92113db579a04c9590a14119b62c9, type: 3}
   wallhitEffect: []
   wallhitEffectPS:
   - {fileID: 1707121828431647151, guid: f96badbc542a2b445bbcb94356bad8cb, type: 3}
-  shootEffect: []
-  shootEffectPS:
-  - {fileID: 678938928091686416, guid: c3aaf77bcc93f2b40a5febbcfb00e059, type: 3}
+  shootEffect:
+  - {fileID: 4932392571206407439, guid: 71824c9f0a5eb2942b189247b81ae17b, type: 3}
+  shootEffectPS: []
   doDissapateOverLifetime: 0
   dissapateOverLifetime:
     serializedVersion: 2

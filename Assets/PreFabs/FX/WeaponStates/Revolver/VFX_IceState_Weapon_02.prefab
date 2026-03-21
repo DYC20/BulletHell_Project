@@ -51,8 +51,11 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 200
+      - m_Value: 50
         m_Name: Rate
+        m_Overridden: 1
+      - m_Value: 0.03
+        m_Name: Refract STR
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
@@ -60,7 +63,7 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 0, y: 0.24149323, z: 2, w: 1}
+      - m_Value: {x: 0.8186802, y: 1.051327, z: 2.670157, w: 1}
         m_Name: Pulse Color
         m_Overridden: 1
     m_Uint:
@@ -105,6 +108,32 @@ VisualEffect:
           m_PostInfinity: 2
           m_RotationOrder: 4
         m_Name: Size Over
+        m_Overridden: 1
+      - m_Value:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 2
+            outSlope: 2
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        m_Name: Pulse Time
         m_Overridden: 1
     m_Gradient:
       m_Array:

@@ -16,6 +16,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     [SerializeField] private Transform weaponFX_tf;
     [SerializeField] private bool isRevolver;
     [SerializeField] private bool isShotgun;
+    [SerializeField] private bool isGrenade;
     
     
     private SpriteRenderer rd;
@@ -183,6 +184,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
 
     public bool Revolver => isRevolver;
     public bool Shotgun => isShotgun;
+    public bool Grenade => isGrenade;
 
     public Sprite WeaponImage => rd.sprite;
 }

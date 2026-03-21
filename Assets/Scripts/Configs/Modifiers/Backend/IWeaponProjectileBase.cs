@@ -8,6 +8,8 @@ public interface IWeaponProjectileBase
     bool Revolver { get; }
     
     bool Shotgun { get; }
+    
+    bool Grenade { get; }
 
     Sprite WeaponImage { get;}
 }

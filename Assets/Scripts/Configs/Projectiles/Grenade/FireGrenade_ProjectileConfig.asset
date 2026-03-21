@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9aa456e2a0cd0f242acf9f0a34127cb0, type: 3}
-  m_Name: Enemy_StandardBullet_ProjectileConfig
+  m_Name: FireGrenade_ProjectileConfig
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileConfigSO
-  ammoType: 0
+  ammoType: 2
   ammoPerShot: 1
-  damage: 1
-  speed: 2
+  damage: 5
+  speed: 3.5
   lifetime: 5
   projectilesPerShot: 1
   spreadAngleDeg: 15
@@ -27,17 +27,35 @@ MonoBehaviour:
   destroyOnHit: 1
   hitEffect: []
   hitEffectPS:
-  - {fileID: 3370062852713752785, guid: 4b815a6ed0ba3d945bc76a704fc42f77, type: 3}
+  - {fileID: 3370062852713752785, guid: 6f020caa6c5497f41a2987dd1a879192, type: 3}
   wallhitEffect: []
   wallhitEffectPS:
   - {fileID: 1707121828431647151, guid: f96badbc542a2b445bbcb94356bad8cb, type: 3}
-  shootEffect: []
-  shootEffectPS:
-  - {fileID: 678938928091686416, guid: c3aaf77bcc93f2b40a5febbcfb00e059, type: 3}
-  doDissapateOverLifetime: 0
+  shootEffect:
+  - {fileID: 4932392571206407439, guid: e4e74c43f9f9dad4d90eaa9d609e067f, type: 3}
+  shootEffectPS: []
+  doDissapateOverLifetime: 1
   dissapateOverLifetime:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 3.3163624
+      outSlope: 3.3163624
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.04385966
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

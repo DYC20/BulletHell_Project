@@ -15,6 +15,7 @@ public class ModifierSO : ProjectileModifierSO
     
     [SerializeField] private OverrideSet bulletSet;
     [SerializeField] private OverrideSet shellSet;
+    [SerializeField] private OverrideSet explosiveSet;
     //[SerializeField] private OverrideSet rifleSet;
 
     [Header("Hit Counting")]
@@ -26,7 +27,7 @@ public class ModifierSO : ProjectileModifierSO
     [SerializeField] private float fireIntervalMultiplier = 1.4f; // higher interval => shoots slower
     [SerializeField] private float damagePerSconds = 0f;
     [SerializeField] private GameObject damageFX;
-    [SerializeField] private bool isKinematic;
+    [SerializeField] private bool isStatic;
 
     [Header("FX Prefab (ParticleSystem or VFX Graph)")]
     [SerializeField] private GameObject fullEffectPrefab;
@@ -73,7 +74,7 @@ public class ModifierSO : ProjectileModifierSO
                 fireIntervalMul: fireIntervalMultiplier,
                 durationSeconds: debuffDuration,
                 damage: damagePerSconds,
-                makeBodyKinematic: isKinematic
+                makeBodyKinematic: isStatic
             );
 
             // spawn FX on enemy and auto-destroy when done
