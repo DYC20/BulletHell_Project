@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6907175310484751001}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SmallMeshCulling: 1
   m_ForceMeshLod: -1
   m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
@@ -162,6 +162,7 @@ MonoBehaviour:
   weaponFX_tf: {fileID: 35942261383038823}
   isRevolver: 0
   isShotgun: 1
+  isGrenade: 0
   recoilImpulse: {fileID: 4245128646552802643}
   recoilStrength: 0.2
 --- !u!114 &4245128646552802643
@@ -288,7 +289,7 @@ Transform:
   m_GameObject: {fileID: 7800869402060890033}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.497, y: 0.175, z: 0}
+  m_LocalPosition: {x: 0.2, y: 0.175, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -38,6 +38,9 @@ public class PooledProjectile : MonoBehaviour
     private GameObject target;
 
     private IDamageable damageable;
+    
+    private float radius;
+    private Collider2D[] hits;
 /*
     private void Awake()
     {
@@ -335,7 +338,50 @@ public class PooledProjectile : MonoBehaviour
                             
                         }
                        
-                    damageable.TakeDamage(_config.damage, _owner);
+                    
+
+                    if (_config.AOE > 0)
+                    {
+                        radius = _config.AOE;
+                        DrawCircle(target.transform.position, radius, 32, 1f);
+                        hits = Physics2D.OverlapCircleAll(target.transform.position, radius);
+                        
+                        foreach (var hit in hits)
+                        {
+                            IDamageable aoeDamageable = hit.GetComponentInParent<IDamageable>();
+
+                            if (aoeDamageable != null && aoeDamageable.Team != _ownerTeam)
+                            {
+                                aoeDamageable.TakeDamage(_config.damage/3f, _owner);
+                                
+                                if (hitEffect != null && _config != null)
+                                {
+            
+                                    for (int FX = 0; FX < _config.hitEffect.Count; FX++)
+                                    {
+                                        VisualEffect hitFX = _config.hitEffect[FX];
+                                        hitEffect.Apply(hitFX, hit.transform.position, hit.transform.rotation);
+                                        Debug.Log("AOE hitEffect Applied" + hitFX.name);
+                                    }
+                            
+                                }
+                    
+                                if (hitEffectPS != null && _config != null)
+                                {
+                                    for (int FX = 0; FX < _config.hitEffectPS.Count; FX++)
+                                    {
+                                        ParticleSystem hitFX = _config.hitEffectPS[FX];
+                                        Debug.Log($"[AOE ENEMY HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
+                                        if (hitFX == null) continue;
+                                        hitEffectPS.Apply(hitFX, hit.transform.position, hit.transform.rotation);
+                                         Debug.Log("AOE hit PS Applied" + hitFX.name + hit.transform.name);
+                                    }
+                            
+                                }
+                            }
+                        }
+                    }
+                     damageable.TakeDamage(_config.damage, _owner);   
             
                     if (_config.destroyOnHit)
                     {
@@ -409,8 +455,25 @@ public class PooledProjectile : MonoBehaviour
             isSniper = true;
             return true;
         }
+        
+        
+   
 
         Debug.LogWarning($"No grounded-state component found on {obj.name}");
         return false;
+    }
+    void DrawCircle(Vector3 center, float radius, int segments = 32, float duration = 1f)
+    {
+        float angleStep = 360f / segments;
+        Vector3 prevPoint = center + new Vector3(radius, 0f, 0f);
+
+        for (int i = 1; i <= segments; i++)
+        {
+            float angle = angleStep * i * Mathf.Deg2Rad;
+            Vector3 newPoint = center + new Vector3(Mathf.Cos(angle) * radius, Mathf.Sin(angle) * radius, 0f);
+
+            Debug.DrawLine(prevPoint, newPoint, Color.red, duration);
+            prevPoint = newPoint;
+        }
     }
 }

@@ -13,6 +13,7 @@ public class ProjectileConfigSO : ScriptableObject
 
     [Header("Damage")]
     public float damage = 1f;
+    public float AOE = 0;
 
     [Header("Movement")]
     public float speed = 18f;

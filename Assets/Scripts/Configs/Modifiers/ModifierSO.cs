@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 using UnityEngine.VFX;
 
@@ -28,6 +29,10 @@ public class ModifierSO : ProjectileModifierSO
     [SerializeField] private float damagePerSconds = 0f;
     [SerializeField] private GameObject damageFX;
     [SerializeField] private bool isStatic;
+    
+    [Header("AOE Damage")]
+    private float radius;
+    private Collider2D[] hits;
 
     [Header("FX Prefab (ParticleSystem or VFX Graph)")]
     [SerializeField] private GameObject fullEffectPrefab;
@@ -43,6 +48,7 @@ public class ModifierSO : ProjectileModifierSO
         {
             case AmmoType.Bullet: set = bulletSet; break;
             case AmmoType.Shell:  set = shellSet;  break;
+            case AmmoType.Explosives:  set = explosiveSet;  break;
            // case AmmoType.Rifle:  set = rifleSet;  break;
             default: return;
         }
@@ -53,6 +59,33 @@ public class ModifierSO : ProjectileModifierSO
         if (set.pool != null) pool = set.pool;
     }
 
+    public void ApplyDebuffDirect(GameObject attacker, GameObject enemy, Quaternion hitRot)
+    {
+        if (attacker == null || enemy == null) return;
+
+        var state = attacker.GetComponentInParent<ModifierRuntimeState>();
+        if (state == null) return;
+
+        state.ApplyTimedDebuff(
+            modifier: this,
+            enemy: enemy,
+            damageFX: damageFX,
+            moveSpeedMul: moveSpeedMultiplier,
+            fireIntervalMul: fireIntervalMultiplier,
+            durationSeconds: debuffDuration,
+            damage: damagePerSconds,
+            makeBodyStatic: isStatic
+        );
+
+        if (fullEffectPrefab != null)
+        {
+            Transform enemyVisualMiddle = enemy.transform.Find("EnemyVisualMiddle");
+            Vector3 fxPos = enemyVisualMiddle != null ? enemyVisualMiddle.position : enemy.transform.position;
+
+            Object.Instantiate(fullEffectPrefab, fxPos, hitRot, enemy.transform);
+        }
+    }
+    
     public override void OnHitEnemy(GameObject attacker, GameObject enemy, Vector3 hitPos, Quaternion hitRot)
     {
         if (attacker == null || enemy == null) return;
@@ -74,7 +107,7 @@ public class ModifierSO : ProjectileModifierSO
                 fireIntervalMul: fireIntervalMultiplier,
                 durationSeconds: debuffDuration,
                 damage: damagePerSconds,
-                makeBodyKinematic: isStatic
+                makeBodyStatic: isStatic
             );
 
             // spawn FX on enemy and auto-destroy when done

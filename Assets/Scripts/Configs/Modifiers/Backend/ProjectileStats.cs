@@ -11,6 +11,7 @@ public struct ProjectileStats
 
     [Header("Damage")]
     public float damage ;
+    public float AOE;
 
     [Header("Movement")]
     public float speed ;

@@ -14,6 +14,7 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3.5f;
     [SerializeField] private float ratationSpeed = 3.5f;
+    private RigidbodyType2D lastBodyType;
     
     public bool isEnemyGrounded {get; private set; }
     public float MoveSpeed
@@ -34,6 +35,7 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        lastBodyType = rb.bodyType;
         rb.gravityScale = 0f; // typical for top-down 2D
         isEnemyGrounded = true;
     }
@@ -78,14 +80,21 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
             return;
         }
 
-        if (rb.linearVelocity.magnitude > 0.1f)
+        if (rb.bodyType != lastBodyType)
         {
-            animator.StopPlayback();
+            if (rb.bodyType == RigidbodyType2D.Static)
+                    {
+                        animator.speed = 0f;
+                    }
+            else if (rb.bodyType == RigidbodyType2D.Dynamic)
+                    {
+                        animator.speed = 1f;
+                    }
+
+            lastBodyType = rb.bodyType;
         }
-        if (rb.linearVelocity.magnitude < 0.1f)
-        {
-            animator.Play(0);
-        }
+
+        
         // Move toward player using Rigidbody2D (physics-friendly)
         Vector2 toPlayer = ((Vector2)player.position - rb.position);
         Vector2 dir = toPlayer.sqrMagnitude > 0.0001f ? toPlayer.normalized : Vector2.zero;

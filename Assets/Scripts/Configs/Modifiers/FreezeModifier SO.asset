@@ -18,11 +18,14 @@ MonoBehaviour:
   shellSet:
     config: {fileID: 11400000, guid: 23c80e9c9cc8a274ca70cf29532662cb, type: 2}
     pool: {fileID: 11400000, guid: beec8f682ca13f64b9196e053df0ff64, type: 2}
+  explosiveSet:
+    config: {fileID: 11400000, guid: 6b10ff2ecb56a614aa3d35dccfc377e4, type: 2}
+    pool: {fileID: 11400000, guid: 4324f6cf778fe024fba2a371829a3d54, type: 2}
   hitsToTrigger: 3
   debuffDuration: 3
   moveSpeedMultiplier: 0
   fireIntervalMultiplier: 0
   damagePerSconds: 0
   damageFX: {fileID: 4129969376939518295, guid: c3bda0b032346ac4caeb4e5a4e99f555, type: 3}
-  isKinematic: 1
+  isStatic: 1
   fullEffectPrefab: {fileID: 502300022835104705, guid: 49c3d8e377d8f5d43b972771b023ff38, type: 3}

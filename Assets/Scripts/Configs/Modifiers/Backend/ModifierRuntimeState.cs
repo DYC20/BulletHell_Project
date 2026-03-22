@@ -104,7 +104,7 @@ public class ModifierRuntimeState : MonoBehaviour
         float fireIntervalMul,
         float durationSeconds, 
         float damage,
-        bool makeBodyKinematic
+        bool makeBodyStatic
     )
     {
         if (modifier == null || enemy == null) return;
@@ -170,11 +170,11 @@ public class ModifierRuntimeState : MonoBehaviour
 
             snap.damageRoutine = StartCoroutine(DamageOverTime(enemy, damage,damageFX, durationSeconds, modifier));
         }
-        if (makeBodyKinematic)
+        if (makeBodyStatic)
         {
             var rb2D = enemy.GetComponentInParent<Rigidbody2D>();
             if (snap.hasRb2D && rb2D != null)
-                rb2D.bodyType = RigidbodyType2D.Kinematic;
+                rb2D.bodyType = RigidbodyType2D.Static;
         }
         
 
