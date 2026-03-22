@@ -29,10 +29,6 @@ public class ModifierSO : ProjectileModifierSO
     [SerializeField] private float damagePerSconds = 0f;
     [SerializeField] private GameObject damageFX;
     [SerializeField] private bool isStatic;
-    
-    [Header("AOE Damage")]
-    private float radius;
-    private Collider2D[] hits;
 
     [Header("FX Prefab (ParticleSystem or VFX Graph)")]
     [SerializeField] private GameObject fullEffectPrefab;

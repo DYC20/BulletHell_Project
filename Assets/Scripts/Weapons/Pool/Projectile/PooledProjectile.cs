@@ -39,8 +39,6 @@ public class PooledProjectile : MonoBehaviour
 
     private IDamageable damageable;
     
-    private float radius;
-    private Collider2D[] hits;
 /*
     private void Awake()
     {
@@ -310,99 +308,125 @@ public class PooledProjectile : MonoBehaviour
     }
 */
     private void HitTarget()
+{
+    ModifierSO activeModifier = _modifierSet != null
+        ? _modifierSet.GetModifierFor(_shotAmmoType) as ModifierSO
+        : null;
+
+    // NON-AOE: keep old counted behavior
+    if (_config.AOE <= 0f)
     {
-        _modifierSet?.NotifyHitEnemy(_shotAmmoType, _owner, target.gameObject, target.transform.position, target.transform.rotation);
-                    
-                    if (hitEffect != null && _config != null)
-                        {
-            
-                            for (int FX = 0; FX < _config.hitEffect.Count; FX++)
-                            {
-                                VisualEffect hitFX = _config.hitEffect[FX];
-                                hitEffect.Apply(hitFX, target.transform.position, target.transform.rotation);
-                                //Debug.Log("hitEffect Applied" + hitFX.name);
-                            }
-                            
-                        }
-                    
-                        if (hitEffectPS != null && _config != null)
-                        {
-                            for (int FX = 0; FX < _config.hitEffectPS.Count; FX++)
-                            {
-                                ParticleSystem hitFX = _config.hitEffectPS[FX];
-                                //Debug.Log($"[ENEMY HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
-                                if (hitFX == null) continue;
-                                hitEffectPS.Apply(hitFX, target.transform.position, target.transform.rotation);
-                               // Debug.Log("hit PS Applied" + hitFX.name);
-                            }
-                            
-                        }
-                       
-                    
-
-                    if (_config.AOE > 0)
-                    {
-                        radius = _config.AOE;
-                        DrawCircle(target.transform.position, radius, 32, 1f);
-                        hits = Physics2D.OverlapCircleAll(target.transform.position, radius);
-                        
-                        foreach (var hit in hits)
-                        {
-                            IDamageable aoeDamageable = hit.GetComponentInParent<IDamageable>();
-
-                            if (aoeDamageable != null && aoeDamageable.Team != _ownerTeam)
-                            {
-                                aoeDamageable.TakeDamage(_config.damage/3f, _owner);
-                                
-                                if (hitEffect != null && _config != null)
-                                {
-            
-                                    for (int FX = 0; FX < _config.hitEffect.Count; FX++)
-                                    {
-                                        VisualEffect hitFX = _config.hitEffect[FX];
-                                        hitEffect.Apply(hitFX, hit.transform.position, hit.transform.rotation);
-                                        Debug.Log("AOE hitEffect Applied" + hitFX.name);
-                                    }
-                            
-                                }
-                    
-                                if (hitEffectPS != null && _config != null)
-                                {
-                                    for (int FX = 0; FX < _config.hitEffectPS.Count; FX++)
-                                    {
-                                        ParticleSystem hitFX = _config.hitEffectPS[FX];
-                                        Debug.Log($"[AOE ENEMY HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
-                                        if (hitFX == null) continue;
-                                        hitEffectPS.Apply(hitFX, hit.transform.position, hit.transform.rotation);
-                                         Debug.Log("AOE hit PS Applied" + hitFX.name + hit.transform.name);
-                                    }
-                            
-                                }
-                            }
-                        }
-                    }
-                     damageable.TakeDamage(_config.damage, _owner);   
-            
-                    if (_config.destroyOnHit)
-                    {
-                        Despawn();
-                        return;
-                    }
-            
-                    // Piercing logic (optional)
-                    if (_remainingPierce > 0)
-                    {
-                        _remainingPierce--;
-                        if (_remainingPierce <= 0)
-                            Despawn();
-                    }
-                    else
-                    {
-                        // If not piercing and not destroyOnHit, you might still want to despawn.
-                        // Keep minimal default:
-                        Despawn();
-                    }
+        _modifierSet?.NotifyHitEnemy(
+            _shotAmmoType,
+            _owner,
+            target.gameObject,
+            target.transform.position,
+            target.transform.rotation
+        );
     }
+
+    // direct-hit FX
+    if (hitEffect != null && _config != null)
+    {
+        for (int FX = 0; FX < _config.hitEffect.Count; FX++)
+        {
+            VisualEffect hitFX = _config.hitEffect[FX];
+            hitEffect.Apply(hitFX, target.transform.position, target.transform.rotation);
+        }
+    }
+
+    if (hitEffectPS != null && _config != null)
+    {
+        for (int FX = 0; FX < _config.hitEffectPS.Count; FX++)
+        {
+            ParticleSystem hitFX = _config.hitEffectPS[FX];
+            if (hitFX == null) continue;
+
+            hitEffectPS.Apply(hitFX, target.transform.position, target.transform.rotation);
+        }
+    }
+
+    // AOE: debuff everyone in radius immediately, with NO counting
+    if (_config.AOE > 0f)
+    {
+        float radius = _config.AOE;
+        Vector3 aoeCenter = target.transform.position;
+
+        DrawCircle(aoeCenter, radius, 32, 1f);
+
+        Collider2D[] aoeHits = Physics2D.OverlapCircleAll(aoeCenter, radius);
+        HashSet<IDamageable> processed = new HashSet<IDamageable>();
+        
+        
+
+        foreach (var hit in aoeHits)
+        {
+            IDamageable aoeDamageable = hit.GetComponentInParent<IDamageable>();
+            if (aoeDamageable == null) continue;
+            if (aoeDamageable.Team == _ownerTeam) continue;
+            if (!processed.Add(aoeDamageable)) continue;
+
+            MonoBehaviour mb = aoeDamageable as MonoBehaviour;
+            if (mb == null) continue;
+
+            GameObject enemyGO = mb.gameObject;
+            Vector3 fxPos = hit.bounds.center;
+
+            if (enemyGO == target.gameObject)
+            {
+                activeModifier?.ApplyDebuffDirect(_owner, enemyGO, enemyGO.transform.rotation);
+                continue;
+            }
+            
+            // AOE splash damage
+            aoeDamageable.TakeDamage(_config.damage / 3f, _owner);
+
+            // immediate debuff, no counting
+            activeModifier?.ApplyDebuffDirect(_owner, enemyGO, enemyGO.transform.rotation);
+
+            // AOE FX
+            if (hitEffect != null && _config != null)
+            {
+                for (int FX = 0; FX < _config.hitEffect.Count; FX++)
+                {
+                    VisualEffect hitFX = _config.hitEffect[FX];
+                    hitEffect.Apply(hitFX, fxPos, enemyGO.transform.rotation);
+                }
+            }
+
+            if (hitEffectPS != null && _config != null)
+            {
+                for (int FX = 0; FX < _config.hitEffectPS.Count; FX++)
+                {
+                    ParticleSystem hitFX = _config.hitEffectPS[FX];
+                    if (hitFX == null) continue;
+
+                    hitEffectPS.Apply(hitFX, fxPos, enemyGO.transform.rotation);
+                }
+            }
+        }
+    }
+
+    // direct-hit damage
+    damageable.TakeDamage(_config.damage, _owner);
+
+    if (_config.destroyOnHit)
+    {
+        Despawn();
+        return;
+    }
+
+    if (_remainingPierce > 0)
+    {
+        _remainingPierce--;
+        if (_remainingPierce <= 0)
+            Despawn();
+    }
+    else
+    {
+        Despawn();
+    }
+}
 
 
     public void Despawn()
