@@ -12,6 +12,7 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
     [SerializeField] public WeaponBase equippedWeapon;
     [SerializeField] private AmmoInventory ammoInventory;
     [SerializeField] private Image weaponImage;
+    [SerializeField] public ShockWave shockWave;
 
     
 

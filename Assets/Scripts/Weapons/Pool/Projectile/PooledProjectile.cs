@@ -178,7 +178,7 @@ public class PooledProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log($"Projectile triggered with: {other.name}, layer: {LayerMask.LayerToName(other.gameObject.layer)}, root: {other.transform.root.name}");
+       // Debug.Log($"Projectile triggered with: {other.name}, layer: {LayerMask.LayerToName(other.gameObject.layer)}, root: {other.transform.root.name}");
         if (other.gameObject.layer == LayerMask.NameToLayer("Walls"))
         {
             if (isGrounded)
@@ -247,10 +247,10 @@ public class PooledProjectile : MonoBehaviour
         
         if (hitDamageable == null)
         {
-            Debug.Log("hitDamageable is null on " + other.name);
+            //Debug.Log("hitDamageable is null on " + other.name);
             return;
         }
-        Debug.Log($"hitDamageable: {other.name}");
+        //Debug.Log($"hitDamageable: {other.name}");
 
         if (_config.preventFriendlyFire && hitDamageable.Team == _ownerTeam)
             return;
@@ -356,8 +356,23 @@ public class PooledProjectile : MonoBehaviour
 
         Collider2D[] aoeHits = Physics2D.OverlapCircleAll(aoeCenter, radius);
         HashSet<IDamageable> processed = new HashSet<IDamageable>();
+
+        //PlayerWeaponController weaponController = _owner.GetComponentInParent<PlayerWeaponController>();
+        //weaponController.shockWave.PlayShockwave(aoeCenter);
+        GameObject shockwaveObject = Instantiate(_config.shockWavePrefab, aoeCenter, Quaternion.identity);
         
+        ShockWave shockwaveEffect = shockwaveObject.GetComponent<ShockWave>();
         
+        if (shockwaveEffect != null)
+        {
+            shockwaveEffect.PlayShockwave();
+            Debug.Log($"Shockwave effect: {shockwaveEffect.name}");
+        }
+        else
+        {
+            Debug.LogWarning("ShockWave component missing on spawned prefab.");
+        }
+            
 
         foreach (var hit in aoeHits)
         {

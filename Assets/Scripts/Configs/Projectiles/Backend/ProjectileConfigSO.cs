@@ -31,6 +31,9 @@ public class ProjectileConfigSO : ScriptableObject
     [Header("Hit Rules")]
     public bool destroyOnHit = true;
     
+    [Header("Shockwave Effect")]
+    public GameObject shockWavePrefab;
+    
     [Header("Hit Effect")]
     public List<VisualEffect> hitEffect;
     public List<ParticleSystem> hitEffectPS;
