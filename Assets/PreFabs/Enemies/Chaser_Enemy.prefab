@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5589662293258780992}
   - component: {fileID: 6997729266414030081}
   - component: {fileID: 1009744389262302966}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: ContactHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   - component: {fileID: 1809575182489146792}
   - component: {fileID: 4933905431315199958}
   - component: {fileID: 8538752535885436585}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Chaser_Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -255,6 +255,7 @@ MonoBehaviour:
   team: 1
   maxHealth: 5
   healthSlider: {fileID: 0}
+  FullScreenPlayerHit: {fileID: 0}
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -438,6 +439,10 @@ PrefabInstance:
     - target: {fileID: 8766929272734289340, guid: 14bdc6b40e76ca7469f52eb9e302b9bd, type: 3}
       propertyPath: m_Name
       value: EnemyVisualMiddle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8766929272734289340, guid: 14bdc6b40e76ca7469f52eb9e302b9bd, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

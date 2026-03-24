@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 859904882753588201}
   - component: {fileID: 262120197106012861}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 2243936387353959673}
   - component: {fileID: 1809575182489146792}
   - component: {fileID: 4933905431315199958}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Sniper_Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,6 +251,7 @@ MonoBehaviour:
   team: 1
   maxHealth: 5
   healthSlider: {fileID: 0}
+  FullScreenPlayerHit: {fileID: 0}
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -434,6 +435,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3602286800176898790, guid: 00e37127dc1ec384c84749fd47df9498, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 3940092321410527907, guid: 00e37127dc1ec384c84749fd47df9498, type: 3}
       propertyPath: m_Size.x
       value: 1.3282787
@@ -457,6 +462,10 @@ PrefabInstance:
     - target: {fileID: 5782139036240968308, guid: 00e37127dc1ec384c84749fd47df9498, type: 3}
       propertyPath: m_Name
       value: SniperRifel_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5782139036240968308, guid: 00e37127dc1ec384c84749fd47df9498, type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6907175310484751001, guid: 00e37127dc1ec384c84749fd47df9498, type: 3}
       propertyPath: m_LocalPosition.x

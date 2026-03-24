@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 859904882753588201}
   - component: {fileID: 262120197106012861}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 2243936387353959673}
   - component: {fileID: 1809575182489146792}
   - component: {fileID: 4933905431315199958}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Solider_Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -293,6 +293,7 @@ MonoBehaviour:
   team: 1
   maxHealth: 5
   healthSlider: {fileID: 0}
+  FullScreenPlayerHit: {fileID: 0}
   onDeath:
     m_PersistentCalls:
       m_Calls:
@@ -472,6 +473,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyVisualMiddle
       objectReference: {fileID: 0}
+    - target: {fileID: 8766929272734289340, guid: 14bdc6b40e76ca7469f52eb9e302b9bd, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -490,6 +495,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2852274010122127103}
     m_Modifications:
+    - target: {fileID: 75062758628031285, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 88992705989351331, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.29
@@ -530,13 +539,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 698614998224370405, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3602286800176898790, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4803435800873981383, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 5782139036240968308, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
       propertyPath: m_Name
       value: SimplePistol_03
       objectReference: {fileID: 0}
     - target: {fileID: 5782139036240968308, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
       propertyPath: m_Layer
-      value: 0
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7028442816849000167, guid: 9040df9a98d4b59469a2f75124af9e3e, type: 3}
       propertyPath: ProjectilePool
