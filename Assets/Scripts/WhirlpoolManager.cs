@@ -4,6 +4,8 @@ using UnityEngine.InputSystem;
 
 public class WhirlpoolManager : MonoBehaviour
 {
+    public static WhirlpoolManager Instance { get; private set; }
+    
     [Header("Center")]
     [SerializeField] private Transform vortexCenter;
 
@@ -47,6 +49,12 @@ public class WhirlpoolManager : MonoBehaviour
         public float spinSpeed;
         public bool consumed;
     }
+    
+    private void Awake()
+    {
+        Instance = this;
+    }
+
 
     private void Start()
     {
@@ -54,7 +62,11 @@ public class WhirlpoolManager : MonoBehaviour
             vortexCenter = transform;
 
         if (beginOnStart)
+        {
             Begin();
+            Debug.Log("beginOnStart");
+        }
+            
     }
 
     public void Begin()

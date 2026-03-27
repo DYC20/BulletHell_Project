@@ -14,6 +14,9 @@ public class TilemapProxySpawner : MonoBehaviour
 
     public void SpawnProxies()
     {
+        if (manager == null)
+            manager = WhirlpoolManager.Instance;
+        
         if (manager == null || proxyPrefab == null || tilemaps == null)
             return;
 
