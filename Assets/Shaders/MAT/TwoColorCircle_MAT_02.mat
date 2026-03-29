@@ -7,9 +7,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: DonutCircle_MAT
-  m_Shader: {fileID: -6465566751694194690, guid: 68fa921e47b98194bb2d5903912b30b0, type: 3}
-  m_Parent: {fileID: 0}
+  m_Name: TwoColorCircle_MAT_02
+  m_Shader: {fileID: -6465566751694194690, guid: 418da30f3f53653409c0d851e9d54428, type: 3}
+  m_Parent: {fileID: 2100000, guid: 8d326ff7b5984e7499cbfbe213b6b24a, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -24,37 +24,17 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
+    - _Color_Ramp:
+        m_Texture: {fileID: 2800000, guid: 0f4f3dd2bddb8674a966c4ad3b6951cb, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Cliping: 0
-    - _Float: 0
-    - _Multi: 2.12
-    - _Multi_1: 1
-    - _Power: 1.23
-    - _Power_1: 1
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    - _Sharpness: 5.07
-    - _Thickness: 2.18
-    m_Colors:
-    - _Gloaw: {r: 8, g: 8, b: 8, a: 0}
-    - _Size: {r: 1, g: 1, b: 0, a: 0}
-    - _Size_1: {r: 1, g: 1, b: 0, a: 0}
+    - _Float: 10
+    m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &8930395843380775268
+--- !u!114 &5455003900430773712
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
