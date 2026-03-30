@@ -30,7 +30,6 @@ public class WhirlpoolManager : MonoBehaviour
     [Header("Consume")]
     [SerializeField] private float consumeRadius = 0.2f;
 
-    [SerializeField] private bool beginOnStart = false;
 
     private float _elapsed;
     private bool _running;
@@ -56,16 +55,15 @@ public class WhirlpoolManager : MonoBehaviour
     }
 
 
-    private void Start()
+    public void PullSeqUence()
     {
         if (vortexCenter == null)
             vortexCenter = transform;
 
-        if (beginOnStart)
-        {
+     
             Begin();
             Debug.Log("beginOnStart");
-        }
+        
             
     }
 

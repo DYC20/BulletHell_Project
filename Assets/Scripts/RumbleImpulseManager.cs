@@ -53,6 +53,9 @@ public class RumbleImpulseManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         
         Instantiate(whirlpoolPrfab, GetRandomWorldPosition(), Quaternion.identity);
+        
+        yield return new WaitForSeconds(8f);
+        
         uICollapseController.Begin();
         proxySpawner.SpawnProxies();
 
