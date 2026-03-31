@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class WhirlpoolManager : MonoBehaviour
 {
     public static WhirlpoolManager Instance { get; private set; }
-    
+
     [Header("Center")]
     [SerializeField] private Transform vortexCenter;
 
@@ -28,8 +28,7 @@ public class WhirlpoolManager : MonoBehaviour
     [SerializeField] private float delayRandomness = 0.2f;
 
     [Header("Consume")]
-    [SerializeField] private float consumeRadius = 0.2f;
-
+    [SerializeField] private float deathRadius = 0.2f;
 
     private float _elapsed;
     private bool _running;
@@ -48,27 +47,22 @@ public class WhirlpoolManager : MonoBehaviour
         public float spinSpeed;
         public bool consumed;
     }
-    
+
     private void Awake()
     {
         Instance = this;
     }
 
-
     public void PullSeqUence()
     {
-        if (vortexCenter == null)
-            vortexCenter = transform;
-
-     
-            Begin();
-            Debug.Log("beginOnStart");
-        
-            
+        Begin();
     }
 
     public void Begin()
     {
+        if (vortexCenter == null)
+            vortexCenter = transform;
+
         DisablePlayerInput();
 
         _targets.Clear();
@@ -82,7 +76,8 @@ public class WhirlpoolManager : MonoBehaviour
 
     private void Update()
     {
-        if (!_running) return;
+        if (!_running)
+            return;
 
         _elapsed += Time.deltaTime;
 
@@ -94,11 +89,15 @@ public class WhirlpoolManager : MonoBehaviour
 
     public void RegisterExternalTarget(Transform t)
     {
-        if (t == null) return;
-        if (_uniqueTargets.Contains(t)) return;
+        if (t == null || vortexCenter == null)
+            return;
+
+        if (_uniqueTargets.Contains(t))
+            return;
 
         float distance = Vector2.Distance(vortexCenter.position, t.position);
-        if (distance > pullAOE) return;
+        if (distance > pullAOE)
+            return;
 
         AddTarget(t, distance);
     }
@@ -111,13 +110,15 @@ public class WhirlpoolManager : MonoBehaviour
         {
             Transform root = r.transform.root;
 
-            if (_uniqueTargets.Contains(root)) continue;
+            if (_uniqueTargets.Contains(root))
+                continue;
 
             if (((1 << root.gameObject.layer) & affectedLayers.value) == 0)
                 continue;
 
             float distance = Vector2.Distance(vortexCenter.position, root.position);
-            if (distance > pullAOE) continue;
+            if (distance > pullAOE)
+                continue;
 
             AddTarget(root, distance);
         }
@@ -170,7 +171,7 @@ public class WhirlpoolManager : MonoBehaviour
             Vector2 toCenter = center - pos;
             float dist = toCenter.magnitude;
 
-            if (dist <= consumeRadius)
+            if (dist <= deathRadius)
             {
                 Consume(target);
                 continue;
@@ -212,7 +213,8 @@ public class WhirlpoolManager : MonoBehaviour
     private void DisablePlayerInput()
     {
         var input = FindFirstObjectByType<PlayerInput>();
-        if (input == null) return;
+        if (input == null)
+            return;
 
         input.enabled = false;
 

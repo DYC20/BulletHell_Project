@@ -50,7 +50,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -5134,6 +5134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2780629046892764454}
   - component: {fileID: 4088097916928892232}
+  - component: {fileID: 2739227438682728408}
   - component: {fileID: 4734107620525087985}
   m_Layer: 14
   m_Name: EndLevel_Gate
@@ -5219,6 +5220,38 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &2739227438682728408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697272644045918394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8aaa1017f9ada75459fa8d1fafad3262, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::WhirlpoolSequenceCoordinator
+  whirlpoolAnimManager: {fileID: 8350905279164157187}
+  whirlpoolManager: {fileID: 4734107620525087985}
+  animationStartDelay: 6
+  pullSequenceDelay: 6.6
+  collapsePhaseDelay: 9
+  onCollapsePhaseReached:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4734107620525087985}
+        m_TargetAssemblyTypeName: WhirlpoolManager, Assembly-CSharp
+        m_MethodName: PullSeqUence
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &4734107620525087985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5232,7 +5265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GateTwearl
   vortexCenter: {fileID: 7009441937721779940}
-  pullAOE: 10
+  pullAOE: 12.5
   affectedLayers:
     serializedVersion: 2
     m_Bits: 16351
@@ -5248,8 +5281,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 1
+      inSlope: 2
+      outSlope: 2
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
@@ -5257,7 +5290,7 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 1
+      inSlope: 0
       outSlope: 0
       tangentMode: 0
       weightedMode: 0
@@ -5267,7 +5300,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   delayRandomness: 0.2
-  consumeRadius: 0.15
+  deathRadius: 0.2
 --- !u!1 &2046051598895864838
 GameObject:
   m_ObjectHideFlags: 0
@@ -24873,7 +24906,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8393023251845652935}
@@ -24952,11 +24985,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc00b3259863ce84cbda66d3527c6e23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WhirlpoolAnimManager
+  pulse: {fileID: 2726956248354361868}
+  swearl: {fileID: 4402470850938857058}
+  genericObjectsPS: {fileID: 5416875157381343078}
   endScale: {x: 3, y: 3, z: 3}
-  scaleEase: 1
+  scaleEase: 19
   startColor: {r: 1, g: 1, b: 1, a: 1}
   endColor: {r: 0.15548629, g: 0, b: 0.39622638, a: 0}
-  scaleDuration: 0.5
+  scaleDuration: 2
   DistortionEndAmount_01: 0.2
   TwirlEndAmount_01: 26
   RotationEndSpeed_01: 10
@@ -24965,7 +25001,7 @@ MonoBehaviour:
   TwirlEndAmount_02: -80
   RotationEndSpeed_02: 5
   NoiseEndAmount_02: 10
-  materialDuration: 0.5
+  materialDuration: 1
 --- !u!1 &3595423358091587982
 GameObject:
   m_ObjectHideFlags: 0
@@ -29922,7 +29958,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3201553897095454549
 Transform:
   m_ObjectHideFlags: 0
@@ -39645,8 +39681,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -240678225
-  m_SortingLayer: 5
+  m_SortingLayerID: 179103593
+  m_SortingLayer: 8
   m_SortingOrder: 1
   m_MaskInteraction: 0
   m_RenderMode: 0
@@ -44576,9 +44612,8 @@ GameObject:
   - component: {fileID: 4021631218960843030}
   - component: {fileID: 657671188566465734}
   - component: {fileID: 8008747879186949568}
-  - component: {fileID: 4622533881952250430}
   m_Layer: 14
-  m_Name: Orb (4)
+  m_Name: OrbSmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49866,45 +49901,6 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
---- !u!114 &4622533881952250430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7456329882771474114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eec5fd9e6a13fdf4495f7cec07d054c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EndOfPSTrigger
-  deathEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8350905279164157187}
-        m_TargetAssemblyTypeName: WhirlpoolAnimManager, Assembly-CSharp
-        m_MethodName: PlaySequence
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 4734107620525087985}
-        m_TargetAssemblyTypeName: WhirlpoolManager, Assembly-CSharp
-        m_MethodName: PullSeqUence
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!1 &8343320730371639431
 GameObject:
   m_ObjectHideFlags: 0
@@ -49931,9 +49927,9 @@ Transform:
   m_GameObject: {fileID: 8343320730371639431}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.9945218, w: -0.10452985}
-  m_LocalPosition: {x: -1.411, y: -0.358, z: 0}
-  m_LocalScale: {x: 0.26436836, y: 0.26436836, z: 0.26436844}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -2.778, y: -0.645, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2780629046892764454}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -49982,8 +49978,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -240678225
-  m_SortingLayer: 5
+  m_SortingLayerID: 179103593
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
@@ -50008,7 +50004,7 @@ GameObject:
   - component: {fileID: 6594765779870892132}
   - component: {fileID: 7000477311200937921}
   m_Layer: 14
-  m_Name: Particle System (1)
+  m_Name: ShootingStars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55124,7 +55120,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
