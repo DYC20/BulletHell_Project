@@ -5,13 +5,20 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour, IDamageable, IHealable
 {
-    [Header("Setup")] [SerializeField] private Teams team;
+    [Header("Setup")]
+    [SerializeField] private Teams team;
     [SerializeField] private float maxHealth = 5f;
-    [SerializeField] private Slider healthSlider;
+    [SerializeField] private RectTransform healthBarRect;
+    [SerializeField] private RectTransform edgeSpriteRect;
+    [SerializeField] private float leftPadding = 0f;
+    [SerializeField] private float rightPadding = 0f;
 
+    [Header("Health Bar Material")]
+    [SerializeField] private Image healthBarImage;
+    [SerializeField] private string healthFillProperty = "_FillAmount";
 
-    [Header("FullScreen Material")] [SerializeField]
-    private Material FullScreenPlayerHit;
+    [Header("FullScreen Material")]
+    [SerializeField] private Material FullScreenPlayerHit;
 
     private string controlEffect = "_ControlEffect";
 
@@ -20,21 +27,19 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     public float CurrentHealth => _hp;
     public bool IsDead => _hp <= 0f;
 
-    [Header("Events")] public UnityEvent onDeath;
+    [Header("Events")]
+    public UnityEvent onDeath;
     public UnityEvent<float, GameObject> onDamaged; // damage amount, instigator
 
     private float _hp;
+    private Material _healthBarRuntimeMaterial;
 
     private void Awake()
     {
+        _healthBarRuntimeMaterial = healthBarImage.material;
         ResetHealth();
-        if (healthSlider == null)
-        {
-            healthSlider = GetComponent<Slider>();
-
-        }
-
-        healthSlider.value = CurrentHealth;
+        SetupHealthBarMaterial();
+        UpdateHealthBarVisual();
     }
 
     /// <summary>
@@ -46,10 +51,9 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (amount <= 0f) return;
 
         _hp -= amount;
-//Debug.Log("Player Took Damage");
+
         onDamaged?.Invoke(amount, instigator);
-        if (healthSlider != null)
-            healthSlider.value = CurrentHealth;
+        UpdateHealthBarVisual();
 
         if (_hp <= 3f)
         {
@@ -60,6 +64,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (_hp <= 0f)
         {
             _hp = 0f;
+            UpdateHealthBarVisual();
             onDeath?.Invoke();
         }
     }
@@ -70,12 +75,12 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     public void ResetHealth()
     {
         _hp = maxHealth;
+        UpdateHealthBarVisual();
     }
 
     /// <summary>
     /// Optional: heal without exceeding max.
     /// </summary>
-
     public bool CanHeal(float amount)
     {
         if (IsDead) return false;
@@ -89,17 +94,57 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (!CanHeal(amount)) return;
 
         _hp = Mathf.Min(_hp + amount, maxHealth);
+        UpdateHealthBarVisual();
 
         if (_hp > 3f)
             StartCoroutine(DeactivateFullScreenLowHealth());
+
         Debug.Log("Player Healed");
+    }
+
+    private void SetupHealthBarMaterial()
+    {
+        if (healthBarImage == null)
+            healthBarImage = GetComponent<Image>();
+
+        if (healthBarImage == null || healthBarImage.material == null)
+            return;
+
+        _healthBarRuntimeMaterial = new Material(healthBarImage.material);
+        healthBarImage.material = _healthBarRuntimeMaterial;
+    }
+
+    private void UpdateHealthBarVisual()
+    {
+        if (_healthBarRuntimeMaterial == null)
+        {
+            
+            Debug.Log("_healthBarRuntimeMaterial is null");
+            return;
+        }
+            
+        ///Health bar normalized to 0-0.8, used in BarEdgeFollower
+        float normalizedHealth = Mathf.Clamp01(_hp / maxHealth);
+        _healthBarRuntimeMaterial.SetFloat(healthFillProperty, normalizedHealth * 0.8f);
+        BarEdgeFollower edgeFollower = edgeSpriteRect.GetComponent<BarEdgeFollower>();
+        edgeFollower.SetNormalized(normalizedHealth);
+        
+       /* if (healthBarRect != null && edgeSpriteRect != null)
+        {
+            float usableWidth = healthBarRect.rect.width - leftPadding - rightPadding;
+            float x = leftPadding + usableWidth * normalizedHealth;
+
+            Vector2 pos = edgeSpriteRect.anchoredPosition;
+            pos.x = x;
+            edgeSpriteRect.anchoredPosition = pos;
+        }*/
+        Debug.Log("Health material value after updating: " + _healthBarRuntimeMaterial.GetFloat(healthFillProperty) );
     }
 
     IEnumerator ActivateFullScreenLowHealth()
     {
         float duration = 1f;
         float timer = 0f;
-        //Color startColor = weaponBG.color;
 
         while (timer < duration)
         {
@@ -112,24 +157,24 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             yield return null;
         }
     }
-    
+
     IEnumerator DeactivateFullScreenLowHealth()
+    {
+        float duration = 1f;
+        float timer = 0f;
+
+        while (timer < duration)
         {
-            float duration = 1f;
-            float timer = 0f;
-            //Color startColor = weaponBG.color;
-    
-            while (timer < duration)
-            {
-                timer += Time.deltaTime;
-                float t = timer / duration;
-                t = Mathf.SmoothStep(1f, 0f, t);
-    
-                FullScreenPlayerHit.SetFloat(controlEffect, t);
-                Debug.Log("contrl effect value" + FullScreenPlayerHit.GetFloat(controlEffect));
-                yield return null;
-            }
+            timer += Time.deltaTime;
+            float t = timer / duration;
+            t = Mathf.SmoothStep(1f, 0f, t);
+
+            FullScreenPlayerHit.SetFloat(controlEffect, t);
+            Debug.Log("contrl effect value" + FullScreenPlayerHit.GetFloat(controlEffect));
+            yield return null;
         }
+        Debug.Log("Health value after healing: " + _hp );
+    }
 
     public void DeactivateLowHealthFullScreen()
     {
@@ -141,36 +186,4 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     {
         FullScreenPlayerHit.SetFloat(controlEffect, 0);
     }
-        
 }
-
-
-
-/*
-[SerializeField] private Teams team;
-[SerializeField] private float maxHealth = 5f;
-
-public Teams Team => team;
-
-public UnityEvent onDeath;
-
-private float _hp;
-
-private void Awake()
-{
-    _hp = maxHealth;
-}
-
-public void TakeDamage(float amount, GameObject instigator)
-{
-    if (_hp <= 0f) return;
-
-    _hp -= amount;
-    if (_hp <= 0f)
-    {
-        _hp = 0f;
-        onDeath?.Invoke();
-        Debug.Log(Team + "Took Damage");
-    }
-}
-*/
