@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4242916081772813694
+--- !u!114 &-5361900588012080788
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,9 +20,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HUD_Health_MAT
+  m_Name: HUD_HealthCap_MAT
   m_Shader: {fileID: -6465566751694194690, guid: 98c31a9b39d741a4fa04c75a50b66e3c, type: 3}
-  m_Parent: {fileID: 0}
+  m_Parent: {fileID: 2100000, guid: 4e08cb66861bcc84bbadecb0816e4cc8, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -35,43 +35,16 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs:
-    - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: 64d123b2759b3664bbfcf228997b253c, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+    m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _DDX_Y_Feather: -24.77
-    - _DDX_Y_Multi: 19.08
-    - _Edge2: 2
-    - _Edge_1: 1
-    - _FillAmount: 0.8
-    - _Float: 1.56
-    - _Float_1: 0.1
-    - _OffsetSpeed: 3
-    - _QueueControl: -1
-    - _QueueOffset: 0
-    - _Scale_2: 0
-    - _Scroll_2: 0
-    - _Scroll_Speed: -0.1
-    - _Voronoi_Scale: 10.1
+    - _FillAmount: 0.775
+    - _Float: 1.24
+    - _OffsetSpeed: -3
+    - _Scroll_Speed: 0.1
+    - _Voronoi_Scale: 1.26
     m_Colors:
-    - White: {r: 1, g: 1, b: 1, a: 1}
-    - _Glow: {r: 0.5, g: 0.5, b: 0.5, a: 0}
-    - _Tiling: {r: -4.75, g: 1, b: 0, a: 0}
-    - _Vector2: {r: 1, g: 1, b: 0, a: 0}
+    - _Glow: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 0}
+    - _Tiling: {r: -4.8, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

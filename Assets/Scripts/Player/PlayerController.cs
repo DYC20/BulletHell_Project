@@ -172,6 +172,18 @@ public class PlayerController : MonoBehaviour
                 holderRotationSpeed * Time.deltaTime
             );
         }
+        
+        PlayerWeaponController pwc = GetComponent<PlayerWeaponController>();
+        if (pwc != null && pwc.equippedWeapon != null && pwc.equippedWeapon.VisualRoot != null)
+        {
+            Transform visualRoot = pwc.equippedWeapon.VisualRoot;
+
+            if (toMouse.x < 0f)
+                visualRoot.localScale = new Vector3(1f, -1f, 1f);
+            else
+                visualRoot.localScale = new Vector3(1f, 1f, 1f);
+        }
+        
         if (playerVisual != null)
         {
             SetSpriteFromDirection(toMouse);

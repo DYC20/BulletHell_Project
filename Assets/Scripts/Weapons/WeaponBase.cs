@@ -5,6 +5,9 @@ public abstract class WeaponBase : MonoBehaviour
     [Header("Fire")]
     [SerializeField] protected Transform firePoint;
     [SerializeField] protected float shotsPerSecond = 6f;
+    
+    [Header("Visuals")]
+    [SerializeField] protected Transform visualRoot;
 
     protected GameObject owner;
     protected Teams ownerTeam;
@@ -14,6 +17,7 @@ public abstract class WeaponBase : MonoBehaviour
     private float _nextFireTime;
     
     public Transform FirePoint => firePoint;
+    public Transform VisualRoot => visualRoot;
     
     public abstract AmmoType GetCurrentAmmoType();
 
