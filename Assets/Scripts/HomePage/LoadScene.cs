@@ -2,26 +2,61 @@ using System.Collections.Generic;
 using Unity.VectorGraphics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
+using Unity.Collections;
 
 public class LoadScene : MonoBehaviour
 {
     [SerializeField] private string sceneName;
     [SerializeField] private List<ParticleSystem> pressFX;
-    [SerializeField] private float duration;
+    
+    [Header("BTN Animation Settings")]
+    [SerializeField] private float scaleDuration;
+    [SerializeField] private Ease ease;
+    
+    private RectTransform buttonTF;
+    private Sequence seq;
+    private bool loadScene = false;
+
+    private void Start()
+    {
+        buttonTF = GetComponent<RectTransform>();
+        
+    }
     
     public void LoadSelectedScene()
     {
-        //StartCoroutine(PlayFX);
-        SceneManager.LoadScene(sceneName);
+        loadScene = true;
     }
 
-    /*private IEnumerator PlayFX()
+    public void PlayBTNAnimation()
     {
-        float time = duration;
+        ButtonAnimation();
+    }
+
+    private void ButtonAnimation()
+    {
+        seq?.Kill();
         
-        foreach (var effect in pressFX)
+        seq = DOTween.Sequence();
+
+        seq.Append(buttonTF.DOScale(0.5f, scaleDuration).SetEase(ease))
+            .Append(buttonTF.DOScale(1.5f, scaleDuration).SetEase(ease))
+        
+            .JoinCallback(() =>
+                {
+                    foreach (var ps in pressFX)
+                        ps.Play();
+                })
+            .Append(buttonTF.DOScale(1, scaleDuration).SetEase(ease));
+        seq.OnComplete(() =>
         {
-            
-        }
-    }*/
+            if (loadScene == true)
+            {
+                SceneManager.LoadScene(sceneName);
+            }
+        });
+
+
+    }
 }

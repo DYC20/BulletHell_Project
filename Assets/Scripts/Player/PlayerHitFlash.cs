@@ -1,18 +1,23 @@
 using UnityEngine;
 using System.Collections;
+using DG.Tweening;
 
 public class PlayerHitFlash : MonoBehaviour
 {
     [Header("Flash Settings")]
-    [SerializeField] private Color flashColor = Color.red;
-    [SerializeField] private float flashDuration = 0.08f;
+    //[SerializeField] private Color flashColor = Color.red;
+    [SerializeField] private float aberrationDuration = 0.08f;
+    [SerializeField] private float deformDuration = 0.08f;
     [SerializeField] private int flashCount = 1;
+    [SerializeField] private float aberrationAmount = 0.2f;
+    [SerializeField] private float deformAmount = 0.2f;
 
     private SpriteRenderer _renderer;
     private MaterialPropertyBlock _mpb;
-    private Coroutine _flashRoutine;
+    private Sequence seq;
 
-    private static readonly int ColorId = Shader.PropertyToID("_Color");
+    private static readonly int AberrationValueId = Shader.PropertyToID("_Aberration_Value");
+    private static readonly int DeformPosId = Shader.PropertyToID("_DeformPos");
 
     private void Awake()
     {
@@ -22,28 +27,39 @@ public class PlayerHitFlash : MonoBehaviour
 
     public void PlayFlash()
     {
-        if (_flashRoutine != null)
-            StopCoroutine(_flashRoutine);
-
-        _flashRoutine = StartCoroutine(FlashRoutine());
+        HitAnimation();
     }
 
-    private IEnumerator FlashRoutine()
+    private void HitAnimation()
     {
         for (int i = 0; i < flashCount; i++)
         {
-            SetColor(flashColor);
-            yield return new WaitForSeconds(flashDuration);
-
-            SetColor(Color.white);
-            yield return new WaitForSeconds(flashDuration);
+            seq?.Kill();
+        
+            seq = DOTween.Sequence();
+            seq.Append(SetValue(0f, aberrationAmount, aberrationDuration, AberrationValueId));
+                seq.Join(SetValue(0f, deformAmount, deformDuration, DeformPosId));
+                seq.Append(SetValue(aberrationAmount, -aberrationAmount, aberrationDuration, AberrationValueId));
+                seq.Append(SetValue(-aberrationAmount, 0f, aberrationDuration, AberrationValueId));
         }
     }
 
-    private void SetColor(Color color)
+    private Tween SetValue(float startValue, float endValue, float duration, int id)
     {
-        _renderer.GetPropertyBlock(_mpb);
-        _mpb.SetColor(ColorId, color);
-        _renderer.SetPropertyBlock(_mpb);
+        float current = startValue;
+
+        return DG.Tweening.DOTween.To(
+            () => current,
+            x =>
+            {
+                current = x;
+
+                _renderer.GetPropertyBlock(_mpb);
+                _mpb.SetFloat(id, x);
+                _renderer.SetPropertyBlock(_mpb);
+            },
+            endValue,
+            duration
+        );
     }
 }
