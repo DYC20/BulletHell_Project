@@ -11,9 +11,6 @@ TextureImporter:
   - first:
       213: 5929393088198558755
     second: idle_5_2
-  - first:
-      213: 2678588962846087872
-    second: idle_5_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -60,7 +57,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 800
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -151,12 +148,12 @@ TextureImporter:
       name: idle_5_0
       rect:
         serializedVersion: 2
-        x: 782
-        y: 321
-        width: 136
-        height: 137
+        x: 195
+        y: 80
+        width: 36
+        height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -173,12 +170,12 @@ TextureImporter:
       name: idle_5_1
       rect:
         serializedVersion: 2
-        x: 797
-        y: 263
-        width: 436
-        height: 601
+        x: 198
+        y: 65
+        width: 111
+        height: 152
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -195,12 +192,12 @@ TextureImporter:
       name: idle_5_2
       rect:
         serializedVersion: 2
-        x: 927
-        y: 262
-        width: 93
-        height: 61
+        x: 279
+        y: 80
+        width: 36
+        height: 35
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -213,46 +210,25 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: idle_5_3
-      rect:
-        serializedVersion: 2
-        x: 1118
-        y: 321
-        width: 137
-        height: 138
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0ca19bd48724c2520800000000000000
-      internalID: 2678588962846087872
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
     weights: []
-    secondaryTextures: []
+    secondaryTextures:
+    - texture: {fileID: 2800000, guid: 0098a0c8df02c084dbe55ff8c3a0e05b, type: 3}
+      name: _NormalMap
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
       idle_5_0: -3726265232208835741
       idle_5_1: -6790038452761992010
       idle_5_2: 5929393088198558755
-      idle_5_3: 2678588962846087872
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

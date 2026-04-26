@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8d6f2125ffca459419b2c126de632123
+guid: 04990e7ad7d5dd84a8be7ce6cd7a90e1
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -14,9 +14,6 @@ TextureImporter:
   - first:
       213: 8502251582909919152
     second: walk_4_3
-  - first:
-      213: -4667963709771181930
-    second: walk_4_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -63,7 +60,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 800
+  spritePixelsToUnits: 200
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -154,12 +151,12 @@ TextureImporter:
       name: walk_4_0
       rect:
         serializedVersion: 2
-        x: 802
-        y: 327
-        width: 136
-        height: 137
+        x: 200
+        y: 77
+        width: 104
+        height: 141
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -176,12 +173,12 @@ TextureImporter:
       name: walk_4_1
       rect:
         serializedVersion: 2
-        x: 820
-        y: 315
-        width: 392
-        height: 555
+        x: 221
+        y: 65
+        width: 25
+        height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -198,12 +195,12 @@ TextureImporter:
       name: walk_4_2
       rect:
         serializedVersion: 2
-        x: 1105
-        y: 327
-        width: 137
-        height: 139
+        x: 266
+        y: 65
+        width: 25
+        height: 17
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -220,12 +217,12 @@ TextureImporter:
       name: walk_4_3
       rect:
         serializedVersion: 2
-        x: 888
-        y: 262
-        width: 92
-        height: 61
+        x: 275
+        y: 81
+        width: 36
+        height: 36
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -238,39 +235,19 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: walk_4_4
-      rect:
-        serializedVersion: 2
-        x: 1067
-        y: 263
-        width: 90
-        height: 60
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6909ca6ecbf083fb0800000000000000
-      internalID: -4667963709771181930
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
     weights: []
-    secondaryTextures: []
+    secondaryTextures:
+    - texture: {fileID: 2800000, guid: d15b56983821bbe4a9097121ad70ab20, type: 3}
+      name: _NormalMap
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
@@ -278,7 +255,6 @@ TextureImporter:
       walk_4_1: -6083269604160118964
       walk_4_2: -3049543264966117275
       walk_4_3: 8502251582909919152
-      walk_4_4: -4667963709771181930
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
