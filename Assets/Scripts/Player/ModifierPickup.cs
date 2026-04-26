@@ -85,12 +85,31 @@ public class ModifierPickup : MonoBehaviour, IPickup
         if (set == null) return;
 
         var weapon = root.GetComponentInChildren<IWeaponProjectileBase>(true);
+        
         if (weapon == null || weapon.BaseConfig == null) return;
 
         weaponFXtf = weapon.WeaponFXtf;
         
-        Transform bulletDrum = ((Component)weapon).transform.Find("BulletDrum");
-        SpriteRenderer weaponRenderer = ((Component)weapon).GetComponent<SpriteRenderer>();
+        Transform bulletDrum = ((Component)weapon).transform.Find("VisualRoot/BulletDrum");
+        Component weaponComponent = (Component)weapon;
+
+        Transform mainVisual = weaponComponent.transform.Find("VisualRoot/MainVisual");
+
+        if (mainVisual == null)
+        {
+            Debug.LogError("Could not find VisualRoot/MainVisual");
+            return;
+        }
+
+        SpriteRenderer weaponRenderer = mainVisual.GetComponent<SpriteRenderer>();
+
+        if (weaponRenderer == null)
+        {
+            Debug.LogError("MainVisual has no SpriteRenderer");
+            return;
+        }
+
+        weaponRenderer.sprite = newSprite;
         
         if (bulletDrum != null)
         {

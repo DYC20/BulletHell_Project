@@ -124,7 +124,7 @@ public class PooledProjectile : MonoBehaviour
             for (int FX = 0; FX < _config.shootEffect.Count; FX++)
             {
                 VisualEffect shootFX = _config.shootEffect[FX];
-                shootEffect.Apply(shootFX, spawnTf.position, spawnTf.rotation);
+                shootEffect.Apply(shootFX, spawnTf.position, projectileOrientation);
                 //Debug.Log("ShootEffect Applied:"+ shootFX.name);
             }
            
@@ -142,7 +142,7 @@ public class PooledProjectile : MonoBehaviour
                 ParticleSystem shootFX = _config.shootEffectPS[FX];
                 //Debug.Log($"[MUZZLE PS] cfg={_config.name} index={FX} ps={(shootFX ? shootFX.name : "NULL")}");
                 if (shootFX == null) continue;
-                shootEffectPS.Apply(shootFX, spawnTf.position, spawnTf.rotation);
+                shootEffectPS.Apply(shootFX, spawnTf.position, projectileOrientation);
                 //Debug.Log("ShootEffect PS Applied:" + shootFX.name);
             }
             

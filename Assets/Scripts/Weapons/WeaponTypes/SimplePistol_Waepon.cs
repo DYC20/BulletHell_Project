@@ -101,7 +101,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     int count = Mathf.Max(1, cfg.projectilesPerShot);
     float cone = Mathf.Max(0f, cfg.spreadAngleDeg);
     
-    Vector2 baseDir = firePoint.up;
+    Vector2 baseDir = transform.up;
 
 
     int playerHighLayer = LayerMask.NameToLayer("Player_High");
