@@ -20,6 +20,8 @@ public abstract class WeaponBase : MonoBehaviour
     public Transform VisualRoot => visualRoot;
     
     public abstract AmmoType GetCurrentAmmoType();
+    
+    public virtual void ResetToDefaultProjectileData() { }
 
     public void SetOwner(GameObject ownerGo, Teams team)
     {

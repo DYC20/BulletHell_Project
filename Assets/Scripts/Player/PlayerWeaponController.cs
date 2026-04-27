@@ -53,6 +53,16 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
         }
         equippedWeapon = weapon;
         Debug.Log($" no Null Equipped weapon: {equippedWeapon.name}");
+        
+        equippedWeapon.ResetToDefaultProjectileData();
+        
+        // clear the modifier that keeps overriding the pool/config
+        var modifierSet = GetComponentInParent<ProjectileModifierSet>();
+        if (modifierSet != null)
+        {
+            modifierSet.ClearAllModifiers();
+        }
+        
         equippedWeapon.SetOwner(gameObject, Teams.Player);
         equippedWeapon.GetComponent<Collider2D>().enabled = false;
         equippedWeapon.gameObject.transform.parent = weaponSocket;

@@ -10,7 +10,6 @@ public class ProjectileModifierSet : MonoBehaviour
     public ProjectileModifierSO GetModifierFor(AmmoType ammoType)
         => _perAmmo.TryGetValue(ammoType, out var mod) ? mod : null;
 
-    /// Adds or REPLACES the modifier for this ammo type (no stacking).
     public void SetModifierFor(AmmoType ammoType, ProjectileModifierSO mod)
     {
         if (mod == null) return;
@@ -23,6 +22,13 @@ public class ProjectileModifierSet : MonoBehaviour
         _perAmmo.Remove(ammoType);
         RefreshDebugKeys();
     }
+
+    public void ClearAllModifiers()
+    {
+        _perAmmo.Clear();
+        RefreshDebugKeys();
+    }
+
     public void ApplyForCurrentAmmo(AmmoType ammoType, ref ProjectileConfigSO config, ref ObjectPool pool)
     {
         if (_perAmmo.TryGetValue(ammoType, out var mod) && mod != null)
@@ -34,6 +40,7 @@ public class ProjectileModifierSet : MonoBehaviour
         if (_perAmmo.TryGetValue(ammoType, out var mod) && mod != null)
             mod.OnHitEnemy(attacker, enemy, hitPos, hitRot);
     }
+
     private void RefreshDebugKeys()
     {
         debugKeys.Clear();
