@@ -36,10 +36,14 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     private void Awake()
     {
-        _healthBarRuntimeMaterial = healthBarImage.material;
         ResetHealth();
-        SetupHealthBarMaterial();
-        UpdateHealthBarVisual();
+        if (team == Teams.Player)
+        {
+            _healthBarRuntimeMaterial = healthBarImage.material;
+                    SetupHealthBarMaterial();
+                    UpdateHealthBarVisual();
+        }
+        
     }
 
     /// <summary>
@@ -47,15 +51,24 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     /// </summary>
     public void TakeDamage(float amount, GameObject instigator)
     {
-        if (IsDead) return;
-        if (amount <= 0f) return;
+        if (IsDead)
+        {
+            Debug.LogWarning("Cannot take damage because it is dead.");
+            return;
+        }
+
+        if (amount <= 0f)
+        {
+            Debug.LogWarning("Cannot take damage because amount is zero.");
+            return;
+        }
 
         _hp -= amount;
-
+        Debug.Log("Got Hit, Current health" + _hp + team);
         onDamaged?.Invoke(amount, instigator);
         UpdateHealthBarVisual();
 
-        if (_hp <= 3f)
+        if (_hp <= 3f && Team == Teams.Player)
         {
             Debug.Log("HP < 3");
             StartCoroutine(ActivateFullScreenLowHealth());
@@ -64,7 +77,11 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (_hp <= 0f)
         {
             _hp = 0f;
-            UpdateHealthBarVisual();
+            if (team == Teams.Player)
+            {
+                UpdateHealthBarVisual();
+            }
+            
             onDeath?.Invoke();
         }
     }
@@ -74,6 +91,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     /// </summary>
     public void ResetHealth()
     {
+        Debug.Log("Reset Health"+ team);
         _hp = maxHealth;
         UpdateHealthBarVisual();
     }

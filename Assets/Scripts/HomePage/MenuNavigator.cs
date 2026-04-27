@@ -11,6 +11,8 @@ public class MenuNavigator : MonoBehaviour
     [SerializeField] private List<Button> buttons;
     
     [SerializeField] private RectTransform pointer;
+    
+    [Header("Button Behavior")]
     [SerializeField, ColorUsage(false,true)] private Color highlightColor;
     [SerializeField] private float transitionTime;
     
