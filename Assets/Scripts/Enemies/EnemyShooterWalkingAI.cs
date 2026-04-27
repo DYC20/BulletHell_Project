@@ -13,7 +13,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
     
     [Header("Aiming")]
     [SerializeField] private Transform weaponPivot; // the transform you want to rotate (weapon root / arm / gun)
-    [SerializeField] private bool aimWithFirePointUp = true; // assumes firePoint.up is the shoot direction
+    [SerializeField] private bool aimWithFirePointUp = false; // assumes firePoint.up is the shoot direction
 
     [Header("Line of Sight")]
     //[SerializeField] private LayerMask walls;          // walls/cover layers (NOT player)
@@ -56,6 +56,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
     [SerializeField] private bool drawGizmos = true;
 
     private State state;
+    private RigidbodyType2D lastBodyType;
 
     private Vector2 startPos;
     private Vector2 combatAnchorPos;
@@ -85,6 +86,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         startPos = transform.position;
         PickNewWanderTarget();
         isEnemyGrounded = true;
+        lastBodyType = rb.bodyType;
         
         if (weapon != null)
         {
@@ -128,6 +130,19 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
                 rb.linearVelocity = Vector2.zero;
                 animator.SetTrigger("isIdle");
                 break;
+        }
+        if (rb.bodyType != lastBodyType)
+        {
+            if (rb.bodyType == RigidbodyType2D.Static)
+            {
+                animator.speed = 0f;
+            }
+            else if (rb.bodyType == RigidbodyType2D.Dynamic)
+            {
+                animator.speed = 1f;
+            }
+
+            lastBodyType = rb.bodyType;
         }
     }
     
@@ -218,7 +233,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         Vector2 dir = (target.position - weaponPivot.position);
         if (dir.sqrMagnitude < 0.0001f) return;
 
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
 
         // firePoint.up is forward → compensate for sprite orientation
         float offset = aimWithFirePointUp ? 00f : 0f;
@@ -433,7 +448,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
     {
         Vector2 pos = rb.position;
         Vector2 dir = (target - pos);
-
+        
         if (dir.sqrMagnitude <= stopThreshold * stopThreshold)
         {
             rb.linearVelocity = Vector2.zero;

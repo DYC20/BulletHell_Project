@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_MAT
-  m_Shader: {fileID: -6465566751694194690, guid: 1a7fc1442f017ca4e825fbb8245b3596, type: 3}
+  m_Name: TexturePS_SHA_02
+  m_Shader: {fileID: -6465566751694194690, guid: 33b830b4ea5dceb4d83497e5e89b36c4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,8 +24,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _MainTex:
-        m_Texture: {fileID: 0}
+    - _Texture2D:
+        m_Texture: {fileID: 2800000, guid: 523984a8de70a9244b05afa006299261, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -42,31 +42,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Aberration_Value: 0
-    - _Deform: 0.744
-    - _DeformPos: 1
-    - _DeformRot: 0
-    - _Float: 5.75
-    - _Green_Rot: -2
-    - _Noise_Scale: 30
-    - _Progression: 0.101
+    - _Multi: 1
+    - _Power: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Red_Rot: 2
-    - _Value: 2
-    - _aberation_Value: 1
-    - _blue_Rot: 4
-    m_Colors:
-    - White: {r: 1, g: 1, b: 1, a: 1}
-    - _Blue_Offset: {r: 0, g: -0.01, b: 0, a: 0}
-    - _Green_Offset: {r: 0.01, g: 0, b: 0, a: 0}
-    - _Red_Offset: {r: -0.01, g: 0, b: 0, a: 0}
-    - _Vector2: {r: 1, g: 1, b: 0, a: 0}
-    - _Vector3: {r: 0, g: 0, b: 0, a: 0}
-    - _offset: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Step_Size: 1
+    m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &7262174142540121232
+--- !u!114 &6472202784809331288
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

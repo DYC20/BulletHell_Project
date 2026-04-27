@@ -11,6 +11,12 @@ public class PlayerHitFlash : MonoBehaviour
     [SerializeField] private int flashCount = 1;
     [SerializeField] private float aberrationAmount = 0.2f;
     [SerializeField] private float deformAmount = 0.2f;
+    
+    [Header("Low HealthSettings")]
+    [SerializeField] private float _LHAberrationDuration = 0.08f;
+    [SerializeField] private float _LHDeformDuration = 0.08f;
+    [SerializeField] private float _LHAberrationAmount = 0.2f;
+    [SerializeField] private float _LHDeformAmount = 0.2f;
 
     private SpriteRenderer _renderer;
     private MaterialPropertyBlock _mpb;
@@ -30,6 +36,29 @@ public class PlayerHitFlash : MonoBehaviour
         HitAnimation();
     }
 
+    public void PlayLowHealthMaterial(float health)
+    {
+        LowHealthAnimation(health);
+    }
+
+    private void LowHealthAnimation(float health)
+    {
+        if (health <= 3f)
+        {
+           seq?.Kill();
+                   
+                   seq = DOTween.Sequence();
+                   seq.Append(SetValue(0f, _LHAberrationAmount, _LHAberrationDuration, AberrationValueId));
+                   seq.Join(SetValue(0f, _LHDeformAmount, _LHDeformDuration, DeformPosId));
+                   seq.Append(SetValue(_LHAberrationAmount, -_LHAberrationAmount, _LHAberrationDuration, AberrationValueId));
+                   seq.Append(SetValue(-_LHAberrationAmount, 0f, _LHAberrationDuration, AberrationValueId));
+                   seq.SetLoops(-1, LoopType.Yoyo); 
+        }
+        else
+        {
+            seq?.Kill();
+        }
+    }
     private void HitAnimation()
     {
         for (int i = 0; i < flashCount; i++)

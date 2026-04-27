@@ -18,6 +18,8 @@ public class ModifierRuntimeState : MonoBehaviour
     [SerializeField] public float newColorDuration;
     public static ModifierRuntimeState Instance { get; private set; }
 
+    private ScriptableObject currentModifier;
+
     public bool isIce;
     
     [HideInInspector]
@@ -107,6 +109,7 @@ public class ModifierRuntimeState : MonoBehaviour
         bool makeBodyStatic
     )
     {
+        currentModifier = modifier;
         if (modifier == null || enemy == null) return;
 
         int modKey = modifier.GetInstanceID();
@@ -175,6 +178,7 @@ public class ModifierRuntimeState : MonoBehaviour
             var rb2D = enemy.GetComponentInParent<Rigidbody2D>();
             if (snap.hasRb2D && rb2D != null)
                 rb2D.bodyType = RigidbodyType2D.Static;
+            Debug.Log("isStatic: "+ rb2D.bodyType);
         }
         
 
@@ -230,4 +234,6 @@ public class ModifierRuntimeState : MonoBehaviour
             timer += 1f;
         }
     }
+    
+    public ScriptableObject Modifier => currentModifier;
 }

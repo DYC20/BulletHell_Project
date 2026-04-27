@@ -7,10 +7,8 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     [Header("Projectile")]
     //[SerializeField] private ProjectileId projectileId = ProjectileId.SimplePistol_Bullet;         // Pool_BulletStandard
     [SerializeField] private ProjectileConfigSO projectileConfig; // PistolProjectileConfig
-
     
-
-    [SerializeField] private ObjectPool ProjectilePool;
+    [SerializeField] private ObjectPool projectilePool;
     
     [Header("Weapon")]
     [SerializeField] private Transform weaponFX_tf;
@@ -48,7 +46,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
         var set = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
         
         ProjectileConfigSO cfg = projectileConfig;
-        ObjectPool pool = ProjectilePool;
+        ObjectPool pool = projectilePool;
 
         if (set != null)
             set.ApplyForCurrentAmmo(projectileConfig.ammoType, ref cfg, ref pool);
@@ -81,7 +79,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     AmmoType currentAmmo = projectileConfig.ammoType;
   
     ProjectileConfigSO cfg = projectileConfig;
-    ObjectPool pool = ProjectilePool;
+    ObjectPool pool = projectilePool;
     
     if (set != null)
         set.ApplyForCurrentAmmo(currentAmmo, ref cfg, ref pool);
@@ -153,7 +151,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
         var set = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
 
         ProjectileConfigSO cfg = projectileConfig;
-        ObjectPool pool = ProjectilePool;
+        ObjectPool pool = projectilePool;
 
         if (set != null)
             set.ApplyForCurrentAmmo(projectileConfig.ammoType, ref cfg, ref pool);

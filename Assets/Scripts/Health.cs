@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,6 +9,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     [Header("Setup")]
     [SerializeField] private Teams team;
     [SerializeField] private float maxHealth = 5f;
+    [SerializeField] private float testHealth = 8f;
     [SerializeField] private RectTransform healthBarRect;
     [SerializeField] private RectTransform edgeSpriteRect;
     [SerializeField] private float leftPadding = 0f;
@@ -19,6 +21,9 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     [Header("FullScreen Material")]
     [SerializeField] private Material FullScreenPlayerHit;
+    
+    [Header("Low Health Material Set-up")]
+    [SerializeField] private PlayerHitFlash playerHitFlash;
 
     private string controlEffect = "_ControlEffect";
 
@@ -36,6 +41,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     private void Awake()
     {
+        //SetupHealthBarMaterial();
         ResetHealth();
         if (team == Teams.Player)
         {
@@ -46,6 +52,18 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         
     }
 
+    private void Start()
+    {
+        _hp = testHealth;
+        UpdateHealthBarVisual();
+        if (_hp <= 3f && Team == Teams.Player)
+        {
+            Debug.Log("HP < 3");
+            playerHitFlash.PlayLowHealthMaterial(_hp);
+            StartCoroutine(ActivateFullScreenLowHealth());
+        }
+    }
+
     /// <summary>
     /// Apply damage to this entity.
     /// </summary>
@@ -53,13 +71,13 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     {
         if (IsDead)
         {
-            Debug.LogWarning("Cannot take damage because it is dead.");
+            //Debug.LogWarning("Cannot take damage because it is dead.");
             return;
         }
 
         if (amount <= 0f)
         {
-            Debug.LogWarning("Cannot take damage because amount is zero.");
+            //Debug.LogWarning("Cannot take damage because amount is zero.");
             return;
         }
 
@@ -71,6 +89,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         if (_hp <= 3f && Team == Teams.Player)
         {
             Debug.Log("HP < 3");
+            playerHitFlash.PlayLowHealthMaterial(_hp);
             StartCoroutine(ActivateFullScreenLowHealth());
         }
 
@@ -91,8 +110,8 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     /// </summary>
     public void ResetHealth()
     {
-        Debug.Log("Reset Health"+ team);
         _hp = maxHealth;
+        Debug.Log("Health" + _hp + team);
         UpdateHealthBarVisual();
     }
 
@@ -143,9 +162,11 @@ public class Health : MonoBehaviour, IDamageable, IHealable
             
         ///Health bar normalized to 0-0.8, used in BarEdgeFollower
         float normalizedHealth = Mathf.Clamp01(_hp / maxHealth);
+        Debug.Log("NormalizedHealth: " + normalizedHealth);
         _healthBarRuntimeMaterial.SetFloat(healthFillProperty, normalizedHealth * 0.8f);
         BarEdgeFollower edgeFollower = edgeSpriteRect.GetComponent<BarEdgeFollower>();
         edgeFollower.SetNormalized(normalizedHealth);
+        
         
        /* if (healthBarRect != null && edgeSpriteRect != null)
         {

@@ -424,7 +424,7 @@ public class PooledProjectile : MonoBehaviour
 
     // direct-hit damage
     damageable.TakeDamage(_config.damage, _owner);
-    Debug.Log("Take Damage Owner Variable:" + _owner.name);
+    //Debug.Log("Take Damage Owner Variable:" + _owner.name);
 
     if (_config.destroyOnHit)
     {

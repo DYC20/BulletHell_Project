@@ -14,13 +14,16 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
     [SerializeField] private Image weaponImage;
     [SerializeField] public ShockWave shockWave;
 
-    
+    private ModifierRuntimeState modifierRunTimeState;
+    private ScriptableObject currentModifier;
 
     private bool _isFiring;
     public Transform CurrentFirePoint { get; private set; }
 
     private void Awake()
     {
+        if (modifierRunTimeState == null)
+            modifierRunTimeState = GetComponent<ModifierRuntimeState>();
         if (ammoInventory == null)
             ammoInventory = GetComponentInParent<AmmoInventory>();
         if (equippedWeapon == null)
@@ -30,6 +33,8 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
 
         if (equippedWeapon != null)
             Equip(equippedWeapon);
+        currentModifier = modifierRunTimeState.Modifier;
+        modifierRunTimeState.ClearModifier(currentModifier);
         // else
         //Debug.LogWarning("PlayerWeaponController: No WeaponBase found under player.");
     }
@@ -39,6 +44,7 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
         if (equippedWeapon != null)
         {
             GameObject oldWeapon = equippedWeapon.gameObject;
+            modifierRunTimeState.ClearModifier(currentModifier);
             Destroy( oldWeapon);
             /* Debug.Log($" is Null Equipped weapon: {equippedWeapon.name}");
             equippedWeapon.transform.SetParent(null, true);

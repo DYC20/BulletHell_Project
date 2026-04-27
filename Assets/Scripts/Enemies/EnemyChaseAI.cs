@@ -1,3 +1,4 @@
+using UnityEditor.Recorder;
 using UnityEngine;
 
 public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
@@ -115,8 +116,14 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
                // float a = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
                 // 4-way thresholds at 45 degrees
-                if (targetAngle >= -180f && targetAngle < 180f)              renderer.sprite = spriteRight;
-                else                                   renderer.sprite = spriteLeft;
+                if (targetAngle >= -180f && targetAngle < 180f)
+                {
+                    this.transform.localScale = new Vector3(-1f, 1f, 1f);
+                }
+                else
+                {
+                    this.transform.localScale = new Vector3(1f, 1f, 1f);
+                }
             }
         }
     }

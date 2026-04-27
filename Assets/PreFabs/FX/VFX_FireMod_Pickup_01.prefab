@@ -63,7 +63,7 @@ VisualEffect:
       m_Array: []
     m_Vector4f:
       m_Array:
-      - m_Value: {x: 0.8696203, y: 0.09459146, z: 0.08614163, w: 1}
+      - m_Value: {x: 7.791516, y: 1.9564388, z: 1.5803547, w: 1}
         m_Name: Pulse Color
         m_Overridden: 1
     m_Uint:
@@ -80,15 +80,15 @@ VisualEffect:
           - serializedVersion: 3
             time: 0
             value: 0
-            inSlope: 5.065047
-            outSlope: 5.065047
+            inSlope: 8.450442
+            outSlope: 8.450442
             tangentMode: 0
-            weightedMode: 0
+            weightedMode: 3
             inWeight: 0
-            outWeight: 0.053822372
+            outWeight: 0.292074
           - serializedVersion: 3
-            time: 0.50172853
-            value: 0.32826614
+            time: 0.4893618
+            value: 0.5304941
             inSlope: 0.179587
             outSlope: -0.15638188
             tangentMode: 1
@@ -139,8 +139,8 @@ VisualEffect:
       m_Array:
       - m_Value:
           serializedVersion: 2
-          key0: {r: 2.8679247, g: 0.6237166, b: 0.55013597, a: 1}
-          key1: {r: 2.8679247, g: 0.6237166, b: 0.55013597, a: 1}
+          key0: {r: 0.8018868, g: 0.374466, b: 0.39023194, a: 1}
+          key1: {r: 8, g: 2.0944846, b: 0, a: 1}
           key2: {r: 0, g: 0, b: 0, a: 0}
           key3: {r: 0, g: 0, b: 0, a: 0}
           key4: {r: 0, g: 0, b: 0, a: 0}
@@ -164,7 +164,7 @@ VisualEffect:
           atime6: 0
           atime7: 0
           m_Mode: 0
-          m_ColorSpace: -1
+          m_ColorSpace: 1
           m_NumColorKeys: 2
           m_NumAlphaKeys: 2
         m_Name: Color
