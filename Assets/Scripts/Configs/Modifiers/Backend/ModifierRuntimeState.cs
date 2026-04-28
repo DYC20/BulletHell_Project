@@ -6,10 +6,9 @@ using UnityEngine.VFX;
 
 public class ModifierRuntimeState : MonoBehaviour
 {
-    // modifier -> enemy -> hit count
     private readonly Dictionary<int, Dictionary<int, int>> _hitCounts = new();
-    
-    [Header("UpdateUI")] 
+
+    [Header("UpdateUI")]
     [SerializeField] public Image weaponBG;
     [SerializeField] public ParticleSystem weaponBGFX;
     [SerializeField] public Gradient newFireBGFXColor;
@@ -19,15 +18,20 @@ public class ModifierRuntimeState : MonoBehaviour
     [SerializeField] public Color fireNewColor;
     [SerializeField] public Color iceNewColor;
     [SerializeField] public float newColorDuration;
+
     public static ModifierRuntimeState Instance { get; private set; }
 
     private ScriptableObject currentModifier;
 
     public bool isIce;
-    
-    [HideInInspector]
-    public bool isModified;
-    
+
+    [HideInInspector] public bool isModified;
+
+    private Color defaultWeaponBGColor;
+    private Gradient defaultBGFXGradient;
+    private Coroutine uiRoutine;
+    private bool defaultsCached;
+
     private class Snapshot
     {
         public bool hasMove;
@@ -35,7 +39,7 @@ public class ModifierRuntimeState : MonoBehaviour
 
         public bool hasFire;
         public float fireInterval;
-        
+
         public bool hasRb2D;
         public RigidbodyType2D rb2DType;
 
@@ -43,23 +47,141 @@ public class ModifierRuntimeState : MonoBehaviour
         public Coroutine damageRoutine;
     }
 
-    // modifier -> enemy -> snapshot
     private readonly Dictionary<int, Dictionary<int, Snapshot>> _snapshots = new();
 
     private void Awake()
     {
         Instance = this;
+        CacheUIDefaults();
+    }
+
+    private void CacheUIDefaults()
+    {
+        if (defaultsCached) return;
+
+        if (weaponBG != null)
+            defaultWeaponBGColor = weaponBG.color;
+
+        if (weaponBGFX != null)
+        {
+            var colorOverLifetime = weaponBGFX.colorOverLifetime;
+            colorOverLifetime.enabled = true;
+            defaultBGFXGradient = CopyGradient(colorOverLifetime.color.gradient);
+        }
+
+        defaultsCached = true;
+    }
+
+    public void AnimateUIToModifier(bool ice)
+    {
+        CacheUIDefaults();
+
+        Color targetBGColor = ice ? iceNewColor : fireNewColor;
+        Gradient targetGradient = ice ? newIceBGFXColor : newFireBGFXColor;
+
+        AnimateUITo(targetBGColor, targetGradient);
+    }
+
+    public void AnimateUIToDefault()
+    {
+        CacheUIDefaults();
+        AnimateUITo(defaultWeaponBGColor, defaultBGFXGradient);
+    }
+
+    private void AnimateUITo(Color targetBGColor, Gradient targetGradient)
+    {
+        if (uiRoutine != null)
+            StopCoroutine(uiRoutine);
+
+        uiRoutine = StartCoroutine(AnimateUICoroutine(targetBGColor, targetGradient));
+    }
+
+    private IEnumerator AnimateUICoroutine(Color targetBGColor, Gradient targetGradient)
+    {
+        if (weaponBG == null || weaponBGFX == null || targetGradient == null)
+            yield break;
+
+        float timer = 0f;
+
+        Color startBGColor = weaponBG.color;
+
+        var colorOverLifetime = weaponBGFX.colorOverLifetime;
+        colorOverLifetime.enabled = true;
+
+        Gradient startGradient = CopyGradient(colorOverLifetime.color.gradient);
+
+        while (timer < newColorDuration)
+        {
+            timer += Time.deltaTime;
+
+            float t = timer / newColorDuration;
+            t = Mathf.SmoothStep(0f, 1f, t);
+
+            weaponBG.color = Color.Lerp(startBGColor, targetBGColor, t);
+
+            Gradient lerpedGradient = LerpGradient(startGradient, targetGradient, t);
+            colorOverLifetime.color = new ParticleSystem.MinMaxGradient(lerpedGradient);
+
+            yield return null;
+        }
+
+        weaponBG.color = targetBGColor;
+        colorOverLifetime.color = new ParticleSystem.MinMaxGradient(targetGradient);
+    }
+
+    private Gradient LerpGradient(Gradient from, Gradient to, float t)
+    {
+        Gradient result = new Gradient();
+
+        GradientColorKey[] fromColors = from.colorKeys;
+        GradientColorKey[] toColors = to.colorKeys;
+
+        GradientAlphaKey[] fromAlphas = from.alphaKeys;
+        GradientAlphaKey[] toAlphas = to.alphaKeys;
+
+        int colorCount = Mathf.Min(fromColors.Length, toColors.Length);
+        int alphaCount = Mathf.Min(fromAlphas.Length, toAlphas.Length);
+
+        GradientColorKey[] resultColors = new GradientColorKey[colorCount];
+        GradientAlphaKey[] resultAlphas = new GradientAlphaKey[alphaCount];
+
+        for (int i = 0; i < colorCount; i++)
+        {
+            resultColors[i] = new GradientColorKey(
+                Color.Lerp(fromColors[i].color, toColors[i].color, t),
+                Mathf.Lerp(fromColors[i].time, toColors[i].time, t)
+            );
+        }
+
+        for (int i = 0; i < alphaCount; i++)
+        {
+            resultAlphas[i] = new GradientAlphaKey(
+                Mathf.Lerp(fromAlphas[i].alpha, toAlphas[i].alpha, t),
+                Mathf.Lerp(fromAlphas[i].time, toAlphas[i].time, t)
+            );
+        }
+
+        result.SetKeys(resultColors, resultAlphas);
+        return result;
+    }
+
+    private Gradient CopyGradient(Gradient source)
+    {
+        Gradient copy = new Gradient();
+        copy.SetKeys(source.colorKeys, source.alphaKeys);
+        return copy;
     }
 
     public void SetIce(bool value)
     {
         isIce = value;
     }
+
     public void SetModifiedState(bool value)
     {
         isModified = value;
     }
-    
+
     public int IncrementHit(ScriptableObject modifier, GameObject enemy)
     {
         if (modifier == null || enemy == null) return 0;
@@ -99,15 +221,13 @@ public class ModifierRuntimeState : MonoBehaviour
         _snapshots.Remove(modKey);
     }
 
-    /// Applies timed debuff using baseline snapshot (per modifier+enemy).
-    /// If already active, it refreshes the timer but keeps the original baseline.
     public void ApplyTimedDebuff(
         ScriptableObject modifier,
         GameObject enemy,
         GameObject damageFX,
         float moveSpeedMul,
         float fireIntervalMul,
-        float durationSeconds, 
+        float durationSeconds,
         float damage,
         bool makeBodyStatic
     )
@@ -141,7 +261,7 @@ public class ModifierRuntimeState : MonoBehaviour
                 snap.hasFire = true;
                 snap.fireInterval = fire.FireInterval;
             }
-            
+
             var rb2D = enemy.GetComponentInParent<Rigidbody2D>();
             if (rb2D != null)
             {
@@ -149,15 +269,12 @@ public class ModifierRuntimeState : MonoBehaviour
                 snap.rb2DType = rb2D.bodyType;
             }
 
-
             perEnemy.Add(enemyKey, snap);
         }
 
-        // refresh timer
         if (snap.revertRoutine != null)
             StopCoroutine(snap.revertRoutine);
 
-        // apply modified values (only supported capabilities)
         var m = enemy.GetComponentInParent<IEnemyMoveSpeed>();
         if (snap.hasMove && m != null) m.MoveSpeed = snap.move * moveSpeedMul;
 
@@ -165,29 +282,23 @@ public class ModifierRuntimeState : MonoBehaviour
         if (snap.hasFire && f != null) f.FireInterval = snap.fireInterval * fireIntervalMul;
 
         var d = enemy.GetComponentInParent<IDamageable>();
-        if (d == null)
-        {
-            Debug.Log("IDamageable is null");
-        }
         if (d != null && durationSeconds > 0 && damage > 0)
         {
             if (snap.damageRoutine != null)
                 StopCoroutine(snap.damageRoutine);
 
-            snap.damageRoutine = StartCoroutine(DamageOverTime(enemy, damage,damageFX, durationSeconds, modifier));
+            snap.damageRoutine = StartCoroutine(DamageOverTime(enemy, damage, damageFX, durationSeconds, modifier));
         }
+
         if (makeBodyStatic)
         {
             var rb2D = enemy.GetComponentInParent<Rigidbody2D>();
             if (snap.hasRb2D && rb2D != null)
                 rb2D.bodyType = RigidbodyType2D.Static;
-            Debug.Log("isStatic: "+ rb2D.bodyType);
         }
-        
 
         snap.revertRoutine = StartCoroutine(RevertAfter(modKey, enemyKey, enemy, durationSeconds));
     }
-    
 
     private IEnumerator RevertAfter(int modKey, int enemyKey, GameObject enemy, float duration)
     {
@@ -202,11 +313,11 @@ public class ModifierRuntimeState : MonoBehaviour
 
         var f = enemy.GetComponentInParent<IEnemyFireInterval>();
         if (snap.hasFire && f != null) f.FireInterval = snap.fireInterval;
-        
+
         var rb2D = enemy.GetComponentInParent<Rigidbody2D>();
         if (snap.hasRb2D && rb2D != null)
             rb2D.bodyType = snap.rb2DType;
-        
+
         if (snap.damageRoutine != null)
             StopCoroutine(snap.damageRoutine);
 
@@ -214,7 +325,7 @@ public class ModifierRuntimeState : MonoBehaviour
         if (perEnemy.Count == 0) _snapshots.Remove(modKey);
     }
 
-    private IEnumerator DamageOverTime(GameObject enemy, float damagePerSecond,GameObject damageFX, float duration, ScriptableObject modifier)
+    private IEnumerator DamageOverTime(GameObject enemy, float damagePerSecond, GameObject damageFX, float duration, ScriptableObject modifier)
     {
         float timer = 0f;
 
@@ -227,16 +338,16 @@ public class ModifierRuntimeState : MonoBehaviour
             if (d != null)
             {
                 d.TakeDamage(damagePerSecond, null);
+
                 Transform enemyVisualMiddle = enemy.transform.Find("EnemyVisualMiddle");
-                Instantiate(damageFX, enemyVisualMiddle.transform.position, Quaternion.identity);
-                Debug.Log($"Damage From Modifier: {modifier.name}, Amount: {damagePerSecond}");
+                if (enemyVisualMiddle != null && damageFX != null)
+                    Instantiate(damageFX, enemyVisualMiddle.position, Quaternion.identity);
             }
 
             yield return new WaitForSeconds(1f);
-
             timer += 1f;
         }
     }
-    
+
     public ScriptableObject Modifier => currentModifier;
 }

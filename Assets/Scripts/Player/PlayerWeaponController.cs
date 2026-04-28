@@ -62,6 +62,17 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
         {
             modifierSet.ClearAllModifiers();
         }
+        if (modifierRunTimeState != null)
+        {
+            modifierRunTimeState.SetModifiedState(false);
+            modifierRunTimeState.AnimateUIToDefault();
+
+            if (modifierRunTimeState.fireUIEffect != null)
+                modifierRunTimeState.fireUIEffect.Reinit();
+
+            if (modifierRunTimeState.iceUIEffect != null)
+                modifierRunTimeState.iceUIEffect.Reinit();
+        }
         
         equippedWeapon.SetOwner(gameObject, Teams.Player);
         equippedWeapon.GetComponent<Collider2D>().enabled = false;
