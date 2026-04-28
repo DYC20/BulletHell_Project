@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
@@ -87,6 +88,7 @@ public class WhirlpoolAnimManager : MonoBehaviour
         pulse.Play();
         swearl.Play();
         genericObjectsPS.SetActive(true);
+        
 
         activeSequence.SetLink(gameObject);
     }
@@ -108,6 +110,20 @@ public class WhirlpoolAnimManager : MonoBehaviour
         mpb.SetFloat(ShaderIDs.NoiseAmount_02, 0f);
 
         renderer.SetPropertyBlock(mpb);
+    }
+
+    /// <summary>
+    /// swiched to stop with PS duration
+    /// </summary>
+    public void StopGenericPS()
+    {
+        List<ParticleSystem> psL = new(
+            genericObjectsPS.GetComponentsInChildren<ParticleSystem>());
+        foreach (ParticleSystem ps in psL)
+        {
+            ps.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+        }
+        Debug.Log("GenericPS stopped");
     }
 
     private void SetFloat(int propertyID, float value)

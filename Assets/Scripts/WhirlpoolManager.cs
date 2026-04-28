@@ -29,6 +29,9 @@ public class WhirlpoolManager : MonoBehaviour
 
     [Header("Consume")]
     [SerializeField] private float deathRadius = 0.2f;
+    
+    [SerializeField] private WhirlpoolAnimManager _WAM;
+    
 
     private float _elapsed;
     private bool _running;
