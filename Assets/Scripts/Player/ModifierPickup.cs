@@ -12,8 +12,14 @@ public class ModifierPickup : MonoBehaviour, IPickup
 
     private GameObject currentPicker;
 
+    /// <summary>
+    /// assigned in runtimestate
+    /// </summary>
     [Header("UpdateUI")] 
      private Image weaponBG;
+     private ParticleSystem weaponBGFX;
+     private Gradient newFireBGFXColor;
+     private Gradient newIceBGFXColor;
      private VisualEffect fireUIEffect;
      private VisualEffect iceUIEffect;
      private Color newColor;
@@ -46,6 +52,8 @@ public class ModifierPickup : MonoBehaviour, IPickup
      private bool revolverOrShotgun;
      private VisualEffect currentWeaponFX;
      private Sprite newSprite;
+     private ParticleSystem.ColorOverLifetimeModule colorOverLifetime;
+     private ParticleSystem.ColorOverLifetimeModule defaultColorOverLifetime;
 
     public bool CanPickup(GameObject picker)
     {
@@ -200,6 +208,7 @@ public class ModifierPickup : MonoBehaviour, IPickup
     private void AssignUIElements()
     {
         weaponBG = currentPicker.GetComponentInChildren<ModifierRuntimeState>().weaponBG;
+        weaponBGFX = currentPicker.GetComponentInChildren<ModifierRuntimeState>().weaponBGFX;
         newColorDuration = currentPicker.GetComponentInChildren<ModifierRuntimeState>().newColorDuration;
         fireUIEffect = currentPicker.GetComponentInChildren<ModifierRuntimeState>().fireUIEffect;
         iceUIEffect = currentPicker.GetComponentInChildren<ModifierRuntimeState>().iceUIEffect;
@@ -207,27 +216,38 @@ public class ModifierPickup : MonoBehaviour, IPickup
         if (isIce)
         {
             newColor = currentPicker.GetComponentInChildren<ModifierRuntimeState>().iceNewColor;
+            newIceBGFXColor = currentPicker.GetComponentInChildren<ModifierRuntimeState>().newIceBGFXColor;
         }
         else
         {
             newColor = currentPicker.GetComponentInChildren<ModifierRuntimeState>().fireNewColor;
+            newFireBGFXColor = currentPicker.GetComponentInChildren<ModifierRuntimeState>().newFireBGFXColor;
         }
-            
-        
     }
 
     IEnumerator ChangeUIColor()
     {
         float timer = 0f;
         Color startColor = weaponBG.color;
+        
+        colorOverLifetime = weaponBGFX.colorOverLifetime;
+        defaultColorOverLifetime = colorOverLifetime;
+        colorOverLifetime.enabled = true;
+        
+        Gradient startGradient = colorOverLifetime.color.gradient;
+        Gradient targetGradient = isIce ? newIceBGFXColor : newFireBGFXColor;
 
         while (timer < newColorDuration)
         {
             timer += Time.deltaTime;
             float t = timer / newColorDuration;
             t = Mathf.SmoothStep(0f, 1f, t);
-
+            
             weaponBG.color = Color.Lerp(startColor, newColor, t);
+            
+           
+            Gradient lerpedGradient = LerpGradient(startGradient, targetGradient, t);
+            colorOverLifetime.color = new ParticleSystem.MinMaxGradient(lerpedGradient);
 
             yield return null;
         }
@@ -237,5 +257,42 @@ public class ModifierPickup : MonoBehaviour, IPickup
         if (destroyAfterPickup)
             Destroy(gameObject);
     }
- 
+    public Gradient LerpGradient(Gradient from, Gradient to, float t)
+    {
+        Gradient result = new Gradient();
+
+        GradientColorKey[] fromColors = from.colorKeys;
+        GradientColorKey[] toColors = to.colorKeys;
+
+        GradientAlphaKey[] fromAlphas = from.alphaKeys;
+        GradientAlphaKey[] toAlphas = to.alphaKeys;
+
+        int colorCount = Mathf.Min(fromColors.Length, toColors.Length);
+        int alphaCount = Mathf.Min(fromAlphas.Length, toAlphas.Length);
+
+        GradientColorKey[] resultColors = new GradientColorKey[colorCount];
+        GradientAlphaKey[] resultAlphas = new GradientAlphaKey[alphaCount];
+
+        for (int i = 0; i < colorCount; i++)
+        {
+            resultColors[i] = new GradientColorKey(
+                Color.Lerp(fromColors[i].color, toColors[i].color, t),
+                Mathf.Lerp(fromColors[i].time, toColors[i].time, t)
+            );
+        }
+
+        for (int i = 0; i < alphaCount; i++)
+        {
+            resultAlphas[i] = new GradientAlphaKey(
+                Mathf.Lerp(fromAlphas[i].alpha, toAlphas[i].alpha, t),
+                Mathf.Lerp(fromAlphas[i].time, toAlphas[i].time, t)
+            );
+        }
+
+        result.SetKeys(resultColors, resultAlphas);
+        return result;
+    }
+
+    public ParticleSystem.ColorOverLifetimeModule DefaultColorOverLifetime => defaultColorOverLifetime;
+
 }

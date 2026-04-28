@@ -11,6 +11,9 @@ public class ModifierRuntimeState : MonoBehaviour
     
     [Header("UpdateUI")] 
     [SerializeField] public Image weaponBG;
+    [SerializeField] public ParticleSystem weaponBGFX;
+    [SerializeField] public Gradient newFireBGFXColor;
+    [SerializeField] public Gradient newIceBGFXColor;
     [SerializeField] public VisualEffect fireUIEffect;
     [SerializeField] public VisualEffect iceUIEffect;
     [SerializeField] public Color fireNewColor;

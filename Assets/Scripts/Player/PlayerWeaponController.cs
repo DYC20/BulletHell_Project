@@ -105,9 +105,9 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
 
         var weapon = weaponPrefab.GetComponent<WeaponBase>();
         Equip(weapon);
-        
-        weaponImage.sprite = equippedWeapon.GetComponentInParent<SpriteRenderer>().sprite;
-Debug.Log("UI weapon sprite changed");
+
+        weaponImage.sprite = equippedWeapon.GetComponent<SimplePistol_Waepon>().UIImage;
+        Debug.Log("UI weapon sprite changed");
         CurrentFirePoint = (weapon != null) ? weapon.FirePoint : null;
     }
 

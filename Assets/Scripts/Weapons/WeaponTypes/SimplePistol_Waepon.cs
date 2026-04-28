@@ -12,13 +12,15 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     private ObjectPool defaultProjectilePool;
     private bool defaultsCached;
 
-    [Header("Weapon")]
+    [Header("Weapon")] 
+    [SerializeField] private Sprite weaponUI;
     [SerializeField] private Transform weaponFX_tf;
     [SerializeField] private bool isRevolver;
     [SerializeField] private bool isShotgun;
     [SerializeField] private bool isGrenade;
 
     private SpriteRenderer rd;
+    
 
     private int projectileLowLayer;
     private int projectileHighLayer;
@@ -37,7 +39,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
         projectileLowLayer = LayerMask.NameToLayer("Projectile_Low");
         projectileHighLayer = LayerMask.NameToLayer("Projectile_High");
     }
-
+    
     private void CacheDefaultsIfNeeded()
     {
         if (defaultsCached) return;
@@ -190,6 +192,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     public bool Revolver => isRevolver;
     public bool Shotgun => isShotgun;
     public bool Grenade => isGrenade;
+    public Sprite UIImage => weaponUI;
 
     public Sprite WeaponImage => rd != null ? rd.sprite : null;
 }
