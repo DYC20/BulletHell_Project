@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,9 +19,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject playerFX;
     [SerializeField] private Color walkingColorRoad;
     [SerializeField] private Color walkingColorGrass;
-    [SerializeField] private GameObject Footprint;
-    [SerializeField] private Vector3 footprint_01Offset;
-    [SerializeField] private Vector3 footprint_02Offset;
 
     private ParticleSystem walkingFX;
     private LayerMask roadLayer;
@@ -141,7 +139,6 @@ public class PlayerController : MonoBehaviour
         UpdateWalkingSurface();
         if (isWalking)
         {
-            CreateFootprint();
             if (!walkingFX.isPlaying)
                 walkingFX.Play();
         }
@@ -259,13 +256,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void CreateFootprint()
-    {
-        Vector3 FootPos1 = playerFX.transform.position + footprint_01Offset;
-        Vector3 FootPos2 = playerFX.transform.position + footprint_02Offset;
-        Instantiate(Footprint, FootPos1, Quaternion.identity);
-        Instantiate(Footprint, FootPos2, Quaternion.identity);
-    }
+
 
 }
 
