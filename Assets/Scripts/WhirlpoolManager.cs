@@ -63,6 +63,7 @@ public class WhirlpoolManager : MonoBehaviour
 
     public void Begin()
     {
+        Debug.LogWarning("Begin Pull Sequence");
         if (vortexCenter == null)
             vortexCenter = transform;
 
@@ -107,6 +108,7 @@ public class WhirlpoolManager : MonoBehaviour
 
     private void CollectSceneTargets()
     {
+        Debug.LogWarning("Collect Scene Targets");
         Renderer[] renderers = FindObjectsByType<Renderer>(FindObjectsSortMode.None);
 
         foreach (var r in renderers)
@@ -158,6 +160,7 @@ public class WhirlpoolManager : MonoBehaviour
 
     private void UpdateTargets()
     {
+        Debug.LogWarning("Update Targets");
         Vector2 center = vortexCenter.position;
 
         for (int i = 0; i < _targets.Count; i++)

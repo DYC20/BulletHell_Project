@@ -16,6 +16,7 @@ public class WhirlpoolSequenceCoordinator : MonoBehaviour
 
     private float timer;
 
+    private bool sequenceStarted;
     private bool animationStarted;
     private bool pullStarted;
     private bool collapseTriggered;
@@ -33,13 +34,22 @@ public class WhirlpoolSequenceCoordinator : MonoBehaviour
     {
         timer = 0f;
 
+        sequenceStarted = true;
         animationStarted = false;
         pullStarted = false;
         collapseTriggered = false;
+
+        Debug.LogWarning(
+            "BeginSequence on: " + gameObject.name +
+            " instanceID: " + GetInstanceID() +
+            " scene time: " + Time.time);
     }
 
     private void Update()
     {
+        //if (!sequenceStarted) return;
+           
+        
         timer += Time.deltaTime;
 
         // 1. Start animation
@@ -47,6 +57,15 @@ public class WhirlpoolSequenceCoordinator : MonoBehaviour
         {
             whirlpoolAnimManager?.PlaySequence();
             animationStarted = true;
+            Debug.LogWarning("Animation Started");
+            Debug.LogWarning("animation Start Delay: " + animationStartDelay);
+            Debug.LogWarning("Time at animation begin: " + timer);
+            Debug.LogWarning(
+                "Animation Started on: " + gameObject.name +
+                " instanceID: " + GetInstanceID() +
+                " timer: " + timer +
+                " scene time: " + Time.time
+            );
         }
 
         // 2. Start pull
@@ -54,6 +73,9 @@ public class WhirlpoolSequenceCoordinator : MonoBehaviour
         {
             whirlpoolManager?.PullSeqUence();
             pullStarted = true;
+            Debug.LogWarning("Pull Called");
+            Debug.LogWarning("pullSequenceDelay: " + pullSequenceDelay);
+            Debug.LogWarning("Time at pull begin: " + timer);
         }
 
         // 3. Start collapse
@@ -61,6 +83,9 @@ public class WhirlpoolSequenceCoordinator : MonoBehaviour
         {
             onCollapsePhaseReached.Invoke();
             collapseTriggered = true;
+            Debug.LogWarning("Collapse Triggered");
+            Debug.LogWarning("collapsePhaseDelay: " + collapsePhaseDelay);
+            Debug.LogWarning("Time at collapse begin: " + timer);
         }
     }
 }

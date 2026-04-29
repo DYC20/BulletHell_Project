@@ -37,10 +37,13 @@ public class RumbleImpulseManager : MonoBehaviour
     public void PlaySequence()
     {
         StartCoroutine(ImpulseSequence());
+        Debug.LogWarning("WhirlpoolAnimManager.PlaySequence called on frame " + Time.frameCount);
     }
 
     private IEnumerator ImpulseSequence()
-    {
+    { 
+       
+        
         float timer = 0f;
 
         while (timer < rumbleDuration)
@@ -49,7 +52,7 @@ public class RumbleImpulseManager : MonoBehaviour
             yield return new WaitForSeconds(rumbleInterval);
             timer += rumbleInterval;
         }
-
+        
         buildup.GenerateImpulse(Vector3.left);
 
         yield return new WaitForSeconds(0.35f);
@@ -57,13 +60,17 @@ public class RumbleImpulseManager : MonoBehaviour
         breakImpulse.GenerateImpulse(Vector3.down);
 
         yield return new WaitForSeconds(0.2f);
-
-        StartCoroutine(LowRumbleLoop());
         
         GameObject whirlpoolInstance = Instantiate(whirlpoolPrfab, GetRandomWorldPosition(), Quaternion.identity);
-
+        
+        Debug.LogWarning(
+            "Instantiated whirlpool: " + whirlpoolInstance.name +
+            " instanceID: " + currentWhirlpoolCoordinator.GetInstanceID() +
+            " scene time: " + Time.time
+        );
+     
         currentWhirlpoolCoordinator = whirlpoolInstance.GetComponent<WhirlpoolSequenceCoordinator>();
-
+        
         if (currentWhirlpoolCoordinator != null)
         {
             currentWhirlpoolCoordinator.onCollapsePhaseReached.RemoveListener(OnCollapsePhaseReached);
@@ -74,6 +81,10 @@ public class RumbleImpulseManager : MonoBehaviour
         {
             Debug.LogWarning("WhirlpoolSequenceCoordinator missing on whirlpool prefab root.");
         }
+    
+
+        StartCoroutine(LowRumbleLoop());
+        
     }
 
     private IEnumerator LowRumbleLoop()
