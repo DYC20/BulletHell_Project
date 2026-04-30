@@ -93,11 +93,7 @@ public class UIRenderTextureProxySpawner : MonoBehaviour
                 float screenX = spriteRect.x + spriteRect.width * 0.5f;
                 float screenY = spriteRect.y + spriteRect.height * 0.5f;
 
-                Vector3 worldPos = worldCamera.ScreenToWorldPoint(
-                    new Vector3(screenX, screenY, Mathf.Abs(worldCamera.transform.position.z))
-                );
-
-                worldPos.z = 0f;
+                Vector3 worldPos = ScreenToWorldAtZ0(screenX, screenY);
 
                 GameObject tile = new GameObject("UI_Texture_Tile");
                 tile.transform.position = worldPos;
@@ -110,5 +106,16 @@ public class UIRenderTextureProxySpawner : MonoBehaviour
                 manager.RegisterExternalTarget(tile.transform);
             }
         }
+    }
+    private Vector3 ScreenToWorldAtZ0(float screenX, float screenY)
+    {
+        float distanceFromCameraToZ0 = -worldCamera.transform.position.z;
+
+        Vector3 worldPos = worldCamera.ScreenToWorldPoint(
+            new Vector3(screenX, screenY, distanceFromCameraToZ0)
+        );
+
+        worldPos.z = 0f;
+        return worldPos;
     }
 }
