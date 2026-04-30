@@ -47,7 +47,7 @@ public class WhirlpoolSequenceCoordinator : MonoBehaviour
 
     private void Update()
     {
-        //if (!sequenceStarted) return;
+        if (!sequenceStarted) return;
            
         
         timer += Time.deltaTime;

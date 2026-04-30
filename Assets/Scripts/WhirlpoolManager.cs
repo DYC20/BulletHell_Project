@@ -89,6 +89,10 @@ public class WhirlpoolManager : MonoBehaviour
 
         if (_activeTargets <= 0)
             _running = false;
+        else
+        {
+            _running = true;
+        }
     }
 
     public void RegisterExternalTarget(Transform t)
@@ -209,6 +213,7 @@ public class WhirlpoolManager : MonoBehaviour
 
     private void Consume(TargetData target)
     {
+        Debug.LogWarning("Active Target:" + _activeTargets);
         target.consumed = true;
         _activeTargets--;
 

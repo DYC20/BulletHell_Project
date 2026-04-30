@@ -20,8 +20,9 @@ public class RumbleImpulseManager : MonoBehaviour
     [SerializeField] private GameObject whirlpoolPrfab;
     [SerializeField] private GameObject hUDCanvas;
     [SerializeField] private GameObject tilemapGrid;
+    [SerializeField] private UIRenderTextureProxySpawner uiTexProxySpawner;
 
-    private UICollapseController uICollapseController;
+    //private UICollapseController uICollapseController;
     private TilemapProxySpawner proxySpawner;
     private Camera cam;
 
@@ -30,7 +31,7 @@ public class RumbleImpulseManager : MonoBehaviour
     private void Start()
     {
         cam = Camera.main;
-        uICollapseController = hUDCanvas.GetComponent<UICollapseController>();
+        //uICollapseController = hUDCanvas.GetComponent<UICollapseController>();
         proxySpawner = tilemapGrid.GetComponent<TilemapProxySpawner>();
     }
 
@@ -42,8 +43,6 @@ public class RumbleImpulseManager : MonoBehaviour
 
     private IEnumerator ImpulseSequence()
     { 
-       
-        
         float timer = 0f;
 
         while (timer < rumbleDuration)
@@ -63,14 +62,13 @@ public class RumbleImpulseManager : MonoBehaviour
         
         GameObject whirlpoolInstance = Instantiate(whirlpoolPrfab, GetRandomWorldPosition(), Quaternion.identity);
         
-        Debug.LogWarning(
-            "Instantiated whirlpool: " + whirlpoolInstance.name +
-            " instanceID: " + currentWhirlpoolCoordinator.GetInstanceID() +
-            " scene time: " + Time.time
-        );
-     
         currentWhirlpoolCoordinator = whirlpoolInstance.GetComponent<WhirlpoolSequenceCoordinator>();
-        
+           Debug.LogWarning(
+                    "Instantiated whirlpool: " + whirlpoolInstance.name +
+                    " instanceID: " + currentWhirlpoolCoordinator.GetInstanceID() +
+                    " scene time: " + Time.time
+                );
+           
         if (currentWhirlpoolCoordinator != null)
         {
             currentWhirlpoolCoordinator.onCollapsePhaseReached.RemoveListener(OnCollapsePhaseReached);
@@ -101,8 +99,12 @@ public class RumbleImpulseManager : MonoBehaviour
 
     private void OnCollapsePhaseReached()
     {
-        uICollapseController.Begin();
+        //uiProxySpawner.SpawnUIProxies();
+        //uICollapseController.Begin();
+        
         proxySpawner.SpawnProxies();
+        
+        uiTexProxySpawner.SpawnUITextureTiles();
 
         if (currentWhirlpoolCoordinator != null)
             currentWhirlpoolCoordinator.onCollapsePhaseReached.RemoveListener(OnCollapsePhaseReached);
