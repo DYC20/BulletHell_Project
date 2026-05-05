@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
@@ -90,9 +92,15 @@ public class ModifierSO : ProjectileModifierSO
         if (state == null) return;
 
         int count = state.IncrementHit(this, enemy);
-
+        
+        float hitFreezeDuration = state.HitFreezeDuration;
+        float fullEffectDuration = state.FullEffectFreezeDuration;
+        state.StartCoroutine(state.FreezeFrame(hitFreezeDuration));
+        
+            
         if (count == hitsToTrigger)
         {
+            state.StartCoroutine(state.FreezeFrame(fullEffectDuration));
             var damageable = enemy.GetComponentInParent<IDamageable>();
             // apply timed behavior changes (reverts automatically)
             state.ApplyTimedDebuff(
@@ -119,4 +127,5 @@ public class ModifierSO : ProjectileModifierSO
             }
         }
     }
+    
 }

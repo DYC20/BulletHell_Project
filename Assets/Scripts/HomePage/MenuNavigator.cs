@@ -4,21 +4,20 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
 using TMPro;
-
+using UnityEngine.EventSystems;
 
 public class MenuNavigator : MonoBehaviour
 {
     [SerializeField] private List<Button> buttons;
-    
     [SerializeField] private RectTransform pointer;
-    
+
     [Header("Button Behavior")]
     [SerializeField, ColorUsage(false,true)] private Color highlightColor;
     [SerializeField] private float transitionTime;
-    
+
     private Coroutine colorRoutine;
     private TMP_Text currentTMP;
-    
+
     private Color originalColor;
     private Material[] materials;
     private TMP_Text[] texts;
@@ -42,6 +41,8 @@ public class MenuNavigator : MonoBehaviour
             materials[i] = mat;
 
             tmp.color = Color.white;
+
+            AddHoverEvent(buttons[i], i);
         }
 
         originalColor = materials[0].GetColor("_FaceColor");
@@ -57,6 +58,7 @@ public class MenuNavigator : MonoBehaviour
         if (Keyboard.current.downArrowKey.wasPressedThisFrame || Keyboard.current.sKey.wasPressedThisFrame)
         {
             currentIndex++;
+
             if (currentIndex >= buttons.Count)
                 currentIndex = 0;
 
@@ -66,22 +68,37 @@ public class MenuNavigator : MonoBehaviour
         if (Keyboard.current.upArrowKey.wasPressedThisFrame || Keyboard.current.wKey.wasPressedThisFrame)
         {
             currentIndex--;
+
             if (currentIndex < 0)
                 currentIndex = buttons.Count - 1;
 
             UpdateSelection();
         }
 
-        if (Keyboard.current.enterKey.wasPressedThisFrame)
-        {
-            buttons[currentIndex].onClick.Invoke();
-        }
-        
         if (Keyboard.current.enterKey.wasPressedThisFrame ||
             Keyboard.current.eKey.wasPressedThisFrame)
         {
             buttons[currentIndex].onClick.Invoke();
         }
+    }
+
+    private void AddHoverEvent(Button button, int index)
+    {
+        EventTrigger trigger = button.GetComponent<EventTrigger>();
+
+        if (trigger == null)
+            trigger = button.gameObject.AddComponent<EventTrigger>();
+
+        EventTrigger.Entry enterEntry = new EventTrigger.Entry();
+        enterEntry.eventID = EventTriggerType.PointerEnter;
+
+        enterEntry.callback.AddListener((data) =>
+        {
+            currentIndex = index;
+            UpdateSelection();
+        });
+
+        trigger.triggers.Add(enterEntry);
     }
 
     void UpdateSelection()

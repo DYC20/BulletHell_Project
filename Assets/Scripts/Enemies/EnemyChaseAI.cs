@@ -1,4 +1,3 @@
-using UnityEditor.Recorder;
 using UnityEngine;
 
 public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed

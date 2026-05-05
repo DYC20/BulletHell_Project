@@ -18,6 +18,9 @@ public class ModifierRuntimeState : MonoBehaviour
     [SerializeField] public Color fireNewColor;
     [SerializeField] public Color iceNewColor;
     [SerializeField] public float newColorDuration;
+    
+    [SerializeField] private float hitFreezeDuration;
+    [SerializeField] private float fullEffectFreezeDuration;
 
     public static ModifierRuntimeState Instance { get; private set; }
 
@@ -348,6 +351,18 @@ public class ModifierRuntimeState : MonoBehaviour
             timer += 1f;
         }
     }
+    public IEnumerator FreezeFrame(float duration)
+    {
+        Debug.LogWarning("Freezing frame");
+        Time.timeScale = 0f;
+        Debug.LogWarning("time scale:" + Time.timeScale);
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1f;
+        Debug.LogWarning("Freezing frame Successfull");
+    }
+
+    public float HitFreezeDuration => hitFreezeDuration;
+    public float FullEffectFreezeDuration => fullEffectFreezeDuration;
 
     public ScriptableObject Modifier => currentModifier;
 }
