@@ -226,20 +226,25 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
     private void AimWeaponAtPlayer()
     {
         if (weaponPivot == null) return;
+        if (weapon == null || weapon.FirePoint == null) return;
 
         Transform target = playerAimPos != null ? playerAimPos : player;
         if (target == null) return;
-        Debug.Log($"Aiming at: {target.name} | position: {target.position}");
-        Vector2 dir = (target.position - weaponPivot.position);
-        if (dir.sqrMagnitude < 0.0001f) return;
 
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg -90f;
+        Vector2 targetPos = target.position;
+        Vector2 firePointPos = weapon.FirePoint.position;
 
-        // firePoint.up is forward → compensate for sprite orientation
-        float offset = aimWithFirePointUp ? 00f : 0f;
+        Vector2 desiredDir = targetPos - firePointPos;
+        if (desiredDir.sqrMagnitude < 0.0001f) return;
 
-        weaponPivot.rotation = Quaternion.Euler(0f, 0f, angle + offset);
-        Debug.Log("Weapon direction: " +  dir);
+        // Rotate the weaponPivot by the difference between where the firePoint is currently aiming
+        // and where it should aim.
+        float deltaAngle = Vector2.SignedAngle(-weapon.FirePoint.right, desiredDir.normalized);
+
+        weaponPivot.Rotate(0f, 0f, deltaAngle, Space.World);
+
+        Debug.DrawLine(firePointPos, targetPos, Color.green, 0.1f);
+        Debug.DrawRay(firePointPos, -weapon.FirePoint.right * 3f, Color.cyan, 0.1f);
     }
 
     private bool HasLineOfSightToPlayer(out RaycastHit2D hit)
@@ -291,10 +296,10 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
 
         while (player != null)
         {
-            if (player != playerAimPos)
+           /* if (player != playerAimPos)
             {
                 TryAcquirePlayer();
-            }
+            }*/
             float dist = Vector2.Distance(transform.position, player.position);
 
             // If player is no longer "detected", exit combat
@@ -425,20 +430,20 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         // Try cheap overlap first (optional)
         Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRadius, playerLayer);
         if (hit == null)
-           // Debug.LogWarning("hit is null");
+            Debug.LogWarning("hit is null");
         if (hit != null && hit.CompareTag(playerTag))
         {
-         //   Debug.LogWarning("looked for player found: " + hit.name);
+            Debug.LogWarning("looked for player found: " + hit.name);
             Transform playerRoot = hit.GetComponentInParent<PlayerWeaponController>()?.transform;
-          //  Debug.LogWarning("Assigned Player root: " + playerRoot.name);
+            Debug.LogWarning("Assigned Player root: " + playerRoot.name);
             player = playerRoot;
             
             playerAimPos = player.Find("AimPos");
             if (playerAimPos == null)
             {
-               // Debug.LogWarning($"{name}: Player has no child named 'AimPos'. Falling back to player transform.");
+                Debug.LogWarning($"{name}: Player has no child named 'AimPos'. Falling back to player transform.");
             }
-            //Debug.LogWarning("found playerAimPos: " + playerAimPos.name);
+            Debug.LogWarning("found playerAimPos: " + playerAimPos.name);
             return;
         }
 
@@ -584,7 +589,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         if (weapon == null || weapon.FirePoint == null) return;
 
         Vector2 origin = weapon.FirePoint.position;
-        Vector2 aimDir = weapon.FirePoint.up;
+        Vector2 aimDir = -weapon.FirePoint.right;
         Vector2 aimPoint = origin + aimDir * distance;
 
         DrawDebugCircle(aimPoint, radius, Color.cyan, 0.1f);
