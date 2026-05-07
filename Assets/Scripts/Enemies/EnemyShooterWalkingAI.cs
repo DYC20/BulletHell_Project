@@ -229,16 +229,17 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
 
         Transform target = playerAimPos != null ? playerAimPos : player;
         if (target == null) return;
-       // Debug.Log($"Aiming at: {target.name} | position: {target.position}");
+        Debug.Log($"Aiming at: {target.name} | position: {target.position}");
         Vector2 dir = (target.position - weaponPivot.position);
         if (dir.sqrMagnitude < 0.0001f) return;
 
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90f;
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg -90f;
 
         // firePoint.up is forward → compensate for sprite orientation
         float offset = aimWithFirePointUp ? 00f : 0f;
 
         weaponPivot.rotation = Quaternion.Euler(0f, 0f, angle + offset);
+        Debug.Log("Weapon direction: " +  dir);
     }
 
     private bool HasLineOfSightToPlayer(out RaycastHit2D hit)
@@ -290,6 +291,10 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
 
         while (player != null)
         {
+            if (player != playerAimPos)
+            {
+                TryAcquirePlayer();
+            }
             float dist = Vector2.Distance(transform.position, player.position);
 
             // If player is no longer "detected", exit combat
@@ -419,16 +424,21 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
     {
         // Try cheap overlap first (optional)
         Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRadius, playerLayer);
+        if (hit == null)
+           // Debug.LogWarning("hit is null");
         if (hit != null && hit.CompareTag(playerTag))
         {
-            player = hit.transform;
+         //   Debug.LogWarning("looked for player found: " + hit.name);
+            Transform playerRoot = hit.GetComponentInParent<PlayerWeaponController>()?.transform;
+          //  Debug.LogWarning("Assigned Player root: " + playerRoot.name);
+            player = playerRoot;
             
             playerAimPos = player.Find("AimPos");
             if (playerAimPos == null)
             {
-                Debug.LogWarning($"{name}: Player has no child named 'AimPos'. Falling back to player transform.");
+               // Debug.LogWarning($"{name}: Player has no child named 'AimPos'. Falling back to player transform.");
             }
-
+            //Debug.LogWarning("found playerAimPos: " + playerAimPos.name);
             return;
         }
 
