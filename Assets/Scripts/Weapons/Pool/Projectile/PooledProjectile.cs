@@ -41,7 +41,7 @@ public class PooledProjectile : MonoBehaviour
     private int _remainingPierce;
     private float _lifeTimer;
 
-    private GameObject target;
+    private Transform target;
 
     private IDamageable damageable;
     
@@ -271,6 +271,12 @@ public class PooledProjectile : MonoBehaviour
             return; //hit a wall
         }
 
+        SimplePistol_Waepon weaponCOllider = other.GetComponent<SimplePistol_Waepon>();
+        if (weaponCOllider)
+        {
+            return;
+        }
+        
         if (_config == null) return;
 
         // Optional layer mask filter
@@ -295,8 +301,9 @@ public class PooledProjectile : MonoBehaviour
             return;
 
         GameObject hitTarget = ((MonoBehaviour)hitDamageable).gameObject;
+        Transform VisualCenter = hitTarget.transform.Find("VisualCenter(DNCN)");
         
-        target = hitTarget;
+        target = VisualCenter;
         damageable = hitDamageable;
         
         if (!TryGetGroundedState(hitTarget, out bool targetIsGrounded))

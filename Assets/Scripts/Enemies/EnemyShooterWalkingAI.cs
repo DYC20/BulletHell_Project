@@ -438,7 +438,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
             Debug.LogWarning("Assigned Player root: " + playerRoot.name);
             player = playerRoot;
             
-            playerAimPos = player.Find("AimPos");
+            playerAimPos = player.Find("VisualCenter(DNCN)");
             if (playerAimPos == null)
             {
                 Debug.LogWarning($"{name}: Player has no child named 'AimPos'. Falling back to player transform.");
