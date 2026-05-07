@@ -44,6 +44,7 @@ public class PooledProjectile : MonoBehaviour
     private Transform target;
 
     private IDamageable damageable;
+    private ModifierSO activeModifier;
     
 /*
     private void Awake()
@@ -226,45 +227,50 @@ public class PooledProjectile : MonoBehaviour
                     projectileOrientation.eulerAngles.y
                     , projectileOrientation.eulerAngles.z - 90f
                 );
-
+                
+                /*if (_config.AOE > 0f)
+                {
+                    CreateShockwave();
+                }*/
+                
                 if (hitEffect != null && _config != null)
                 {
-                    //Debug.Log("projectileOrientation:" + projectileOrientation);
+                    Debug.Log("projectileOrientation:" + projectileOrientation);
                     for (int FX = 0; FX < _config.wallhitEffect.Count; FX++)
                     {
 
                         VisualEffect hitFX = _config.wallhitEffect[FX];
-                        hitEffect.Apply(hitFX, other.transform.position, projectileOrientation);
-                        //Debug.Log("hitEffect Applied:" + hitFX.name);
+                        hitEffect.Apply(hitFX, transform.position, projectileOrientation);
+                        Debug.Log("hitEffect Applied:" + hitFX.name);
                     }
 
                 }
 
-                /*
+                
                 else if (hitEffect == null || _config == null)
                 {
                     Debug.LogWarning("hit effect/config is null");
                 }
-            */
+            
                 if (hitEffectPS != null && _config != null)
                 {
                     for (int FX = 0; FX < _config.wallhitEffectPS.Count; FX++)
                     {
                         ParticleSystem hitFX = _config.wallhitEffectPS[FX];
-                        //Debug.Log($"[WALL HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
+                        Debug.Log($"[WALL HIT PS] cfg={_config.name} index={FX} ps={(hitFX ? hitFX.name : "NULL")}");
                         if (hitFX == null) continue;
-                        hitEffectPS.Apply(hitFX, other.transform.position, projectileOrientation);
-                        //Debug.Log("hit PS Applied"+ hitFX.name);
+                        hitEffectPS.Apply(hitFX, transform.position, projectileOrientation);
+                        Debug.Log("hit PS Applied"+ hitFX.name);
                     }
 
                 }
 
-                /*
+                
                 else if (hitEffect == null || _config == null)
                 {
                     Debug.LogWarning("hit effect/config is null");
                 }
-                */
+                
                 Despawn();
             }
 
@@ -355,7 +361,7 @@ public class PooledProjectile : MonoBehaviour
 */
     private void HitTarget()
 {
-    ModifierSO activeModifier = _modifierSet != null
+    activeModifier = _modifierSet != null
         ? _modifierSet.GetModifierFor(_shotAmmoType) as ModifierSO
         : null;
 
@@ -377,7 +383,7 @@ public class PooledProjectile : MonoBehaviour
         for (int FX = 0; FX < _config.hitEffect.Count; FX++)
         {
             VisualEffect hitFX = _config.hitEffect[FX];
-            hitEffect.Apply(hitFX, target.transform.position, target.transform.rotation);
+            hitEffect.Apply(hitFX, transform.position, target.transform.rotation);
         }
     }
 
@@ -388,15 +394,42 @@ public class PooledProjectile : MonoBehaviour
             ParticleSystem hitFX = _config.hitEffectPS[FX];
             if (hitFX == null) continue;
 
-            hitEffectPS.Apply(hitFX, target.transform.position, target.transform.rotation);
+            hitEffectPS.Apply(hitFX, transform.position, target.transform.rotation);
         }
     }
 
     // AOE: debuff everyone in radius immediately, with NO counting
     if (_config.AOE > 0f)
     {
+        CreateShockwave();
+    }
+
+    // direct-hit damage
+    damageable.TakeDamage(_config.damage, _owner);
+    //Debug.Log("Take Damage Owner Variable:" + _owner.name);
+
+    if (_config.destroyOnHit)
+    {
+        Despawn();
+        return;
+    }
+
+    if (_remainingPierce > 0)
+    {
+        _remainingPierce--;
+        if (_remainingPierce <= 0)
+            Despawn();
+    }
+    else
+    {
+        Despawn();
+    }
+}
+
+    private void CreateShockwave()
+    {
         float radius = _config.AOE;
-        Vector3 aoeCenter = target.transform.position;
+        Vector3 aoeCenter = transform.position;
 
         DrawCircle(aoeCenter, radius, 32, 1f);
 
@@ -418,7 +451,7 @@ public class PooledProjectile : MonoBehaviour
         {
             Debug.LogWarning("ShockWave component missing on spawned prefab.");
         }
-            
+
 
         foreach (var hit in aoeHits)
         {
@@ -438,7 +471,7 @@ public class PooledProjectile : MonoBehaviour
                 activeModifier?.ApplyDebuffDirect(_owner, enemyGO, enemyGO.transform.rotation);
                 continue;
             }
-            
+
             // AOE splash damage
             aoeDamageable.TakeDamage(_config.damage / 3f, _owner);
 
@@ -467,29 +500,6 @@ public class PooledProjectile : MonoBehaviour
             }
         }
     }
-
-    // direct-hit damage
-    damageable.TakeDamage(_config.damage, _owner);
-    //Debug.Log("Take Damage Owner Variable:" + _owner.name);
-
-    if (_config.destroyOnHit)
-    {
-        Despawn();
-        return;
-    }
-
-    if (_remainingPierce > 0)
-    {
-        _remainingPierce--;
-        if (_remainingPierce <= 0)
-            Despawn();
-    }
-    else
-    {
-        Despawn();
-    }
-}
-
 
     public void Despawn()
     {/*
