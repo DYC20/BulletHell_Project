@@ -180,6 +180,8 @@ MonoBehaviour:
   hitEffectPS: {fileID: 7452838741041188026}
   shootEffect: {fileID: 5164655207921999921}
   shootEffectPS: {fileID: -7363887207052164825}
+  bulletRenderer: {fileID: 0}
+  enemyBulletColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!50 &1955884628445460395
 Rigidbody2D:
   serializedVersion: 5
@@ -301,10 +303,10 @@ VisualEffect:
       - m_Value: 0.6
         m_Name: Max Lifetime
         m_Overridden: 1
-      - m_Value: 3
+      - m_Value: 0.32
         m_Name: Fresnel Power
         m_Overridden: 1
-      - m_Value: 10
+      - m_Value: 15
         m_Name: Rate
         m_Overridden: 1
     m_Vector2f:
@@ -335,7 +337,7 @@ VisualEffect:
             outWeight: 0
           - serializedVersion: 3
             time: 0.23
-            value: 0.6135269
+            value: 1.4767627
             inSlope: 0.179587
             outSlope: 0.179587
             tangentMode: 0
@@ -498,10 +500,10 @@ VisualEffect:
       - m_Value: 0.6
         m_Name: Max Lifetime
         m_Overridden: 1
-      - m_Value: 3
+      - m_Value: 0
         m_Name: Fresnel Power
         m_Overridden: 1
-      - m_Value: 10
+      - m_Value: 20
         m_Name: Rate
         m_Overridden: 1
     m_Vector2f:
@@ -532,7 +534,7 @@ VisualEffect:
             outWeight: 0
           - serializedVersion: 3
             time: 0.23
-            value: 0.6135269
+            value: 0.5848282
             inSlope: 0.179587
             outSlope: 0.179587
             tangentMode: 0

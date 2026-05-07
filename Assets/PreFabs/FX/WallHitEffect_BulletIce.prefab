@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5928222709208185735}
   - component: {fileID: 3099761127350721115}
   m_Layer: 0
-  m_Name: SmokeTrail
+  m_Name: WallHitEffect_BulletIce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4814,7 +4814,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 872a7922d61475e41bca5704ed777538, type: 2}
+  - {fileID: 2100000, guid: 056f44f280d11e14a8ef4d5aec6a586f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
