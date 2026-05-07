@@ -136,6 +136,18 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
 
             var pg = proj.GetComponent<PooledProjectile>();
             pg.Init(owner, ownerTeam, cfg, dir, pelletSpeed, firePoint);
+            if (owner == null) 
+                Debug.LogWarning($"{name}: projectile {i} has no owner");
+            if (ownerTeam != Teams.Player && ownerTeam != Teams.Enemy)
+                Debug.LogWarning($"{name}: projectile {i} has no valid ownerTeam");
+            if (cfg == null) 
+                Debug.LogWarning($"{name}: projectile {i} has no cfg");
+            if (dir == Vector2.zero)
+                Debug.LogWarning($"{name}: projectile {i} has zero direction");
+            if (pelletSpeed <= 0f)
+                Debug.LogWarning($"{name}: projectile {i} has invalid pelletSpeed: {pelletSpeed}");
+            if (firePoint == null) 
+                Debug.LogWarning($"{name}: projectile {i} has no firePoint");
         }
 
         if (recoilImpulse != null)

@@ -173,11 +173,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PooledProjectile
   rb: {fileID: 1955884628445460395}
-  kinematics: {fileID: 8488122799573839415}
+  projMovement: {fileID: 0}
   hitEffect: {fileID: 4361183904634148549}
   hitEffectPS: {fileID: -596124624765486420}
   shootEffect: {fileID: 5164655207921999921}
   shootEffectPS: {fileID: -8955935111617131742}
+  bulletRenderer: {fileID: 9199918622919697984}
+  enemyBulletColor: {r: 4, g: 0, b: 3.2008514, a: 0}
 --- !u!50 &1955884628445460395
 Rigidbody2D:
   serializedVersion: 5

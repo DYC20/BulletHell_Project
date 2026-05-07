@@ -115,10 +115,14 @@ public class MenuNavigator : MonoBehaviour
 
         RectTransform target = buttons[currentIndex].GetComponent<RectTransform>();
 
-        Vector3 dir = target.position - pointer.position;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        if (pointer != null)
+        {
+            Vector3 dir = target.position - pointer.position;
+            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            
+            pointer.rotation = Quaternion.Euler(0f, 0f, angle - 180f);
+        }
 
-        pointer.rotation = Quaternion.Euler(0f, 0f, angle - 180f);
     }
 
     IEnumerator ChangeColor(int index)

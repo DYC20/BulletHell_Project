@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.VFX;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Collider2D))]
 public class PooledProjectile : MonoBehaviour
@@ -13,6 +14,8 @@ public class PooledProjectile : MonoBehaviour
     [SerializeField] private ProjectileHitEffectPS hitEffectPS;
     [SerializeField] private ProjectileShootEffect shootEffect;
     [SerializeField] private ProjectileShootEffectPS shootEffectPS;
+    [SerializeField] private Renderer bulletRenderer;
+    [SerializeField, ColorUsage(false, true)] private  Color enemyBulletColor;
     
     //[SerializeField]  private Renderer OutlineMaterialRenderer;
     //private MaterialPropertyBlock mpb;
@@ -27,6 +30,9 @@ public class PooledProjectile : MonoBehaviour
     private Quaternion projectileOrientation;
     private ProjectileModifierSet _modifierSet;
     private AmmoType _shotAmmoType; 
+    [ColorUsage(false, true)] private Color originalColor;
+    [ColorUsage(false, true)] private Color bulletNewColor;
+    private MaterialPropertyBlock mpb;
     
     private bool isGrounded;
     private bool targetIsGrounded;
@@ -58,10 +64,29 @@ public class PooledProjectile : MonoBehaviour
         shootEffectPS = GetComponent<ProjectileShootEffectPS>();
     }
 
+    private void Awake()
+    {
+        if (mpb == null)
+            mpb = new MaterialPropertyBlock();
+
+        if (bulletRenderer == null)
+            bulletRenderer = GetComponentInChildren<Renderer>();
+    }
+
     private void OnEnable()
     {
         // Important: ensure collider works immediately, but timer resets on Init
         _lifeTimer = 0f;
+    }
+
+    private void ChangeBulletColor(Color bulletNewColor)
+    {
+        if (bulletRenderer == null)
+            return;
+        
+        bulletRenderer.GetPropertyBlock(mpb);
+        mpb.SetColor("_Color", bulletNewColor);
+        bulletRenderer.SetPropertyBlock(mpb);
     }
 
     public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction, float speedOverride, Transform spawnTf)
@@ -71,6 +96,20 @@ public class PooledProjectile : MonoBehaviour
         _modifierSet = _owner != null ? _owner.GetComponentInParent<ProjectileModifierSet>() : null;
         _ownerTeam = ownerTeam;
         _config = config;
+        
+        originalColor = bulletRenderer.sharedMaterial.color;
+
+        if (_ownerTeam == Teams.Enemy)
+        {
+            bulletNewColor = enemyBulletColor;
+            ChangeBulletColor(bulletNewColor);
+        }
+        
+        if (_ownerTeam == Teams.Player)
+        {
+            bulletNewColor = originalColor;
+            ChangeBulletColor(bulletNewColor);
+        }
         
         if (!TryGetGroundedState(owner, out isGrounded))
         {
