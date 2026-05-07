@@ -15,7 +15,8 @@ MonoBehaviour:
   ammoType: 0
   ammoPerShot: 1
   damage: 1
-  speed: 3
+  AOE: 0
+  speed: 4
   lifetime: 1
   projectilesPerShot: 1
   spreadAngleDeg: 18
@@ -25,6 +26,7 @@ MonoBehaviour:
   speedMultiplierMin: 1
   speedMultiplierMax: 1.2
   destroyOnHit: 1
+  shockWavePrefab: {fileID: 0}
   hitEffect: []
   hitEffectPS:
   - {fileID: 3370062852713752785, guid: 6f020caa6c5497f41a2987dd1a879192, type: 3}
