@@ -12,8 +12,8 @@ public class MenuNavigator : MonoBehaviour
     [SerializeField] private RectTransform pointer;
 
     [Header("Button Behavior")]
-    [SerializeField, ColorUsage(false,true)] private Color highlightColor;
-    [SerializeField] private float transitionTime;
+    [SerializeField, ColorUsage(false, true)] private Color highlightColor;
+    [SerializeField] private float transitionTime = 0.15f;
 
     private Coroutine colorRoutine;
     private TMP_Text currentTMP;
@@ -23,9 +23,31 @@ public class MenuNavigator : MonoBehaviour
     private TMP_Text[] texts;
 
     private int currentIndex = 0;
+    private bool initialized;
 
-    void Start()
+    private static readonly int FaceColorID = Shader.PropertyToID("_FaceColor");
+
+    private void Awake()
     {
+        Initialize();
+    }
+
+    private void OnEnable()
+    {
+        Initialize();
+
+        currentIndex = 0;
+        UpdateSelection();
+    }
+
+    private void Initialize()
+    {
+        if (initialized)
+            return;
+
+        if (buttons == null || buttons.Count == 0)
+            return;
+
         int count = buttons.Count;
 
         texts = new TMP_Text[count];
@@ -33,24 +55,47 @@ public class MenuNavigator : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
-            TMP_Text tmp = buttons[i].transform.GetChild(1).GetComponent<TMP_Text>();
+            if (buttons[i] == null)
+                continue;
+
+            TMP_Text tmp = null;
+
+            if (buttons[i].transform.childCount > 1)
+            {
+                Transform childOne = buttons[i].transform.GetChild(1);
+                tmp = childOne.GetComponent<TMP_Text>();
+            }
+
+            if (tmp == null)
+                tmp = buttons[i].GetComponentInChildren<TMP_Text>(true);
+
+            if (tmp == null)
+                continue;
+
             texts[i] = tmp;
 
             Material mat = new Material(tmp.fontSharedMaterial);
+            mat.name = tmp.fontSharedMaterial.name + " Runtime Instance " + i;
+
             tmp.fontMaterial = mat;
             materials[i] = mat;
 
             tmp.color = Color.white;
 
+            TouchTMPMaterial(tmp);
+
             AddHoverEvent(buttons[i], i);
         }
 
-        originalColor = materials[0].GetColor("_FaceColor");
+        if (materials[0] == null)
+            return;
 
-        UpdateSelection();
+        originalColor = materials[0].GetColor(FaceColorID);
+
+        initialized = true;
     }
 
-    void Update()
+    private void Update()
     {
         if (Keyboard.current == null || buttons == null || buttons.Count == 0)
             return;
@@ -101,52 +146,130 @@ public class MenuNavigator : MonoBehaviour
         trigger.triggers.Add(enterEntry);
     }
 
-    void UpdateSelection()
+    private void UpdateSelection()
     {
+        if (!initialized)
+            return;
+
+        if (currentIndex < 0 || currentIndex >= buttons.Count)
+            return;
+
         if (colorRoutine != null)
             StopCoroutine(colorRoutine);
 
         for (int i = 0; i < materials.Length; i++)
-            materials[i].SetColor("_FaceColor", originalColor);
+        {
+            if (materials[i] == null)
+                continue;
+
+            materials[i].SetColor(FaceColorID, originalColor);
+
+            if (texts[i] != null)
+            {
+                texts[i].fontMaterial = materials[i];
+                texts[i].SetMaterialDirty();
+                texts[i].SetVerticesDirty();
+                TouchTMPMaterial(texts[i]);
+            }
+        }
 
         currentTMP = texts[currentIndex];
 
+        if (currentTMP == null)
+            return;
+
         colorRoutine = StartCoroutine(ChangeColor(currentIndex));
+
+        if (EventSystem.current != null)
+        {
+            EventSystem.current.SetSelectedGameObject(buttons[currentIndex].gameObject);
+        }
 
         RectTransform target = buttons[currentIndex].GetComponent<RectTransform>();
 
-        if (pointer != null)
+        if (pointer != null && target != null)
         {
             Vector3 dir = target.position - pointer.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            
+
             pointer.rotation = Quaternion.Euler(0f, 0f, angle - 180f);
         }
-
     }
 
-    IEnumerator ChangeColor(int index)
+    private IEnumerator ChangeColor(int index)
     {
         Material mat = materials[index];
+        TMP_Text tmp = texts[index];
+
+        if (mat == null || tmp == null)
+            yield break;
 
         Color targetColor = highlightColor;
         targetColor.a = 1f;
+
+        if (transitionTime <= 0f)
+        {
+            mat.SetColor(FaceColorID, targetColor);
+
+            tmp.fontMaterial = mat;
+            tmp.SetMaterialDirty();
+            tmp.SetVerticesDirty();
+            TouchTMPMaterial(tmp);
+
+            yield break;
+        }
 
         float time = 0f;
 
         while (time < transitionTime)
         {
-            time += Time.deltaTime;
-            float t = time / transitionTime;
+            time += Time.unscaledDeltaTime;
+
+            float t = Mathf.Clamp01(time / transitionTime);
 
             Color newColor = Color.Lerp(originalColor, targetColor, t);
             newColor.a = 1f;
 
-            mat.SetColor("_FaceColor", newColor);
+            mat.SetColor(FaceColorID, newColor);
+
+            tmp.fontMaterial = mat;
+            tmp.SetMaterialDirty();
+            tmp.SetVerticesDirty();
+            TouchTMPMaterial(tmp);
 
             yield return null;
         }
 
-        mat.SetColor("_FaceColor", targetColor);
+        mat.SetColor(FaceColorID, targetColor);
+
+        tmp.fontMaterial = mat;
+        tmp.SetMaterialDirty();
+        tmp.SetVerticesDirty();
+        TouchTMPMaterial(tmp);
+    }
+
+    private void TouchTMPMaterial(TMP_Text tmp)
+    {
+        if (tmp == null)
+            return;
+
+        Material activeMaterial = tmp.fontMaterial;
+
+        if (activeMaterial != null && activeMaterial.HasProperty(FaceColorID))
+        {
+            activeMaterial.GetColor(FaceColorID);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (materials == null)
+            return;
+
+        for (int i = 0; i < materials.Length; i++)
+        {
+            if (materials[i] != null)
+                Destroy(materials[i]);
+        }
     }
 }

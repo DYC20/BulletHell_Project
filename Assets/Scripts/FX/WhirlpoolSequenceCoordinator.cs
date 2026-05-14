@@ -14,6 +14,8 @@ public class WhirlpoolSequenceCoordinator : MonoBehaviour
 
     public UnityEvent onCollapsePhaseReached;
 
+    private GameObject gameOverCanvas;
+
     private float timer;
 
     private bool sequenceStarted;
@@ -87,5 +89,11 @@ public class WhirlpoolSequenceCoordinator : MonoBehaviour
             Debug.LogWarning("collapsePhaseDelay: " + collapsePhaseDelay);
             Debug.LogWarning("Time at collapse begin: " + timer);
         }
+    }
+
+    public void AcquireGameOverGO(GameObject gameOverGO)
+    {
+        gameOverCanvas = gameOverGO;
+        whirlpoolManager.AcquireGameOverGO(gameOverCanvas);
     }
 }

@@ -31,8 +31,9 @@ public class WhirlpoolManager : MonoBehaviour
     [SerializeField] private float deathRadius = 0.2f;
     
     [SerializeField] private WhirlpoolAnimManager _WAM;
-    
 
+    private GameObject gameOverCanvas;
+    
     private float _elapsed;
     private bool _running;
 
@@ -219,6 +220,12 @@ public class WhirlpoolManager : MonoBehaviour
 
         if (target.transform != null)
             target.transform.gameObject.SetActive(false);
+
+        if (_activeTargets <= 0)
+        {
+            gameOverCanvas.gameObject.SetActive(true);
+            
+        }
     }
 
     private void DisablePlayerInput()
@@ -235,5 +242,9 @@ public class WhirlpoolManager : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0f;
         }
+    }
+    public void AcquireGameOverGO(GameObject gameOverGO)
+    {
+        gameOverCanvas = gameOverGO;
     }
 }

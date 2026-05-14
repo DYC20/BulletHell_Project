@@ -15,6 +15,7 @@ public class RumbleImpulseManager : MonoBehaviour
     [SerializeField] private float rumbleInterval = 0.15f;
     [SerializeField] private float rumbleDuration = 1f;
     [SerializeField] private float instenciationWorldPadding = 1f;
+    [SerializeField] private GameObject gameOverCanvas;
 
     [Header("Whirlpool")]
     [SerializeField] private GameObject whirlpoolPrfab;
@@ -71,6 +72,7 @@ public class RumbleImpulseManager : MonoBehaviour
            
         if (currentWhirlpoolCoordinator != null)
         {
+            currentWhirlpoolCoordinator.AcquireGameOverGO(gameOverCanvas);
             currentWhirlpoolCoordinator.onCollapsePhaseReached.RemoveListener(OnCollapsePhaseReached);
             currentWhirlpoolCoordinator.onCollapsePhaseReached.AddListener(OnCollapsePhaseReached);
             currentWhirlpoolCoordinator.BeginSequence();
@@ -123,4 +125,5 @@ public class RumbleImpulseManager : MonoBehaviour
 
         return worldPos;
     }
+    
 }
