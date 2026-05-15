@@ -162,11 +162,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PooledProjectile
   rb: {fileID: 1955884628445460395}
-  kinematics: {fileID: 8488122799573839415}
+  projMovement: {fileID: 0}
   hitEffect: {fileID: 4361183904634148549}
   hitEffectPS: {fileID: 0}
   shootEffect: {fileID: 5164655207921999921}
   shootEffectPS: {fileID: -7363887207052164825}
+  bulletRenderer: {fileID: 0}
+  enemyBulletColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!50 &1955884628445460395
 Rigidbody2D:
   serializedVersion: 5
@@ -258,7 +260,7 @@ Transform:
   m_GameObject: {fileID: 194275181420219783}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.046, z: 0}
+  m_LocalPosition: {x: 0, y: -0.134, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -282,14 +284,20 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.05
+      - m_Value: 0.03
         m_Name: Size Max
         m_Overridden: 1
-      - m_Value: 0.05
+      - m_Value: 0.02
         m_Name: Size Min
         m_Overridden: 1
       - m_Value: 0.5
         m_Name: Trail Lifetime
+        m_Overridden: 1
+      - m_Value: 0.5
+        m_Name: Velocity
+        m_Overridden: 1
+      - m_Value: 7
+        m_Name: Rate
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
@@ -310,18 +318,18 @@ VisualEffect:
           m_Curve:
           - serializedVersion: 3
             time: 0
-            value: 0.16
-            inSlope: 0.9561583
-            outSlope: 0.9561583
+            value: 0
+            inSlope: 0
+            outSlope: 0
             tangentMode: 0
             weightedMode: 0
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.99658203
-            value: 0.80332565
-            inSlope: -0.01838701
-            outSlope: -0.01838701
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
             tangentMode: 0
             weightedMode: 0
             inWeight: 0
@@ -414,8 +422,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.13, y: 0.15, z: 0.25361693}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.16, y: 0.1846154, z: 0.31214392}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5534935560467015888}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -505,7 +513,7 @@ Transform:
   m_GameObject: {fileID: 6814650207484515050}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.224, z: 0}
+  m_LocalPosition: {x: 0, y: -0.059, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -529,25 +537,31 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 0.3
+      - m_Value: 0.2
         m_Name: Size Max
         m_Overridden: 1
-      - m_Value: 0.15
+      - m_Value: 0.2
         m_Name: Size Min
         m_Overridden: 1
-      - m_Value: 0.5
+      - m_Value: 1
         m_Name: Spiral Lifetime
         m_Overridden: 1
       - m_Value: 0
         m_Name: Fresnel Power
         m_Overridden: 1
-      - m_Value: 0.15
+      - m_Value: 0.3
         m_Name: Scale Y
+        m_Overridden: 1
+      - m_Value: 5
+        m_Name: Rate
         m_Overridden: 1
     m_Vector2f:
       m_Array: []
     m_Vector3f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 0, y: 0.4, z: 0}
+        m_Name: Position
+        m_Overridden: 1
     m_Vector4f:
       m_Array: []
     m_Uint:
@@ -572,7 +586,7 @@ VisualEffect:
             outWeight: 0.027848111
           - serializedVersion: 3
             time: 1
-            value: -0.19468689
+            value: -0.5068034
             inSlope: 0.0031631852
             outSlope: 0.0031631852
             tangentMode: 0

@@ -173,11 +173,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PooledProjectile
   rb: {fileID: 1955884628445460395}
-  kinematics: {fileID: 8488122799573839415}
+  projMovement: {fileID: 0}
   hitEffect: {fileID: 4361183904634148549}
   hitEffectPS: {fileID: 6076854499155355570}
   shootEffect: {fileID: 5164655207921999921}
   shootEffectPS: {fileID: -7363887207052164825}
+  bulletRenderer: {fileID: 0}
+  enemyBulletColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!50 &1955884628445460395
 Rigidbody2D:
   serializedVersion: 5
@@ -269,8 +271,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.0048999786, z: -0.072}
-  m_LocalScale: {x: 0.13, y: 0.15, z: 0.2536169}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.16, y: 0.1846154, z: 0.3121439}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5534935560467015888}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
