@@ -77,7 +77,7 @@ public class ModifierSO : ProjectileModifierSO
 
         if (fullEffectPrefab != null)
         {
-            Transform enemyVisualMiddle = enemy.transform.Find("EnemyVisualMiddle");
+            Transform enemyVisualMiddle = enemy.transform.Find("VisualCenter(DNCN)");
             Vector3 fxPos = enemyVisualMiddle != null ? enemyVisualMiddle.position : enemy.transform.position;
 
             Object.Instantiate(fullEffectPrefab, fxPos, hitRot, enemy.transform);
@@ -117,13 +117,21 @@ public class ModifierSO : ProjectileModifierSO
             // spawn FX on enemy and auto-destroy when done
             if (fullEffectPrefab != null)
             {
-                Transform enemyVisualMiddle = enemy.transform.Find("EnemyVisualMiddle");
+                //Transform enemyVisualMiddle = enemy.transform.Find("VisualCenter(DNCN)");
                 
-                if (enemyVisualMiddle == null)
+                Debug.Log("enemy object is: " + enemy.name);
+                Debug.Log("enemy root is: " + enemy.transform.root.name);
+
+                foreach (Transform child in enemy.transform)
+                {
+                    Debug.Log("Direct child of enemy: [" + child.name + "]");
+                }
+                
+                if (enemy == null)
                 {
                     Debug.LogWarning("EnemyVisualMiddle not found!");
                 }
-                var fx = Object.Instantiate(fullEffectPrefab, enemyVisualMiddle.position, hitRot, enemy.transform);
+                var fx = Object.Instantiate(fullEffectPrefab, enemy.transform.position, hitRot, enemy.transform);
             }
         }
     }
