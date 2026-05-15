@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 
 public class WhirlpoolManager : MonoBehaviour
 {
@@ -33,6 +34,7 @@ public class WhirlpoolManager : MonoBehaviour
     [SerializeField] private WhirlpoolAnimManager _WAM;
 
     private GameObject gameOverCanvas;
+    [SerializeField] private PlayableAsset finnTimeline;
     
     private float _elapsed;
     private bool _running;
@@ -41,7 +43,6 @@ public class WhirlpoolManager : MonoBehaviour
     private readonly HashSet<Transform> _uniqueTargets = new();
 
     private int _activeTargets;
-
     private class TargetData
     {
         public Transform transform;
@@ -221,10 +222,14 @@ public class WhirlpoolManager : MonoBehaviour
         if (target.transform != null)
             target.transform.gameObject.SetActive(false);
 
-        if (_activeTargets <= 0)
+        if (_activeTargets <= 0 && _targets.Count > 1 )
         {
+            Debug.LogWarning("Active Targets <= 0");
             gameOverCanvas.gameObject.SetActive(true);
-            
+            PlayableDirector _gameOverDirector = gameOverCanvas.GetComponent<PlayableDirector>();
+            //_gameOverDirector.playableAsset = finnTimeline;
+            Debug.LogWarning("Game Over Playable assigned");
+            _gameOverDirector.Play(finnTimeline);
         }
     }
 
