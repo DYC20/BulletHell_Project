@@ -16,7 +16,6 @@ public class LoadScene : MonoBehaviour
     
     private RectTransform buttonTF;
     private Sequence seq;
-    private bool loadScene = false;
 
     private void Start()
     {
@@ -26,7 +25,7 @@ public class LoadScene : MonoBehaviour
     
     public void LoadSelectedScene()
     {
-        loadScene = true;
+        SceneManager.LoadScene(sceneName);
     }
 
     public void PlayBTNAnimation()
@@ -49,14 +48,5 @@ public class LoadScene : MonoBehaviour
                         ps.Play();
                 })
             .Append(buttonTF.DOScale(1, scaleDuration).SetEase(ease));
-        seq.OnComplete(() =>
-        {
-            if (loadScene == true)
-            {
-                SceneManager.LoadScene(sceneName);
-            }
-        });
-
-
     }
 }

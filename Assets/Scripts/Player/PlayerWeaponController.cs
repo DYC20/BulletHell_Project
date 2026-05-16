@@ -18,6 +18,7 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
     private ScriptableObject currentModifier;
 
     private bool _isFiring;
+    private bool notFirstWeapon = false;
     public Transform CurrentFirePoint { get; private set; }
 
     private void Awake()
@@ -29,7 +30,18 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
         if (equippedWeapon == null)
             equippedWeapon = GetComponentInChildren<WeaponBase>(includeInactive: true);
         if (equippedWeapon != null && weaponImage != null)
-            weaponImage.sprite = equippedWeapon.GetComponentInParent<SpriteRenderer>().sprite;
+        {
+            SpriteRenderer weaponRenderer = equippedWeapon.GetComponentInChildren<SpriteRenderer>(true);
+
+            if (weaponRenderer != null)
+            {
+                weaponImage.sprite = weaponRenderer.sprite;
+            }
+            else
+            {
+                Debug.LogWarning("PlayerWeaponController: No SpriteRenderer found under equipped weapon: " + equippedWeapon.name);
+            }
+        }
 
         if (equippedWeapon != null)
             Equip(equippedWeapon);
@@ -45,7 +57,12 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
         {
             GameObject oldWeapon = equippedWeapon.gameObject;
             modifierRunTimeState.ClearModifier(currentModifier);
-            Destroy( oldWeapon);
+            if (notFirstWeapon)
+            {
+              Destroy( oldWeapon);  
+            }
+
+            notFirstWeapon = true;
             /* Debug.Log($" is Null Equipped weapon: {equippedWeapon.name}");
             equippedWeapon.transform.SetParent(null, true);
             equippedWeapon.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
