@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 69c6b504c62bd6043817b6d9b5cd2c8f
+guid: 7015dd705512fd94ba06a43180119f65
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8668657545571369102
-    second: CircleGradiant_0
+      213: 2100180518939089097
+    second: E_Shadow_02_0
+  - first:
+      213: 457620252437974779
+    second: E_Shadow_02_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -54,7 +57,7 @@ TextureImporter:
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
-  alphaUsage: 2
+  alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
   textureType: 8
@@ -139,23 +142,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CircleGradiant_0
+      name: E_Shadow_02_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 256
-        height: 256
+        x: 22
+        y: 52
+        width: 12
+        height: 26
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 27f75bc04edb2b780800000000000000
-      internalID: -8668657545571369102
+      spriteID: 9c85f830e07552d10800000000000000
+      internalID: 2100180518939089097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: E_Shadow_02_1
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 23
+        width: 78
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bfe079ce13bc95600800000000000000
+      internalID: 457620252437974779
       vertices: []
       indices: 
       edges: []
@@ -165,7 +190,7 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -174,7 +199,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CircleGradiant_0: -8668657545571369102
+      E_Shadow_02_0: 2100180518939089097
+      E_Shadow_02_1: 457620252437974779
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

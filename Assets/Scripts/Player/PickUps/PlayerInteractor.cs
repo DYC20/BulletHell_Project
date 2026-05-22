@@ -11,25 +11,42 @@ public class PlayerInteractor : MonoBehaviour
     [SerializeField] private bool _IsPickInArea = false;
     [SerializeField] private Collider2D[] PickList;
 
+     private bool _Interactable;
+    
+      public bool Interactable
+    {
+        get { return _Interactable; }
+        set { _Interactable = value; }
+    }
     // Input System action name "Interact" -> "OnInteract"
     public void OnInteract(InputValue E)
     {
         if (_IsPickInArea)
         {
-            var best = GetClosestPickable();
+            var bestPickable = GetClosestPickable();
             Debug.Log("Trying To Pickup");
             //Debug.Log(best == null ? "No pickup candidate" : $"Trying pickup: {((MonoBehaviour)best).name} ({best.GetType().Name})");
-            if (best == null) return;
+            if (bestPickable == null) return;
             else
             {
                 Debug.Log("Can be Equiped ?");
-                if(best.CanPickup(gameObject))
+                if(bestPickable.CanPickup(gameObject))
                 {
                     Debug.Log("Yes");
-                    best.Pickup(gameObject);
+                    bestPickable.Pickup(gameObject);
                 }
             }
             ScanForIPickups(out PickList);
+
+            if (Interactable)
+            {
+                IInteractable bestInteractable = GetClosestInteractable();
+                if (bestInteractable == null) return;
+                else
+                {
+                    bestInteractable.Activate(gameObject);
+                }
+            }
             
             /*if (best != null)
             {
@@ -43,6 +60,8 @@ public class PlayerInteractor : MonoBehaviour
         }
     }
 
+  
+
 
     private IPickup GetClosestPickable()
     {
@@ -55,6 +74,33 @@ public class PlayerInteractor : MonoBehaviour
         {
             IPickup mb = null;
             if(!p.gameObject.TryGetComponent<IPickup>(out mb))
+            {
+                Debug.Log("Not Pickable");
+                continue;
+            }
+            float d = Vector2.Distance(transform.position, p.transform.position);
+            if (d < bestDist)
+            {
+                bestDist = d;
+                best = mb;
+            }
+            //Debug.Log("Number of candidates found:" + _candidates.Count);
+        }
+
+        return best;
+    }
+    
+    private IInteractable GetClosestInteractable()
+    {
+        // simplest: last in range
+        // better: closest; here’s closest if pickup is a MonoBehaviour
+        float bestDist = float.MaxValue;
+        IInteractable best = null;
+
+        foreach (var p in PickList)
+        {
+            IInteractable mb = null;
+            if(!p.gameObject.TryGetComponent<IInteractable>(out mb))
             {
                 Debug.Log("Not Pickable");
                 continue;
