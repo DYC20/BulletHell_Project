@@ -1,19 +1,28 @@
 fileFormatVersion: 2
-guid: d269daff960d3d64da3dcd30a33881f5
+guid: 62ca2536dfb461b4fb2abeb6b51e86bd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3092223754324887936
-    second: Time_0
+      213: -9021645512629592528
+    second: PlayGlow_02_0
   - first:
-      213: -760114947846703349
-    second: Time_1
+      213: -18161888315559025
+    second: PlayGlow_02_1
   - first:
-      213: 897785315250141396
-    second: Time_2
+      213: -132136128370182828
+    second: PlayGlow_02_2
   - first:
-      213: 7814514304990478803
-    second: Time_3
+      213: -2407622658325898190
+    second: PlayGlow_02_3
+  - first:
+      213: -2511677033702419120
+    second: PlayGlow_02_4
+  - first:
+      213: -7553169080245155459
+    second: PlayGlow_02_5
+  - first:
+      213: -5448933707176613501
+    second: PlayGlow_02_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +55,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -55,9 +64,9 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -148,13 +157,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Time_0
+      name: PlayGlow_02_0
       rect:
         serializedVersion: 2
-        x: 204
-        y: 141
-        width: 6
-        height: 6
+        x: 274
+        y: 162
+        width: 8
+        height: 12
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 086b075f0e63615d0800000000000000
-      internalID: -3092223754324887936
+      spriteID: 03e573a743dacc280800000000000000
+      internalID: -9021645512629592528
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Time_1
+      name: PlayGlow_02_1
       rect:
         serializedVersion: 2
-        x: 129
-        y: 44
-        width: 65
-        height: 82
+        x: 280
+        y: 148
+        width: 10
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,20 +194,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b07f1217b778375f0800000000000000
-      internalID: -760114947846703349
+      spriteID: f83308adbd97fbff0800000000000000
+      internalID: -18161888315559025
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Time_2
+      name: PlayGlow_02_2
       rect:
         serializedVersion: 2
-        x: 196
-        y: 35
-        width: 158
-        height: 91
+        x: 339
+        y: 63
+        width: 77
+        height: 99
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -207,20 +216,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4d8fb00dcf2957c00800000000000000
-      internalID: 897785315250141396
+      spriteID: 455ff7e24ee8a2ef0800000000000000
+      internalID: -132136128370182828
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Time_3
+      name: PlayGlow_02_3
       rect:
         serializedVersion: 2
-        x: 329
-        y: 44
-        width: 54
-        height: 70
+        x: 95
+        y: 14
+        width: 42
+        height: 94
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -229,8 +238,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3d18a297b5bb27c60800000000000000
-      internalID: 7814514304990478803
+      spriteID: 23c9d49c2f7669ed0800000000000000
+      internalID: -2407622658325898190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayGlow_02_4
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 62
+        width: 35
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05519a79b0bb42dd0800000000000000
+      internalID: -2511677033702419120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayGlow_02_5
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 9
+        width: 145
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d79068b6db0cd2790800000000000000
+      internalID: -7553169080245155459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayGlow_02_6
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 31
+        width: 124
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 389e51bb9af7164b0800000000000000
+      internalID: -5448933707176613501
       vertices: []
       indices: 
       edges: []
@@ -239,7 +314,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -249,10 +324,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Time_0: -3092223754324887936
-      Time_1: -760114947846703349
-      Time_2: 897785315250141396
-      Time_3: 7814514304990478803
+      PlayGlow_02_0: -9021645512629592528
+      PlayGlow_02_1: -18161888315559025
+      PlayGlow_02_2: -132136128370182828
+      PlayGlow_02_3: -2407622658325898190
+      PlayGlow_02_4: -2511677033702419120
+      PlayGlow_02_5: -7553169080245155459
+      PlayGlow_02_6: -5448933707176613501
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

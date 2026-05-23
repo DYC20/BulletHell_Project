@@ -1,16 +1,28 @@
 fileFormatVersion: 2
-guid: 8637f54147723a941a63ccd3371587af
+guid: d7ee5731fd6a74141a442ab77df116fd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6438188543624759393
-    second: TimeGlow_0
+      213: -1591373574794996033
+    second: FirstTime_0
   - first:
-      213: -1168739650735091576
-    second: TimeGlow_1
+      213: 8881278222701411994
+    second: FirstTime_1
   - first:
-      213: 8192741455059559749
-    second: TimeGlow_2
+      213: -8010704423116900093
+    second: FirstTime_2
+  - first:
+      213: -3764937005998260236
+    second: FirstTime_3
+  - first:
+      213: -3943810835503254286
+    second: FirstTime_4
+  - first:
+      213: -6564808909623164088
+    second: FirstTime_5
+  - first:
+      213: -3773557576513573446
+    second: FirstTime_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -43,7 +55,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -52,9 +64,9 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -145,13 +157,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TimeGlow_0
+      name: FirstTime_0
       rect:
         serializedVersion: 2
-        x: 129
-        y: 55
-        width: 65
-        height: 82
+        x: 5
+        y: 112
+        width: 61
+        height: 93
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,20 +172,64 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1684eb39e5a095950800000000000000
-      internalID: 6438188543624759393
+      spriteID: fb696694a2e4ae9e0800000000000000
+      internalID: -1591373574794996033
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TimeGlow_1
+      name: FirstTime_1
       rect:
         serializedVersion: 2
-        x: 196
+        x: 70
+        y: 122
+        width: 48
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9eb78f0d73a04b70800000000000000
+      internalID: 8881278222701411994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FirstTime_2
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 112
+        width: 102
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 309777b05c244d090800000000000000
+      internalID: -8010704423116900093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FirstTime_3
+      rect:
+        serializedVersion: 2
+        x: 192
         y: 46
-        width: 158
-        height: 91
+        width: 139
+        height: 173
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -182,20 +238,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 880550bda7dc7cfe0800000000000000
-      internalID: -1168739650735091576
+      spriteID: 4ff30c39db140cbc0800000000000000
+      internalID: -3764937005998260236
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: TimeGlow_2
+      name: FirstTime_4
       rect:
         serializedVersion: 2
-        x: 329
-        y: 55
-        width: 54
-        height: 70
+        x: 296
+        y: 49
+        width: 45
+        height: 75
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -204,8 +260,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 545217542f672b170800000000000000
-      internalID: 8192741455059559749
+      spriteID: 2f4fd78b0f4c449c0800000000000000
+      internalID: -3943810835503254286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FirstTime_5
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 35
+        width: 140
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 843879b141d15e4a0800000000000000
+      internalID: -6564808909623164088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FirstTime_6
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 46
+        width: 59
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abdac689061a1abc0800000000000000
+      internalID: -3773557576513573446
       vertices: []
       indices: 
       edges: []
@@ -214,7 +314,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -224,9 +324,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      TimeGlow_0: 6438188543624759393
-      TimeGlow_1: -1168739650735091576
-      TimeGlow_2: 8192741455059559749
+      FirstTime_0: -1591373574794996033
+      FirstTime_1: 8881278222701411994
+      FirstTime_2: -8010704423116900093
+      FirstTime_3: -3764937005998260236
+      FirstTime_4: -3943810835503254286
+      FirstTime_5: -6564808909623164088
+      FirstTime_6: -3773557576513573446
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

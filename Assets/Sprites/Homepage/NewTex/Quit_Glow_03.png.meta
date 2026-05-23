@@ -1,13 +1,28 @@
 fileFormatVersion: 2
-guid: eb91ce7f8cb5e274f9d4b3a441e151c6
+guid: bf19237f94025d74faf0e3de787d5394
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3887698873763895225
-    second: Play_Glow_0
+      213: 9161757292679917500
+    second: Quit_Glow_03_0
   - first:
-      213: 7182899262851703467
-    second: Play_Glow_1
+      213: 7761813273300015823
+    second: Quit_Glow_03_1
+  - first:
+      213: 5708437349263961351
+    second: Quit_Glow_03_2
+  - first:
+      213: -6851000230367807102
+    second: Quit_Glow_03_3
+  - first:
+      213: 5305102459905038595
+    second: Quit_Glow_03_4
+  - first:
+      213: -9050363974273935764
+    second: Quit_Glow_03_5
+  - first:
+      213: 8868211979527148818
+    second: Quit_Glow_03_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -142,13 +157,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Play_Glow_0
+      name: Quit_Glow_03_0
       rect:
         serializedVersion: 2
-        x: 84
-        y: 3
-        width: 253
-        height: 139
+        x: 90
+        y: 70
+        width: 49
+        height: 73
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 748ed93e87e1c0ac0800000000000000
-      internalID: -3887698873763895225
+      spriteID: cbfe78477b9152f70800000000000000
+      internalID: 9161757292679917500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Play_Glow_1
+      name: Quit_Glow_03_1
       rect:
         serializedVersion: 2
-        x: 255
-        y: 31
-        width: 173
-        height: 148
+        x: 139
+        y: 66
+        width: 36
+        height: 78
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,8 +194,118 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ba2e0bba2d8cea360800000000000000
-      internalID: 7182899262851703467
+      spriteID: fca95f75c0087bb60800000000000000
+      internalID: 7761813273300015823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Quit_Glow_03_2
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 65
+        width: 37
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70d63794681783f40800000000000000
+      internalID: 5708437349263961351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Quit_Glow_03_3
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 60
+        width: 56
+        height: 110
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 289bec0b69b5ce0a0800000000000000
+      internalID: -6851000230367807102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Quit_Glow_03_4
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 65
+        width: 42
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 309d0b364928f9940800000000000000
+      internalID: 5305102459905038595
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Quit_Glow_03_5
+      rect:
+        serializedVersion: 2
+        x: 343
+        y: 64
+        width: 79
+        height: 84
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c66d8619ae5a66280800000000000000
+      internalID: -9050363974273935764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Quit_Glow_03_6
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 12
+        width: 122
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21554904fc7321b70800000000000000
+      internalID: 8868211979527148818
       vertices: []
       indices: 
       edges: []
@@ -199,8 +324,13 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Play_Glow_0: -3887698873763895225
-      Play_Glow_1: 7182899262851703467
+      Quit_Glow_03_0: 9161757292679917500
+      Quit_Glow_03_1: 7761813273300015823
+      Quit_Glow_03_2: 5708437349263961351
+      Quit_Glow_03_3: -6851000230367807102
+      Quit_Glow_03_4: 5305102459905038595
+      Quit_Glow_03_5: -9050363974273935764
+      Quit_Glow_03_6: 8868211979527148818
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

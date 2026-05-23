@@ -1,13 +1,22 @@
 fileFormatVersion: 2
-guid: eb91ce7f8cb5e274f9d4b3a441e151c6
+guid: af6f9735d211c5f4da4b40fc793cf499
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3887698873763895225
-    second: Play_Glow_0
+      213: -5869468331426505833
+    second: Glow_02_0
   - first:
-      213: 7182899262851703467
-    second: Play_Glow_1
+      213: 81458094996770289
+    second: Glow_02_1
+  - first:
+      213: 7256148849199612028
+    second: Glow_02_2
+  - first:
+      213: 139407663177454394
+    second: Glow_02_3
+  - first:
+      213: -7424563263668771639
+    second: Glow_02_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -49,9 +58,9 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 0
+  spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -142,13 +151,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Play_Glow_0
+      name: Glow_02_0
       rect:
         serializedVersion: 2
-        x: 84
-        y: 3
-        width: 253
-        height: 139
+        x: 120
+        y: 440
+        width: 182
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -157,20 +166,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 748ed93e87e1c0ac0800000000000000
-      internalID: -3887698873763895225
+      spriteID: 79b1bec76a57b8ea0800000000000000
+      internalID: -5869468331426505833
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Play_Glow_1
+      name: Glow_02_1
       rect:
         serializedVersion: 2
-        x: 255
-        y: 31
-        width: 173
-        height: 148
+        x: 110
+        y: 304
+        width: 329
+        height: 132
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,8 +188,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ba2e0bba2d8cea360800000000000000
-      internalID: 7182899262851703467
+      spriteID: 1fdcc50b4b5612100800000000000000
+      internalID: 81458094996770289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glow_02_2
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 197
+        width: 10
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7007e10fe403b460800000000000000
+      internalID: 7256148849199612028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glow_02_3
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 0
+        width: 186
+        height: 240
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a33d8a2f7864fe100800000000000000
+      internalID: 139407663177454394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glow_02_4
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 0
+        width: 116
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c4ab987c07a6f890800000000000000
+      internalID: -7424563263668771639
       vertices: []
       indices: 
       edges: []
@@ -189,7 +264,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -199,8 +274,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Play_Glow_0: -3887698873763895225
-      Play_Glow_1: 7182899262851703467
+      Glow_02_0: -5869468331426505833
+      Glow_02_1: 81458094996770289
+      Glow_02_2: 7256148849199612028
+      Glow_02_3: 139407663177454394
+      Glow_02_4: -7424563263668771639
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
