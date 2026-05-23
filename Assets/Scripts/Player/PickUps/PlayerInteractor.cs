@@ -23,21 +23,24 @@ public class PlayerInteractor : MonoBehaviour
     {
         if (_IsPickInArea)
         {
-            var bestPickable = GetClosestPickable();
-            Debug.Log("Trying To Pickup");
-            //Debug.Log(best == null ? "No pickup candidate" : $"Trying pickup: {((MonoBehaviour)best).name} ({best.GetType().Name})");
-            if (bestPickable == null) return;
-            else
+            if (!Interactable)
             {
-                Debug.Log("Can be Equiped ?");
-                if(bestPickable.CanPickup(gameObject))
-                {
-                    Debug.Log("Yes");
-                    bestPickable.Pickup(gameObject);
-                }
+                 var bestPickable = GetClosestPickable();
+                            Debug.Log("Trying To Pickup");
+                            //Debug.Log(best == null ? "No pickup candidate" : $"Trying pickup: {((MonoBehaviour)best).name} ({best.GetType().Name})");
+                            if (bestPickable == null) return;
+                            else
+                            {
+                                Debug.Log("Can be Equiped ?");
+                                if(bestPickable.CanPickup(gameObject))
+                                {
+                                    Debug.Log("Yes");
+                                    bestPickable.Pickup(gameObject);
+                                }
+                            }
+                            ScanForIPickups(out PickList);
             }
-            ScanForIPickups(out PickList);
-
+           
             if (Interactable)
             {
                 IInteractable bestInteractable = GetClosestInteractable();
@@ -47,6 +50,7 @@ public class PlayerInteractor : MonoBehaviour
                     bestInteractable.Activate(gameObject);
                 }
             }
+            Debug.Log("Player Interactor OG status: " + Interactable);
             
             /*if (best != null)
             {

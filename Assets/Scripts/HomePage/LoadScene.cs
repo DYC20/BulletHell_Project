@@ -15,14 +15,18 @@ public class LoadScene : MonoBehaviour
     [SerializeField] private Ease ease;
     
     private RectTransform buttonTF;
+    private Transform buttonTransform;
     private Sequence seq;
 
     private void Start()
     {
         buttonTF = GetComponent<RectTransform>();
+        if (buttonTF == null)
+            buttonTransform =GetComponent<Transform>();
         
     }
     
+    //called with signal
     public void LoadSelectedScene()
     {
         SceneManager.LoadScene(sceneName);
@@ -35,18 +39,39 @@ public class LoadScene : MonoBehaviour
 
     private void ButtonAnimation()
     {
-        seq?.Kill();
-        
-        seq = DOTween.Sequence();
-
-        seq.Append(buttonTF.DOScale(0.5f, scaleDuration).SetEase(ease))
-            .Append(buttonTF.DOScale(1.5f, scaleDuration).SetEase(ease))
-        
-            .JoinCallback(() =>
+        if (buttonTF)
+        {
+             seq?.Kill();
+                    
+                    seq = DOTween.Sequence();
+            
+                    seq.Append(buttonTF.DOScale(0.5f, scaleDuration).SetEase(ease))
+                        .Append(buttonTF.DOScale(1.5f, scaleDuration).SetEase(ease))
+                    
+                        .JoinCallback(() =>
+                            {
+                                foreach (var ps in pressFX)
+                                    ps.Play();
+                            })
+                        .Append(buttonTF.DOScale(1, scaleDuration).SetEase(ease));
+        }
+       
+        if (buttonTransform)
+        {
+            seq?.Kill();
+                    
+            seq = DOTween.Sequence();
+            
+            seq.Append(buttonTransform.DOScale(0.5f, scaleDuration).SetEase(ease))
+                .Append(buttonTransform.DOScale(1.5f, scaleDuration).SetEase(ease))
+                    
+                .JoinCallback(() =>
                 {
                     foreach (var ps in pressFX)
                         ps.Play();
                 })
-            .Append(buttonTF.DOScale(1, scaleDuration).SetEase(ease));
+                .Append(buttonTransform.DOScale(1, scaleDuration).SetEase(ease));
+        }
+        
     }
 }
