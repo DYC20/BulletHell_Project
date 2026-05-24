@@ -1,10 +1,13 @@
 fileFormatVersion: 2
-guid: 087d9cf4b3e4647458eaec6f21109eaa
+guid: 74c59c263196fa84f8a4d5493797022d
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: -7752101553062105310
     second: A_Highlight_0
+  - first:
+      213: 1742172505433857696
+    second: A_Highlight_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -142,10 +145,10 @@ TextureImporter:
       name: A_Highlight_0
       rect:
         serializedVersion: 2
-        x: 12
-        y: 18
-        width: 104
-        height: 92
+        x: 36
+        y: 38
+        width: 55
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,6 +159,28 @@ TextureImporter:
       bones: []
       spriteID: 22faafab5b00b6490800000000000000
       internalID: -7752101553062105310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: A_Highlight_1
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 84
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ae56dbc9a07d2810800000000000000
+      internalID: 1742172505433857696
       vertices: []
       indices: 
       edges: []
@@ -175,6 +200,7 @@ TextureImporter:
       entries: []
     nameFileIdTable:
       A_Highlight_0: -7752101553062105310
+      A_Highlight_1: 1742172505433857696
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
