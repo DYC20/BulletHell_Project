@@ -17,15 +17,28 @@ public class MenuNavigator : MonoBehaviour
 
     private Coroutine colorRoutine;
     private TMP_Text currentTMP;
+    private Image currentImage;
 
-    private Color originalColor;
+    private Color originalTMPColor;
+    private Color originalImageColor;
+
     private Material[] materials;
     private TMP_Text[] texts;
+
+    private Image[] images;
+    private Material[] imageMaterials;
+
+    private bool[] tmpRout;
+    private bool[] imageRout;
 
     private int currentIndex = 0;
     private bool initialized;
 
     private static readonly int FaceColorID = Shader.PropertyToID("_FaceColor");
+
+    // Proxy name for now.
+    // Replace this with the actual property name in your Image shader later.
+    private static readonly int ImageProxyColorID = Shader.PropertyToID("_Color");
 
     private void Awake()
     {
@@ -53,46 +66,121 @@ public class MenuNavigator : MonoBehaviour
         texts = new TMP_Text[count];
         materials = new Material[count];
 
+        images = new Image[count];
+        imageMaterials = new Material[count];
+
+        tmpRout = new bool[count];
+        imageRout = new bool[count];
+
         for (int i = 0; i < count; i++)
         {
             if (buttons[i] == null)
                 continue;
 
-            TMP_Text tmp = null;
-
-            if (buttons[i].transform.childCount > 1)
-            {
-                Transform childOne = buttons[i].transform.GetChild(1);
-                tmp = childOne.GetComponent<TMP_Text>();
-            }
-
-            if (tmp == null)
-                tmp = buttons[i].GetComponentInChildren<TMP_Text>(true);
-
-            if (tmp == null)
+            if (buttons[i].transform.childCount <= 1)
                 continue;
 
-            texts[i] = tmp;
+            Transform childOne = buttons[i].transform.GetChild(1);
 
-            Material mat = new Material(tmp.fontSharedMaterial);
-            mat.name = tmp.fontSharedMaterial.name + " Runtime Instance " + i;
+            TMP_Text tmp = childOne.GetComponent<TMP_Text>();
 
-            tmp.fontMaterial = mat;
-            materials[i] = mat;
+            if (tmp != null)
+            {
+                InitializeTMPRoute(i, tmp);
+                AddHoverEvent(buttons[i], i);
+                continue;
+            }
 
-            tmp.color = Color.white;
+            Image image = childOne.GetComponent<Image>();
 
-            TouchTMPMaterial(tmp);
-
-            AddHoverEvent(buttons[i], i);
+            if (image != null)
+            {
+                InitializeImageRoute(i, image);
+                AddHoverEvent(buttons[i], i);
+                continue;
+            }
         }
 
-        if (materials[0] == null)
+        bool foundAnyValidRoute = false;
+
+        for (int i = 0; i < count; i++)
+        {
+            if (tmpRout[i] || imageRout[i])
+            {
+                foundAnyValidRoute = true;
+                break;
+            }
+        }
+
+        if (!foundAnyValidRoute)
             return;
 
-        originalColor = materials[0].GetColor(FaceColorID);
+        InitializeOriginalColors();
 
         initialized = true;
+    }
+
+    private void InitializeTMPRoute(int index, TMP_Text tmp)
+    {
+        tmpRout[index] = true;
+        imageRout[index] = false;
+
+        texts[index] = tmp;
+
+        Material mat = new Material(tmp.fontSharedMaterial);
+        mat.name = tmp.fontSharedMaterial.name + " Runtime Instance " + index;
+
+        tmp.fontMaterial = mat;
+        materials[index] = mat;
+
+        tmp.color = Color.white;
+
+        TouchTMPMaterial(tmp);
+    }
+
+    private void InitializeImageRoute(int index, Image image)
+    {
+        tmpRout[index] = false;
+        imageRout[index] = true;
+
+        images[index] = image;
+
+        Material sourceMaterial = image.material;
+
+        if (sourceMaterial == null)
+        {
+            Debug.LogWarning(image.name + " has no material.");
+            return;
+        }
+
+        Material mat = new Material(sourceMaterial);
+        mat.name = sourceMaterial.name + " Runtime Instance " + index;
+
+        image.material = mat;
+        imageMaterials[index] = mat;
+
+        TouchImageMaterial(image);
+    }
+
+    private void InitializeOriginalColors()
+    {
+        originalTMPColor = Color.white;
+        originalImageColor = Color.white;
+
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            if (tmpRout[i] && materials[i] != null && materials[i].HasProperty(FaceColorID))
+            {
+                originalTMPColor = materials[i].GetColor(FaceColorID);
+                return;
+            }
+
+            if (imageRout[i] && imageMaterials[i] != null && imageMaterials[i].HasProperty(ImageProxyColorID))
+            {
+                originalImageColor = imageMaterials[i].GetColor(ImageProxyColorID);
+                return;
+            }
+        }
     }
 
     private void Update()
@@ -157,28 +245,33 @@ public class MenuNavigator : MonoBehaviour
         if (colorRoutine != null)
             StopCoroutine(colorRoutine);
 
-        for (int i = 0; i < materials.Length; i++)
+        ResetAllVisuals();
+
+        currentTMP = null;
+        currentImage = null;
+
+        if (tmpRout[currentIndex])
         {
-            if (materials[i] == null)
-                continue;
+            currentTMP = texts[currentIndex];
 
-            materials[i].SetColor(FaceColorID, originalColor);
+            if (currentTMP == null)
+                return;
 
-            if (texts[i] != null)
-            {
-                texts[i].fontMaterial = materials[i];
-                texts[i].SetMaterialDirty();
-                texts[i].SetVerticesDirty();
-                TouchTMPMaterial(texts[i]);
-            }
+            colorRoutine = StartCoroutine(ChangeTMPColor(currentIndex));
         }
+        else if (imageRout[currentIndex])
+        {
+            currentImage = images[currentIndex];
 
-        currentTMP = texts[currentIndex];
+            if (currentImage == null)
+                return;
 
-        if (currentTMP == null)
+            colorRoutine = StartCoroutine(ChangeImageProxyColor(currentIndex));
+        }
+        else
+        {
             return;
-
-        colorRoutine = StartCoroutine(ChangeColor(currentIndex));
+        }
 
         if (EventSystem.current != null)
         {
@@ -196,7 +289,45 @@ public class MenuNavigator : MonoBehaviour
         }
     }
 
-    private IEnumerator ChangeColor(int index)
+    private void ResetAllVisuals()
+    {
+        for (int i = 0; i < buttons.Count; i++)
+        {
+            if (tmpRout[i])
+            {
+                ResetTMPVisual(i);
+            }
+            else if (imageRout[i])
+            {
+                ResetImageVisual(i);
+            }
+        }
+    }
+
+    private void ResetTMPVisual(int index)
+    {
+        if (materials[index] == null)
+            return;
+
+        if (materials[index].HasProperty(FaceColorID))
+            materials[index].SetColor(FaceColorID, originalTMPColor);
+
+        if (texts[index] != null)
+        {
+            texts[index].fontMaterial = materials[index];
+            texts[index].SetMaterialDirty();
+            texts[index].SetVerticesDirty();
+            TouchTMPMaterial(texts[index]);
+        }
+    }
+
+    private void ResetImageVisual(int index)
+    {
+        SetImageMaterialProxyProperty(index, originalImageColor);
+        SetImageComponentAlpha(index, 0f);
+    }
+
+    private IEnumerator ChangeTMPColor(int index)
     {
         Material mat = materials[index];
         TMP_Text tmp = texts[index];
@@ -205,11 +336,12 @@ public class MenuNavigator : MonoBehaviour
             yield break;
 
         Color targetColor = highlightColor;
-        targetColor.a = 1f;
+        //targetColor.a = 1f;
 
         if (transitionTime <= 0f)
         {
-            mat.SetColor(FaceColorID, targetColor);
+            if (mat.HasProperty(FaceColorID))
+                mat.SetColor(FaceColorID, targetColor);
 
             tmp.fontMaterial = mat;
             tmp.SetMaterialDirty();
@@ -227,10 +359,11 @@ public class MenuNavigator : MonoBehaviour
 
             float t = Mathf.Clamp01(time / transitionTime);
 
-            Color newColor = Color.Lerp(originalColor, targetColor, t);
+            Color newColor = Color.Lerp(originalTMPColor, targetColor, t);
             newColor.a = 1f;
 
-            mat.SetColor(FaceColorID, newColor);
+            if (mat.HasProperty(FaceColorID))
+                mat.SetColor(FaceColorID, newColor);
 
             tmp.fontMaterial = mat;
             tmp.SetMaterialDirty();
@@ -240,12 +373,92 @@ public class MenuNavigator : MonoBehaviour
             yield return null;
         }
 
-        mat.SetColor(FaceColorID, targetColor);
+        if (mat.HasProperty(FaceColorID))
+            mat.SetColor(FaceColorID, targetColor);
 
         tmp.fontMaterial = mat;
         tmp.SetMaterialDirty();
         tmp.SetVerticesDirty();
         TouchTMPMaterial(tmp);
+    }
+
+    private IEnumerator ChangeImageProxyColor(int index)
+    {
+        Image image = images[index];
+        Material mat = imageMaterials[index];
+
+        if (image == null || mat == null)
+            yield break;
+
+        Color targetColor = highlightColor;
+        targetColor.a = 1f;
+
+        float startAlpha = image.color.a;
+        float targetAlpha = 1f;
+
+        if (transitionTime <= 0f)
+        {
+            SetImageMaterialProxyProperty(index, targetColor);
+            SetImageComponentAlpha(index, targetAlpha);
+            yield break;
+        }
+
+        float time = 0f;
+
+        while (time < transitionTime)
+        {
+            time += Time.unscaledDeltaTime;
+
+            float t = Mathf.Clamp01(time / transitionTime);
+
+            Color newColor = Color.Lerp(originalImageColor, targetColor, t);
+            newColor.a = 1f;
+
+            float newAlpha = Mathf.Lerp(startAlpha, targetAlpha, t);
+
+            SetImageMaterialProxyProperty(index, newColor);
+            SetImageComponentAlpha(index, newAlpha);
+
+            yield return null;
+        }
+
+        SetImageMaterialProxyProperty(index, targetColor);
+        SetImageComponentAlpha(index, targetAlpha);
+    }
+
+    private void SetImageMaterialProxyProperty(int index, Color color)
+    {
+        if (images == null || imageMaterials == null)
+            return;
+
+        if (index < 0 || index >= images.Length)
+            return;
+
+        Image image = images[index];
+        Material mat = imageMaterials[index];
+
+        if (image == null || mat == null)
+            return;
+
+        if (mat.HasProperty(ImageProxyColorID))
+        {
+            mat.SetColor(ImageProxyColorID, color);
+        }
+        else if (mat.HasProperty("_Color"))
+        {
+            mat.SetColor("_Color", color);
+        }
+        else if (mat.HasProperty("_BaseColor"))
+        {
+            mat.SetColor("_BaseColor", color);
+        }
+        else
+        {
+            image.color = color;
+        }
+
+        image.material = mat;
+        image.SetMaterialDirty();
     }
 
     private void TouchTMPMaterial(TMP_Text tmp)
@@ -261,15 +474,68 @@ public class MenuNavigator : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void TouchImageMaterial(Image image)
     {
-        if (materials == null)
+        if (image == null)
             return;
 
-        for (int i = 0; i < materials.Length; i++)
+        Material activeMaterial = image.material;
+
+        if (activeMaterial == null)
+            return;
+
+        if (activeMaterial.HasProperty(ImageProxyColorID))
         {
-            if (materials[i] != null)
-                Destroy(materials[i]);
+            activeMaterial.GetColor(ImageProxyColorID);
+        }
+        else if (activeMaterial.HasProperty("_Color"))
+        {
+            activeMaterial.GetColor("_Color");
+        }
+        else if (activeMaterial.HasProperty("_BaseColor"))
+        {
+            activeMaterial.GetColor("_BaseColor");
+        }
+    }
+    
+    private void SetImageComponentAlpha(int index, float alpha)
+    {
+        if (images == null)
+            return;
+
+        if (index < 0 || index >= images.Length)
+            return;
+
+        Image image = images[index];
+
+        if (image == null)
+            return;
+
+        Color imageColor = image.color;
+        imageColor.a = alpha;
+        image.color = imageColor;
+
+        image.SetMaterialDirty();
+    }
+
+    private void OnDestroy()
+    {
+        if (materials != null)
+        {
+            for (int i = 0; i < materials.Length; i++)
+            {
+                if (materials[i] != null)
+                    Destroy(materials[i]);
+            }
+        }
+
+        if (imageMaterials != null)
+        {
+            for (int i = 0; i < imageMaterials.Length; i++)
+            {
+                if (imageMaterials[i] != null)
+                    Destroy(imageMaterials[i]);
+            }
         }
     }
 }
