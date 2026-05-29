@@ -43,14 +43,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaMultiplier: 1
-    - _FlashMultiplier: 3.83
+    - _FlashMultiplier: 2
+    - _NoiseScale: 3
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Speed: 0.1
     m_Colors:
     - White: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 5.7911477, g: 0.75800365, b: 0, a: 0}
-    - _ColorRemap: {r: 0, g: 1, b: 0, a: 0}
+    - _ColorRemap: {r: 0.2, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &609853970174227472

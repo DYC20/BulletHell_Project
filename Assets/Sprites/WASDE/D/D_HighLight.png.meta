@@ -1,25 +1,10 @@
 fileFormatVersion: 2
-guid: 8657ef2dff4ab864ba88a98b09cac9e5
+guid: 50f998bea5db469489d6d24dfde227a6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5182980206655313880
-    second: D_HighLight_0
-  - first:
-      213: -2220776813867083577
-    second: D_HighLight_1
-  - first:
-      213: -8205942200325423285
-    second: D_HighLight_2
-  - first:
-      213: -3857675699504298438
-    second: D_HighLight_3
-  - first:
-      213: -7938696470581985074
-    second: D_HighLight_4
-  - first:
-      213: -1273816317506290809
-    second: D_HighLight_5
+      213: 7298338412005371422
+    second: D_Highlight_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -66,7 +51,7 @@ TextureImporter:
   spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 150
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -154,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: D_HighLight_0
+      name: D_Highlight_0
       rect:
         serializedVersion: 2
-        x: 41
-        y: 74
-        width: 15
-        height: 10
+        x: 24
+        y: 26
+        width: 79
+        height: 77
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,118 +154,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 828ed6076fa5218b0800000000000000
-      internalID: -5182980206655313880
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: D_HighLight_1
-      rect:
-        serializedVersion: 2
-        x: 56
-        y: 71
-        width: 24
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7c8570401473e21e0800000000000000
-      internalID: -2220776813867083577
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: D_HighLight_2
-      rect:
-        serializedVersion: 2
-        x: 60
-        y: 84
-        width: 15
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b4f3736bb03ae1e80800000000000000
-      internalID: -8205942200325423285
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: D_HighLight_3
-      rect:
-        serializedVersion: 2
-        x: 45
-        y: 52
-        width: 41
-        height: 21
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a36c360e368c67ac0800000000000000
-      internalID: -3857675699504298438
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: D_HighLight_4
-      rect:
-        serializedVersion: 2
-        x: 48
-        y: 39
-        width: 16
-        height: 10
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ec0405bfe9514d190800000000000000
-      internalID: -7938696470581985074
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: D_HighLight_5
-      rect:
-        serializedVersion: 2
-        x: 69
-        y: 35
-        width: 12
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 78bf0f5eece725ee0800000000000000
-      internalID: -1273816317506290809
+      spriteID: e1e2b221e18e84560800000000000000
+      internalID: 7298338412005371422
       vertices: []
       indices: 
       edges: []
@@ -299,12 +174,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      D_HighLight_0: -5182980206655313880
-      D_HighLight_1: -2220776813867083577
-      D_HighLight_2: -8205942200325423285
-      D_HighLight_3: -3857675699504298438
-      D_HighLight_4: -7938696470581985074
-      D_HighLight_5: -1273816317506290809
+      D_Highlight_0: 7298338412005371422
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
