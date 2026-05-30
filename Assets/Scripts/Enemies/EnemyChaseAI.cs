@@ -59,7 +59,8 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
         if (!aiEnabled && rb != null)
             rb.linearVelocity = Vector2.zero;
     }
-/* 
+    
+    /* 
     private void CachePlayerHealth()
     {
         playerHealth = null;
