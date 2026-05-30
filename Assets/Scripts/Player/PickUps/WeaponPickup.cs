@@ -13,6 +13,7 @@ public class WeaponPickup : MonoBehaviour, IPickup
     private Image weaponBG;
     private VisualEffect fireUIEffect;
     private VisualEffect iceUIEffect;
+    [SerializeField] private SpriteRenderer shadow;
     [SerializeField] private Color newColor;
     [SerializeField]private float newColorDuration = 1f;
     
@@ -45,7 +46,7 @@ public class WeaponPickup : MonoBehaviour, IPickup
         }
 
 
-
+        shadow.gameObject.SetActive(false);
         equipper.Equip(this.gameObject);
         /*
         if (destroyAfterPickup)

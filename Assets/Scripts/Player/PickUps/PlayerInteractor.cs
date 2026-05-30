@@ -25,20 +25,7 @@ public class PlayerInteractor : MonoBehaviour
         {
             if (!Interactable)
             {
-                 var bestPickable = GetClosestPickable();
-                            Debug.Log("Trying To Pickup");
-                            //Debug.Log(best == null ? "No pickup candidate" : $"Trying pickup: {((MonoBehaviour)best).name} ({best.GetType().Name})");
-                            if (bestPickable == null) return;
-                            else
-                            {
-                                Debug.Log("Can be Equiped ?");
-                                if(bestPickable.CanPickup(gameObject))
-                                {
-                                    Debug.Log("Yes");
-                                    bestPickable.Pickup(gameObject);
-                                }
-                            }
-                            ScanForIPickups(out PickList);
+                PickupWeapon();
             }
            
             if (Interactable)
@@ -49,6 +36,8 @@ public class PlayerInteractor : MonoBehaviour
                 {
                     bestInteractable.Activate(gameObject);
                 }
+
+                PickupWeapon();
             }
             Debug.Log("Player Interactor OG status: " + Interactable);
             
@@ -64,7 +53,23 @@ public class PlayerInteractor : MonoBehaviour
         }
     }
 
-  
+    private void PickupWeapon()
+    {
+        var bestPickable = GetClosestPickable();
+        Debug.Log("Trying To Pickup");
+        //Debug.Log(best == null ? "No pickup candidate" : $"Trying pickup: {((MonoBehaviour)best).name} ({best.GetType().Name})");
+        if (bestPickable == null) return;
+        else
+        {
+            Debug.Log("Can be Equiped ?");
+            if(bestPickable.CanPickup(gameObject))
+            {
+                Debug.Log("Yes");
+                bestPickable.Pickup(gameObject);
+            }
+        }
+        ScanForIPickups(out PickList);
+    }
 
 
     private IPickup GetClosestPickable()
@@ -106,7 +111,7 @@ public class PlayerInteractor : MonoBehaviour
             IInteractable mb = null;
             if(!p.gameObject.TryGetComponent<IInteractable>(out mb))
             {
-                Debug.Log("Not Pickable");
+//                Debug.Log("Not Pickable");
                 continue;
             }
             float d = Vector2.Distance(transform.position, p.transform.position);

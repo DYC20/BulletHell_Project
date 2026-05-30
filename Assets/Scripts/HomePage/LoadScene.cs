@@ -13,6 +13,7 @@ public class LoadScene : MonoBehaviour
     [Header("BTN Animation Settings")]
     [SerializeField] private float scaleDuration;
     [SerializeField] private Ease ease;
+    [SerializeField] private bool endAtZero;
     
     private RectTransform buttonTF;
     private Transform buttonTransform;
@@ -54,6 +55,10 @@ public class LoadScene : MonoBehaviour
                                     ps.Play();
                             })
                         .Append(buttonTF.DOScale(1, scaleDuration).SetEase(ease));
+                    if (endAtZero)
+                    {
+                        seq.Append(buttonTransform.DOScale(0, scaleDuration).SetEase(ease));
+                    }
         }
        
         if (buttonTransform)
@@ -71,6 +76,10 @@ public class LoadScene : MonoBehaviour
                         ps.Play();
                 })
                 .Append(buttonTransform.DOScale(1, scaleDuration).SetEase(ease));
+            if (endAtZero)
+            {
+                seq.Append(buttonTransform.DOScale(0, scaleDuration).SetEase(ease));
+            }
         }
         
     }

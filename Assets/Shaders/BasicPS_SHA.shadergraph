@@ -940,8 +940,8 @@
     "m_ObjectId": "3c87885560a64c599439dae3a09dfccd",
     "m_Title": "Circle",
     "m_Position": {
-        "x": -2579.33349609375,
-        "y": 125.333251953125
+        "x": -2579.333251953125,
+        "y": 125.33333587646485
     }
 }
 
@@ -1023,6 +1023,12 @@
         "w": 0.0
     },
     "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.Rendering.Universal.ShaderGraph.UniversalSpriteUnlitSubTarget",
+    "m_ObjectId": "5299c42df41a46cc927431aa1260d54a"
 }
 
 {
@@ -1505,8 +1511,8 @@
     "m_ObjectId": "7ccaab93db7a44939443cd76e8772bfb",
     "m_Title": "PSColor",
     "m_Position": {
-        "x": -447.3333740234375,
-        "y": -105.3333740234375
+        "x": -447.33343505859377,
+        "y": -105.33331298828125
     }
 }
 
@@ -1516,8 +1522,8 @@
     "m_ObjectId": "802c5afe0025468a945112bd9058f6cd",
     "m_Title": "CoreSize",
     "m_Position": {
-        "x": -870.0,
-        "y": 410.0
+        "x": -870.0001831054688,
+        "y": 409.9999694824219
     }
 }
 
@@ -1970,15 +1976,6 @@
         "e32": 0.0,
         "e33": 1.0
     }
-}
-
-{
-    "m_SGVersion": 2,
-    "m_Type": "UnityEditor.Rendering.Universal.ShaderGraph.UniversalUnlitSubTarget",
-    "m_ObjectId": "ada45b5eaf9a42bdb86f79a6dc4dba60",
-    "m_KeepLightingVariants": false,
-    "m_DefaultDecalBlending": true,
-    "m_DefaultSSAO": true
 }
 
 {
@@ -2486,7 +2483,7 @@
     "m_ObjectId": "d3b080427ef84690a98898d8a84a8036",
     "m_Datas": [],
     "m_ActiveSubTarget": {
-        "m_Id": "ada45b5eaf9a42bdb86f79a6dc4dba60"
+        "m_Id": "5299c42df41a46cc927431aa1260d54a"
     },
     "m_AllowMaterialOverride": false,
     "m_SurfaceType": 1,
@@ -2780,7 +2777,7 @@
     "m_Title": "CircleLook",
     "m_Position": {
         "x": -1522.0,
-        "y": 156.6666259765625
+        "y": 156.66668701171876
     }
 }
 

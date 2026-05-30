@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Player_MAT
-  m_Shader: {fileID: -6465566751694194690, guid: 1a7fc1442f017ca4e825fbb8245b3596, type: 3}
+  m_Name: PlayerPortal_MAT
+  m_Shader: {fileID: -6465566751694194690, guid: dbe15728ca4ba0b4db6393f141cdd2fa, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -28,6 +28,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _OrbSprite:
+        m_Texture: {fileID: 2800000, guid: 69c6b504c62bd6043817b6d9b5cd2c8f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _PlayerSprite:
+        m_Texture: {fileID: 2800000, guid: a89679a9b5523ef46ac40216db8b718d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -42,31 +50,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Aberration_Value: 0
-    - _Deform: 0.744
-    - _DeformPos: 1
-    - _DeformRot: 0
-    - _Float: 5.75
-    - _Green_Rot: -2
-    - _Noise_Scale: 30
-    - _Progression: 0.101
+    - _Add: 1
+    - _Power: 89.6
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Red_Rot: 2
-    - _Value: 2
-    - _aberation_Value: 1
-    - _blue_Rot: 4
+    - _Transition: 0
+    - _Value: 0
     m_Colors:
     - White: {r: 1, g: 1, b: 1, a: 1}
-    - _Blue_Offset: {r: 0, g: -0.01, b: 0, a: 0}
-    - _Green_Offset: {r: 0.01, g: 0, b: 0, a: 0}
-    - _Red_Offset: {r: -0.01, g: 0, b: 0, a: 0}
-    - _Vector2: {r: 1, g: 1, b: 0, a: 0}
-    - _Vector3: {r: 0, g: 0, b: 0, a: 0}
-    - _offset: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Offset: {r: 0.05, g: 0.33, b: 0, a: 0}
+    - _Vector2: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &7262174142540121232
+--- !u!114 &8037157057827071918
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
