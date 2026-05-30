@@ -5,6 +5,7 @@ public class PSDestroy : MonoBehaviour
 {
     private ParticleSystem vfx;
     private List<ParticleSystem> vfxList;
+    private bool hasPlayed = false;
 
     void Awake()
     {        
@@ -24,8 +25,13 @@ public class PSDestroy : MonoBehaviour
         {
             if (ps != null && ps.IsAlive(true))
                 return; // at least one system still playing
+            
+            if (ps.IsAlive(true))
+            {
+                hasPlayed = true;
+            }
         }
-
+    if (hasPlayed) 
         Destroy(gameObject);
     }
 }
