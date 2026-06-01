@@ -78,6 +78,13 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
         if (!aiEnabled ||player == null)
         {
             rb.linearVelocity = Vector2.zero;
+            Debug.Log("Linear velocity: " + rb.linearVelocity);
+            Debug.Log("ai Enabled: " + aiEnabled);
+            if (player == null)
+            {
+                Debug.Log("Player is NULL");
+            }
+
             return;
         }
 
@@ -101,6 +108,8 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
         Vector2 dir = toPlayer.sqrMagnitude > 0.0001f ? toPlayer.normalized : Vector2.zero;
 
         rb.linearVelocity = dir * moveSpeed;
+        Debug.Log("Linear velocity: " + rb.linearVelocity);
+        Debug.Log("Body Type: " + rb.bodyType);
         
         if (toPlayer.sqrMagnitude > 0.0001f)
         {
@@ -127,39 +136,4 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
             }
         }
     }
-    
-    /*
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        TryHitPlayer(collision.collider);
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        TryHitPlayer(collision.collider);
-    }
-    
-
-    private void TryHitPlayer(Collider2D other)
-    {
-        if (Time.time < nextTimeCanHit)
-            return;
-
-        // Fast path: tag check
-        if (!other.CompareTag(playerTag))
-            return;
-
-        // Ensure we have the Health reference (in case player was found late)
-        if (playerHealth == null)
-        {
-            playerHealth = other.GetComponent<Health>();
-            if (playerHealth == null) return;
-        }
-
-        playerHealth.TakeDamage(contactDamage);
-        nextTimeCanHit = Time.time + hitCooldown;
-
-        Debug.Log("PlayerHealth"+playerHealth.currentHP);
-    }
-    */
 }
