@@ -37,7 +37,13 @@ public class PopupButton : MonoBehaviour, IInteractable
 
     private void OnTrigger()
     {
+        Debug.LogWarning(gameObject.name + " is about to invoke onTrigger");
+
+        Debug.LogWarning("onTrigger persistent listener count: " + onTrigger.GetPersistentEventCount());
+
         onTrigger?.Invoke();
+
+        Debug.LogWarning(gameObject.name + " finished invoking onTrigger");
     }
 
     private void OnTriggerEnter2D(Collider2D other)

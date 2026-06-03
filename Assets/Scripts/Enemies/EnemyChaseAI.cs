@@ -78,8 +78,8 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
         if (!aiEnabled ||player == null)
         {
             rb.linearVelocity = Vector2.zero;
-            Debug.Log("Linear velocity: " + rb.linearVelocity);
-            Debug.Log("ai Enabled: " + aiEnabled);
+  //          Debug.Log("Linear velocity: " + rb.linearVelocity);
+//            Debug.Log("ai Enabled: " + aiEnabled);
             if (player == null)
             {
                 Debug.Log("Player is NULL");

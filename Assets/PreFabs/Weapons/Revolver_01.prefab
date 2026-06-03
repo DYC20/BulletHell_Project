@@ -422,6 +422,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponPickup
   destroyAfterPickup: 1
+  interactableGO: {fileID: 2666730262157173589}
   shadow: {fileID: 2272482297003609325}
   newColor: {r: 1, g: 1, b: 1, a: 1}
   newColorDuration: 1
@@ -651,6 +652,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 679b5a0aec568fc428fd14a73de41b22, type: 3}
+--- !u!1 &2666730262157173589 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5104319564541752332, guid: 679b5a0aec568fc428fd14a73de41b22, type: 3}
+  m_PrefabInstance: {fileID: 7193390528321279833}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2803790735275733216 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4989177236710746041, guid: 679b5a0aec568fc428fd14a73de41b22, type: 3}

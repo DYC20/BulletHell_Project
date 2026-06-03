@@ -39,7 +39,7 @@ public class PlayerInteractor : MonoBehaviour
 
                 PickupWeapon();
             }
-            Debug.Log("Player Interactor OG status: " + Interactable);
+//            Debug.Log("Player Interactor OG status: " + Interactable);
             
             /*if (best != null)
             {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,8 +7,10 @@ using UnityEngine.VFX;
 public class WeaponPickup : MonoBehaviour, IPickup
 {
     [SerializeField] private bool destroyAfterPickup = true;
+    [SerializeField] private GameObject interactableGO;
 
     private GameObject currentPicker;
+    private IInteractable interactable;
 
     [Header("UpdateUI")] 
     private Image weaponBG;
@@ -16,7 +19,11 @@ public class WeaponPickup : MonoBehaviour, IPickup
     [SerializeField] private SpriteRenderer shadow;
     [SerializeField] private Color newColor;
     [SerializeField]private float newColorDuration = 1f;
-    
+
+    private void Start()
+    {
+        interactable = interactableGO.GetComponent<IInteractable>();
+    }
 
     public bool CanPickup(GameObject picker)
     {
@@ -31,6 +38,11 @@ public class WeaponPickup : MonoBehaviour, IPickup
         var equipper = picker.GetComponentInParent<IWeaponEquipper>();
         if (equipper == null) return;
 
+        if (interactableGO != null && interactable != null)
+        {
+            Destroy(interactableGO);
+        }
+            
         // var modRuntimeState = picker.GetComponentInParent<ModifierRuntimeState>();
 
         if (ModifierRuntimeState.Instance.isModified)
