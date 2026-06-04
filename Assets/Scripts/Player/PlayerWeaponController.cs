@@ -43,6 +43,8 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
             }
         }
 
+        
+        
         if (equippedWeapon != null)
             Equip(equippedWeapon);
         currentModifier = modifierRunTimeState.Modifier;
@@ -143,7 +145,7 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
     // Input System: Action name "Fire" => method "OnFire"
     public void OnFire(InputValue value)
     {
-        _isFiring = value.isPressed;
+            _isFiring = value.isPressed;
         //Debug.LogWarning("isFiring");
     }
 

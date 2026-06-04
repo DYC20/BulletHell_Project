@@ -160,6 +160,16 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         }
     }
 
+    public void DisableEnemyBrain()
+    {
+        StopCoroutine(BrainLoop());
+    }
+
+    public void EnableEnemyBrain()
+    {
+        StartCoroutine(BrainLoop());
+    }
+
     private IEnumerator BrainLoop()
     {
         state = State.Wander;

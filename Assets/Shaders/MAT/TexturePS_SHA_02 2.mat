@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Glow_Cracks_HitEffect_02_MAT
-  m_Shader: {fileID: -6465566751694194690, guid: 460e77241172be94897985bf6cb6535e, type: 3}
+  m_Name: TexturePS_SHA_02 2
+  m_Shader: {fileID: -6465566751694194690, guid: 33b830b4ea5dceb4d83497e5e89b36c4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,12 +24,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Mask:
-        m_Texture: {fileID: 2800000, guid: 9a2a65d7df399f7498710e9dcdd8cb97, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _Texture2D:
-        m_Texture: {fileID: 2800000, guid: a7fe33a05d8335540b4cddd2bbb728a3, type: 3}
+        m_Texture: {fileID: 2800000, guid: 523984a8de70a9244b05afa006299261, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -46,21 +42,16 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AlphaMultiplier: 1
-    - _FlashMultiplier: 0
-    - _NoiseScale: 0
+    - _Multi: 1
+    - _Power: 1
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Speed: 0
-    - _Value: 1
+    - _Step_Size: 0
     m_Colors:
-    - White: {r: 1, g: 1, b: 1, a: 1}
-    - _Color: {r: 1, g: 1, b: 1, a: 0}
-    - _ColorRemap: {r: 0, g: 7, b: 0, a: 0}
-    - _MaskTiling: {r: 0, g: 0, b: 0, a: 0}
+    - _HDR_Color: {r: 3.9999998, g: 3.9999998, b: 3.9999998, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &609853970174227472
+--- !u!114 &6472202784809331288
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

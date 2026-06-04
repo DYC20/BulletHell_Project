@@ -17,9 +17,9 @@ public class PauseDirector : MonoBehaviour
 /*
         Debug.LogWarning("Director object: " + director.gameObject.name);
         Debug.LogWarning("Director state before pause: " + director.state);
-
-        director.Pause();
 */
+        director.Pause();
+
         //Debug.LogWarning("Director state after pause: " + director.state);
     }
 
