@@ -156,6 +156,30 @@ MonoBehaviour:
   m_Loop: 0
   m_Version: 1
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
+--- !u!114 &-6478732675770435352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21bf7f712d84d26478ebe6a299f21738, type: 3}
+  m_Name: Activation Track
+  m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.ActivationTrack
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children: []
+  m_Clips: []
+  m_Markers:
+    m_Objects: []
+  m_PostPlaybackState: 3
 --- !u!114 &-5921633390881245401
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1639,6 +1663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Timeline::UnityEngine.Timeline.TimelineAsset
   m_Version: 0
   m_Tracks:
+  - {fileID: -6478732675770435352}
   - {fileID: -7136841620923478482}
   - {fileID: 3304343791107064748}
   - {fileID: -2894937187486904150}
