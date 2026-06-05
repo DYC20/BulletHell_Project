@@ -8,6 +8,7 @@ public class PlayerDeathHandler : MonoBehaviour
     [SerializeField] private Transform respawnPoint;
     
     private PlayerInput playerInput;
+    private PlayerWeaponController pwc;
     private Rigidbody2D rb;
     private Health health;
 
@@ -15,6 +16,7 @@ public class PlayerDeathHandler : MonoBehaviour
     {
         health = GetComponent<Health>();
         playerInput = GetComponent<PlayerInput>();
+        pwc = GetComponent<PlayerWeaponController>();
     }
 
     public void OnPlayerDied()
@@ -35,6 +37,7 @@ public class PlayerDeathHandler : MonoBehaviour
             
             // 1. Disable input (THIS is the key line)
             playerInput.enabled = false;
+            pwc.SetCanFire(false);
 
             // 2. Stop movement immediately
             if (rb)

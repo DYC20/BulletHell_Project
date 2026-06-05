@@ -7,6 +7,7 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
 {
     [Header("Weapon")]
 
+    [SerializeField] private bool canFire = true;
     [SerializeField] private Transform weaponSocket;
     [SerializeField] private float gunDistance = 0.34f;
     [SerializeField] public WeaponBase equippedWeapon;
@@ -35,7 +36,7 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
 
             if (weaponRenderer != null)
             {
-                weaponImage.sprite = weaponRenderer.sprite;
+                weaponImage.sprite = equippedWeapon.GetComponent<SimplePistol_Waepon>().UIImage;
             }
             else
             {
@@ -44,7 +45,8 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
         }
 
         
-        
+        if (equippedWeapon == null)
+            canFire = false;
         if (equippedWeapon != null)
             Equip(equippedWeapon);
         currentModifier = modifierRunTimeState.Modifier;
@@ -70,6 +72,8 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
             equippedWeapon.gameObject.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             equippedWeapon.GetComponent<Collider2D>().enabled = true;*/
         }
+
+        canFire = true;
         equippedWeapon = weapon;
         Debug.Log($" no Null Equipped weapon: {equippedWeapon.name}");
         
@@ -153,5 +157,31 @@ public class PlayerWeaponController : MonoBehaviour, IWeaponEquipper
     {
         if (_isFiring)
             equippedWeapon?.TryFire();
+    }
+    
+    ////////////
+    /// canFure---operators
+    ///////////
+    public bool CanFireGetSet
+    {
+        get { return canFire; }
+        set { canFire = value; }
+    }
+
+    // Useful for UnityEvents / Timeline Signals
+    public void SetCanFire(bool value)
+    {
+        canFire = value;
+//        Debug.LogWarning("Player canFire set to: " + canFire);
+    }
+
+    public void DisableFire()
+    {
+        SetCanFire(false);
+    }
+
+    public void EnableFire()
+    {
+        SetCanFire(true);
     }
 }

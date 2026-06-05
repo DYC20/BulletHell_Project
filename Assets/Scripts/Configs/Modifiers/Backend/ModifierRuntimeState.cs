@@ -334,21 +334,28 @@ public class ModifierRuntimeState : MonoBehaviour
 
         while (timer < duration)
         {
+            timer += Time.deltaTime;
             if (enemy == null) yield break;
 
             var d = enemy.GetComponentInParent<IDamageable>();
+            if (d == null) Debug.LogWarning("Enemy damagable is NULL");
+            Debug.LogWarning("Damage Per Second: " + damagePerSecond);
+            Debug.LogWarning("Duration: " + duration);
 
             if (d != null)
             {
                 d.TakeDamage(damagePerSecond, null);
 
-                Transform enemyVisualMiddle = enemy.transform.Find("EnemyVisualMiddle");
+                Transform enemyVisualMiddle = enemy.transform.Find("VisualCenter(DNCN)");
+                if (enemyVisualMiddle == null) Debug.LogWarning("enemyVisualMiddle is NULL");
+                if (damageFX == null) Debug.LogWarning("damageFX NULL");
+                    
                 if (enemyVisualMiddle != null && damageFX != null)
                     Instantiate(damageFX, enemyVisualMiddle.position, Quaternion.identity);
             }
-
+                
             yield return new WaitForSeconds(1f);
-            timer += 1f;
+            Debug.LogWarning("DamageOverTime delt");
         }
     }
     public IEnumerator FreezeFrame(float duration)

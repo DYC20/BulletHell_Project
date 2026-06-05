@@ -21,16 +21,20 @@ public class PSDestroy : MonoBehaviour
     
     void Update()
     {
-      foreach (var ps in vfxList)
+        foreach (var ps in vfxList)
         {
-            if (ps != null && ps.IsAlive(true))
-                return; // at least one system still playing
-            
+            if (ps == null)
+                continue;
+
             if (ps.IsAlive(true))
             {
-                hasPlayed = true;
+                //Debug.LogWarning($"{ps.name} is still alive", ps.gameObject);
+                return; // at least one system is still playing/alive
             }
+            
+            hasPlayed = true;
         }
+        
     if (hasPlayed) 
         Destroy(gameObject);
     }

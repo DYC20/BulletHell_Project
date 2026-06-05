@@ -62,7 +62,17 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
         CacheDefaultsIfNeeded();
 
         var set = owner != null ? owner.GetComponentInParent<ProjectileModifierSet>() : null;
+        
+        Debug.LogWarning("Weapon Owner: " + owner.name);
+        
+        PlayerWeaponController pwc = owner.GetComponentInParent<PlayerWeaponController>();
 
+        if (pwc != null)
+        {
+                    if (!pwc.CanFireGetSet)
+                        return false;
+        }
+        
         ProjectileConfigSO cfg = projectileConfig;
         ObjectPool pool = projectilePool;
 
@@ -74,7 +84,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
             Debug.LogWarning($"{name}: projectileConfig is null.");
             return false;
         }
-
+        
         if (cfg.ammoPerShot <= 0) return true;
         if (ammoConsumer == null) return false;
 
