@@ -328,6 +328,7 @@ public class ModifierRuntimeState : MonoBehaviour
         if (perEnemy.Count == 0) _snapshots.Remove(modKey);
     }
 
+    //enemy is enemyVisualMiddle
     private IEnumerator DamageOverTime(GameObject enemy, float damagePerSecond, GameObject damageFX, float duration, ScriptableObject modifier)
     {
         float timer = 0f;
@@ -338,20 +339,21 @@ public class ModifierRuntimeState : MonoBehaviour
             if (enemy == null) yield break;
 
             var d = enemy.GetComponentInParent<IDamageable>();
-            if (d == null) Debug.LogWarning("Enemy damagable is NULL");
-            Debug.LogWarning("Damage Per Second: " + damagePerSecond);
-            Debug.LogWarning("Duration: " + duration);
+            //if (d == null) Debug.LogWarning("Enemy damagable is NULL");
+            //Debug.LogWarning("Damage Per Second: " + damagePerSecond);
+          //  Debug.LogWarning("Duration: " + duration);
 
             if (d != null)
             {
                 d.TakeDamage(damagePerSecond, null);
-
+/*
                 Transform enemyVisualMiddle = enemy.transform.Find("VisualCenter(DNCN)");
+                Debug.LogWarning("enemy is: " + enemy.name);
                 if (enemyVisualMiddle == null) Debug.LogWarning("enemyVisualMiddle is NULL");
                 if (damageFX == null) Debug.LogWarning("damageFX NULL");
-                    
-                if (enemyVisualMiddle != null && damageFX != null)
-                    Instantiate(damageFX, enemyVisualMiddle.position, Quaternion.identity);
+*/
+                if ( damageFX != null)
+                    Instantiate(damageFX, enemy.transform.position, Quaternion.identity);
             }
                 
             yield return new WaitForSeconds(1f);
