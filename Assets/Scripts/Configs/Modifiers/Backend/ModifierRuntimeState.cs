@@ -357,7 +357,7 @@ public class ModifierRuntimeState : MonoBehaviour
             }
                 
             yield return new WaitForSeconds(1f);
-            Debug.LogWarning("DamageOverTime delt");
+           // Debug.LogWarning("DamageOverTime delt");
         }
     }
     public IEnumerator FreezeFrame(float duration)

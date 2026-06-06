@@ -16,14 +16,14 @@ MonoBehaviour:
   ammoPerShot: 1
   damage: 1
   AOE: 0
-  speed: 3
+  speed: 4
   lifetime: 5
   projectilesPerShot: 1
   spreadAngleDeg: 11
   randomSpread: 1
   centerProjectile: 1
   spawnPosJitter: 0.1
-  speedMultiplierMin: 0.8
+  speedMultiplierMin: 0.6
   speedMultiplierMax: 1
   destroyOnHit: 1
   shockWavePrefab: {fileID: 0}
@@ -36,10 +36,28 @@ MonoBehaviour:
   shootEffect: []
   shootEffectPS:
   - {fileID: 3769249183343581588, guid: 6d3a7ced8cc5cbe439f0fec342f850db, type: 3}
-  doDissapateOverLifetime: 0
+  doDissapateOverLifetime: 1
   dissapateOverLifetime:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0.00872938
+      outSlope: 0.00872938
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0
+      outWeight: 0.58762205
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -74.88628
+      outSlope: -74.88628
+      tangentMode: 0
+      weightedMode: 3
+      inWeight: 0.013870001
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

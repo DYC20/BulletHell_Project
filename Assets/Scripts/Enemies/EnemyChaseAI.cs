@@ -10,6 +10,7 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
     [Header("Target")]
     [SerializeField] private Transform player;           // assign in Inspector (recommended)
     [SerializeField] private string playerTag = "Player"; // fallback if not assigned
+    private Transform playerVisualCenter;
                                   
     [Header("Movement")]
     [SerializeField] private float moveSpeed = 3.5f;
@@ -50,9 +51,42 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
             if (p != null) player = p.transform;
         }
 
+        if (player == null)
+        {
+            Debug.LogWarning("No player found");
+        }
+        if (player != null)
+        {
+            Debug.LogWarning("Player: " + player.name);
+            /*
+            foreach (Transform child in player.GetComponentsInChildren<Transform>(true))
+            {
+                Debug.LogWarning("Child in hierarchy: " + GetFullPath(child));
+            }
+            */
+            playerVisualCenter = player.Find("VisualCenter(DNCN)");
+        //    Debug.LogWarning("Playe Visual Center: " + playerVisualCenter.name);
+            if (playerVisualCenter == null) Debug.LogWarning("Player Visual Center is null");
+        }
         //CachePlayerHealth();
     }
+    //
+    //player heirarchy debug
+    //
+    /*
+    private string GetFullPath(Transform t)
+    {
+        string path = t.name;
 
+        while (t.parent != null)
+        {
+            t = t.parent;
+            path = t.name + "/" + path;
+        }
+
+        return path;
+    }
+    */
     public void SetAIEnabled(bool enabled)
     {
         aiEnabled = enabled;
@@ -104,7 +138,8 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
 
         
         // Move toward player using Rigidbody2D (physics-friendly)
-        Vector2 toPlayer = ((Vector2)player.position - rb.position);
+        //Vector2 toPlayer = ((Vector2)player.position - rb.position);
+        Vector2 toPlayer = (Vector2)playerVisualCenter.position - rb.position;
         Vector2 dir = toPlayer.sqrMagnitude > 0.0001f ? toPlayer.normalized : Vector2.zero;
 
         rb.linearVelocity = dir * moveSpeed;

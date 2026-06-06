@@ -13,6 +13,7 @@ public class PortalTransition : MonoBehaviour
     [SerializeField] private float transitionTime = 1f;
     [SerializeField] private float startValue = 0f;
     [SerializeField] private float endValue = 1f;
+    [SerializeField] private bool backToStandardMaterial;
 
     private Material runtimePortalMaterial;
     private Coroutine transitionRoutine;
@@ -45,9 +46,9 @@ public class PortalTransition : MonoBehaviour
             return;
         }
 
-        runtimePortalMaterial = new Material(portalMaterial);
+        //runtimePortalMaterial = new Material(portalMaterial);
 
-        if (!runtimePortalMaterial.HasProperty(ValueID))
+        if (!portalMaterial.HasProperty(ValueID))
         {
             Debug.LogError($"{name}: Portal material does not contain property '_Value'.");
             enabled = false;
@@ -87,7 +88,7 @@ public class PortalTransition : MonoBehaviour
 
     private IEnumerator TransitionRoutine(float fromValue, float toValue)
     {
-        spriteRenderer.sharedMaterial = runtimePortalMaterial;
+        //spriteRenderer.sharedMaterial = runtimePortalMaterial;
 
         SetPortalValue(fromValue);
 
@@ -107,14 +108,15 @@ public class PortalTransition : MonoBehaviour
 
         SetPortalValue(toValue);
 
-        spriteRenderer.sharedMaterial = playerStandardMaterial;
+        if (backToStandardMaterial) spriteRenderer.sharedMaterial = playerStandardMaterial;
+        
 
         transitionRoutine = null;
     }
 
     private void SetPortalValue(float value)
     {
-        runtimePortalMaterial.SetFloat(ValueID, value);
+      portalMaterial.SetFloat(ValueID, value);
     }
 
     private void OnDestroy()

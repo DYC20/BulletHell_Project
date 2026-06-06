@@ -298,7 +298,7 @@ public class PooledProjectile : MonoBehaviour
         
         if (hitDamageable == null)
         {
-            //Debug.Log("hitDamageable is null on " + other.name);
+            Debug.Log("hitDamageable is null on " + other.name);
             return;
         }
         //Debug.Log($"hitDamageable: {other.name}");
@@ -307,7 +307,9 @@ public class PooledProjectile : MonoBehaviour
             return;
 
         GameObject hitTarget = ((MonoBehaviour)hitDamageable).gameObject;
+        Debug.LogWarning("hit target: " + hitTarget);
         Transform VisualCenter = hitTarget.transform.Find("VisualCenter(DNCN)");
+        Debug.LogWarning("VisualCenter: " + VisualCenter);
         
         target = VisualCenter;
         damageable = hitDamageable;
@@ -383,7 +385,7 @@ public class PooledProjectile : MonoBehaviour
         for (int FX = 0; FX < _config.hitEffect.Count; FX++)
         {
             VisualEffect hitFX = _config.hitEffect[FX];
-            hitEffect.Apply(hitFX, transform.position, target.transform.rotation);
+            hitEffect.Apply(hitFX, target.transform.position, target.transform.rotation);
         }
     }
 
@@ -394,7 +396,7 @@ public class PooledProjectile : MonoBehaviour
             ParticleSystem hitFX = _config.hitEffectPS[FX];
             if (hitFX == null) continue;
 
-            hitEffectPS.Apply(hitFX, transform.position, target.transform.rotation);
+            hitEffectPS.Apply(hitFX, target.transform.position, target.transform.rotation);
         }
     }
 
