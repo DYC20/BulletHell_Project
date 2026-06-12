@@ -1295,7 +1295,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 172, y: -80.304016}
+  m_AnchoredPosition: {x: 172, y: -80.30401}
   m_SizeDelta: {x: 100, y: 310.96002}
   m_Pivot: {x: 0.9, y: 0.1}
 --- !u!114 &474468475
@@ -6882,6 +6882,7 @@ MonoBehaviour:
   - {fileID: 348888800}
   scaleDuration: 0.25
   ease: 21
+  endAtZero: 0
 --- !u!1 &930409166
 GameObject:
   m_ObjectHideFlags: 0
@@ -12545,12 +12546,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c8aa18218e2df448ad2e8853f99bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadScene
-  sceneName: 
+  sceneName: TutorialScene_01
   pressFX:
   - {fileID: 1410709006}
   - {fileID: 1206158333}
   scaleDuration: 0.25
   ease: 21
+  endAtZero: 0
 --- !u!224 &1131034274 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4371066156983200843, guid: fb67df155abc6aa479aec5f18d797676, type: 3}
@@ -13868,6 +13870,7 @@ MonoBehaviour:
   - {fileID: 1368940357}
   scaleDuration: 0.25
   ease: 21
+  endAtZero: 0
 --- !u!224 &1688921370 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1441158477699674354, guid: ffd6019500c2ddc499d10684c2278cf9, type: 3}
