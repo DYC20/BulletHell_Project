@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Unity.VectorGraphics;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class LoadScene : MonoBehaviour
 {
     [SerializeField] private string sceneName;
     [SerializeField] private List<ParticleSystem> pressFX;
+    [SerializeField] private float delayLoadSceneDuration;
     
     [Header("BTN Animation Settings")]
     [SerializeField] private float scaleDuration;
@@ -18,6 +20,7 @@ public class LoadScene : MonoBehaviour
     private RectTransform buttonTF;
     private Transform buttonTransform;
     private Sequence seq;
+    
 
     private void Start()
     {
@@ -30,9 +33,15 @@ public class LoadScene : MonoBehaviour
     //called with signal
     public void LoadSelectedScene()
     {
-        SceneManager.LoadScene(sceneName);
+        StartCoroutine(DelayLoadScene(delayLoadSceneDuration));
     }
 
+    private IEnumerator DelayLoadScene(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(sceneName);
+    }
+    
     public void PlayBTNAnimation()
     {
         ButtonAnimation();

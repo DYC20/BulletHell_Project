@@ -3,18 +3,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using System.Security;
 using TMPro;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
 public class MenuNavigator : MonoBehaviour
 {
     [SerializeField] private List<Button> buttons;
     [SerializeField] private RectTransform pointer;
+    [SerializeField] private RectTransform cursor;
 
     [Header("Button Behavior")]
     [SerializeField, ColorUsage(false, true)] private Color highlightColor;
     [SerializeField] private float transitionTime = 0.15f;
+    [SerializeField] private List<UnityEvent> selectionEvents;
+    [SerializeField] private bool invokeSelectionEventOnEnable = false;
 
+    private int previousIndex = -1;
+    
     private Coroutine colorRoutine;
     private TMP_Text currentTMP;
     private Image currentImage;
@@ -43,13 +50,22 @@ public class MenuNavigator : MonoBehaviour
     private void Awake()
     {
         Initialize();
+
     }
 
     private void OnEnable()
     {
         Initialize();
-
+        
         currentIndex = 0;
+        previousIndex = invokeSelectionEventOnEnable ? -1 : currentIndex;
+
+        UpdateSelectionNextFrame();
+    }
+    private IEnumerator UpdateSelectionNextFrame()
+    {
+        yield return null;
+
         UpdateSelection();
     }
 
@@ -113,7 +129,12 @@ public class MenuNavigator : MonoBehaviour
         }
 
         if (!foundAnyValidRoute)
-            return;
+        {
+            {
+                Debug.LogWarning($"{name}: No valid TMP/Image routes found");
+                return;
+            }
+        }
 
         InitializeOriginalColors();
 
@@ -186,10 +207,16 @@ public class MenuNavigator : MonoBehaviour
     private void Update()
     {
         if (Keyboard.current == null || buttons == null || buttons.Count == 0)
-            return;
-
-        if (Keyboard.current.downArrowKey.wasPressedThisFrame || Keyboard.current.sKey.wasPressedThisFrame)
         {
+            Debug.Log("keyboard = NULL / buttons = NULL");
+              return;
+              
+        }
+          
+
+        if (Keyboard.current.downArrowKey.wasPressedThisFrame || Keyboard.current.sKey.wasPressedThisFrame || Keyboard.current.dKey.wasPressedThisFrame)
+        {
+            Debug.Log("Menu down pressed");
             currentIndex++;
 
             if (currentIndex >= buttons.Count)
@@ -198,7 +225,7 @@ public class MenuNavigator : MonoBehaviour
             UpdateSelection();
         }
 
-        if (Keyboard.current.upArrowKey.wasPressedThisFrame || Keyboard.current.wKey.wasPressedThisFrame)
+        if (Keyboard.current.upArrowKey.wasPressedThisFrame || Keyboard.current.wKey.wasPressedThisFrame || Keyboard.current.aKey.wasPressedThisFrame)
         {
             currentIndex--;
 
@@ -237,10 +264,31 @@ public class MenuNavigator : MonoBehaviour
     private void UpdateSelection()
     {
         if (!initialized)
+        {
+            //Debug.LogWarning("Menu navigator called without initialized");
             return;
+        }
+        else
+        {
+          //  Debug.LogWarning("Menu navigator HAS initialized");
+        }
+
 
         if (currentIndex < 0 || currentIndex >= buttons.Count)
-            return;
+        {
+          //  Debug.LogWarning("Menu navigator called without currentIndex");
+             return;
+        }
+        else
+        {
+           // Debug.LogWarning("Menu navigator called WITH currentIndex " + currentIndex);
+        }
+           
+
+        RectTransform target = buttons[currentIndex].GetComponent<RectTransform>();
+
+        // Move cursor and rotate pointer FIRST
+        UpdatePointerAndCursor(target);
 
         if (colorRoutine != null)
             StopCoroutine(colorRoutine);
@@ -250,27 +298,27 @@ public class MenuNavigator : MonoBehaviour
         currentTMP = null;
         currentImage = null;
 
+        //BringButtonToFront();
+
         if (tmpRout[currentIndex])
         {
             currentTMP = texts[currentIndex];
 
-            if (currentTMP == null)
-                return;
-
-            colorRoutine = StartCoroutine(ChangeTMPColor(currentIndex));
+            if (currentTMP != null)
+                colorRoutine = StartCoroutine(ChangeTMPColor(currentIndex));
         }
         else if (imageRout[currentIndex])
         {
             currentImage = images[currentIndex];
 
-            if (currentImage == null)
-                return;
-
-            colorRoutine = StartCoroutine(ChangeImageProxyColor(currentIndex));
+            if (currentImage != null)
+                colorRoutine = StartCoroutine(ChangeImageProxyColor(currentIndex));
         }
-        else
+        
+        if (currentIndex != previousIndex)
         {
-            return;
+            InvokeSelectionEvent();
+            previousIndex = currentIndex;
         }
 
         if (EventSystem.current != null)
@@ -278,14 +326,31 @@ public class MenuNavigator : MonoBehaviour
             EventSystem.current.SetSelectedGameObject(buttons[currentIndex].gameObject);
         }
 
-        RectTransform target = buttons[currentIndex].GetComponent<RectTransform>();
+    }
+    /*
+    private void BringButtonToFront()
+    {
+        buttons[currentIndex].gameObject.transform.SetAsLastSibling();
+    }
+    */
+    private void UpdatePointerAndCursor(RectTransform target)
+    {
+        if (target == null)
+            return;
 
-        if (pointer != null && target != null)
+        // Existing behavior: pointer looks at active button
+        if (pointer != null)
         {
             Vector3 dir = target.position - pointer.position;
             float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
             pointer.rotation = Quaternion.Euler(0f, 0f, angle - 180f);
+        }
+
+        // New behavior: cursor moves to active button
+        if (cursor != null)
+        {
+            cursor.position = target.position;
         }
     }
 
@@ -516,6 +581,20 @@ public class MenuNavigator : MonoBehaviour
         image.color = imageColor;
 
         image.SetMaterialDirty();
+    }
+    
+    private void InvokeSelectionEvent()
+    {
+        if (selectionEvents == null)
+            return;
+
+        if (currentIndex < 0 || currentIndex >= selectionEvents.Count)
+            return;
+
+        if (selectionEvents[currentIndex] == null)
+            return;
+
+        selectionEvents[currentIndex].Invoke();
     }
 
     private void OnDestroy()

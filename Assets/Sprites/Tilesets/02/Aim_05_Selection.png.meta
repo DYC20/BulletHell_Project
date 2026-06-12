@@ -1,10 +1,19 @@
 fileFormatVersion: 2
-guid: e5d58b9486efbec478c195f752cc1d0d
+guid: e17754481e1d9b74b94f3903045cf83c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4204453302490337519
-    second: Shotgun_Sill_0
+      213: -7106936656428690243
+    second: Aim_05_Selection_0
+  - first:
+      213: 4429045228236798814
+    second: Aim_05_Selection_1
+  - first:
+      213: -7502094500880538873
+    second: Aim_05_Selection_2
+  - first:
+      213: 4626542499390152523
+    second: Aim_05_Selection_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -48,7 +57,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 1
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -139,13 +148,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shotgun_Sill_0
+      name: Aim_05_Selection_0
       rect:
         serializedVersion: 2
-        x: 33
+        x: 0
         y: 165
-        width: 434
-        height: 180
+        width: 91
+        height: 91
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +163,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 11f685e5ff7c6a5c0800000000000000
-      internalID: -4204453302490337519
+      spriteID: db49d50e3c61f5d90800000000000000
+      internalID: -7106936656428690243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aim_05_Selection_1
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 165
+        width: 91
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5b71334b21277d30800000000000000
+      internalID: 4429045228236798814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aim_05_Selection_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 91
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 703aa9b9cc433e790800000000000000
+      internalID: -7502094500880538873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aim_05_Selection_3
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 0
+        width: 91
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4fd56604e7c43040800000000000000
+      internalID: 4626542499390152523
       vertices: []
       indices: 
       edges: []
@@ -174,7 +249,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Shotgun_Sill_0: -4204453302490337519
+      Aim_05_Selection_0: -7106936656428690243
+      Aim_05_Selection_1: 4429045228236798814
+      Aim_05_Selection_2: -7502094500880538873
+      Aim_05_Selection_3: 4626542499390152523
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

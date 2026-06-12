@@ -228,8 +228,11 @@ MonoBehaviour:
   - {fileID: 1107785833}
   - {fileID: 1639567330}
   pointer: {fileID: 474468474}
+  cursor: {fileID: 0}
   highlightColor: {r: 2.9960787, g: 0.39215687, b: 0, a: 0}
   transitionTime: 0.3
+  selectionEvents: []
+  invokeSelectionEventOnEnable: 0
 --- !u!4 &44060943
 Transform:
   m_ObjectHideFlags: 0
@@ -1295,7 +1298,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 172, y: -80.30401}
+  m_AnchoredPosition: {x: 172, y: -80.304016}
   m_SizeDelta: {x: 100, y: 310.96002}
   m_Pivot: {x: 0.9, y: 0.1}
 --- !u!114 &474468475
@@ -6876,10 +6879,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c8aa18218e2df448ad2e8853f99bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadScene
-  sceneName: MainScene
+  sceneName: CharacterSelection
   pressFX:
   - {fileID: 2083620444}
   - {fileID: 348888800}
+  delayLoadSceneDuration: 0
   scaleDuration: 0.25
   ease: 21
   endAtZero: 0
@@ -12550,6 +12554,7 @@ MonoBehaviour:
   pressFX:
   - {fileID: 1410709006}
   - {fileID: 1206158333}
+  delayLoadSceneDuration: 0
   scaleDuration: 0.25
   ease: 21
   endAtZero: 0
@@ -13868,6 +13873,7 @@ MonoBehaviour:
   pressFX:
   - {fileID: 1821900313}
   - {fileID: 1368940357}
+  delayLoadSceneDuration: 0
   scaleDuration: 0.25
   ease: 21
   endAtZero: 0

@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: e5d58b9486efbec478c195f752cc1d0d
+guid: 9c0967a6ca656664485138b5bd2f8eac
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4204453302490337519
-    second: Shotgun_Sill_0
+      213: -949245995023994475
+    second: Aim_05_0
+  - first:
+      213: -4725921703296300160
+    second: Aim_05_1
+  - first:
+      213: 8831380542394084494
+    second: Aim_05_2
+  - first:
+      213: -7989363447137915419
+    second: Aim_05_3
+  - first:
+      213: -8076265547921111875
+    second: Aim_05_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -24,7 +36,7 @@ TextureImporter:
     heightScale: 0.25
     normalMapFilter: 0
     flipGreenChannel: 0
-  isReadable: 0
+  isReadable: 1
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
@@ -37,7 +49,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -46,7 +58,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -57,7 +69,7 @@ TextureImporter:
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 8
+  textureType: 7
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -139,13 +151,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Shotgun_Sill_0
+      name: Aim_05_0
       rect:
         serializedVersion: 2
-        x: 33
+        x: 0
         y: 165
-        width: 434
-        height: 180
+        width: 91
+        height: 91
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -154,8 +166,96 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 11f685e5ff7c6a5c0800000000000000
-      internalID: -4204453302490337519
+      spriteID: 591f12efbc993d2f0800000000000000
+      internalID: -949245995023994475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aim_05_1
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 165
+        width: 91
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08b07b6ff372a6eb0800000000000000
+      internalID: -4725921703296300160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aim_05_2
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 101
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8c22b900dd5f8a70800000000000000
+      internalID: 8831380542394084494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aim_05_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 91
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5edaad73644102190800000000000000
+      internalID: -7989363447137915419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Aim_05_4
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 0
+        width: 91
+        height: 91
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db4cf6826475bef80800000000000000
+      internalID: -8076265547921111875
       vertices: []
       indices: 
       edges: []
@@ -164,7 +264,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -174,7 +274,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Shotgun_Sill_0: -4204453302490337519
+      Aim_05_0: -949245995023994475
+      Aim_05_1: -4725921703296300160
+      Aim_05_2: 8831380542394084494
+      Aim_05_3: -7989363447137915419
+      Aim_05_4: -8076265547921111875
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
