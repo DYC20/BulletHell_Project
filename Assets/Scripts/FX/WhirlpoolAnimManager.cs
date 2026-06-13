@@ -95,6 +95,8 @@ public class WhirlpoolAnimManager : MonoBehaviour
 
     private void ResetToStartValues()
     {
+        if (mpb == null) 
+            return;
         transform.localScale = Vector3.zero;
 
         mpb.SetColor(ShaderIDs.matColor, startColor);

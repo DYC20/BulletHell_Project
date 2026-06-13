@@ -18,8 +18,12 @@ public class ArtifactPickup : MonoBehaviour, IPickup
         proxySpawner = tilemapGrid.GetComponent<TilemapProxySpawner>();
     }*/
 
+   private bool pickedUp = false;
+   
     public bool CanPickup(GameObject picker)
     {
+        if (pickedUp)
+            return false;
         return true;
     }
 
@@ -31,6 +35,7 @@ public class ArtifactPickup : MonoBehaviour, IPickup
         {
             Debug.Log("manager GO:" + manager.GetType().Name);
         }
+        pickedUp = true;
         manager.PlaySequence();
         //Instantiate(whirlpoolPrfab, GetRandomWorldPosition(), Quaternion.identity);
         //uICollapseController.Begin();

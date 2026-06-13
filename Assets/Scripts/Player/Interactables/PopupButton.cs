@@ -11,12 +11,14 @@ public class PopupButton : MonoBehaviour, IInteractable
     [SerializeField] private float loadSceneDelay;
     [SerializeField] private bool dontLoadScene;
     [SerializeField] private UnityEvent onTrigger;
+    [SerializeField] private bool OneTimeUse = false;
     
     private PlayableDirector playableDirector;
     private PlayerInteractor playerInteractor;
 
     float time;
     private bool _Activated = false;
+    private bool used = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,6 +29,8 @@ public class PopupButton : MonoBehaviour, IInteractable
     
     public void Activate(GameObject gameObject)
     {
+        if (used)
+            return;
         OnTrigger();
         if (dontLoadScene == true)
             return;
@@ -42,7 +46,9 @@ public class PopupButton : MonoBehaviour, IInteractable
         Debug.LogWarning("onTrigger persistent listener count: " + onTrigger.GetPersistentEventCount());
 
         onTrigger?.Invoke();
-
+        
+        if (OneTimeUse)
+            used = true;
         Debug.LogWarning(gameObject.name + " finished invoking onTrigger");
     }
 
