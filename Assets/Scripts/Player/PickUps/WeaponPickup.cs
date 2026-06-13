@@ -8,9 +8,11 @@ public class WeaponPickup : MonoBehaviour, IPickup
 {
     [SerializeField] private bool destroyAfterPickup = true;
     [SerializeField] private GameObject interactableGO;
+    [SerializeField] private SpriteRenderer weaponRenderer;
 
     private GameObject currentPicker;
     private IInteractable interactable;
+    private PlayerRendererGetter playerRendererGetter;
 
     [Header("UpdateUI")] 
     private Image weaponBG;
@@ -36,6 +38,17 @@ public class WeaponPickup : MonoBehaviour, IPickup
     {
         Debug.Log($"Picking weapon: {this.gameObject.name}");
         var equipper = picker.GetComponentInParent<IWeaponEquipper>();
+        
+        //make sorting layer as player's on weapon pickup
+        playerRendererGetter = picker.GetComponentInParent<PlayerRendererGetter>();
+        Debug.Log("Player Renderer Getter:" + playerRendererGetter.name);
+        
+        var playerSortingLayer = playerRendererGetter.GetRenderLayer;
+        
+        weaponRenderer.sortingLayerName = playerSortingLayer;
+        Debug.Log("Player Sorting Layer:" + playerSortingLayer);
+        
+        
         if (equipper == null) return;
 
         if (interactableGO != null && interactable != null)

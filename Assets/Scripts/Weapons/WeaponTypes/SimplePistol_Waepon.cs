@@ -18,6 +18,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     [SerializeField] private bool isRevolver;
     [SerializeField] private bool isShotgun;
     [SerializeField] private bool isGrenade;
+     
 
     private SpriteRenderer rd;
     

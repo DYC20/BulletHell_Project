@@ -26,7 +26,6 @@ public class PlayerController : MonoBehaviour
     [Header("Aiming")]
     [SerializeField] private Transform weaponHolder;   // assign in Inspector
     [SerializeField] private float holderRotationSpeed = 25f; // visual smoothing
-
     private Vector2 move;
     private Vector2 mouseScreenPos;
 
@@ -173,6 +172,7 @@ public class PlayerController : MonoBehaviour
                 targetRot,
                 holderRotationSpeed * Time.deltaTime
             );
+
         }
         
         PlayerWeaponController pwc = GetComponent<PlayerWeaponController>();

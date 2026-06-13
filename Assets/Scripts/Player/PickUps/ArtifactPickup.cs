@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -18,8 +19,12 @@ public class ArtifactPickup : MonoBehaviour, IPickup
         proxySpawner = tilemapGrid.GetComponent<TilemapProxySpawner>();
     }*/
 
+   [SerializeField] private Material lowHealthShader;
+   [SerializeField] private float _LHSDuration;
    private bool pickedUp = false;
+   private float transitionValue;
    
+   private static readonly int controllEffect = Shader.PropertyToID("_ControlEffect");
     public bool CanPickup(GameObject picker)
     {
         if (pickedUp)
@@ -36,12 +41,30 @@ public class ArtifactPickup : MonoBehaviour, IPickup
             Debug.Log("manager GO:" + manager.GetType().Name);
         }
         pickedUp = true;
+        StartCoroutine(DisableLowHealthEffect());
         manager.PlaySequence();
         //Instantiate(whirlpoolPrfab, GetRandomWorldPosition(), Quaternion.identity);
         //uICollapseController.Begin();
         //proxySpawner.SpawnProxies();
         Renderer renderer = GetComponent<SpriteRenderer>();
         renderer.enabled = false;
+    }
+
+    private IEnumerator DisableLowHealthEffect()
+    {
+        float timer = 0f;
+        
+        float startValue = lowHealthShader.GetFloat("controllEffect");
+        
+        while (timer < 1f)
+        {
+            timer += Time.deltaTime;
+            float t = Mathf.Clamp01(timer / _LHSDuration);
+            transitionValue = Mathf.Lerp(startValue, 0f, t);
+            lowHealthShader.SetFloat(controllEffect, transitionValue);
+            yield return null;
+        }
+        lowHealthShader.SetFloat(controllEffect, 0f);
     }
 /*
     public Vector3 GetRandomWorldPosition(float padding = 0.1f)
