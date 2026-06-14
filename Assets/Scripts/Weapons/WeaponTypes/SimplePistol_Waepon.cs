@@ -13,6 +13,9 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     private bool defaultsCached;
 
     [Header("Weapon")] 
+    [SerializeField] private SpriteRenderer weaponRenderer;
+
+    [SerializeField] private SpriteRenderer seconderyRenderer;
     [SerializeField] private Sprite weaponUI;
     [SerializeField] private Transform weaponFX_tf;
     [SerializeField] private bool isRevolver;
@@ -21,6 +24,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
      
 
     private SpriteRenderer rd;
+    private PlayerRendererGetter playerRendererGetter;
     
 
     private int projectileLowLayer;
@@ -36,9 +40,22 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     {
         CacheDefaultsIfNeeded();
 
+          
         _IsSpriteRenderer = TryGetComponent<SpriteRenderer>(out rd);
         projectileLowLayer = LayerMask.NameToLayer("Projectile_Low");
         projectileHighLayer = LayerMask.NameToLayer("Projectile_High");
+    }
+
+    private void Start()
+    {
+        playerRendererGetter = GetComponentInParent<PlayerRendererGetter>();
+        if (playerRendererGetter != null)
+        {
+            var playerSortingLayer = playerRendererGetter.GetRenderLayer;
+            weaponRenderer.sortingLayerName = playerSortingLayer;
+            if (seconderyRenderer != null)
+                seconderyRenderer.sortingLayerName = playerSortingLayer;
+        }
     }
     
     private void CacheDefaultsIfNeeded()

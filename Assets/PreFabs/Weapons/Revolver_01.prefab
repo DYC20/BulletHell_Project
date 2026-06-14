@@ -537,7 +537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponPickup
   destroyAfterPickup: 1
   interactableGO: {fileID: 2666730262157173589}
-  weaponRenderer: {fileID: 0}
+  weaponRenderer: {fileID: 7517556205709324532}
   shadow: {fileID: 2272482297003609325}
   newColor: {r: 1, g: 1, b: 1, a: 1}
   newColorDuration: 1
@@ -558,6 +558,8 @@ MonoBehaviour:
   visualRoot: {fileID: 9131586305785572897}
   projectileConfig: {fileID: 11400000, guid: 80fa68fe217061f4eaeca1aaaa5159b2, type: 2}
   projectilePool: {fileID: 11400000, guid: 7812b24b1e918db97813241183e4b802, type: 2}
+  weaponRenderer: {fileID: 7517556205709324532}
+  seconderyRenderer: {fileID: 3139212418572080586}
   weaponUI: {fileID: 21300000, guid: 104ad18334a9a6945aec36857bada2d4, type: 3}
   weaponFX_tf: {fileID: 2086365347930203354}
   isRevolver: 1

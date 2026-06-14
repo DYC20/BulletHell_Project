@@ -311,7 +311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1933925870109291740}
   - component: {fileID: 1305709028501122577}
-  - component: {fileID: 8127440800846767813}
+  - component: {fileID: 1278130373378004279}
   - component: {fileID: 26113237596811181}
   m_Layer: 11
   m_Name: MainVisual
@@ -394,7 +394,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &8127440800846767813
+--- !u!114 &1278130373378004279
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -403,9 +403,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 6087570307529118799}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49c07fbc97bc6ae4982971958f432b21, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e9e739dc4632f54caad0872f186dbf6, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PushWeaponFromWall
+  m_EditorClassIdentifier: Assembly-CSharp::WeaponWallContactRetract2D
+  weaponRootToMove: {fileID: 1679280114329484311}
+  weaponCollider: {fileID: 26113237596811181}
+  wallMask:
+    serializedVersion: 2
+    m_Bits: 0
+  retractDistance: 10
+  retractSpeed: 18
+  returnSpeed: 14
+  retractOppositeWeaponUp: 1
+  drawDebug: 1
+  touchingWall: 0
 --- !u!60 &26113237596811181
 PolygonCollider2D:
   m_ObjectHideFlags: 0
