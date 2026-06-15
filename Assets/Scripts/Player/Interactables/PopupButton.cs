@@ -7,11 +7,13 @@ public class PopupButton : MonoBehaviour, IInteractable
 {
     [SerializeField] private PlayableAsset enterAnimationAsset;
     [SerializeField] private PlayableAsset exitAnimationAsset;
-    [SerializeField] private LoadScene loadScene;
+    [SerializeField] private LoadSceneManager loadScene;
+    [SerializeField] private HomeScreenBTNPress _BTNPress;
     [SerializeField] private float loadSceneDelay;
     [SerializeField] private bool dontLoadScene;
     [SerializeField] private UnityEvent onTrigger;
     [SerializeField] private bool OneTimeUse = false;
+    [SerializeField] private string sceneName;
     
     private PlayableDirector playableDirector;
     private PlayerInteractor playerInteractor;
@@ -34,7 +36,7 @@ public class PopupButton : MonoBehaviour, IInteractable
         OnTrigger();
         if (dontLoadScene == true)
             return;
-        loadScene.PlayBTNAnimation();
+        _BTNPress.PlayBTNAnimation();
         _Activated = true;
         Debug.Log(gameObject.name + " is activated");
     }
@@ -86,10 +88,11 @@ public class PopupButton : MonoBehaviour, IInteractable
         //Debug.Log("_Activated status: " + _Activated);
         if (_Activated)
         {
+            loadScene.SetSceneName(sceneName);
             time -= Time.deltaTime;
             if (time <= 0)
             {
-                loadScene.LoadSelectedScene();
+                loadScene.LoadScene();
 //                Debug.Log(loadScene.name);
             }
         }

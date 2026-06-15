@@ -6,12 +6,10 @@ using UnityEngine.SceneManagement;
 using DG.Tweening;
 using Unity.Collections;
 
-public class LoadScene : MonoBehaviour
+public class HomeScreenBTNPress : MonoBehaviour
 {
     //[SerializeField] private SceneTransition loadSceneTransition;
-    [SerializeField] private string sceneName;
     [SerializeField] private List<ParticleSystem> pressFX;
-    [SerializeField] private float delayLoadSceneDuration;
     
     [Header("BTN Animation Settings")]
     [SerializeField] private float scaleDuration;
@@ -31,19 +29,7 @@ public class LoadScene : MonoBehaviour
         
     }
     
-    //called with signal
-    public void LoadSelectedScene()
-    {
-        StartCoroutine(DelayLoadScene(delayLoadSceneDuration));
-    }
 
-    private IEnumerator DelayLoadScene(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene(sceneName);
-        //DontDestroyOnLoad(loadSceneTransition.gameObject);
-    }
-    
     public void PlayBTNAnimation()
     {
         ButtonAnimation();
