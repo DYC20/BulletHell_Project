@@ -8,6 +8,7 @@ using Unity.Collections;
 
 public class LoadScene : MonoBehaviour
 {
+    //[SerializeField] private SceneTransition loadSceneTransition;
     [SerializeField] private string sceneName;
     [SerializeField] private List<ParticleSystem> pressFX;
     [SerializeField] private float delayLoadSceneDuration;
@@ -40,6 +41,7 @@ public class LoadScene : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene(sceneName);
+        //DontDestroyOnLoad(loadSceneTransition.gameObject);
     }
     
     public void PlayBTNAnimation()
