@@ -12640,18 +12640,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1107785836}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: PlayBTNAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1313437476}
         m_TargetAssemblyTypeName: UnityEngine.Playables.PlayableDirector, UnityEngine
         m_MethodName: Play
@@ -13215,6 +13203,8 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 807220a1e0b8e634089db8997a1d8342, type: 2}
     - {fileID: 11400000, guid: aac8c76d4a1f50d46acfbb8a1fedc225, type: 2}
     - {fileID: 11400000, guid: cb657fad59bd8f640875476d7d8ae019, type: 2}
+    - {fileID: 11400000, guid: e873202f3b4fc0f4b9542d57241b1ca2, type: 2}
+    - {fileID: 11400000, guid: aac08ebc0c80b784385a0858d45a1cd2, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -13232,9 +13222,9 @@ MonoBehaviour:
           m_CallState: 2
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1639567333}
-          m_TargetAssemblyTypeName: ExitGame, Assembly-CSharp
-          m_MethodName: QuitGame
+        - m_Target: {fileID: 1639567334}
+          m_TargetAssemblyTypeName: HomeScreenBTNPress, Assembly-CSharp
+          m_MethodName: PlayBTNAnimation
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -13247,8 +13237,8 @@ MonoBehaviour:
     - m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1107785836}
-          m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-          m_MethodName: LoadSelectedScene
+          m_TargetAssemblyTypeName: HomeScreenBTNPress, Assembly-CSharp
+          m_MethodName: PlayBTNAnimation
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -13275,6 +13265,46 @@ MonoBehaviour:
         - m_Target: {fileID: 1003218257}
           m_TargetAssemblyTypeName: LoadSceneManager, Assembly-CSharp
           m_MethodName: LoadScene
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1003218257}
+          m_TargetAssemblyTypeName: LoadSceneManager, Assembly-CSharp
+          m_MethodName: SetSceneName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: TutorialScene_01
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 1003218257}
+          m_TargetAssemblyTypeName: LoadSceneManager, Assembly-CSharp
+          m_MethodName: LoadScene
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1003218257}
+          m_TargetAssemblyTypeName: LoadSceneManager, Assembly-CSharp
+          m_MethodName: ExitGame
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -14064,18 +14094,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1639567334}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: PlayBTNAnimation
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 1313437476}
         m_TargetAssemblyTypeName: UnityEngine.Playables.PlayableDirector, UnityEngine
         m_MethodName: Play
@@ -14104,7 +14122,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1639567328}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 984c5cf19a2d31542a7bd68b1f0d3e8d, type: 3}
   m_Name: 

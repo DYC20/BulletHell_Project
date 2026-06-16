@@ -161,6 +161,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
             Vector2 dir = Rotate(baseDir, angle);
             float mult = Random.Range(cfg.speedMultiplierMin, cfg.speedMultiplierMax);
             float pelletSpeed = cfg.speed * mult;
+            Debug.LogWarning("pellet speed:" + pelletSpeed);
 
             var pg = proj.GetComponent<PooledProjectile>();
             pg.Init(owner, ownerTeam, cfg, dir, pelletSpeed, firePoint);

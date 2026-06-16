@@ -317,6 +317,7 @@ GameObject:
   - component: {fileID: 3429363104114947116}
   - component: {fileID: 3378022275050918772}
   - component: {fileID: 44070096979427054}
+  - component: {fileID: 887868213191925387}
   - component: {fileID: 3188813529715988493}
   m_Layer: 5
   m_Name: Button_Quit
@@ -429,30 +430,41 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 955643402146281034}
-        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
-        m_MethodName: QuitGame
-        m_Mode: 1
+      - m_Target: {fileID: 887868213191925387}
+        m_TargetAssemblyTypeName: PopupButton, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 1698053492874686990}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: DeactivateLowHealthFullScreen
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+--- !u!114 &887868213191925387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1698053492874686990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bff766a045648b546a40b51816215a6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PopupButton
+  enterAnimationAsset: {fileID: 0}
+  exitAnimationAsset: {fileID: 0}
+  _BTNPress: {fileID: 3188813529715988493}
+  _Quit: 1
+  sceneName: 
+  loadSceneDelay: 2
+  dontLoadScene: 0
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  OneTimeUse: 0
 --- !u!114 &3188813529715988493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,12 +477,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c8aa18218e2df448ad2e8853f99bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadScene
-  sceneName: 
   pressFX:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 3279941913130791998}
+  - {fileID: 8768585923621231565}
   scaleDuration: 0.3
-  ease: 0
+  ease: 29
   endAtZero: 0
 --- !u!1 &1833401825340082730
 GameObject:
@@ -960,6 +971,7 @@ GameObject:
   - component: {fileID: 5492939790197715682}
   - component: {fileID: 7040568649422286133}
   - component: {fileID: 5696041849472699395}
+  - component: {fileID: 4438206670394863264}
   - component: {fileID: 6779899978953485678}
   - component: {fileID: 3694802979097588276}
   m_Layer: 5
@@ -1073,30 +1085,41 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: StopLowHealthEffect
-        m_Mode: 1
+      - m_Target: {fileID: 4438206670394863264}
+        m_TargetAssemblyTypeName: PopupButton, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 2841111033912988349}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 955643402146281034}
-        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
-        m_MethodName: TryAgain
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+--- !u!114 &4438206670394863264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2841111033912988349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bff766a045648b546a40b51816215a6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PopupButton
+  enterAnimationAsset: {fileID: 0}
+  exitAnimationAsset: {fileID: 0}
+  _BTNPress: {fileID: 6779899978953485678}
+  _Quit: 0
+  sceneName: MainScene
+  loadSceneDelay: 2
+  dontLoadScene: 0
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  OneTimeUse: 0
 --- !u!114 &6779899978953485678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1109,12 +1132,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c8aa18218e2df448ad2e8853f99bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadScene
-  sceneName: MainScene
   pressFX:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7483882297382388948}
+  - {fileID: 3740486838162533159}
   scaleDuration: 0.3
-  ease: 19
+  ease: 29
   endAtZero: 0
 --- !u!95 &3694802979097588276
 Animator:
@@ -1436,7 +1458,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2942289902278665607}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ccfbeb7e74c984f4293259b951009ac3, type: 3}
   m_Name: 
@@ -1458,8 +1480,11 @@ MonoBehaviour:
   - {fileID: 44070096979427054}
   - {fileID: 5696041849472699395}
   pointer: {fileID: 0}
+  cursor: {fileID: 0}
   highlightColor: {r: 4, g: 4, b: 4, a: 0}
   transitionTime: 0.3
+  selectionEvents: []
+  invokeSelectionEventOnEnable: 0
 --- !u!95 &4550885046945919454
 Animator:
   serializedVersion: 7
@@ -3213,6 +3238,7 @@ GameObject:
   - component: {fileID: 7861855163525036792}
   - component: {fileID: 8830660728358828173}
   - component: {fileID: 9164171797344429461}
+  - component: {fileID: 4315325722676842816}
   - component: {fileID: 4447079768871449047}
   m_Layer: 5
   m_Name: Button_Play
@@ -3325,30 +3351,41 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Health, Assembly-CSharp
-        m_MethodName: StopLowHealthEffect
-        m_Mode: 1
+      - m_Target: {fileID: 4315325722676842816}
+        m_TargetAssemblyTypeName: PopupButton, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 2841111033912988349}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 955643402146281034}
-        m_TargetAssemblyTypeName: GameOver, Assembly-CSharp
-        m_MethodName: TryAgain
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+--- !u!114 &4315325722676842816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7683216484641992925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bff766a045648b546a40b51816215a6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PopupButton
+  enterAnimationAsset: {fileID: 0}
+  exitAnimationAsset: {fileID: 0}
+  _BTNPress: {fileID: 4447079768871449047}
+  _Quit: 0
+  sceneName: CharacterSelection
+  loadSceneDelay: 2
+  dontLoadScene: 0
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  OneTimeUse: 0
 --- !u!114 &4447079768871449047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3361,12 +3398,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c8aa18218e2df448ad2e8853f99bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadScene
-  sceneName: 
   pressFX:
   - {fileID: 2470685473243064246}
   - {fileID: 8538073803834689605}
   scaleDuration: 0.3
-  ease: 0
+  ease: 29
   endAtZero: 0
 --- !u!1 &8744550683416279247
 GameObject:
@@ -3955,6 +3991,16 @@ PrefabInstance:
 --- !u!224 &597899539338766610 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1441158477699674354, guid: ffd6019500c2ddc499d10684c2278cf9, type: 3}
+  m_PrefabInstance: {fileID: 2039056998594304480}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &3740486838162533159 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3433096962315875015, guid: ffd6019500c2ddc499d10684c2278cf9, type: 3}
+  m_PrefabInstance: {fileID: 2039056998594304480}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7483882297382388948 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8903678883039223092, guid: ffd6019500c2ddc499d10684c2278cf9, type: 3}
   m_PrefabInstance: {fileID: 2039056998594304480}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2040820305115768271
@@ -5606,9 +5652,19 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffd6019500c2ddc499d10684c2278cf9, type: 3}
+--- !u!198 &3279941913130791998 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 8903678883039223092, guid: ffd6019500c2ddc499d10684c2278cf9, type: 3}
+  m_PrefabInstance: {fileID: 6202733288367352074}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4761585668624521720 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1441158477699674354, guid: ffd6019500c2ddc499d10684c2278cf9, type: 3}
+  m_PrefabInstance: {fileID: 6202733288367352074}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8768585923621231565 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 3433096962315875015, guid: ffd6019500c2ddc499d10684c2278cf9, type: 3}
   m_PrefabInstance: {fileID: 6202733288367352074}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6474377034610899586

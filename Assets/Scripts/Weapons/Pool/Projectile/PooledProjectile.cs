@@ -92,6 +92,7 @@ public class PooledProjectile : MonoBehaviour
 
     public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction, float speedOverride, Transform spawnTf)
     {
+        Debug.LogWarning("SpeedOverride: " + speedOverride);
         _owner = owner;
         _shotAmmoType = config != null ? config.ammoType : AmmoType.Bullet;
         _modifierSet = _owner != null ? _owner.GetComponentInParent<ProjectileModifierSet>() : null;
@@ -149,11 +150,21 @@ public class PooledProjectile : MonoBehaviour
         _lifeTimer = 0f;
 
         float speed = speedOverride > 0f ? speedOverride : config.speed;
-        
+        Debug.LogWarning("Speed override check: " + speed);
+
         if (projMovement != null)
+        {
             projMovement.Apply(rb, config, direction, speed);
+            Debug.LogWarning("proj move check, Projectile Movement apply: " + speed);
+        }
+            
+        
         else if (rb != null && config != null)
-            rb.linearVelocity = direction.normalized * config.speed;
+        {
+            rb.linearVelocity = direction.normalized * speed;
+            Debug.LogWarning("rb move check, Projectile Linear Velocity: " + rb.linearVelocity);
+        }
+            
         
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg-90f;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);

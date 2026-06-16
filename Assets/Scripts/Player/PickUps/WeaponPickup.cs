@@ -44,8 +44,10 @@ public class WeaponPickup : MonoBehaviour, IPickup
         Debug.Log("Player Renderer Getter:" + playerRendererGetter.name);
         
         var playerSortingLayer = playerRendererGetter.GetRenderLayer;
+        int playerSortingOrder = playerRendererGetter.GetSortingOrder;
         
         weaponRenderer.sortingLayerName = playerSortingLayer;
+        weaponRenderer.sortingOrder = playerSortingOrder + 1;
         Debug.Log("Player Sorting Layer:" + playerSortingLayer);
         
         

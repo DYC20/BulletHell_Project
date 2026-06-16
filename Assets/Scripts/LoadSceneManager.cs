@@ -65,4 +65,16 @@ public class LoadSceneManager : MonoBehaviour
         isLoading = false;
     }
 
+    private IEnumerator QuitGameRoutine()
+    {
+        isLoading = true;
+        yield return sceneTransitionGO.TransitionOutRoutine();
+        Application.Quit();
+    }
+
+    public void ExitGame()
+    {
+        StartCoroutine(QuitGameRoutine());
+    }
+
 }

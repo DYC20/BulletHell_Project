@@ -40899,6 +40899,7 @@ GameObject:
   - component: {fileID: 585941307}
   - component: {fileID: 585941306}
   - component: {fileID: 585941305}
+  - component: {fileID: 585941309}
   - component: {fileID: 585941308}
   m_Layer: 5
   m_Name: Character_02
@@ -40984,13 +40985,13 @@ MonoBehaviour:
           m_StringArgument: IsSelected
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 585941308}
-        m_TargetAssemblyTypeName: LoadScene, Assembly-CSharp
-        m_MethodName: LoadSelectedScene
-        m_Mode: 1
+      - m_Target: {fileID: 585941309}
+        m_TargetAssemblyTypeName: PopupButton, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 585941303}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -41050,6 +41051,29 @@ MonoBehaviour:
   scaleDuration: 0
   ease: 0
   endAtZero: 0
+--- !u!114 &585941309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 585941303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bff766a045648b546a40b51816215a6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PopupButton
+  enterAnimationAsset: {fileID: 0}
+  exitAnimationAsset: {fileID: 0}
+  _BTNPress: {fileID: 585941308}
+  _Quit: 0
+  sceneName: MainScene
+  loadSceneDelay: 0
+  dontLoadScene: 0
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls: []
+  OneTimeUse: 0
 --- !u!1 &607890796
 GameObject:
   m_ObjectHideFlags: 0

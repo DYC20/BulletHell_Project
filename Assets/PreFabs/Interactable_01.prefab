@@ -237,7 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c8aa18218e2df448ad2e8853f99bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadScene
-  sceneName: MainScene
   pressFX:
   - {fileID: 4144172547313420849}
   - {fileID: 7906061740611642818}
@@ -462,12 +461,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PopupButton
   enterAnimationAsset: {fileID: 11400000, guid: 4549145ae58eb5c439f5de4222399a36, type: 2}
   exitAnimationAsset: {fileID: 11400000, guid: af3e7e143ac65d641964cca288220cbd, type: 2}
-  loadScene: {fileID: 390374432845456249}
+  _BTNPress: {fileID: 390374432845456249}
   loadSceneDelay: 2
   dontLoadScene: 0
   onTrigger:
     m_PersistentCalls:
       m_Calls: []
+  OneTimeUse: 0
+  sceneName: 
 --- !u!95 &792204998257324968
 Animator:
   serializedVersion: 7
