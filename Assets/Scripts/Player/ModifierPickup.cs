@@ -11,28 +11,29 @@ public class ModifierPickup : MonoBehaviour, IPickup
     [SerializeField] private bool isIce;
 
     [Header("RevolverFX")] 
-    [SerializeField] private VisualEffect revolverFireEffect;
-    [SerializeField] private VisualEffect revolverIceEffect;
+    [SerializeField] private GameObject revolverFireEffect;
+    [SerializeField] private GameObject revolverIceEffect;
     [SerializeField] private Sprite FireRevolverSprite;
     [SerializeField] private Sprite IceRevolverSprite;
     private bool isRevolver;
+    
      
     [Header("ShotgunFX")] 
-    [SerializeField] private VisualEffect shotgunFireEffect;
-    [SerializeField] private VisualEffect shotgunIceEffect;
+    [SerializeField] private GameObject shotgunFireEffect;
+    [SerializeField] private GameObject shotgunIceEffect;
     [SerializeField] private Sprite FireShotgunSprite;
     [SerializeField] private Sprite IceShotgunSprite;
     private bool isShotgun;
      
     [Header("GrenadeFX")] 
-    [SerializeField] private VisualEffect grenadeFireEffect;
-    [SerializeField] private VisualEffect grenadeIceEffect;
+    [SerializeField] private GameObject grenadeFireEffect;
+    [SerializeField] private GameObject grenadeIceEffect;
     [SerializeField] private Sprite FireGrenadeSprite;
     [SerializeField] private Sprite IceGrenadeSprite;
     private bool isGrenade;
      
     private Transform weaponFXtf;
-    private VisualEffect currentWeaponFX;
+    private GameObject currentWeaponFX;
     private Sprite newSprite;
 
     public bool CanPickup(GameObject picker)
@@ -96,13 +97,13 @@ public class ModifierPickup : MonoBehaviour, IPickup
         }
 
         weaponRenderer.sprite = newSprite;
-        
+        /*
         if (bulletDrum != null)
         {
             SpriteRenderer drumRenderer = bulletDrum.GetComponent<SpriteRenderer>();
             drumRenderer.enabled = false;
         }
-
+        */
         isRevolver = weapon.Revolver;
         isShotgun = weapon.Shotgun;
         isGrenade = weapon.Grenade;
@@ -170,7 +171,7 @@ public class ModifierPickup : MonoBehaviour, IPickup
             Destroy(gameObject);
     }
 
-    private void AssignWeaponFX(VisualEffect visuals)
+    private void AssignWeaponFX(GameObject visuals)
     {
         for (int i = weaponFXtf.childCount - 1; i >= 0; i--)
         {
@@ -178,5 +179,9 @@ public class ModifierPickup : MonoBehaviour, IPickup
         }
 
         currentWeaponFX = Instantiate(visuals, weaponFXtf, false);
+        if ( currentWeaponFX != null)
+        {
+            Debug.LogWarning("instenciiated Object:" + currentWeaponFX.name);
+        }
     }
 }

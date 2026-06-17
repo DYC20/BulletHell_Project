@@ -58,6 +58,8 @@ public class PopupButton : MonoBehaviour, IInteractable
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log(other.name);
+        if (other.name != "Player")
+            return;
         if (other.CompareTag("Player"))
         {
             Debug.Log("player detected");

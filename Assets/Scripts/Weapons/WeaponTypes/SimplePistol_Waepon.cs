@@ -229,6 +229,8 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
 
     public ProjectileConfigSO BaseConfig => defaultProjectileConfig;
     public Transform WeaponFXtf => weaponFX_tf;
+    
+    public Transform FirePoint => firePoint;
 
     public bool Revolver => isRevolver;
     public bool Shotgun => isShotgun;
