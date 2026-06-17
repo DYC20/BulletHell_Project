@@ -17,14 +17,14 @@ MonoBehaviour:
   damage: 0.4
   AOE: 0
   speed: 4
-  lifetime: 1
+  lifetime: 5
   projectilesPerShot: 6
   spreadAngleDeg: 45
   randomSpread: 1
   centerProjectile: 0
   spawnPosJitter: 0.1
   speedMultiplierMin: 1
-  speedMultiplierMax: 0.6
+  speedMultiplierMax: 0.5
   destroyOnHit: 1
   shockWavePrefab: {fileID: 0}
   hitEffect: []
