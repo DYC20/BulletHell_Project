@@ -91,10 +91,10 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 1529
-    y: -1021
-    width: 2109
-    height: 2565
+    x: 1530
+    y: -1020
+    width: 2107
+    height: 2536
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5111,7 +5111,8 @@ MonoBehaviour:
       m_SerializableType: UnityEngine.Vector4, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
   m_Direction: 1
-  m_LinkedSlots: []
+  m_LinkedSlots:
+  - {fileID: 8926484042661616098}
 --- !u!114 &8926484042661616044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6562,7 +6563,8 @@ MonoBehaviour:
       m_SerializableType: UnityEngine.Color, UnityEngine.CoreModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
   m_Direction: 0
-  m_LinkedSlots: []
+  m_LinkedSlots:
+  - {fileID: 8926484042661616043}
 --- !u!114 &8926484042661616099
 MonoBehaviour:
   m_ObjectHideFlags: 0
