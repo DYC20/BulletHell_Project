@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
@@ -7,7 +8,12 @@ public class ContactDamage : MonoBehaviour
     [Header("Damage")]
     [SerializeField] private float damage = 10f;
     [SerializeField] private float hitCooldown = 0.5f;
-
+    private bool inflictedDamage = false;
+    
+    public event Action<GameObject> OnContactDamage;
+    public float HitCooldown => hitCooldown;
+    public bool InflictedDamage => inflictedDamage;
+    
     [Header("Targeting")]
     [Tooltip("Only damage targets on these layers.")]
     [SerializeField] private LayerMask targetMask = ~0;
@@ -24,6 +30,7 @@ public class ContactDamage : MonoBehaviour
 
     private float nextHitTime;
     private Teams attackerTeam;
+    
 
     public void SetDamageEnabled(bool enabled) => damageEnabled = enabled;
 
@@ -42,7 +49,6 @@ public class ContactDamage : MonoBehaviour
         }
 
         // Ensure trigger is set (contact damage needs trigger volume)
-        var col = GetComponent<Collider2D>();
         //if (!col.isTrigger)
          //   Debug.LogWarning($"{name}: ContactDamage works best with a Trigger collider (isTrigger = true).");
     }
@@ -51,7 +57,7 @@ public class ContactDamage : MonoBehaviour
     {
         if (!damageEnabled) return;
         if (Time.time < nextHitTime) return;
-
+        
         // Layer filter
         if (((1 << other.gameObject.layer) & targetMask.value) == 0)
             return;
@@ -66,8 +72,10 @@ public class ContactDamage : MonoBehaviour
 
         // Apply damage (instigator is this GameObject)
         damageable.TakeDamage(damage, gameObject);
+        inflictedDamage = true;
 
         nextHitTime = Time.time + hitCooldown;
+        OnContactDamage?.Invoke(gameObject);
     }
 }
 

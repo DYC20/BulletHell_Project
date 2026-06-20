@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3516138570704444126}
   - component: {fileID: 1955884628445460395}
   - component: {fileID: 1922452841970364557}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy_StandardBullet_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,11 +173,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PooledProjectile
   rb: {fileID: 1955884628445460395}
-  kinematics: {fileID: 8488122799573839415}
+  projMovement: {fileID: 0}
   hitEffect: {fileID: 4361183904634148549}
   hitEffectPS: {fileID: -596124624765486420}
   shootEffect: {fileID: 5164655207921999921}
   shootEffectPS: {fileID: -8955935111617131742}
+  bulletRenderer: {fileID: 0}
+  enemyBulletColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!50 &1955884628445460395
 Rigidbody2D:
   serializedVersion: 5
@@ -252,7 +254,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3827452164310428481}
   - component: {fileID: 9199918622919697984}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bullet_02 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

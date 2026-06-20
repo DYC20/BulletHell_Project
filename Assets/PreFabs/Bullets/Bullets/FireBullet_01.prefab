@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3559575904071847389}
   - component: {fileID: 3250106613970485413}
   - component: {fileID: 6883401792206892989}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FireBullet_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,12 +136,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PooledProjectile
   rb: {fileID: 3250106613970485413}
-  kinematics: {fileID: 4124142701063531577}
+  projMovement: {fileID: 0}
   hitEffect: {fileID: 5580016079290541308}
   hitEffectPS: {fileID: 0}
   shootEffect: {fileID: 0}
   shootEffectPS: {fileID: 0}
-  OutlineMaterialRenderer: {fileID: 0}
+  bulletRenderer: {fileID: 0}
+  enemyBulletColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!50 &3250106613970485413
 Rigidbody2D:
   serializedVersion: 5
@@ -216,7 +217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8443150892856015985}
   - component: {fileID: 3017055182938767107}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bullet_02 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -307,7 +308,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6000634046956274888}
   - component: {fileID: 7109350828226123547}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bullet_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +400,7 @@ GameObject:
   - component: {fileID: 5792544339252719513}
   - component: {fileID: 3664168285283037502}
   - component: {fileID: 1992292242319657143}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: VFX_BulletLongTrail_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}

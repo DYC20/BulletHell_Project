@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
@@ -16,6 +17,11 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
     [SerializeField] private float moveSpeed = 3.5f;
     [SerializeField] private float ratationSpeed = 3.5f;
     private RigidbodyType2D lastBodyType;
+    private Vector2 toPlayer = new Vector2();
+    private Vector2 dir = new Vector2();
+    
+    
+    private ContactDamage contactDamage;
     
     public bool isEnemyGrounded {get; private set; }
     public float MoveSpeed
@@ -23,6 +29,23 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
         get => moveSpeed;
         set => moveSpeed = Mathf.Max(0f, value);
     }
+    
+    private enum EnemyState
+    {
+        Chase,
+        Retreat
+    }
+
+    private EnemyState state = EnemyState.Chase;
+
+    [Header("Retreat / Circle Back")]
+    [SerializeField] private float retreatSpeedMultiplier = 1.2f;
+    [SerializeField] private float retreatAwayWeight = 0.7f;
+    [SerializeField] private float retreatOrbitWeight = 1.0f;
+
+    private float retreatEndTime;
+    private int orbitDirection = 1;
+    
 /*  [Header("Contact Damage")]
     [SerializeField] private float contactDamage = 10f;
     [SerializeField] private float hitCooldown = 0.5f;   // seconds between hits while touching
@@ -43,6 +66,12 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
 
     private void Start()
     {
+        contactDamage = GetComponent<ContactDamage>();
+        if (contactDamage != null)
+        {
+            contactDamage.OnContactDamage += HandleDamageInflicted;
+        }
+        
         animator = GetComponent<Animator>();
         // If player not set, try find by tag
         if (player == null)
@@ -71,6 +100,24 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
         }
         //CachePlayerHealth();
     }
+    
+    private void OnDestroy()
+    {
+        if (contactDamage != null)
+        {
+            contactDamage.OnContactDamage -= HandleDamageInflicted;
+        }
+    }
+    
+    private void HandleDamageInflicted(GameObject damagedTarget)
+    {
+        state = EnemyState.Retreat;
+        retreatEndTime = Time.time + contactDamage.HitCooldown;
+
+        // Pick clockwise or counter-clockwise orbit direction.
+        orbitDirection = Random.value < 0.5f ? -1 : 1;
+    }
+    
     //
     //player heirarchy debug
     //
@@ -108,6 +155,7 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
     {
         isEnemyGrounded = value;
     }
+    
     private void FixedUpdate()
     {
         if (!aiEnabled ||player == null)
@@ -134,16 +182,34 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
                         animator.speed = 1f;
                     }
 
+
+
             lastBodyType = rb.bodyType;
         }
 
+        if (playerVisualCenter == null)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
         
         // Move toward player using Rigidbody2D (physics-friendly)
         //Vector2 toPlayer = ((Vector2)player.position - rb.position);
-        Vector2 toPlayer = (Vector2)playerVisualCenter.position - rb.position;
-        Vector2 dir = toPlayer.sqrMagnitude > 0.0001f ? toPlayer.normalized : Vector2.zero;
+        toPlayer = (Vector2)playerVisualCenter.position - rb.position;
+        
+        if (state == EnemyState.Retreat)
+        {
+            if (Time.time < retreatEndTime)
+            {
+                Retreat(toPlayer);
+                return;
+            }
 
-        rb.linearVelocity = dir * moveSpeed;
+            state = EnemyState.Chase;
+        }
+        
+        Chase(toPlayer);
+      
         Debug.Log("Linear velocity: " + rb.linearVelocity);
         Debug.Log("Body Type: " + rb.bodyType);
         
@@ -171,5 +237,39 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
                 }
             }
         }
+    }
+
+    private void Chase(Vector2 toPlayer)
+    {
+        dir = toPlayer.sqrMagnitude > 0.0001f ? toPlayer.normalized : Vector2.zero;
+        
+        rb.linearVelocity = dir * moveSpeed;
+    }
+    
+    private void Retreat(Vector2 toPlayer)
+    {
+        if (toPlayer.sqrMagnitude < 0.0001f)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
+        // Direction from player to enemy
+        Vector2 awayFromPlayer = -toPlayer.normalized;
+
+        // Perpendicular direction, used to orbit around the player
+        Vector2 orbitDirectionVector = new Vector2(
+            -awayFromPlayer.y,
+            awayFromPlayer.x
+        ) * orbitDirection;
+
+        // Blend away movement + orbit movement
+        Vector2 retreatDir = 
+            awayFromPlayer * retreatAwayWeight +
+            orbitDirectionVector * retreatOrbitWeight;
+
+        retreatDir.Normalize();
+
+        rb.linearVelocity = retreatDir * moveSpeed * retreatSpeedMultiplier;
     }
 }

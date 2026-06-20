@@ -289,7 +289,7 @@ CapsuleCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a878cb552917c6c4d87926641814f4c7, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -313,8 +313,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0023089903, y: -0.46336555}
-  m_Size: {x: 0.35398355, y: 0.13560046}
+  m_Offset: {x: 0.0011054868, y: -0.38141778}
+  m_Size: {x: 0.20374659, y: 0.10828443}
   m_Direction: 1
 --- !u!1 &3258707897656166981
 GameObject:
@@ -643,13 +643,13 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: fdc97a42f8f77a9429acea3f1bbbbb95, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 130559
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -756,6 +756,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponPickup
   destroyAfterPickup: 1
+  interactableGO: {fileID: 0}
+  weaponRenderer: {fileID: 0}
+  shadow: {fileID: 0}
   newColor: {r: 1, g: 1, b: 1, a: 1}
   newColorDuration: 1
 --- !u!114 &9029346528136732228
@@ -775,6 +778,8 @@ MonoBehaviour:
   visualRoot: {fileID: 7096912211577833090}
   projectileConfig: {fileID: 11400000, guid: 2eac937780c2923498677082a48a14a9, type: 2}
   projectilePool: {fileID: 11400000, guid: 7812b24b1e918db97813241183e4b802, type: 2}
+  weaponRenderer: {fileID: 0}
+  seconderyRenderer: {fileID: 0}
   weaponUI: {fileID: 21300000, guid: 104ad18334a9a6945aec36857bada2d4, type: 3}
   weaponFX_tf: {fileID: 13765240764320889}
   isRevolver: 1
