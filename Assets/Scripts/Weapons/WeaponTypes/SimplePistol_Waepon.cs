@@ -1,6 +1,7 @@
 using UnityEngine;
 using Unity.Cinemachine;
 using Unity.VectorGraphics;
+using UnityEngine.Rendering;
 
 public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
 {
@@ -11,6 +12,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     private ProjectileConfigSO defaultProjectileConfig;
     private ObjectPool defaultProjectilePool;
     private bool defaultsCached;
+    private int _nextShotId = 0;
 
     [Header("Weapon")] 
     [SerializeField] private SpriteRenderer weaponRenderer;
@@ -132,7 +134,8 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
                 return;
         }
 
-        int count = Mathf.Max(1, cfg.projectilesPerShot);
+        //int count = Mathf.Max(1, cfg.projectilesPerShot);
+        int count = cfg.projectilesPerShot;
         float cone = Mathf.Max(0f, cfg.spreadAngleDeg);
 
         Vector2 baseDir = transform.up;
@@ -142,6 +145,8 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
         bool fromHighland = shooterRoot != null && shooterRoot.layer == playerHighLayer;
         int projectileLayer = fromHighland ? projectileHighLayer : projectileLowLayer;
 
+        int shotid = ++_nextShotId;
+        
         for (int i = 0; i < count; i++)
         {
             GameObject proj = pool.GetInstance(firePoint.position, Quaternion.identity);
@@ -162,21 +167,23 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
             float mult = Random.Range(cfg.speedMultiplierMin, cfg.speedMultiplierMax);
             float pelletSpeed = cfg.speed * mult;
             Debug.LogWarning("pellet speed:" + pelletSpeed);
-
-            var pg = proj.GetComponent<PooledProjectile>();
-            pg.Init(owner, ownerTeam, cfg, dir, pelletSpeed, firePoint);
-            if (owner == null) 
-                Debug.LogWarning($"{name}: projectile {i} has no owner");
-            if (ownerTeam != Teams.Player && ownerTeam != Teams.Enemy)
-                Debug.LogWarning($"{name}: projectile {i} has no valid ownerTeam");
-            if (cfg == null) 
-                Debug.LogWarning($"{name}: projectile {i} has no cfg");
-            if (dir == Vector2.zero)
-                Debug.LogWarning($"{name}: projectile {i} has zero direction");
-            if (pelletSpeed <= 0f)
-                Debug.LogWarning($"{name}: projectile {i} has invalid pelletSpeed: {pelletSpeed}");
-            if (firePoint == null) 
-                Debug.LogWarning($"{name}: projectile {i} has no firePoint");
+           
+                var pg = proj.GetComponent<PooledProjectile>();
+                pg.Init(owner, ownerTeam, cfg, dir, pelletSpeed, firePoint, shotid);
+                Debug.LogWarning("ShotID: " + shotid);
+                if (owner == null)
+                    Debug.LogWarning($"{name}: projectile {i} has no owner");
+                if (ownerTeam != Teams.Player && ownerTeam != Teams.Enemy)
+                    Debug.LogWarning($"{name}: projectile {i} has no valid ownerTeam");
+                if (cfg == null)
+                    Debug.LogWarning($"{name}: projectile {i} has no cfg");
+                if (dir == Vector2.zero)
+                    Debug.LogWarning($"{name}: projectile {i} has zero direction");
+                if (pelletSpeed <= 0f)
+                    Debug.LogWarning($"{name}: projectile {i} has invalid pelletSpeed: {pelletSpeed}");
+                if (firePoint == null)
+                    Debug.LogWarning($"{name}: projectile {i} has no firePoint");
+            
         }
 
         if (recoilImpulse != null)

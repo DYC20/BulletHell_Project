@@ -84,7 +84,7 @@ public class ModifierSO : ProjectileModifierSO
         }
     }
     
-    public override void OnHitEnemy(GameObject attacker, GameObject enemy, Vector3 hitPos, Quaternion hitRot)
+    public override void OnHitEnemy(GameObject attacker, GameObject enemy, Vector3 hitPos, Quaternion hitRot, int shotid)
     {
         if (attacker == null || enemy == null) return;
 
@@ -95,12 +95,22 @@ public class ModifierSO : ProjectileModifierSO
         
         float hitFreezeDuration = state.HitFreezeDuration;
         float fullEffectDuration = state.FullEffectFreezeDuration;
-        state.StartCoroutine(state.FreezeFrame(hitFreezeDuration));
+        
+        bool canFreezeThisShot = state.TryConsumeShotFreeze(shotid);
+
+        if (canFreezeThisShot)
+        {
+            float freezeDuration = count == hitsToTrigger
+                ? fullEffectDuration
+                : hitFreezeDuration;
+
+            state.StartCoroutine(state.FreezeFrame(freezeDuration));
+        }
         
             
         if (count == hitsToTrigger)
         {
-            state.StartCoroutine(state.FreezeFrame(fullEffectDuration));
+           // state.StartCoroutine(state.FreezeFrame(fullEffectDuration));
             var damageable = enemy.GetComponentInParent<IDamageable>();
             // apply timed behavior changes (reverts automatically)
             state.ApplyTimedDebuff(

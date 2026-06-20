@@ -21,7 +21,8 @@ public class ModifierRuntimeState : MonoBehaviour
     
     [SerializeField] private float hitFreezeDuration;
     [SerializeField] private float fullEffectFreezeDuration;
-
+    
+    private readonly HashSet<int> _shotsThatAlreadyFroze = new();
     public static ModifierRuntimeState Instance { get; private set; }
 
     private ScriptableObject currentModifier;
@@ -34,6 +35,7 @@ public class ModifierRuntimeState : MonoBehaviour
     private Gradient defaultBGFXGradient;
     private Coroutine uiRoutine;
     private bool defaultsCached;
+    
 
     private class Snapshot
     {
@@ -203,7 +205,26 @@ public class ModifierRuntimeState : MonoBehaviour
         perEnemy[enemyKey] = count;
         return count;
     }
+    public bool TryConsumeShotFreeze(int shotId)
+    {
+        if (shotId <= 0)
+            return true;
 
+        if (_shotsThatAlreadyFroze.Contains(shotId))
+            return false;
+
+        _shotsThatAlreadyFroze.Add(shotId);
+        StartCoroutine(ClearShotFreezeIdLater(shotId, 2f));
+
+        return true;
+    }
+
+    private IEnumerator ClearShotFreezeIdLater(int shotId, float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+        _shotsThatAlreadyFroze.Remove(shotId);
+    }
+    
     public void ClearModifier(ScriptableObject modifier)
     {
         if (modifier == null) return;

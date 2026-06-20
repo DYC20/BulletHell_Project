@@ -36,10 +36,10 @@ public class ProjectileModifierSet : MonoBehaviour
             mod.Modify(ref config, ref pool);
     }
 
-    public void NotifyHitEnemy(AmmoType ammoType, GameObject attacker, GameObject enemy, Vector3 hitPos, Quaternion hitRot)
+    public void NotifyHitEnemy(AmmoType ammoType, GameObject attacker, GameObject enemy, Vector3 hitPos, Quaternion hitRot, int shotid)
     {
         if (_perAmmo.TryGetValue(ammoType, out var mod) && mod != null)
-            mod.OnHitEnemy(attacker, enemy, hitPos, hitRot);
+            mod.OnHitEnemy(attacker, enemy, hitPos, hitRot, shotid);
     }
     
     private void RefreshDebugKeys()

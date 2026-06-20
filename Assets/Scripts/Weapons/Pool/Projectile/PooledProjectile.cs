@@ -46,6 +46,8 @@ public class PooledProjectile : MonoBehaviour
     private IDamageable damageable;
     private ModifierSO activeModifier;
     
+    private int _shotID;
+    
 /*
     private void Awake()
     {
@@ -90,9 +92,10 @@ public class PooledProjectile : MonoBehaviour
         bulletRenderer.SetPropertyBlock(mpb);
     }
 
-    public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction, float speedOverride, Transform spawnTf)
+    public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction, float speedOverride, Transform spawnTf, int shotid)
     {
         Debug.LogWarning("SpeedOverride: " + speedOverride);
+        _shotID = shotid;
         _owner = owner;
         _shotAmmoType = config != null ? config.ammoType : AmmoType.Bullet;
         _modifierSet = _owner != null ? _owner.GetComponentInParent<ProjectileModifierSet>() : null;
@@ -386,7 +389,8 @@ public class PooledProjectile : MonoBehaviour
             _owner,
             target.gameObject,
             target.transform.position,
-            target.transform.rotation
+            target.transform.rotation,
+            _shotID
         );
     }
 

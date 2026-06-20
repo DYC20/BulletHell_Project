@@ -13531,7 +13531,7 @@ PlayableDirector:
   m_GameObject: {fileID: 1313437472}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 0}
+  m_PlayableAsset: {fileID: 11400000, guid: df24ef783bb0ea64f80f20ea680c289f, type: 2}
   m_InitialState: 1
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -13568,6 +13568,8 @@ PlayableDirector:
   - key: {fileID: -9120307352826178996, guid: bee3aeac6f0e31c448d76d275e1b0e19, type: 2}
     value: {fileID: 536386933}
   - key: {fileID: 8625802861813228306, guid: 6e567c12393fea44cb9d33514cf304b5, type: 2}
+    value: {fileID: 1436683813}
+  - key: {fileID: -5565843402094967654, guid: df24ef783bb0ea64f80f20ea680c289f, type: 2}
     value: {fileID: 1436683813}
   m_ExposedReferences:
     m_References:
@@ -13844,7 +13846,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -20755,7 +20757,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1

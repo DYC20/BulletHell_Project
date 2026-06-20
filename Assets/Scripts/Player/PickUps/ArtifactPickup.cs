@@ -42,8 +42,11 @@ public class ArtifactPickup : MonoBehaviour, IPickup
         {
             Debug.Log("manager GO:" + manager.GetType().Name);
         }
-        pickedUp = true;
+        
         StartCoroutine(DisableLowHealthEffect());
+        if (pickedUp)
+            return;
+        pickedUp = true;
         manager.PlaySequence();
         //Instantiate(whirlpoolPrfab, GetRandomWorldPosition(), Quaternion.identity);
         //uICollapseController.Begin();
