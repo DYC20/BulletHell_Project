@@ -16,15 +16,15 @@ MonoBehaviour:
   ammoPerShot: 1
   damage: 1
   AOE: 0
-  speed: 5
+  speed: 2
   lifetime: 5
   projectilesPerShot: 1
   spreadAngleDeg: 15
   randomSpread: 1
   centerProjectile: 1
-  spawnPosJitter: 0.2
+  spawnPosJitter: 0.5
   speedMultiplierMin: 1
-  speedMultiplierMax: 1
+  speedMultiplierMax: 1.3
   destroyOnHit: 1
   shockWavePrefab: {fileID: 0}
   hitEffect: []
@@ -64,5 +64,5 @@ MonoBehaviour:
   preventFriendlyFire: 1
   hitMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 129023
   pierceCount: 0

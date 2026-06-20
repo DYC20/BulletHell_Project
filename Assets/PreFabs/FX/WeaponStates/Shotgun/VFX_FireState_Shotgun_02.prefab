@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1958051993410017795}
   - component: {fileID: 6292541761293455987}
   - component: {fileID: 8668915473839755961}
+  - component: {fileID: 6241618741431102758}
+  - component: {fileID: 1211358109375041649}
   m_Layer: 0
   m_Name: Light_Fire
   m_TagString: Untagged
@@ -4980,6 +4982,37 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
+--- !u!114 &6241618741431102758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2172133319162153053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2cef6ca460b474a85c82ce391f5f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PSLifetimeByMovement
+  ps: {fileID: 6292541761293455987}
+  idleLifetime: 0.5
+  movingLifetime: 0.08333334
+  idleEmmision: 20
+  movingEmmision: 120
+  speedForMinLifetime: 6
+--- !u!114 &1211358109375041649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2172133319162153053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7455173fbeb87c640b7d576f77adbd9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SortingLayerOrder
+  bgParticleSystem: {fileID: 221130209284636703}
 --- !u!1 &6798718995242106642
 GameObject:
   m_ObjectHideFlags: 0
@@ -4991,6 +5024,7 @@ GameObject:
   - component: {fileID: 2433312091917926068}
   - component: {fileID: 221130209284636703}
   - component: {fileID: 8260874569110036185}
+  - component: {fileID: 4674854787831889092}
   m_Layer: 0
   m_Name: Dark_Fire
   m_TagString: Untagged
@@ -9960,6 +9994,24 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
+--- !u!114 &4674854787831889092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6798718995242106642}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2cef6ca460b474a85c82ce391f5f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PSLifetimeByMovement
+  ps: {fileID: 221130209284636703}
+  idleLifetime: 0.5
+  movingLifetime: 0.08333334
+  idleEmmision: 20
+  movingEmmision: 120
+  speedForMinLifetime: 6
 --- !u!1 &6931151330811414991
 GameObject:
   m_ObjectHideFlags: 0

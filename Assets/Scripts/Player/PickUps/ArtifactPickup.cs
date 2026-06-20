@@ -27,6 +27,7 @@ public class ArtifactPickup : MonoBehaviour, IPickup
    private static readonly int controllEffect = Shader.PropertyToID("_ControlEffect");
     public bool CanPickup(GameObject picker)
     {
+        Debug.LogWarning("CanPickup artifact");
         if (pickedUp)
             return false;
         return true;
@@ -34,8 +35,9 @@ public class ArtifactPickup : MonoBehaviour, IPickup
 
     public void Pickup(GameObject picker)
     {
+        Debug.LogWarning("Pickup artifact");
         RumbleImpulseManager manager = GetComponent<RumbleImpulseManager>();
-        if (manager == null) Debug.Log("Rtifact Pickup Failed");
+        if (manager == null) Debug.Log("Artifact Pickup Failed");
         if (manager != null)
         {
             Debug.Log("manager GO:" + manager.GetType().Name);

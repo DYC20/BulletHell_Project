@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
+using UnityEngine.SceneManagement;
 
 public class PopupButton : MonoBehaviour, IInteractable
 {
@@ -58,7 +59,7 @@ public class PopupButton : MonoBehaviour, IInteractable
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log(other.name);
-        if (other.name != "Player")
+        if (!other.CompareTag("Player"))
             return;
         if (other.CompareTag("Player"))
         {
@@ -90,10 +91,12 @@ public class PopupButton : MonoBehaviour, IInteractable
     {
         //Debug.Log("_Activated status: " + _Activated);
         if (_Activated)
-        { 
+        {
             if (_Quit)
                 LoadSceneManager.Instance.ExitGame();
             LoadSceneManager.Instance.SetSceneName(sceneName);
+            if (LoadSceneManager.Instance == null)
+                SceneManager.LoadScene(sceneName);
             time -= Time.deltaTime;
             if (time <= 0)
             {

@@ -303,7 +303,7 @@ public class PooledProjectile : MonoBehaviour
         // Don’t hit owner
         if (_owner != null && other.gameObject == _owner)
             return;
-
+        
         // Friendly fire rule (team check requires target has Health/IDamageable with a team)
         IDamageable hitDamageable = other.GetComponentInParent<IDamageable>();
         

@@ -41,10 +41,10 @@ public class MenuNavigator : MonoBehaviour
     private int currentIndex = 0;
     private bool initialized;
 
+    //txt color name
     private static readonly int FaceColorID = Shader.PropertyToID("_FaceColor");
 
-    // Proxy name for now.
-    // Replace this with the actual property name in your Image shader later.
+    //image color name
     private static readonly int ImageProxyColorID = Shader.PropertyToID("_Color");
 
     private void Awake()
@@ -181,6 +181,7 @@ public class MenuNavigator : MonoBehaviour
         imageMaterials[index] = mat;
 
         TouchImageMaterial(image);
+        ResetAllVisuals();
     }
 
     private void InitializeOriginalColors()

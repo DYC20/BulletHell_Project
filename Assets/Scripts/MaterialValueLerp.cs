@@ -47,6 +47,7 @@ public class MaterialValueLerp : MonoBehaviour
 
     private IEnumerator LerpMaterial()
     {
+        Debug.LogWarning("LerpMaterial Start");
         float elapsedTime = 0f;
         while (elapsedTime < duration)
         {

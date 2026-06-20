@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7049002405825738035}
   - component: {fileID: 1574791123806509899}
   - component: {fileID: 32663808982635231}
+  - component: {fileID: 7508749957491657763}
   m_Layer: 0
   m_Name: Dark_Fire
   m_TagString: Untagged
@@ -4980,6 +4981,24 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
+--- !u!114 &7508749957491657763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3156824593466024725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2cef6ca460b474a85c82ce391f5f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PSLifetimeByMovement
+  ps: {fileID: 1574791123806509899}
+  idleLifetime: 0.5
+  movingLifetime: 0.08333334
+  idleEmmision: 20
+  movingEmmision: 120
+  speedForMinLifetime: 5
 --- !u!1 &7270081221407595685
 GameObject:
   m_ObjectHideFlags: 0
@@ -5024,6 +5043,8 @@ GameObject:
   - component: {fileID: 6274105704938390770}
   - component: {fileID: 6196678559137234184}
   - component: {fileID: 4016542127314231449}
+  - component: {fileID: 6857383726545550899}
+  - component: {fileID: 483583183169336170}
   m_Layer: 0
   m_Name: Light_Fire
   m_TagString: Untagged
@@ -9993,3 +10014,34 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
+--- !u!114 &6857383726545550899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7508595851180793066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe2cef6ca460b474a85c82ce391f5f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PSLifetimeByMovement
+  ps: {fileID: 6196678559137234184}
+  idleLifetime: 0.5
+  movingLifetime: 0.08333334
+  idleEmmision: 20
+  movingEmmision: 120
+  speedForMinLifetime: 6
+--- !u!114 &483583183169336170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7508595851180793066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7455173fbeb87c640b7d576f77adbd9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SortingLayerOrder
+  bgParticleSystem: {fileID: 1574791123806509899}

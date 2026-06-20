@@ -48,7 +48,8 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
         if (player == null)
         {
             GameObject p = GameObject.FindGameObjectWithTag(playerTag);
-            if (p != null) player = p.transform;
+            
+            if (p != null) player = p.transform.root;
         }
 
         if (player == null)

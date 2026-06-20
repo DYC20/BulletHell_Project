@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -35,6 +37,7 @@ public class ModifierPickup : MonoBehaviour, IPickup
     private Transform weaponFXtf;
     private GameObject currentWeaponFX;
     private Sprite newSprite;
+    private PlayerRendererGetter playerRendererGetter;
 
     public bool CanPickup(GameObject picker)
     {
@@ -97,13 +100,13 @@ public class ModifierPickup : MonoBehaviour, IPickup
         }
 
         weaponRenderer.sprite = newSprite;
-        /*
+        
         if (bulletDrum != null)
         {
             SpriteRenderer drumRenderer = bulletDrum.GetComponent<SpriteRenderer>();
             drumRenderer.enabled = false;
         }
-        */
+        
         isRevolver = weapon.Revolver;
         isShotgun = weapon.Shotgun;
         isGrenade = weapon.Grenade;
@@ -182,6 +185,30 @@ public class ModifierPickup : MonoBehaviour, IPickup
         if ( currentWeaponFX != null)
         {
             Debug.LogWarning("instenciiated Object:" + currentWeaponFX.name);
+            List<ParticleSystem> allCurrentPSChildren = currentWeaponFX.GetComponentsInChildren<ParticleSystem>().ToList();
+
+            playerRendererGetter = currentPicker.GetComponentInParent<PlayerRendererGetter>();
+            string playerSortingLayer = playerRendererGetter.GetRenderLayer;
+            int playerSortingOrder = playerRendererGetter.GetSortingOrder;
+            
+            foreach (var childFX in allCurrentPSChildren)
+            {
+                ParticleSystemRenderer psRenderer = childFX.GetComponent<ParticleSystemRenderer>();
+
+                if (psRenderer == null)
+                    continue;
+
+                psRenderer.sortingLayerName = playerSortingLayer;
+                psRenderer.sortingOrder = playerSortingOrder + 1;
+
+                SortingLayerOrder sortingLayerOrder = GetComponent<SortingLayerOrder>();
+                
+                if (sortingLayerOrder != null)
+                    sortingLayerOrder.RaiseLayerOrderByOne();
+
+                Debug.Log("PS Sorting Layer: " + psRenderer.sortingLayerName);
+                Debug.Log("PS Sorting Order: " + psRenderer.sortingOrder);
+            }
         }
     }
 }
