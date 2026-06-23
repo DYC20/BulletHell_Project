@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Playables;
 using Random = UnityEngine.Random;
 
 public class ArtifactPickup : MonoBehaviour, IPickup
@@ -18,9 +19,11 @@ public class ArtifactPickup : MonoBehaviour, IPickup
         uICollapseController = hUDCanvas.GetComponent<UICollapseController>();
         proxySpawner = tilemapGrid.GetComponent<TilemapProxySpawner>();
     }*/
-
+   [SerializeField] private PlayableDirector director;
    [SerializeField] private Material lowHealthShader;
    [SerializeField] private float _LHSDuration;
+
+   private RumbleImpulseManager manager; 
    private bool pickedUp = false;
    private float transitionValue;
    
@@ -36,7 +39,7 @@ public class ArtifactPickup : MonoBehaviour, IPickup
     public void Pickup(GameObject picker)
     {
         Debug.LogWarning("Pickup artifact");
-        RumbleImpulseManager manager = GetComponent<RumbleImpulseManager>();
+        manager = GetComponent<RumbleImpulseManager>();
         if (manager == null) Debug.Log("Artifact Pickup Failed");
         if (manager != null)
         {
@@ -47,6 +50,12 @@ public class ArtifactPickup : MonoBehaviour, IPickup
         if (pickedUp)
             return;
         pickedUp = true;
+        director.Play();
+
+    }
+
+    public void PlayManagerSequence()
+    {
         manager.PlaySequence();
         //Instantiate(whirlpoolPrfab, GetRandomWorldPosition(), Quaternion.identity);
         //uICollapseController.Begin();
@@ -54,7 +63,7 @@ public class ArtifactPickup : MonoBehaviour, IPickup
         Renderer renderer = GetComponent<SpriteRenderer>();
         renderer.enabled = false;
     }
-
+    
     private IEnumerator DisableLowHealthEffect()
     {
         float timer = 0f;
