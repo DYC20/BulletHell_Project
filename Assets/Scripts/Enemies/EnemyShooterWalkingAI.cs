@@ -240,6 +240,8 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
 
         Transform target = playerAimPos != null ? playerAimPos : player;
         if (target == null) return;
+        
+        Debug.Log("Target:" + target.name);
 
         Vector2 targetPos = target.position;
         Vector2 firePointPos = weapon.FirePoint.position;
@@ -439,31 +441,32 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
     {
         // Try cheap overlap first (optional)
         Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRadius, playerLayer);
+        Debug.Log("hit name: " + hit.name);
         if (hit == null)
             Debug.LogWarning("hit is null");
-        if (hit != null && hit.CompareTag(playerTag))
-        {
+   
             Debug.LogWarning("looked for player found: " + hit.name);
             Transform playerRoot = hit.GetComponentInParent<PlayerWeaponController>()?.transform;
             Debug.LogWarning("Assigned Player root: " + playerRoot.name);
             player = playerRoot;
             
             playerAimPos = player.Find("VisualCenter(DNCN)");
+            Debug.LogWarning("Assigned Player aim pos: " + playerAimPos.name);
             if (playerAimPos == null)
             {
                 Debug.LogWarning($"{name}: Player has no child named 'AimPos'. Falling back to player transform.");
+                GameObject go = GameObject.FindGameObjectWithTag(playerTag);
+                if (go)
+                {
+                    player = go.transform;
+                    playerAimPos = player.Find("VisualCenter(DNCN");
+                }
             }
             Debug.LogWarning("found playerAimPos: " + playerAimPos.name);
-            return;
-        }
+        
 
         // Fallback: Find by tag (only if needed, not every frame)
-        GameObject go = GameObject.FindGameObjectWithTag(playerTag);
-        if (go)
-        {
-            player = go.transform;
-            playerAimPos = player.Find("AimPos");
-        }
+    
     }
 
     // -------------------------

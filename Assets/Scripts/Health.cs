@@ -21,6 +21,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     [Header("FullScreen Material")]
     [SerializeField] private Material FullScreenPlayerHit;
+    [SerializeField] private Material Chromatic;
     
     [Header("Low Health Material Set-up")]
     [SerializeField] private PlayerHitFlash playerHitFlash;
@@ -134,7 +135,12 @@ public class Health : MonoBehaviour, IDamageable, IHealable
         UpdateHealthBarVisual();
 
         if (_hp > 3f)
+        {
             StartCoroutine(DeactivateFullScreenLowHealth());
+            playerHitFlash.PlayLowHealthMaterial(_hp);
+        }
+            
+        
 
         Debug.Log("Player Healed");
     }

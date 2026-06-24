@@ -57,6 +57,13 @@ public class PlayerHitFlash : MonoBehaviour
         else
         {
             seq?.Kill();
+            
+            seq = DOTween.Sequence();
+            seq.Append(SetValue(_LHAberrationAmount, 0f, _LHAberrationDuration, AberrationValueId));
+            seq.Join(SetValue(_LHDeformAmount, 0f, _LHDeformDuration, DeformPosId));
+            Debug.Log("AberrationValueId: " + AberrationValueId);
+            Debug.Log("DeformPosId:" + DeformPosId);
+            Debug.Log("Health:" + health);
         }
     }
     private void HitAnimation()
