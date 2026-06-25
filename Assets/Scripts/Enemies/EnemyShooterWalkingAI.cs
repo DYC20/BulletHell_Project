@@ -128,7 +128,10 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
             case State.CombatFiring:
                 // optional: stay still while firing
                 rb.linearVelocity = Vector2.zero;
-                animator.SetTrigger("isIdle");
+                animator.SetBool("isIdle", true);
+                animator.SetBool("isWalking", false);
+                
+                Debug.LogWarning("Idle While Firing");
                 break;
         }
         if (rb.bodyType != lastBodyType)
@@ -136,6 +139,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
             if (rb.bodyType == RigidbodyType2D.Static)
             {
                 animator.speed = 0f;
+                Debug.Log("Velocity is 0");
             }
             else if (rb.bodyType == RigidbodyType2D.Dynamic)
             {
@@ -207,8 +211,10 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         // If reached target, wait, then pick new target around START position
         if (HasArrived(currentTarget, arriveDistance))
         {
-            animator.SetTrigger("isIdle");
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isIdle", true);
             rb.linearVelocity = Vector2.zero;
+            Debug.LogWarning("Wander Tick Idle");
 
             float wait = Random.Range(wanderWaitMin, wanderWaitMax);
             yield return new WaitForSeconds(wait);
@@ -241,7 +247,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         Transform target = playerAimPos != null ? playerAimPos : player;
         if (target == null) return;
         
-        Debug.Log("Target:" + target.name);
+        //Debug.Log("Target:" + target.name);
 
         Vector2 targetPos = target.position;
         Vector2 firePointPos = weapon.FirePoint.position;
@@ -340,8 +346,10 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
 
             // --- IN GOOD FIRING POSITION ---
             state = State.CombatFiring;
-            animator.SetTrigger("isIdle");
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isIdle", true);
             rb.linearVelocity = Vector2.zero;
+            Debug.LogWarning("Fire Pos Idle");
 
             // Refresh anchor once after chase / re-entering firing position
             if (needsAnchorRefresh)
@@ -389,8 +397,10 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
                 // Plan next reposition time
                
                 rb.linearVelocity = Vector2.zero;
-                animator.SetTrigger("isIdle");
+                animator.SetBool("isWalking", false);
+                animator.SetBool("isIdle", true);
                 state = State.CombatFiring;
+                Debug.LogWarning("Reposition Idle");
 
                 yield return null;
                 continue;
@@ -477,17 +487,21 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         Vector2 pos = rb.position;
         Vector2 dir = (target - pos);
         
-        if (dir.sqrMagnitude <= stopThreshold * stopThreshold)
+        if (dir.sqrMagnitude <= stopThreshold * stopThreshold || dir.sqrMagnitude < stopThreshold)
         {
             rb.linearVelocity = Vector2.zero;
-            animator.SetTrigger("isIdle");
+            animator.SetBool("isWalking", false);
+            animator.SetBool("isIdle", true);
+            Debug.LogWarning("Too close to target Idle");
             return;
         }
 
         dir.Normalize();
 
         // Simple movement
-        animator.SetTrigger("isWalking");
+        animator.SetBool("isIdle", false);
+        animator.SetBool("isWalking", true);
+        Debug.LogWarning("Walking triggered");
         rb.linearVelocity = dir * moveSpeed;
     }
 
