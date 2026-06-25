@@ -1,7 +1,7 @@
-                    using System.Collections;
+using System.Collections;
 using UnityEngine;
 
-public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireInterval
+public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireInterval, IWeaponPivot
 {
     private enum State { Wander, CombatChase, CombatReposition, CombatFiring }
 
@@ -14,6 +14,8 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
     [Header("Aiming")]
     [SerializeField] private Transform weaponPivot; // the transform you want to rotate (weapon root / arm / gun)
     [SerializeField] private bool aimWithFirePointUp = false; // assumes firePoint.up is the shoot direction
+
+
 
     [Header("Line of Sight")]
     //[SerializeField] private LayerMask walls;          // walls/cover layers (NOT player)
@@ -643,6 +645,12 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
     {
         get => moveSpeed;
         set => moveSpeed = Mathf.Max(0f, value);
+    }
+    
+    public Transform WeaponPivot
+    {
+        get => weaponPivot;
+        set => weaponPivot = value;
     }
 
     public float FireInterval
