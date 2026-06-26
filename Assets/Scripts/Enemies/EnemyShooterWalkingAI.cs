@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireInterval, IWeaponPivot
+public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireInterval//, IWeaponPivot
 {
     private enum State { Wander, CombatChase, CombatReposition, CombatFiring }
 
@@ -10,6 +10,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
     [SerializeField] private Transform firePoint;
     [SerializeField] private WeaponBase weapon;
     [SerializeField] private Teams enemyTeam = Teams.Enemy;
+    [SerializeField] private Transform detectionOrigin;
     
     [Header("Aiming")]
     [SerializeField] private Transform weaponPivot; // the transform you want to rotate (weapon root / arm / gun)
@@ -451,30 +452,40 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
     // -------------------------
     private void TryAcquirePlayer()
     {
+        Vector2 origin = detectionOrigin != null 
+            ? detectionOrigin.position 
+            : transform.position;
+        
         // Try cheap overlap first (optional)
-        Collider2D hit = Physics2D.OverlapCircle(transform.position, detectionRadius, playerLayer);
-        Debug.Log("hit name: " + hit.name);
-        if (hit == null)
+        Collider2D hit = Physics2D.OverlapCircle(origin, detectionRadius, playerLayer);
+        Debug.LogWarning("origin:" + origin);
+        Debug.LogWarning("detectionRadius:" + detectionRadius);
+        Debug.LogWarning("playerLayer:" + playerLayer);
+        if (hit != null)
+        {
             Debug.LogWarning("hit is null");
-   
+            Debug.LogWarning("Hit name: " + hit.name);
+               
             Debug.LogWarning("looked for player found: " + hit.name);
             Transform playerRoot = hit.GetComponentInParent<PlayerWeaponController>()?.transform;
             Debug.LogWarning("Assigned Player root: " + playerRoot.name);
             player = playerRoot;
-            
+                        
             playerAimPos = player.Find("VisualCenter(DNCN)");
             Debug.LogWarning("Assigned Player aim pos: " + playerAimPos.name);
-            if (playerAimPos == null)
+        }
+
+        if (hit == null)
+        {
+            Debug.LogWarning($"{name}: Player has no child named 'AimPos'. Falling back to player transform.");
+            GameObject go = GameObject.FindGameObjectWithTag(playerTag);
+            if (go)
             {
-                Debug.LogWarning($"{name}: Player has no child named 'AimPos'. Falling back to player transform.");
-                GameObject go = GameObject.FindGameObjectWithTag(playerTag);
-                if (go)
-                {
-                    player = go.transform;
-                    playerAimPos = player.Find("VisualCenter(DNCN");
-                }
+                player = go.transform;
+                playerAimPos = player.Find("VisualCenter(DNCN");
             }
-            Debug.LogWarning("found playerAimPos: " + playerAimPos.name);
+        }
+        //Debug.LogWarning("found playerAimPos: " + playerAimPos.name);
         
 
         // Fallback: Find by tag (only if needed, not every frame)
@@ -646,13 +657,13 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         get => moveSpeed;
         set => moveSpeed = Mathf.Max(0f, value);
     }
-    
+    /*
     public Transform WeaponPivot
     {
         get => weaponPivot;
         set => weaponPivot = value;
     }
-
+    */
     public float FireInterval
     {
         get => (fireRateMin + fireRateMax) * 0.5f;

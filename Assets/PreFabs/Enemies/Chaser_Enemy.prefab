@@ -67,8 +67,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.015229221, y: -0.4019184}
-  m_Size: {x: 0.16985124, y: 0.1698509}
+  m_Offset: {x: 0.00009032841, y: -0.39543006}
+  m_Size: {x: 0.3183623, y: 0.23761797}
   m_Direction: 1
 --- !u!114 &1009744389262302966
 MonoBehaviour:
@@ -229,7 +229,7 @@ MonoBehaviour:
   hitCooldown: 0.5
   targetMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 522239
   preventFriendlyFire: 1
   overrideAttackerTeam: 1
   useOverrideTeam: 1
@@ -256,6 +256,7 @@ MonoBehaviour:
   healthBarImage: {fileID: 0}
   healthFillProperty: _FillAmount
   FullScreenPlayerHit: {fileID: 0}
+  Chromatic: {fileID: 0}
   playerHitFlash: {fileID: 0}
   onDeath:
     m_PersistentCalls:
@@ -310,7 +311,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -328,7 +329,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.027864277, y: -0.26407716}
+  m_Offset: {x: -0.0033527613, y: -0.2885887}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -338,7 +339,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.88242364, y: 0.68977004}
+  m_Size: {x: 0.4844725, y: 0.346609}
   m_EdgeRadius: 0
 --- !u!50 &4933905431315199958
 Rigidbody2D:
@@ -362,7 +363,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0

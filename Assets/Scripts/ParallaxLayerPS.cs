@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(ParticleSystem))]
-public class ParallaxLayer : MonoBehaviour
+public class ParallaxLayerPS : MonoBehaviour
 {
     [SerializeField] private Transform cameraTransform;
 
@@ -11,6 +11,7 @@ public class ParallaxLayer : MonoBehaviour
     [SerializeField] private float parallaxFactor = 0.5f;
 
     [SerializeField] private float referenceSize;
+    [SerializeField] private bool onlyXAxis = true;
     
     private ParticleSystem ps;
     private ParticleSystem.Particle[] particles;
@@ -40,12 +41,23 @@ public class ParallaxLayer : MonoBehaviour
         {
             ParticleSystem.Particle p = particles[i];
             float scale = p.startSize / referenceSize;
-            
-            p.position += new Vector3(
-                cameraDelta.x * parallaxFactor,
-                0f,
-                0f
-            ) * scale;
+
+            if (onlyXAxis)
+            {
+                p.position += new Vector3(
+                    cameraDelta.x * parallaxFactor,
+                    0f,
+                    0f
+                ) * scale;
+            }
+            else
+            {
+                p.position += new Vector3(
+                    cameraDelta.x * parallaxFactor,
+                    cameraDelta.y * parallaxFactor,
+                    0f
+                ) * scale;
+            }
 
             particles[i] = p;
         }

@@ -488,6 +488,7 @@ MonoBehaviour:
   firePoint: {fileID: 4836745098007669306}
   weapon: {fileID: 9029346528136732228}
   enemyTeam: 1
+  detectionOrigin: {fileID: 2852274010122127103}
   weaponPivot: {fileID: 2159633483432574720}
   aimWithFirePointUp: 0
   losRepositionRadius: 2
@@ -578,6 +579,7 @@ MonoBehaviour:
   healthBarImage: {fileID: 0}
   healthFillProperty: _FillAmount
   FullScreenPlayerHit: {fileID: 0}
+  Chromatic: {fileID: 0}
   playerHitFlash: {fileID: 0}
   onDeath:
     m_PersistentCalls:

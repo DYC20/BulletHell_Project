@@ -25,6 +25,10 @@ public class WeaponPickup : MonoBehaviour, IPickup
     private void Start()
     {
         interactable = interactableGO.GetComponent<IInteractable>();
+        if (interactable == null)
+        {
+            return;
+        }
     }
 
     public bool CanPickup(GameObject picker)

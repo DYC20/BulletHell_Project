@@ -295,14 +295,15 @@ public class ModifierRuntimeState : MonoBehaviour
                 snap.hasRb2D = true;
                 snap.rb2DType = rb2D.bodyType;
             }
-            
+           /* 
             var weaponPivot = enemy.GetComponentInParent<IWeaponPivot>();
+            
             if (weaponPivot != null)
             {
                 snap.hasPivot = true;
                 snap.weaponPivot = weaponPivot.WeaponPivot;
             }
-
+            */
             perEnemy.Add(enemyKey, snap);
         }
 
@@ -326,12 +327,12 @@ public class ModifierRuntimeState : MonoBehaviour
 
         if (makeBodyStatic)
         {
-            var weaponPivot = enemy.GetComponentInParent<IWeaponPivot>();
+            //var weaponPivot = enemy.GetComponentInParent<IWeaponPivot>();
             var rb2D = enemy.GetComponentInParent<Rigidbody2D>();
             if (snap.hasRb2D && rb2D != null)
             {
                 rb2D.bodyType = RigidbodyType2D.Static;
-                weaponPivot.WeaponPivot = null;
+                //weaponPivot.WeaponPivot = enemy.transform;
             }
                 
         }
@@ -356,10 +357,11 @@ public class ModifierRuntimeState : MonoBehaviour
         var rb2D = enemy.GetComponentInParent<Rigidbody2D>();
         if (snap.hasRb2D && rb2D != null)
             rb2D.bodyType = snap.rb2DType;
-        
+        /*
         var weaponPivot = enemy.GetComponentInParent<IWeaponPivot>();
         if (snap.weaponPivot)
             weaponPivot.WeaponPivot = snap.weaponPivot;
+            */
         if (snap.damageRoutine != null)
             StopCoroutine(snap.damageRoutine);
 
