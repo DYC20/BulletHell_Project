@@ -329,10 +329,12 @@ public class ModifierRuntimeState : MonoBehaviour
         {
             var weaponPivot = enemy.GetComponentInParent<IWeaponPivot>();
             var rb2D = enemy.GetComponentInParent<Rigidbody2D>();
+            var fire = enemy.GetComponentInParent<IEnemyFireInterval>();
             if (snap.hasRb2D && rb2D != null)
             {
                 rb2D.bodyType = RigidbodyType2D.Static;
                 weaponPivot.WeaponPivot = Camera.main.transform;
+                fire.FireInterval = fireIntervalMul;
             }
                 
         }

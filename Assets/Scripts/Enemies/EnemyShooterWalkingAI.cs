@@ -16,7 +16,10 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
     [SerializeField] private Transform weaponPivot; // the transform you want to rotate (weapon root / arm / gun)
     [SerializeField] private bool aimWithFirePointUp = false; // assumes firePoint.up is the shoot direction
 
-
+    [Header("Reposition Safety")]
+    [SerializeField] private float repositionTimeout = 1.25f;
+    [SerializeField] private float stuckCheckInterval = 0.25f;
+    [SerializeField] private float stuckMinMoveDistance = 0.03f;
 
     [Header("Line of Sight")]
     //[SerializeField] private LayerMask walls;          // walls/cover layers (NOT player)
@@ -169,12 +172,21 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
 
     public void DisableEnemyBrain()
     {
-        StopCoroutine(BrainLoop());
+        if (brainRoutine != null)
+        {
+            StopCoroutine(brainRoutine);
+            brainRoutine = null;
+        }
+
+        rb.linearVelocity = Vector2.zero;
     }
 
     public void EnableEnemyBrain()
     {
-        StartCoroutine(BrainLoop());
+        if (brainRoutine == null)
+        {
+            brainRoutine = StartCoroutine(BrainLoop());
+        }
     }
 
     private IEnumerator BrainLoop()
@@ -374,10 +386,15 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
                 Vector2 center = combatAnchorSet ? combatAnchorPos : (Vector2)transform.position;
                 float radius = forceReposition ? losRepositionRadius : repositionRadius;
 
-                currentTarget = RandomPointInRadius(combatAnchorPos, repositionRadius);
+                currentTarget = RandomPointInRadius(center, radius);
                 
                 forceReposition = false;
                 nextRepositionTime = Time.time + Random.Range(repositionIntervalMin, repositionIntervalMax);
+                
+                float repositionStartTime = Time.time;
+                
+                Vector2 lastPos = rb.position;
+                float nextStuckCheckTime = Time.time + stuckCheckInterval;
 
                 // Walk to reposition target, but don't leave combat loop
                 while (!HasArrived(currentTarget, repositionArriveDistance))
@@ -387,12 +404,41 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
 
                     dist = Vector2.Distance(transform.position, player.position);
 
+                    if (dist > detectionRadius)
+                    {
+                        state = State.Wander;
+                        PickNewWanderTarget();
+                        yield break;
+                    }
+                    
                     // If player moved far away, stop reposition and chase instead
                     if (dist > firingRange || dist > stopDistanceInRange)
                     {
                         needsAnchorRefresh = true;
                         break;
                     }
+                    // Safety: don't allow repositioning forever.
+                    if (Time.time - repositionStartTime >= repositionTimeout)
+                    {
+                        Debug.LogWarning($"{name}: Reposition timed out. Returning to firing/chase logic.");
+                        break;
+                    }
+
+                    // Safety: detect if enemy is trying to move but not actually moving.
+                    if (Time.time >= nextStuckCheckTime)
+                    {
+                        float movedDistance = Vector2.Distance(rb.position, lastPos);
+
+                        if (movedDistance < stuckMinMoveDistance)
+                        {
+                            Debug.LogWarning($"{name}: Reposition seems stuck. Breaking reposition loop.");
+                            break;
+                        }
+
+                        lastPos = rb.position;
+                        nextStuckCheckTime = Time.time + stuckCheckInterval;
+                    }
+
 
                     yield return null;
                 }
@@ -427,20 +473,20 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
                 // 2) Clear LOS -> try shoot
                 if (weapon != null)
                 {
-                    bool fired = weapon.TryFire();
+                       bool fired = weapon.TryFire(); 
+                       
+                        // schedule next shot regardless
+                        float delay = Random.Range(fireRateMin, fireRateMax);
+                        nextShotTime = Time.time + delay;
 
-                    // schedule next shot regardless
-                    float delay = Random.Range(fireRateMin, fireRateMax);
-                    nextShotTime = Time.time + delay;
-
-                    if (fired)
-                    {
-                        if (!combatAnchorSet)
+                        if (fired)
                         {
-                            combatAnchorSet = true;
-                            combatAnchorPos = transform.position;
+                            if (!combatAnchorSet)
+                            {
+                                combatAnchorSet = true;
+                                combatAnchorPos = transform.position;
+                            }
                         }
-                    }
                 }
             }
             yield return null;
