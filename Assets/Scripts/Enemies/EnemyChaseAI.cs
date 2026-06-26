@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
+public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed, IWeaponPivot
 {
     [Header("Directional Sprites (4-way)")]
     [SerializeField] private SpriteRenderer renderer; // assign in Inspector
@@ -19,8 +19,8 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
     private RigidbodyType2D lastBodyType;
     private Vector2 toPlayer = new Vector2();
     private Vector2 dir = new Vector2();
-    
-    
+
+    private Transform weaponPivot;
     private ContactDamage contactDamage;
     
     public bool isEnemyGrounded {get; private set; }
@@ -271,5 +271,10 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed
         retreatDir.Normalize();
 
         rb.linearVelocity = retreatDir * moveSpeed * retreatSpeedMultiplier;
+    }
+    public Transform WeaponPivot
+    {
+        get => weaponPivot;
+        set => weaponPivot = value;
     }
 }

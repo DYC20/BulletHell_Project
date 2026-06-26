@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireInterval//, IWeaponPivot
+public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireInterval, IWeaponPivot
 {
     private enum State { Wander, CombatChase, CombatReposition, CombatFiring }
 
@@ -657,13 +657,13 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         get => moveSpeed;
         set => moveSpeed = Mathf.Max(0f, value);
     }
-    /*
+    
     public Transform WeaponPivot
     {
         get => weaponPivot;
         set => weaponPivot = value;
     }
-    */
+    
     public float FireInterval
     {
         get => (fireRateMin + fireRateMax) * 0.5f;
