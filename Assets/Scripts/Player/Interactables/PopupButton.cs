@@ -36,9 +36,9 @@ public class PopupButton : MonoBehaviour, IInteractable
         if (used)
             return;
         OnTrigger();
+        _BTNPress.PlayBTNAnimation();
         if (dontLoadScene == true)
             return;
-        _BTNPress.PlayBTNAnimation();
         _Activated = true;
         Debug.Log(gameObject.name + " is activated");
     }

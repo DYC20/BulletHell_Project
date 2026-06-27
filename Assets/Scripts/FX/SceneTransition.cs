@@ -17,36 +17,7 @@ public class SceneTransition : MonoBehaviour
     private Material runtimeMaterial;
     
     private static readonly int ValueID = Shader.PropertyToID("_Value");
-    /*
-    public void RefreshCamera()
-    {
-        currentCamera = Camera.main;
 
-        if (currentCamera == null)
-        {
-            Debug.LogWarning("No Camera.main found for scene transition.");
-            return;
-        }
-
-        AlignToCamera();
-    }
-
-    private void LateUpdate()
-    {
-        if (currentCamera == null) return;
-
-        AlignToCamera();
-    }
-
-    private void AlignToCamera()
-    {
-        transform.position =
-            currentCamera.transform.position +
-            currentCamera.transform.forward * distanceFromCamera;
-
-        transform.rotation = currentCamera.transform.rotation;
-    }
-    */
     private void Awake()
     {
         // Create a unique material instance for this UI Image
@@ -90,7 +61,15 @@ public class SceneTransition : MonoBehaviour
         }
         SetValue(valueB);
     }
-    
-    
+
+    public void ToBlack()
+    {
+        StartCoroutine(TransitionOutRoutine());
+    }
+
+    public void ToWhite()
+    {
+        StartCoroutine(TransitionInRoutine());
+    }
     
 }
