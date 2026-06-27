@@ -275,66 +275,68 @@ public class ModifierRuntimeState : MonoBehaviour
         {
             snap = new Snapshot();
 
-            var move = enemy.GetComponentInParent<IEnemyMoveSpeed>();
-            if (move != null)
-            {
-                snap.hasMove = true;
-                snap.move = move.MoveSpeed;
-            }
+           var move = enemy.GetComponentInParent<IEnemyMoveSpeed>();
+           if (move != null)
+           {
+               snap.hasMove = true;
+               snap.move = move.MoveSpeed;
+           }
 
-            var fire = enemy.GetComponentInParent<IEnemyFireInterval>();
-            if (fire != null)
-            {
-                snap.hasFire = true;
-                snap.fireInterval = fire.FireInterval;
-            }
+           var fire = enemy.GetComponentInParent<IEnemyFireInterval>();
+           if (fire != null)
+           {
+               snap.hasFire = true;
+               snap.fireInterval = fire.FireInterval;
+           }
 
-            var rb2D = enemy.GetComponentInParent<Rigidbody2D>();
-            if (rb2D != null)
-            {
-                snap.hasRb2D = true;
-                snap.rb2DType = rb2D.bodyType;
-            }
+           var rb2D = enemy.GetComponentInParent<Rigidbody2D>();
+           if (rb2D != null)
+           {
+               snap.hasRb2D = true;
+               snap.rb2DType = rb2D.bodyType;
+           }
+          
+           var weaponPivot = enemy.GetComponentInParent<IWeaponPivot>();
            
-            var weaponPivot = enemy.GetComponentInParent<IWeaponPivot>();
-            
-            if (weaponPivot != null)
-            {
-                snap.hasPivot = true;
-                snap.weaponPivot = weaponPivot.WeaponPivot;
-            }
-            
-            perEnemy.Add(enemyKey, snap);
+           if (weaponPivot != null)
+           {
+               snap.hasPivot = true;
+               snap.weaponPivot = weaponPivot.WeaponPivot;
+           }
+           
+           perEnemy.Add(enemyKey, snap);
         }
+   
+           if (snap.revertRoutine != null)
+               StopCoroutine(snap.revertRoutine);
+   
+           var m = enemy.GetComponentInParent<IEnemyMoveSpeed>();
+           if (snap.hasMove && m != null) m.MoveSpeed = snap.move * moveSpeedMul;
+   
+           var f = enemy.GetComponentInParent<IEnemyFireInterval>();
+           if (snap.hasFire && f != null) f.FireInterval = snap.fireInterval / fireIntervalMul;
+   
+           var d = enemy.GetComponentInParent<IDamageable>();
+           if (d != null && durationSeconds > 0 && damage > 0)
+           {
+               if (snap.damageRoutine != null)
+                   StopCoroutine(snap.damageRoutine);
+   
+               snap.damageRoutine = StartCoroutine(DamageOverTime(enemy, damage, damageFX, durationSeconds, modifier));
+           } 
 
-        if (snap.revertRoutine != null)
-            StopCoroutine(snap.revertRoutine);
-
-        var m = enemy.GetComponentInParent<IEnemyMoveSpeed>();
-        if (snap.hasMove && m != null) m.MoveSpeed = snap.move * moveSpeedMul;
-
-        var f = enemy.GetComponentInParent<IEnemyFireInterval>();
-        if (snap.hasFire && f != null) f.FireInterval = snap.fireInterval * fireIntervalMul;
-
-        var d = enemy.GetComponentInParent<IDamageable>();
-        if (d != null && durationSeconds > 0 && damage > 0)
-        {
-            if (snap.damageRoutine != null)
-                StopCoroutine(snap.damageRoutine);
-
-            snap.damageRoutine = StartCoroutine(DamageOverTime(enemy, damage, damageFX, durationSeconds, modifier));
-        }
 
         if (makeBodyStatic)
         {
             var weaponPivot = enemy.GetComponentInParent<IWeaponPivot>();
             var rb2D = enemy.GetComponentInParent<Rigidbody2D>();
-            var fire = enemy.GetComponentInParent<IEnemyFireInterval>();
+            //var fire = enemy.GetComponentInParent<IEnemyFireInterval>();
             if (snap.hasRb2D && rb2D != null)
             {
                 rb2D.bodyType = RigidbodyType2D.Static;
                 weaponPivot.WeaponPivot = Camera.main.transform;
-                fire.FireInterval = fireIntervalMul;
+                //fire.FireInterval = snap.fireInterval * fireIntervalMul;
+                //Debug.LogWarning("fireIntervalMul:" + fire.FireInterval);
             }
                 
         }

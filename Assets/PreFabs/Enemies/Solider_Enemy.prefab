@@ -491,6 +491,9 @@ MonoBehaviour:
   detectionOrigin: {fileID: 2852274010122127103}
   weaponPivot: {fileID: 2159633483432574720}
   aimWithFirePointUp: 0
+  repositionTimeout: 1.25
+  stuckCheckInterval: 0.25
+  stuckMinMoveDistance: 0.03
   losRepositionRadius: 2
   losSquareSize: 0.2
   drawLosDebug: 1
@@ -510,8 +513,8 @@ MonoBehaviour:
   firingRange: 8
   stopDistanceInRange: 4.5
   repathIfBlockedCooldown: 0.15
-  fireRateMin: 0.15
-  fireRateMax: 0.45
+  fireRateMin: 0.5
+  fireRateMax: 1
   repositionRadius: 1.25
   repositionIntervalMin: 0.5
   repositionIntervalMax: 1.5

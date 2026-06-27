@@ -509,10 +509,8 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         Debug.LogWarning("playerLayer:" + playerLayer);
         if (hit != null)
         {
-            Debug.LogWarning("hit is null");
-            Debug.LogWarning("Hit name: " + hit.name);
-               
-            Debug.LogWarning("looked for player found: " + hit.name);
+            Debug.LogWarning("hit:" + hit.name);
+
             Transform playerRoot = hit.GetComponentInParent<PlayerWeaponController>()?.transform;
             Debug.LogWarning("Assigned Player root: " + playerRoot.name);
             player = playerRoot;
@@ -523,12 +521,17 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
 
         if (hit == null)
         {
+            Debug.LogWarning("hit is null");
             Debug.LogWarning($"{name}: Player has no child named 'AimPos'. Falling back to player transform.");
             GameObject go = GameObject.FindGameObjectWithTag(playerTag);
             if (go)
             {
-                player = go.transform;
-                playerAimPos = player.Find("VisualCenter(DNCN");
+                Transform playerTagGO;
+                playerTagGO = go.transform;
+                player = playerTagGO.parent;
+                playerAimPos = player.Find("VisualCenter(DNCN)");
+                Debug.LogWarning("found player:" + player.name);
+                Debug.LogWarning("player aim pos:" + playerAimPos.name);
             }
         }
         //Debug.LogWarning("found playerAimPos: " + playerAimPos.name);
@@ -715,7 +718,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
         get => (fireRateMin + fireRateMax) * 0.5f;
         set
         {
-            value = Mathf.Max(0.02f, value);
+            value = Mathf.Max(0f, value);
 
             float currentAvg = (fireRateMin + fireRateMax) * 0.5f;
             if (currentAvg <= 0.0001f)
@@ -726,7 +729,7 @@ public class EnemyShooterWalkingAI : MonoBehaviour, IEnemyMoveSpeed, IEnemyFireI
             }
 
             float scale = value / currentAvg;
-            fireRateMin = Mathf.Max(0.02f, fireRateMin * scale);
+            fireRateMin = Mathf.Max(0f, fireRateMin * scale);
             fireRateMax = Mathf.Max(fireRateMin, fireRateMax * scale);
         }
     }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 253938782105515000}
   - component: {fileID: 514001303835228759}
-  - component: {fileID: 9006595782569322212}
+  - component: {fileID: 2332170752000199379}
   m_Layer: 15
   m_Name: Ray_02
   m_TagString: Untagged
@@ -78,12 +78,12 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -240678225
-  m_SortingLayer: 5
+  m_SortingLayerID: -336353209
+  m_SortingLayer: 6
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 3d18482cbbb5bab43bf2411f05046950, type: 3}
-  m_Color: {r: 1, g: 0.75263834, b: 0.43867922, a: 0.101960786}
+  m_Sprite: {fileID: 21300000, guid: 5f6d2de874b48314396c3e055c07605a, type: 3}
+  m_Color: {r: 1, g: 0.75263834, b: 0.43867922, a: 0.3764706}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -92,7 +92,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &9006595782569322212
+--- !u!114 &2332170752000199379
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -101,11 +101,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 4482757073715067029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3faaadb62acbb64ea2f2f84a43161c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 9818855ab30a7474f9cf1a82f278cc92, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ParallaxLayer
+  m_EditorClassIdentifier: Assembly-CSharp::ParallexLayer
   cameraTransform: {fileID: 0}
-  parallaxFactor: 1.5
+  parallaxFactor: 2
+  referenceSize: -20
+  onlyXAxis: 1
 --- !u!1 &5604793789762440617
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,7 +118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6309288701452521836}
   - component: {fileID: 6296228477755493233}
-  - component: {fileID: 308672338837128109}
+  - component: {fileID: 1908074803873063023}
   m_Layer: 15
   m_Name: Ray_01
   m_TagString: Untagged
@@ -184,12 +186,12 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: -240678225
-  m_SortingLayer: 5
+  m_SortingLayerID: -336353209
+  m_SortingLayer: 6
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 3d18482cbbb5bab43bf2411f05046950, type: 3}
-  m_Color: {r: 1, g: 0.94326574, b: 0.4764151, a: 0.101960786}
+  m_Sprite: {fileID: 21300000, guid: 5f6d2de874b48314396c3e055c07605a, type: 3}
+  m_Color: {r: 1, g: 0.94326574, b: 0.4764151, a: 0.12941177}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -198,7 +200,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &308672338837128109
+--- !u!114 &1908074803873063023
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,11 +209,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5604793789762440617}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3faaadb62acbb64ea2f2f84a43161c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 9818855ab30a7474f9cf1a82f278cc92, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ParallaxLayer
+  m_EditorClassIdentifier: Assembly-CSharp::ParallexLayer
   cameraTransform: {fileID: 0}
-  parallaxFactor: 1.5
+  parallaxFactor: 2
+  referenceSize: -20
+  onlyXAxis: 1
 --- !u!1 &9065909719443654255
 GameObject:
   m_ObjectHideFlags: 0
