@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -16,7 +17,16 @@ public class RumbleImpulseManager : MonoBehaviour
     [SerializeField] private float rumbleDuration = 1f;
     [SerializeField] private float instenciationWorldPadding = 1f;
     [SerializeField] private GameObject gameOverCanvas;
-
+    
+    [Header("Eviornment")]
+    [SerializeField] private GameObject orbsPS;
+    [SerializeField] private GameObject rayPS;
+    [SerializeField] private GameObject rayGO;
+    [SerializeField] private float rayDissapationDur = 1f;
+    private List<ParticleSystem> particlesOrbs;
+    private List<ParticleSystem> particlesRays;
+    private List<SpriteRenderer> sprites;
+    
     [Header("Whirlpool")]
     [SerializeField] private GameObject whirlpoolPrfab;
     [SerializeField] private GameObject hUDCanvas;
@@ -34,6 +44,29 @@ public class RumbleImpulseManager : MonoBehaviour
         cam = Camera.main;
         //uICollapseController = hUDCanvas.GetComponent<UICollapseController>();
         proxySpawner = tilemapGrid.GetComponent<TilemapProxySpawner>();
+        particlesOrbs= new List<ParticleSystem>();
+        particlesRays = new List<ParticleSystem>();
+        sprites = new List<SpriteRenderer>();
+        foreach (SpriteRenderer renderers in rayGO.GetComponentsInChildren<SpriteRenderer>())
+        {
+            sprites.Add(renderers);
+        }
+       /*foreach (SpriteRenderer renderer in sprites)
+        {
+            Debug.Log(renderer.name);
+        }*/
+        foreach (ParticleSystem system in rayPS.GetComponentsInChildren<ParticleSystem>())
+        {
+            particlesRays.Add(system);
+        }
+        foreach (ParticleSystem system in orbsPS.GetComponentsInChildren<ParticleSystem>())
+        {
+            particlesOrbs.Add(system);
+        }
+        foreach (ParticleSystem system in particlesOrbs)
+        {
+            Debug.Log("orbs list names: " + system.name);
+        }
     }
 
     public void PlaySequence()
@@ -45,7 +78,19 @@ public class RumbleImpulseManager : MonoBehaviour
     private IEnumerator ImpulseSequence()
     { 
         float timer = 0f;
-
+        StartCoroutine(LerpOrbParticleSizeToZero());
+        foreach (ParticleSystem particle in particlesRays)
+        {
+            particle.emissionRate = 0f;
+        }
+        
+        foreach (ParticleSystem particle in particlesOrbs)
+        {
+            particle.emissionRate = 0f;
+        }
+        
+        
+        
         while (timer < rumbleDuration)
         {
             rumble.GenerateImpulse(Random.insideUnitSphere * 0.2f + Vector3.left);
@@ -103,6 +148,8 @@ public class RumbleImpulseManager : MonoBehaviour
     {
         //uiProxySpawner.SpawnUIProxies();
         //uICollapseController.Begin();
+
+        StartCoroutine(LerpRayAlphaToZero());
         
         proxySpawner.SpawnProxies();
         
@@ -112,6 +159,68 @@ public class RumbleImpulseManager : MonoBehaviour
             currentWhirlpoolCoordinator.onCollapsePhaseReached.RemoveListener(OnCollapsePhaseReached);
 
         Destroy(gameObject);
+    }
+
+    private IEnumerator LerpRayAlphaToZero()
+    {
+        foreach (SpriteRenderer renderer in sprites)
+        {
+            float t = rayDissapationDur;
+            float targetAlpha = 0f;
+            Color targetColor = new Color(renderer.color.r, renderer.color.b, renderer.color.g, targetAlpha);
+            renderer.color = Color.Lerp(renderer.color, targetColor, t);
+        }
+        yield return null;
+    }
+    
+    private IEnumerator LerpOrbParticleSizeToZero()
+    {
+        Vector3[] startScales = new Vector3[particlesOrbs.Count];
+
+        for (int i = 0; i < particlesOrbs.Count; i++)
+        {
+            if (particlesOrbs[i] == null) continue;
+
+            startScales[i] = particlesOrbs[i].transform.localScale;
+        }
+
+        float t = 0f;
+
+        while (t < rayDissapationDur)
+        {
+            t += Time.deltaTime;
+
+            float normalizedTime = Mathf.Clamp01(t / rayDissapationDur);
+
+            for (int i = 0; i < particlesOrbs.Count; i++)
+            {
+                if (particlesOrbs[i] == null) continue;
+
+                Transform orbTransform = particlesOrbs[i].transform;
+
+                orbTransform.localScale = Vector3.Lerp(
+                    startScales[i],
+                    Vector3.zero,
+                    normalizedTime
+                );
+            }
+
+            yield return null;
+        }
+
+        for (int i = 0; i < particlesOrbs.Count; i++)
+        {
+            if (particlesOrbs[i] == null) continue;
+
+            particlesOrbs[i].transform.localScale = Vector3.zero;
+
+            Debug.LogWarning(
+                "Orb scaled to zero: " +
+                particlesOrbs[i].gameObject.name +
+                " | scale: " +
+                particlesOrbs[i].transform.localScale
+            );
+        }
     }
 
     public Vector3 GetRandomWorldPosition()
