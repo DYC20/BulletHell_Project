@@ -38,7 +38,7 @@ public class TMPDilate : MonoBehaviour
 
         while (time < duration)
         {
-            time += Time.deltaTime;
+            time += Time.unscaledDeltaTime;
 
             float t = Mathf.Clamp01(time / duration);
             float value = Mathf.Lerp(from, to, t);

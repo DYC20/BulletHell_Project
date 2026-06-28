@@ -50,7 +50,7 @@ public class SceneTransition : MonoBehaviour
         
         while (elapsedTime < transitionDuration)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             
             float t = Mathf.Clamp01(elapsedTime / transitionDuration);
             float vlue = Mathf.Lerp(valueA, valueB, t);
