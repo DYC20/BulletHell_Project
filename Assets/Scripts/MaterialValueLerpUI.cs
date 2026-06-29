@@ -73,6 +73,12 @@ public class MaterialValueLerpUI : MonoBehaviour
 
     private IEnumerator LerpMaterialReverse()
     {
+        
+        if (_RTM.GetFloat(valueID) == startValue)
+        {
+            yield break;
+        }
+            
         float elapsedTime = 0f;
         while (elapsedTime < duration)
         {

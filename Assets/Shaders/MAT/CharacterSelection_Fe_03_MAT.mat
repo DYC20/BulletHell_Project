@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CharacterSelection_03_MAT
+  m_Name: CharacterSelection_Fe_03_MAT
   m_Shader: {fileID: -6465566751694194690, guid: 0105310538cd28c4a866fbc10cea4f79, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -24,7 +24,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a4d9a091441ee3b448cae0d626550f03, type: 3}
+        m_Texture: {fileID: 2800000, guid: b806afb08e0586f458e55aa9a5a1ae45, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MaskTex:
@@ -65,5 +65,7 @@ Material:
     - _ofset: -0.25
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
+    - _Main_Offset: {r: 0, g: 0, b: 0, a: 0}
+    - _Main_Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
