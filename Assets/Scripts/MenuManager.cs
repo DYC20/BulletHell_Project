@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 
@@ -10,7 +11,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private PlayableAsset enterMenuPlayable;
     [SerializeField] private PlayableAsset exitMenuPlayable;
 
-
+    [SerializeField] private GameObject firstSelectedButton;
     private void Update()
     {
         if (InputManager.instance.MenuOpenInput && !PauseManager.Instance.IsPaused)
@@ -30,6 +31,11 @@ public class MenuManager : MonoBehaviour
     {
         PlayTimeline(enterMenuPlayable);
         PauseManager.Instance.PauseGame();
+        
+        PauseManager.Instance.PauseGame();
+
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(firstSelectedButton);
     }
 
 

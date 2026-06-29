@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Playables;
@@ -33,6 +34,8 @@ public class PopupButton : MonoBehaviour, IInteractable
     
     public void Activate(GameObject gameObject)
     {
+        Press();
+        /*
         if (used)
             return;
         OnTrigger();
@@ -41,6 +44,7 @@ public class PopupButton : MonoBehaviour, IInteractable
             return;
         _Activated = true;
         Debug.Log(gameObject.name + " is activated");
+        */
     }
 
     private void OnTrigger()
@@ -85,10 +89,48 @@ public class PopupButton : MonoBehaviour, IInteractable
             playableDirector.Play();
         }
     }
+    public void Press()
+    {
+        if (used)
+            return;
+
+        OnTrigger();
+
+        if (_BTNPress != null)
+            _BTNPress.PlayBTNAnimation();
+
+        if (dontLoadScene)
+            return;
+
+        StartCoroutine(LoadSceneAfterDelay());
+    }
+    private IEnumerator LoadSceneAfterDelay()
+    {
+        yield return new WaitForSecondsRealtime(loadSceneDelay);
+
+        Time.timeScale = 1f;
+
+        if (_Quit)
+        {
+            LoadSceneManager.Instance.ExitGame();
+            yield break;
+        }
+
+        if (LoadSceneManager.Instance != null)
+        {
+            LoadSceneManager.Instance.SetSceneName(sceneName);
+            LoadSceneManager.Instance.LoadScene();
+        }
+        else
+        {
+            SceneManager.LoadScene(sceneName);
+        }
+    }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         //Debug.Log("_Activated status: " + _Activated);
         if (_Activated)
         {
@@ -97,7 +139,7 @@ public class PopupButton : MonoBehaviour, IInteractable
             LoadSceneManager.Instance.SetSceneName(sceneName);
             if (LoadSceneManager.Instance == null)
                 SceneManager.LoadScene(sceneName);
-            time -= Time.deltaTime;
+            time -= Time.unscaledDeltaTime;
             if (time <= 0)
             {
                 LoadSceneManager.Instance.LoadScene();
@@ -105,6 +147,6 @@ public class PopupButton : MonoBehaviour, IInteractable
             }
            
         }
-     
+     */
     }
 }

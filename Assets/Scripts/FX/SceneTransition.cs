@@ -9,6 +9,11 @@ public class SceneTransition : MonoBehaviour
     [SerializeField] private float startValue = -0.5f;
     [SerializeField] private float endValue = 1f;
     [SerializeField] private float distanceFromCamera = 5f;
+
+    [Header("Seconde Stage")] 
+    [SerializeField] private float secondeDuration;
+    [SerializeField] private float secondeStartValue = -0.5f;
+    [SerializeField] private float secondeEndValue = 1f;
     
     //private float reverseStartValue;
     //private float reverseEndValue;
@@ -43,6 +48,10 @@ public class SceneTransition : MonoBehaviour
     {
         yield return AnimateValue(endValue, startValue);
     }
+    public IEnumerator SecondeTransitionInRoutine()
+    {
+        yield return AnimateValue(secondeStartValue, secondeEndValue);
+    }
 
     private IEnumerator AnimateValue(float valueA, float valueB)
     {
@@ -62,6 +71,10 @@ public class SceneTransition : MonoBehaviour
         SetValue(valueB);
     }
 
+    public void ToSeconde()
+    {
+        StartCoroutine(SecondeTransitionInRoutine());
+    }
     public void ToBlack()
     {
         StartCoroutine(TransitionOutRoutine());

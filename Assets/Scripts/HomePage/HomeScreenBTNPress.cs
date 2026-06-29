@@ -41,7 +41,7 @@ public class HomeScreenBTNPress : MonoBehaviour
         {
              seq?.Kill();
                     
-                    seq = DOTween.Sequence();
+                    seq = DOTween.Sequence().SetUpdate(true);
             
                     seq.Append(buttonTF.DOScale(0.5f, scaleDuration).SetEase(ease))
                         .Append(buttonTF.DOScale(1.5f, scaleDuration).SetEase(ease))
@@ -62,7 +62,7 @@ public class HomeScreenBTNPress : MonoBehaviour
         {
             seq?.Kill();
                     
-            seq = DOTween.Sequence();
+            seq = DOTween.Sequence().SetUpdate(true);
             
             seq.Append(buttonTransform.DOScale(0.5f, scaleDuration).SetEase(ease))
                 .Append(buttonTransform.DOScale(1.5f, scaleDuration).SetEase(ease))

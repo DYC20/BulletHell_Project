@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Wind_01_MAT_02
+  m_Name: Wind_01_MAT_04
   m_Shader: {fileID: -6465566751694194690, guid: b43eeca60ea2f0749833e019a51d1d2e, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -42,15 +42,15 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.35
+    - _Alpha: 0.13
     - _EdgePower: 1
     - _NoiseSpeed: 0.01
     - _QueueControl: 0
     - _QueueOffset: 0
     - _TexSpeed: -0.03
     m_Colors:
-    - _Color: {r: 0.6774653, g: 0.8301887, b: 0.8217261, a: 1}
-    - _Tiling: {r: 0.25, g: 0.4, b: 0, a: 0}
+    - _Color: {r: 0.6774653, g: 0.8301887, b: 0.8217261, a: 0}
+    - _Tiling: {r: 1, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &456142440821538861

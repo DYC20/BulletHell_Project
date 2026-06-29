@@ -22,10 +22,15 @@ public class RumbleImpulseManager : MonoBehaviour
     [SerializeField] private GameObject orbsPS;
     [SerializeField] private GameObject rayPS;
     [SerializeField] private GameObject rayGO;
+    [SerializeField] private GameObject windGO;
     [SerializeField] private float rayDissapationDur = 1f;
+    
     private List<ParticleSystem> particlesOrbs;
     private List<ParticleSystem> particlesRays;
     private List<SpriteRenderer> sprites;
+    private List<SpriteRenderer> SpritesWind;
+    private static readonly int Alpha = Shader.PropertyToID("_Alpha");
+    private List<MaterialPropertyBlock> windMPBs;
     
     [Header("Whirlpool")]
     [SerializeField] private GameObject whirlpoolPrfab;
@@ -47,9 +52,16 @@ public class RumbleImpulseManager : MonoBehaviour
         particlesOrbs= new List<ParticleSystem>();
         particlesRays = new List<ParticleSystem>();
         sprites = new List<SpriteRenderer>();
+        
+        SpritesWind = new List<SpriteRenderer>();
+        
         foreach (SpriteRenderer renderers in rayGO.GetComponentsInChildren<SpriteRenderer>())
         {
             sprites.Add(renderers);
+        }
+        foreach (SpriteRenderer renderers in windGO.GetComponentsInChildren<SpriteRenderer>())
+        {
+            SpritesWind.Add(renderers);
         }
        /*foreach (SpriteRenderer renderer in sprites)
         {
@@ -170,6 +182,45 @@ public class RumbleImpulseManager : MonoBehaviour
             Color targetColor = new Color(renderer.color.r, renderer.color.b, renderer.color.g, targetAlpha);
             renderer.color = Color.Lerp(renderer.color, targetColor, t);
         }
+
+        MaterialPropertyBlock[] mpbs = new MaterialPropertyBlock[SpritesWind.Count];
+        float[] startAlphas = new float[SpritesWind.Count];
+        float windAlphaTarget = 0f;
+        
+        for (int i = 0; i < SpritesWind.Count; i++)
+        {
+            mpbs[i] = new MaterialPropertyBlock();
+
+            SpritesWind[i].GetPropertyBlock(mpbs[i]);
+            startAlphas[i] = mpbs[i].GetFloat(Alpha);
+        }
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < rayDissapationDur)
+        {
+            elapsedTime += Time.deltaTime;
+           
+            
+            float t = rayDissapationDur <= 0f ? 1f : Mathf.Clamp01(elapsedTime / rayDissapationDur);
+
+            for (int i = 0; i < SpritesWind.Count; i++)
+            {
+                float value = Mathf.Lerp(startAlphas[i], windAlphaTarget, t);
+
+                mpbs[i].SetFloat(Alpha, value);
+                SpritesWind[i].SetPropertyBlock(mpbs[i]);
+            }
+
+            yield return null;
+        }
+
+        for (int i = 0; i < SpritesWind.Count; i++)
+        {
+            mpbs[i].SetFloat(Alpha, windAlphaTarget);
+            SpritesWind[i].SetPropertyBlock(mpbs[i]);
+        }
+
         yield return null;
     }
     

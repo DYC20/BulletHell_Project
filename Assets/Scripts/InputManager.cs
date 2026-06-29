@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class InputManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class InputManager : MonoBehaviour
     
     private InputAction _menuOpenAction;
     private InputAction _menuExitAction;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private void Awake()
