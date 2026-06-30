@@ -9,6 +9,8 @@ public class EnemieDeathHandler : MonoBehaviour
     [SerializeField] private GameObject healthPrefab;
     [SerializeField] private int dropProbabillity = 9;
     [SerializeField] private int healthDropProbability = 3;
+    [SerializeField] private AudioClip audioClip;
+    [SerializeField] private float deathSoundVolume = 1f;
     private Rigidbody2D rb;
     private bool droppedAmmo = false;
     private bool droppedHealth = false;
@@ -19,8 +21,7 @@ public class EnemieDeathHandler : MonoBehaviour
 
             Debug.Log("Enemy Died");
             // disable input, show UI, etc.
-            
-            
+                
 
             // 2. Stop movement immediately
             if (rb)
@@ -51,7 +52,12 @@ public class EnemieDeathHandler : MonoBehaviour
                 Instantiate(healthPrefab, transform.position, Quaternion.identity);
             }
         
-        Destroy(this.gameObject);
+            if (audioClip != null)
+            {
+                AudioSource.PlayClipAtPoint(audioClip, transform.position, deathSoundVolume);
+            }
+
+            Destroy(gameObject);
     }
 
     private void AmmoDroppProbability()

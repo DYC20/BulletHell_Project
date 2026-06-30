@@ -134,9 +134,9 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 6bdf1569b4e6bea4abb8d960a226cebc, type: 3}
-  m_PlayOnAwake: 1
-  m_Volume: 0
+  m_Resource: {fileID: 8300000, guid: 093480dfe54edf347a3a8883ace31859, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.542
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -425,6 +425,8 @@ MonoBehaviour:
   healthPrefab: {fileID: 4613640937427443391, guid: f077e8d33a674a4449996e83fc6c4812, type: 3}
   dropProbabillity: 7
   healthDropProbability: 3
+  audioClip: {fileID: 8300000, guid: 093480dfe54edf347a3a8883ace31859, type: 3}
+  deathSoundVolume: 1
 --- !u!61 &1809575182489146792
 BoxCollider2D:
   m_ObjectHideFlags: 0
