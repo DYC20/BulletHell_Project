@@ -55,7 +55,7 @@ public class Health : MonoBehaviour, IDamageable, IHealable
 
     private void Start()
     {
-        _hp = testHealth;
+        _hp = maxHealth;
         UpdateHealthBarVisual();
         if (_hp <= 3f && Team == Teams.Player)
         {

@@ -34,6 +34,7 @@ public class WhirlpoolManager : MonoBehaviour
     [SerializeField] private WhirlpoolAnimManager _WAM;
 
     private GameObject gameOverCanvas;
+    private RumbleImpulseManager rumbleImpulseManager;
     [SerializeField] private PlayableAsset finnTimeline;
     
     private float _elapsed;
@@ -218,6 +219,11 @@ public class WhirlpoolManager : MonoBehaviour
         Debug.LogWarning("Active Target:" + _activeTargets);
         target.consumed = true;
         _activeTargets--;
+        
+        if (rumbleImpulseManager != null)
+        {
+            rumbleImpulseManager.PlayRandomDisappearSuction();
+        }
 
         if (target.transform != null)
             target.transform.gameObject.SetActive(false);
@@ -251,5 +257,9 @@ public class WhirlpoolManager : MonoBehaviour
     public void AcquireGameOverGO(GameObject gameOverGO)
     {
         gameOverCanvas = gameOverGO;
+    }
+    public void AcquireRumbleImpulseManager(RumbleImpulseManager manager)
+    {
+        rumbleImpulseManager = manager;
     }
 }

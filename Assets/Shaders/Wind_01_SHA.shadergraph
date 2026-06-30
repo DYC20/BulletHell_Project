@@ -155,6 +155,9 @@
         },
         {
             "m_Id": "665a2cd8745444a8ae6798eda893e3eb"
+        },
+        {
+            "m_Id": "f9b165834b00496aae9e5dc6b92c0a7a"
         }
     ],
     "m_GroupDatas": [
@@ -417,7 +420,7 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "124d04311dba4d78bad7564dce00bfab"
+                    "m_Id": "f9b165834b00496aae9e5dc6b92c0a7a"
                 },
                 "m_SlotId": 0
             }
@@ -756,6 +759,20 @@
                     "m_Id": "e6b4fc8d59d94f258dba01a2a84c751e"
                 },
                 "m_SlotId": 1
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "f9b165834b00496aae9e5dc6b92c0a7a"
+                },
+                "m_SlotId": 1
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "124d04311dba4d78bad7564dce00bfab"
+                },
+                "m_SlotId": 0
             }
         }
     ],
@@ -1373,7 +1390,7 @@
     "m_ObjectId": "13523853bc1e44529c716db90f76c9ae",
     "m_Title": "Alpha Noise",
     "m_Position": {
-        "x": -2012.0,
+        "x": -2012.000244140625,
         "y": 322.0
     }
 }
@@ -2479,6 +2496,31 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "6148e08e970042ec9b1c62b456c84439",
+    "m_Id": 0,
+    "m_DisplayName": "In",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "In",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.MultiplyNode",
     "m_ObjectId": "62468a99614c4e86804b720e37285397",
     "m_Group": {
@@ -2702,7 +2744,7 @@
     "m_Title": "UV Noise",
     "m_Position": {
         "x": -2804.000244140625,
-        "y": -536.0
+        "y": -536.0001220703125
     }
 }
 
@@ -3377,6 +3419,31 @@
         "y": 0.0
     },
     "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
+    "m_ObjectId": "876df12618a649aebe2dbc7e91fd408e",
+    "m_Id": 1,
+    "m_DisplayName": "Out",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_LiteralMode": false
 }
 
 {
@@ -5418,8 +5485,8 @@
     "m_ObjectId": "f06f1ae89dcb495480cafde67ff78a22",
     "m_Title": "Edge Mask",
     "m_Position": {
-        "x": -2002.6666259765625,
-        "y": 864.0000610351563
+        "x": -2002.6668701171875,
+        "y": 864.0001220703125
     }
 }
 
@@ -5712,6 +5779,44 @@
     "m_DefaultValue": 0.0,
     "m_Labels": [],
     "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.SaturateNode",
+    "m_ObjectId": "f9b165834b00496aae9e5dc6b92c0a7a",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Saturate",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -16.821096420288087,
+            "y": 629.8455810546875,
+            "width": 209.3333282470703,
+            "height": 280.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "6148e08e970042ec9b1c62b456c84439"
+        },
+        {
+            "m_Id": "876df12618a649aebe2dbc7e91fd408e"
+        }
+    ],
+    "synonyms": [
+        "clamp"
+    ],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    }
 }
 
 {

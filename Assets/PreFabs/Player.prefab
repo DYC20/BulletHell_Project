@@ -273,6 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f86580832dcdc47a330191b2fa57cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerWeaponController
+  canFire: 1
   weaponSocket: {fileID: 1819663273497137966}
   gunDistance: 0.3
   equippedWeapon: {fileID: 0}
@@ -314,6 +315,7 @@ MonoBehaviour:
   healthBarImage: {fileID: 0}
   healthFillProperty: _FillAmount
   FullScreenPlayerHit: {fileID: 2100000, guid: db05b5da7b997d74ca3d2b699de685e7, type: 2}
+  Chromatic: {fileID: 0}
   playerHitFlash: {fileID: 124697837248007792}
   onDeath:
     m_PersistentCalls:
@@ -555,7 +557,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.31
   m_Pitch: 1
   Loop: 1
   Mute: 0

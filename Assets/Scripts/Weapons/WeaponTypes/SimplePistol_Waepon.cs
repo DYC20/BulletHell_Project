@@ -8,11 +8,13 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
     [Header("Projectile")]
     [SerializeField] private ProjectileConfigSO projectileConfig;
     [SerializeField] private ObjectPool projectilePool;
+    [SerializeField] private AudioSource sfxSource;
 
     private ProjectileConfigSO defaultProjectileConfig;
     private ObjectPool defaultProjectilePool;
     private bool defaultsCached;
     private int _nextShotId = 0;
+    private AudioClip weaponSFX;
 
     [Header("Weapon")] 
     [SerializeField] private SpriteRenderer weaponRenderer;
@@ -58,6 +60,7 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
             if (seconderyRenderer != null)
                 seconderyRenderer.sortingLayerName = playerSortingLayer;
         }
+        weaponSFX = sfxSource.clip;
     }
     
     private void CacheDefaultsIfNeeded()
@@ -185,7 +188,8 @@ public class SimplePistol_Waepon : WeaponBase, IWeaponProjectileBase
                     Debug.LogWarning($"{name}: projectile {i} has no firePoint");
             
         }
-
+        if (sfxSource != null)
+            sfxSource.PlayOneShot(weaponSFX);
         if (recoilImpulse != null)
             recoilImpulse.GenerateImpulse(new Vector3(baseDir.x, baseDir.y, 0f) * recoilStrength);
     }

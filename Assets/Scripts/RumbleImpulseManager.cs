@@ -25,6 +25,13 @@ public class RumbleImpulseManager : MonoBehaviour
     [SerializeField] private GameObject windGO;
     [SerializeField] private float rayDissapationDur = 1f;
     
+    [Header("Sounds")]
+    [SerializeField] private List<AudioSource> rumbleSources = new List<AudioSource>();
+    [SerializeField] private List<AudioSource> lowRumbleSources = new List<AudioSource>();
+    [SerializeField] private List<AudioSource> collapseSuctionSources = new List<AudioSource>();
+    [SerializeField] private List<AudioSource> dissapearSuctionSources = new List<AudioSource>();
+    [SerializeField] private float fadeDuration = 1f;
+    
     private List<ParticleSystem> particlesOrbs;
     private List<ParticleSystem> particlesRays;
     private List<SpriteRenderer> sprites;
@@ -52,9 +59,17 @@ public class RumbleImpulseManager : MonoBehaviour
         particlesOrbs= new List<ParticleSystem>();
         particlesRays = new List<ParticleSystem>();
         sprites = new List<SpriteRenderer>();
-        
         SpritesWind = new List<SpriteRenderer>();
         
+        foreach (AudioSource source in rumbleSources)
+        {
+            if (source == null)
+                continue;
+
+            source.loop = true;
+            source.playOnAwake = false;
+        }
+
         foreach (SpriteRenderer renderers in rayGO.GetComponentsInChildren<SpriteRenderer>())
         {
             sprites.Add(renderers);
@@ -101,7 +116,7 @@ public class RumbleImpulseManager : MonoBehaviour
             particle.emissionRate = 0f;
         }
         
-        
+        PlaySounds(rumbleSources);
         
         while (timer < rumbleDuration)
         {
@@ -109,6 +124,8 @@ public class RumbleImpulseManager : MonoBehaviour
             yield return new WaitForSeconds(rumbleInterval);
             timer += rumbleInterval;
         }
+        
+        
         
         buildup.GenerateImpulse(Vector3.left);
 
@@ -130,6 +147,7 @@ public class RumbleImpulseManager : MonoBehaviour
         if (currentWhirlpoolCoordinator != null)
         {
             currentWhirlpoolCoordinator.AcquireGameOverGO(gameOverCanvas);
+            currentWhirlpoolCoordinator.AcquireRumbleImpulseManager(this);
             currentWhirlpoolCoordinator.onCollapsePhaseReached.RemoveListener(OnCollapsePhaseReached);
             currentWhirlpoolCoordinator.onCollapsePhaseReached.AddListener(OnCollapsePhaseReached);
             currentWhirlpoolCoordinator.BeginSequence();
@@ -146,6 +164,8 @@ public class RumbleImpulseManager : MonoBehaviour
 
     private IEnumerator LowRumbleLoop()
     {
+       StopSoundLoop(rumbleSources, fadeDuration); 
+       PlaySounds(lowRumbleSources);
         float timer = 0f;
         
         while (timer < lowRumbleDuration)
@@ -158,6 +178,8 @@ public class RumbleImpulseManager : MonoBehaviour
 
     private void OnCollapsePhaseReached()
     {
+        StopSoundLoop(lowRumbleSources, fadeDuration);
+        PlaySourcesOnce(collapseSuctionSources);
         //uiProxySpawner.SpawnUIProxies();
         //uICollapseController.Begin();
 
@@ -170,7 +192,7 @@ public class RumbleImpulseManager : MonoBehaviour
         if (currentWhirlpoolCoordinator != null)
             currentWhirlpoolCoordinator.onCollapsePhaseReached.RemoveListener(OnCollapsePhaseReached);
 
-        Destroy(gameObject);
+       // Destroy(gameObject, GetLongestClipLength(collapseSuctionSources));
     }
 
     private IEnumerator LerpRayAlphaToZero()
@@ -284,6 +306,141 @@ public class RumbleImpulseManager : MonoBehaviour
         worldPos.z = 0f;
 
         return worldPos;
+    }
+    /// <summary>
+    /// /sound helpers
+    /// </summary>
+    /// <param name="sourceList"></param>
+    private void PlaySounds(List<AudioSource> sourceList)
+    {
+        foreach (AudioSource source in sourceList)
+        {
+            if (source == null || source.clip == null)
+                continue;
+
+            source.loop = true;
+
+            if (!source.isPlaying)
+            {
+                source.Play();
+            }
+        }
+    }
+
+    private void StopSoundLoop(List<AudioSource> sourceList, float fadeDuration)
+    {
+        foreach (AudioSource source in sourceList)
+        {
+            if (source == null || !source.isPlaying || source.clip == null)
+                continue;
+
+            StartCoroutine(FinishCurrentLoopAndFadeOut(source, fadeDuration));
+        }
+    }
+
+    private IEnumerator FinishCurrentLoopAndFadeOut(AudioSource source, float fadeDuration)
+    {
+        source.loop = false;
+
+        float originalVolume = source.volume;
+
+        float remainingTime = source.clip.length - source.time;
+
+        // Wait until the last fadeDuration seconds of the current clip
+        float waitTime = Mathf.Max(0f, remainingTime - fadeDuration);
+
+        if (waitTime > 0f)
+        {
+            yield return new WaitForSeconds(waitTime);
+        }
+
+        float actualFadeDuration = Mathf.Min(fadeDuration, source.clip.length - source.time);
+        float timer = 0f;
+
+        while (timer < actualFadeDuration && source != null)
+        {
+            timer += Time.deltaTime;
+
+            float t = actualFadeDuration <= 0f ? 1f : timer / actualFadeDuration;
+            source.volume = Mathf.Lerp(originalVolume, 0f, t);
+
+            yield return null;
+        }
+
+        if (source != null)
+        {
+            source.Stop();
+
+            // Reset for next time
+            source.volume = originalVolume;
+            source.loop = true;
+            source.time = 0f;
+        }
+    }
+    
+    private void PlaySourcesOnce(List<AudioSource> sourceList)
+    {
+        foreach (AudioSource source in sourceList)
+        {
+            if (source == null || source.clip == null)
+                continue;
+
+            source.loop = false;
+            source.time = 0f;
+            source.Play();
+        }
+    }
+    private float GetLongestClipLength(List<AudioSource> sourceList)
+    {
+        float longest = 0f;
+
+        foreach (AudioSource source in sourceList)
+        {
+            if (source == null || source.clip == null)
+                continue;
+
+            if (source.clip.length > longest)
+            {
+                longest = source.clip.length;
+            }
+        }
+
+        return longest;
+    }
+    public void PlayRandomDisappearSuction()
+    {
+        PlayRandomSourceOnce(dissapearSuctionSources);
+    }
+    private void PlayRandomSourceOnce(List<AudioSource> sourceList)
+    {
+        List<AudioSource> validSources = new List<AudioSource>();
+
+        foreach (AudioSource source in sourceList)
+        {
+            if (source != null && source.clip != null)
+            {
+                validSources.Add(source);
+            }
+        }
+
+        if (validSources.Count == 0)
+            return;
+
+        AudioSource randomSource = validSources[Random.Range(0, validSources.Count)];
+
+        randomSource.loop = false;
+        randomSource.time = 0f;
+        randomSource.Play();
+    }
+    private void OnDisable(List<AudioSource> sourceList)
+    {
+        foreach (AudioSource source in sourceList)
+        {
+            if (source == null)
+                continue;
+
+            source.Stop();
+        }
     }
     
 }

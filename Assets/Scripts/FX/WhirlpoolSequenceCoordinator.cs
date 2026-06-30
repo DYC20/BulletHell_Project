@@ -6,6 +6,7 @@ public class WhirlpoolSequenceCoordinator : MonoBehaviour
     [Header("References")]
     [SerializeField] private WhirlpoolAnimManager whirlpoolAnimManager;
     [SerializeField] private WhirlpoolManager whirlpoolManager;
+    private RumbleImpulseManager rumbleImpulseManager;
 
     [Header("Timing (from spawn)")]
     [SerializeField] private float animationStartDelay = 0f;
@@ -95,5 +96,14 @@ public class WhirlpoolSequenceCoordinator : MonoBehaviour
     {
         gameOverCanvas = gameOverGO;
         whirlpoolManager.AcquireGameOverGO(gameOverCanvas);
+    }
+    public void AcquireRumbleImpulseManager(RumbleImpulseManager manager)
+    {
+        rumbleImpulseManager = manager;
+
+        if (whirlpoolManager != null)
+        {
+            whirlpoolManager.AcquireRumbleImpulseManager(rumbleImpulseManager);
+        }
     }
 }

@@ -8,6 +8,13 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed, IWeaponPivot
     [SerializeField] private Sprite spriteLeft;
     [SerializeField] private Sprite spriteRight;
     
+    //[Header("Sound")]
+    //[SerializeField] private AudioSource wingAudioSource;
+
+    private AudioClip wingSFX;
+    private bool isNewChase;
+    
+    
     [Header("Target")]
     [SerializeField] private Transform player;           // assign in Inspector (recommended)
     [SerializeField] private string playerTag = "Player"; // fallback if not assigned
@@ -80,7 +87,15 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed, IWeaponPivot
             
             if (p != null) player = p.transform.root;
         }
-
+/*
+        if (wingAudioSource != null)
+        {
+            wingSFX = wingAudioSource.clip;
+            wingAudioSource.loop = true;
+            wingAudioSource.playOnAwake = false;
+        }
+            
+*/
         if (player == null)
         {
             Debug.LogWarning("No player found");
@@ -244,10 +259,17 @@ public class EnemyChaseAI : MonoBehaviour, IEnemyMoveSpeed, IWeaponPivot
         dir = toPlayer.sqrMagnitude > 0.0001f ? toPlayer.normalized : Vector2.zero;
         
         rb.linearVelocity = dir * moveSpeed;
+/*
+        if (!wingAudioSource.isPlaying && isNewChase)
+        {
+            wingAudioSource.PlayOneShot(wingSFX);
+        }
+        isNewChase = false;*/
     }
     
     private void Retreat(Vector2 toPlayer)
     {
+        //isNewChase = true;
         if (toPlayer.sqrMagnitude < 0.0001f)
         {
             rb.linearVelocity = Vector2.zero;

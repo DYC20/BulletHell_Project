@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float speed = 6f;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer playerVisual;
+    private AudioSource audioSource;
+    private AudioClip audioClip;
 
     [Header("Movement Behavior")]
     public float accel = 60f;
@@ -58,6 +60,9 @@ public class PlayerController : MonoBehaviour
         HoldOrigin = weaponHolder.transform.localPosition;
 
         isPlayerGrounded = true;
+        
+        if (audioSource == null) audioSource = GetComponent<AudioSource>();
+        if (audioSource != null) audioClip = audioSource.clip;
     }
 
     public void OnMove(InputValue value)
@@ -73,12 +78,14 @@ public class PlayerController : MonoBehaviour
             if (move.x > 0)
             {
                 playerVisual.transform.localScale = new Vector3(1f, 1f, 1f);
+                audioSource.PlayOneShot(audioClip);
                 //playerFX.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             }
 
             if (move.x < 0)
             {
                 playerVisual.transform.localScale = new Vector3(-1f, 1f, 1f);
+                audioSource.PlayOneShot(audioClip);
                 //playerFX.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             }
         }
