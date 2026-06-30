@@ -28,8 +28,8 @@ public class RumbleImpulseManager : MonoBehaviour
     [Header("Sounds")]
     [SerializeField] private List<AudioSource> rumbleSources = new List<AudioSource>();
     [SerializeField] private List<AudioSource> lowRumbleSources = new List<AudioSource>();
-    [SerializeField] private List<AudioSource> collapseSuctionSources = new List<AudioSource>();
-    [SerializeField] private List<AudioSource> dissapearSuctionSources = new List<AudioSource>();
+    //[SerializeField] private List<AudioSource> collapseSuctionSources = new List<AudioSource>();
+    //[SerializeField] private List<AudioSource> dissapearSuctionSources = new List<AudioSource>();
     [SerializeField] private float fadeDuration = 1f;
     
     private List<ParticleSystem> particlesOrbs;
@@ -179,9 +179,6 @@ public class RumbleImpulseManager : MonoBehaviour
     private void OnCollapsePhaseReached()
     {
         StopSoundLoop(lowRumbleSources, fadeDuration);
-        PlaySourcesOnce(collapseSuctionSources);
-        //uiProxySpawner.SpawnUIProxies();
-        //uICollapseController.Begin();
 
         StartCoroutine(LerpRayAlphaToZero());
         
@@ -407,10 +404,12 @@ public class RumbleImpulseManager : MonoBehaviour
 
         return longest;
     }
+    /*
     public void PlayRandomDisappearSuction()
     {
         PlayRandomSourceOnce(dissapearSuctionSources);
     }
+    */
     private void PlayRandomSourceOnce(List<AudioSource> sourceList)
     {
         List<AudioSource> validSources = new List<AudioSource>();

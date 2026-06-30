@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -31,6 +32,19 @@ public class WhirlpoolManager : MonoBehaviour
     [Header("Consume")]
     [SerializeField] private float deathRadius = 0.2f;
     
+   // [Header("Sounds")]
+    //[SerializeField] private List<AudioSource> collapseSuctionSources = new List<AudioSource>();
+    //[SerializeField] private float collapseSuctionDelay = 0.25f;
+
+    private bool collapseSuctionScheduled;
+    private Coroutine collapseSuctionRoutine;
+
+    [SerializeField] private AudioSource disappearOneShotSource;
+    [SerializeField] private List<AudioClip> disappearSuctionClips = new List<AudioClip>();
+    [SerializeField] private float disappearSuctionVolume = 1f;
+
+    private bool collapseSuctionPlayed;
+    
     [SerializeField] private WhirlpoolAnimManager _WAM;
 
     private GameObject gameOverCanvas;
@@ -52,6 +66,7 @@ public class WhirlpoolManager : MonoBehaviour
         public float strengthMultiplier;
         public float spinSpeed;
         public bool consumed;
+        public bool isProxyTile;
     }
 
     private void Awake()
@@ -71,12 +86,21 @@ public class WhirlpoolManager : MonoBehaviour
             vortexCenter = transform;
 
         DisablePlayerInput();
-
+        
+        collapseSuctionPlayed = false;
         _targets.Clear();
         _uniqueTargets.Clear();
         _elapsed = 0f;
         _running = true;
         _activeTargets = 0;
+        
+        collapseSuctionScheduled = false;
+
+        if (collapseSuctionRoutine != null)
+        {
+            StopCoroutine(collapseSuctionRoutine);
+            collapseSuctionRoutine = null;
+        }
 
         CollectSceneTargets();
     }
@@ -110,7 +134,8 @@ public class WhirlpoolManager : MonoBehaviour
         if (distance > pullAOE)
             return;
 
-        AddTarget(t, distance);
+        AddTarget(t, distance, true);
+        _running = true;
     }
 
     private void CollectSceneTargets()
@@ -132,11 +157,11 @@ public class WhirlpoolManager : MonoBehaviour
             if (distance > pullAOE)
                 continue;
 
-            AddTarget(root, distance);
+            AddTarget(root, distance, false);
         }
     }
 
-    private void AddTarget(Transform t, float distance)
+    private void AddTarget(Transform t, float distance,  bool isProxyTile)
     {
         _uniqueTargets.Add(t);
 
@@ -158,7 +183,8 @@ public class WhirlpoolManager : MonoBehaviour
             startDelay = delay,
             strengthMultiplier = 1f + Random.Range(-0.2f, 0.2f),
             spinSpeed = Random.Range(-360f, 360f),
-            consumed = false
+            consumed = false,
+            isProxyTile = isProxyTile
         };
 
         _targets.Add(data);
@@ -179,7 +205,13 @@ public class WhirlpoolManager : MonoBehaviour
 
             if (_elapsed < target.startDelay)
                 continue;
-
+            /*
+            if (target.isProxyTile && !collapseSuctionScheduled)
+            {
+                collapseSuctionScheduled = true;
+                collapseSuctionRoutine = StartCoroutine(PlayCollapseSuctionAfterDelay());
+            }
+*/
             Vector2 pos = target.transform.position;
             Vector2 toCenter = center - pos;
             float dist = toCenter.magnitude;
@@ -213,18 +245,26 @@ public class WhirlpoolManager : MonoBehaviour
             target.transform.localScale = target.startScale * normalizedDistance;
         }
     }
+    /*
+    private IEnumerator PlayCollapseSuctionAfterDelay()
+    {
+        yield return new WaitForSeconds(collapseSuctionDelay);
 
+        PlayCollapseSuction();
+
+        collapseSuctionRoutine = null;
+    }
+*/
     private void Consume(TargetData target)
     {
         Debug.LogWarning("Active Target:" + _activeTargets);
         target.consumed = true;
         _activeTargets--;
         
-        if (rumbleImpulseManager != null)
+        if (target.isProxyTile)
         {
-            rumbleImpulseManager.PlayRandomDisappearSuction();
+            PlayRandomDisappearSuction();
         }
-
         if (target.transform != null)
             target.transform.gameObject.SetActive(false);
 
@@ -253,6 +293,36 @@ public class WhirlpoolManager : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
             rb.angularVelocity = 0f;
         }
+    }
+    /*
+    private void PlayCollapseSuction()
+    {
+        foreach (AudioSource source in collapseSuctionSources)
+        {
+            if (source == null || source.clip == null)
+                continue;
+
+            source.loop = false;
+            source.time = 0f;
+            source.Play();
+        }
+    }
+    */
+    private void PlayRandomDisappearSuction()
+    {
+        if (disappearOneShotSource == null)
+            return;
+
+        if (disappearSuctionClips == null || disappearSuctionClips.Count == 0)
+            return;
+
+        AudioClip clip = disappearSuctionClips[Random.Range(0, disappearSuctionClips.Count)];
+
+        if (clip == null)
+            return;
+
+        disappearOneShotSource.loop = false;
+        disappearOneShotSource.PlayOneShot(clip, disappearSuctionVolume);
     }
     public void AcquireGameOverGO(GameObject gameOverGO)
     {

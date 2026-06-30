@@ -75,6 +75,7 @@ public class WhirlpoolSequenceCoordinator : MonoBehaviour
         if (!pullStarted && timer >= pullSequenceDelay)
         {
             whirlpoolManager?.PullSeqUence();
+            
             pullStarted = true;
             Debug.LogWarning("Pull Called");
             Debug.LogWarning("pullSequenceDelay: " + pullSequenceDelay);
