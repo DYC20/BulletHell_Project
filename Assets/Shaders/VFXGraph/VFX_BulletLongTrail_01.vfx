@@ -318,38 +318,6 @@ MonoBehaviour:
     max: Infinity
     enumValues: []
     descendantCount: 0
-  - name: Rate
-    path: Rate
-    tooltip: 
-    space: -1
-    spaceable: 0
-    sheetType: m_Float
-    realType: Single
-    defaultValue:
-      m_Type:
-        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-          PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 5
-    min: -Infinity
-    max: Infinity
-    enumValues: []
-    descendantCount: 0
-  - name: Velocity
-    path: Velocity
-    tooltip: 
-    space: -1
-    spaceable: 0
-    sheetType: m_Float
-    realType: Single
-    defaultValue:
-      m_Type:
-        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-          PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 1
-    min: -Infinity
-    max: Infinity
-    enumValues: []
-    descendantCount: 0
   - name: Size Min
     path: Size Min
     tooltip: 
@@ -410,6 +378,38 @@ MonoBehaviour:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
       m_SerializableObject: 1.2
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 0
+  - name: Rate
+    path: Rate
+    tooltip: 
+    space: -1
+    spaceable: 0
+    sheetType: m_Float
+    realType: Single
+    defaultValue:
+      m_Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 5
+    min: -Infinity
+    max: Infinity
+    enumValues: []
+    descendantCount: 0
+  - name: Velocity
+    path: Velocity
+    tooltip: 
+    space: -1
+    spaceable: 0
+    sheetType: m_Float
+    realType: Single
+    defaultValue:
+      m_Type:
+        m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+          PublicKeyToken=b77a5c561934e089
+      m_SerializableObject: 1
     min: -Infinity
     max: Infinity
     enumValues: []
@@ -6891,7 +6891,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615290}
   m_ExposedName: Size Min
   m_Exposed: 1
-  m_Order: 2
+  m_Order: 0
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -6972,7 +6972,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615292}
   m_ExposedName: Size Max
   m_Exposed: 1
-  m_Order: 3
+  m_Order: 1
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -7053,7 +7053,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615294}
   m_ExposedName: Clip Over Time
   m_Exposed: 1
-  m_Order: 4
+  m_Order: 2
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -7134,7 +7134,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615296}
   m_ExposedName: Trail Lifetime
   m_Exposed: 1
-  m_Order: 5
+  m_Order: 3
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -7974,7 +7974,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615326}
   m_ExposedName: Rate
   m_Exposed: 1
-  m_Order: 0
+  m_Order: 10
   m_Category: Smoke
   m_Min:
     m_Type:
@@ -8325,7 +8325,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615339}
   m_ExposedName: Velocity
   m_Exposed: 1
-  m_Order: 1
+  m_Order: 11
   m_Category: Smoke
   m_Min:
     m_Type:
