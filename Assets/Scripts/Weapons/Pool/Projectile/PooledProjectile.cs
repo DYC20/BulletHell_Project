@@ -4,6 +4,7 @@ using UnityEngine.VFX;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine.Rendering;
+using VisualEffect = UnityEngine.VFX.VisualEffect;
 
 [RequireComponent(typeof(Collider2D))]
 public class PooledProjectile : MonoBehaviour
@@ -16,6 +17,8 @@ public class PooledProjectile : MonoBehaviour
     [SerializeField] private ProjectileShootEffectPS shootEffectPS;
     [SerializeField] private Renderer bulletRenderer;
     [SerializeField, ColorUsage(false, true)] private  Color enemyBulletColor;
+    [SerializeField] private ParticleSystem trailPS;
+    [SerializeField] private GameObject notTrailObjects;
     
     //[SerializeField]  private Renderer OutlineMaterialRenderer;
     //private MaterialPropertyBlock mpb;
@@ -47,6 +50,10 @@ public class PooledProjectile : MonoBehaviour
     private ModifierSO activeModifier;
     
     private int _shotID;
+
+    private int _particleCount;
+    private bool trailIsAlive;
+    private bool forceDespawn;
     
 /*
     private void Awake()
@@ -65,6 +72,8 @@ public class PooledProjectile : MonoBehaviour
         hitEffectPS = GetComponent<ProjectileHitEffectPS>();
         shootEffect = GetComponent<ProjectileShootEffect>();
         shootEffectPS = GetComponent<ProjectileShootEffectPS>();
+        notTrailObjects.SetActive(true);
+        forceDespawn = false;
     }
 
     private void Awake()
@@ -94,6 +103,18 @@ public class PooledProjectile : MonoBehaviour
 
     public void Init(GameObject owner, Teams ownerTeam, ProjectileConfigSO config, Vector2 direction, float speedOverride, Transform spawnTf, int shotid)
     {
+        forceDespawn = false;
+        trailIsAlive = trailPS != null;
+
+        if (notTrailObjects != null)
+            notTrailObjects.SetActive(true);
+
+        if (trailPS != null)
+        {
+            trailPS.Clear(true);
+            trailPS.Play(true);
+        }
+        
         Debug.LogWarning("SpeedOverride: " + speedOverride);
         _shotID = shotid;
         _owner = owner;
@@ -101,6 +122,7 @@ public class PooledProjectile : MonoBehaviour
         _modifierSet = _owner != null ? _owner.GetComponentInParent<ProjectileModifierSet>() : null;
         _ownerTeam = ownerTeam;
         _config = config;
+
         
         originalColor = bulletRenderer.sharedMaterial.color;
 
@@ -201,6 +223,10 @@ public class PooledProjectile : MonoBehaviour
             }
             
         }
+        if (trailPS != null)
+            trailIsAlive = true;
+        if (trailPS == null)
+            _particleCount = 0;
         /*
         else if (shootEffect == null || _config == null || spawnTf == null)
         {
@@ -211,23 +237,31 @@ public class PooledProjectile : MonoBehaviour
 
     private void Update()
     {
+        if (forceDespawn)
+        {
+            if (trailPS == null || !trailPS.IsAlive(true))
+            {
+                FinishDespawn();
+            }
+
+            return;
+        }
+
         if (_config == null) return;
-        
+
         _lifeTimer += Time.deltaTime;
-        // Debug.LogWarning("lifeTimer:" + _lifeTimer);
-        if (_config.doDissapateOverLifetime == true)
-                {
-                     float t = (_config.lifetime <= 0f) ? 1f : Mathf.Clamp01(_lifeTimer / _config.lifetime);
-                     float scale = _config.dissapateOverLifetime.Evaluate(t);
-                     transform.localScale = Vector3.one * scale;
-                }
+
+        if (_config.doDissapateOverLifetime)
+        {
+            float t = (_config.lifetime <= 0f) ? 1f : Mathf.Clamp01(_lifeTimer / _config.lifetime);
+            float scale = _config.dissapateOverLifetime.Evaluate(t);
+            transform.localScale = Vector3.one * scale;
+        }
 
         if (_lifeTimer >= _config.lifetime)
         {
             Despawn();
-           
         }
-        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -439,7 +473,7 @@ public class PooledProjectile : MonoBehaviour
     }
     else
     {
-        Despawn();
+            Despawn();
     }
 }
 
@@ -519,21 +553,40 @@ public class PooledProjectile : MonoBehaviour
     }
 
     public void Despawn()
-    {/*
-        transform.localScale = Vector3.one;
-        OutlineMaterialRenderer.GetPropertyBlock(mpb);
-        mpb.Clear();
-        OutlineMaterialRenderer.SetPropertyBlock(mpb);
-       */
-        
-        // Stop physics motion to avoid “ghost velocity” on reuse
+    {
+        if (forceDespawn)
+            return;
+
         if (rb != null)
             rb.linearVelocity = Vector2.zero;
+
+        if (notTrailObjects != null)
+            notTrailObjects.SetActive(false);
+
+        if (trailPS != null)
+        {
+            forceDespawn = true;
+
+            // Stop creating new particles, but let existing particles finish.
+            trailPS.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+
+            Debug.Log("Started forced despawn, waiting for trail particles.");
+            return;
+        }
+
+        FinishDespawn();
+    }
+    private void FinishDespawn()
+    {
+        forceDespawn = false;
+        trailIsAlive = false;
 
         _owner = null;
         _config = null;
 
-            gameObject.SetActive(false);
+        gameObject.SetActive(false);
+
+        Debug.Log("Projectile fully despawned after trail ended.");
     }
     
     private bool TryGetGroundedState(GameObject obj, out bool grounded)
