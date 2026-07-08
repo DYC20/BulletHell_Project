@@ -28,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 0.48766804}
+  m_LocalScale: {x: 30, y: 30, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -108,12 +108,12 @@ MonoBehaviour:
   strengthProperty: _Strength
   distanceProperty: _DistanceFromCenter
   duration: 0.6
-  startSize: 0.05
-  endSize: 0
+  startSize: 0
+  endSize: 0.05
   startStrength: 0.2
   endStrength: 0
   startDistance: 0
-  endDistance: 0.5
+  endDistance: 0.2
   sizeCurve:
     serializedVersion: 2
     m_Curve:

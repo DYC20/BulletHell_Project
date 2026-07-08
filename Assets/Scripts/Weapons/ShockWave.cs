@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -43,6 +44,21 @@ public class ShockWave : MonoBehaviour
         _distanceID = Shader.PropertyToID(distanceProperty);
     }
 
+    /*private void Update()
+    {
+        if (_mpb.GetFloat(_sizeID) == endSize &&
+            _mpb.GetFloat(_strengthID) == endStrength &&
+            _mpb.GetFloat(_distanceID) == endDistance)
+        {
+            Destroy(gameObject);
+            
+            _mpb.SetFloat(_sizeID, startSize);
+            _mpb.SetFloat(_strengthID, startStrength);
+            _mpb.SetFloat(_distanceID, startDistance);
+           
+        }
+    } */
+
     /// <summary>
     /// Call this from another script and pass the world position of the source object.
     /// </summary>
@@ -76,17 +92,23 @@ public class ShockWave : MonoBehaviour
             _renderer.SetPropertyBlock(_mpb);
 
             yield return null;
+            
+            ApplyShockwaveValues(currentSize, currentStrength, currentDistance);
         }
 
         // Force exact final values
-        _renderer.GetPropertyBlock(_mpb);
-
-        _mpb.SetFloat(_sizeID, endSize);
-        _mpb.SetFloat(_strengthID, endStrength);
-        _mpb.SetFloat(_distanceID, endDistance);
-
-        _renderer.SetPropertyBlock(_mpb);
+        
 
         _playRoutine = null;
+    }
+    private void ApplyShockwaveValues(float size, float strength, float distance)
+    {
+        _renderer.GetPropertyBlock(_mpb);
+
+        _mpb.SetFloat(_sizeID, size);
+        _mpb.SetFloat(_strengthID, strength);
+        _mpb.SetFloat(_distanceID, distance);
+
+        _renderer.SetPropertyBlock(_mpb);
     }
 }

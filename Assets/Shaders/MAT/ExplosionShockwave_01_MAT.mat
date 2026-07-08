@@ -41,14 +41,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DistanceFromCenter: 0.48
+    - _DistanceFromCenter: 0.2
     - _Distance_From_Center: 0.48
-    - _Float: 1.5
+    - _Float: 2.2
+    - _NoiseScale: 1.67
+    - _NoiseSpeed: 3
     - _Power: 0.88
     - _Size: 0.05
-    - _Strength: 0.2
+    - _Strength: 0.18
     m_Colors:
     - White: {r: 1, g: 1, b: 1, a: 1}
+    - _NoiseColor: {r: 1, g: 0.8056904, b: 0, a: 0}
     - _ShockWave_Origin: {r: 0.65, g: 0.5, b: 0, a: 0}
     - _ShockwaveOrigin: {r: 0.5, g: 0.5, b: 0, a: 0}
   m_BuildTextureStacks: []
