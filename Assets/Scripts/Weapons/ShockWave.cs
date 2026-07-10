@@ -100,6 +100,7 @@ public class ShockWave : MonoBehaviour
         
 
         _playRoutine = null;
+        Destroy(gameObject);
     }
     private void ApplyShockwaveValues(float size, float strength, float distance)
     {
