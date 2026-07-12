@@ -11,18 +11,22 @@ public class ModifierPickup : MonoBehaviour, IPickup
     private GameObject currentPicker;
 
     [SerializeField] private bool isIce;
+    [SerializeField] private bool isElectric;
 
     [Header("RevolverFX")] 
     [SerializeField] private GameObject revolverFireEffect;
     [SerializeField] private GameObject revolverIceEffect;
+    [SerializeField] private GameObject revolverElectricEffect;
     [SerializeField] private Sprite FireRevolverSprite;
     [SerializeField] private Sprite IceRevolverSprite;
+    [SerializeField] private Sprite ElectricRevolverSprite;
     private bool isRevolver;
     
      
     [Header("ShotgunFX")] 
     [SerializeField] private GameObject shotgunFireEffect;
     [SerializeField] private GameObject shotgunIceEffect;
+    [SerializeField] private GameObject shotgunElectricEffect;
     [SerializeField] private Sprite FireShotgunSprite;
     [SerializeField] private Sprite IceShotgunSprite;
     private bool isShotgun;
@@ -30,6 +34,7 @@ public class ModifierPickup : MonoBehaviour, IPickup
     [Header("GrenadeFX")] 
     [SerializeField] private GameObject grenadeFireEffect;
     [SerializeField] private GameObject grenadeIceEffect;
+    [SerializeField] private GameObject grenadeElectricEffect;
     [SerializeField] private Sprite FireGrenadeSprite;
     [SerializeField] private Sprite IceGrenadeSprite;
     private bool isGrenade;
@@ -67,6 +72,7 @@ public class ModifierPickup : MonoBehaviour, IPickup
         if (picker == null || modifierConfig == null) return;
 
         ModifierRuntimeState.Instance.SetIce(isIce);
+        ModifierRuntimeState.Instance.SetIce(isElectric);
         ModifierRuntimeState.Instance.SetModifiedState(true);
         ModifierRuntimeState.Instance.AnimateUIToModifier(isIce);
         
@@ -123,6 +129,11 @@ public class ModifierPickup : MonoBehaviour, IPickup
                 ModifierRuntimeState.Instance.fireUIEffect.Reinit();
                 ModifierRuntimeState.Instance.iceUIEffect.Play();
             }
+            else if (isElectric)
+            {
+                AssignWeaponFX(revolverElectricEffect);
+                newSprite = ElectricRevolverSprite;
+            }
             else
             {
                 AssignWeaponFX(revolverFireEffect);
@@ -141,6 +152,10 @@ public class ModifierPickup : MonoBehaviour, IPickup
                 ModifierRuntimeState.Instance.fireUIEffect.Reinit();
                 ModifierRuntimeState.Instance.iceUIEffect.Play();
             }
+            else if (isElectric)
+            {
+                AssignWeaponFX(shotgunElectricEffect);
+            }
             else
             {
                 AssignWeaponFX(shotgunFireEffect);
@@ -158,6 +173,10 @@ public class ModifierPickup : MonoBehaviour, IPickup
                 newSprite = IceGrenadeSprite;
                 ModifierRuntimeState.Instance.fireUIEffect.Reinit();
                 ModifierRuntimeState.Instance.iceUIEffect.Play();
+            }
+            else if (isElectric)
+            {
+                AssignWeaponFX(grenadeElectricEffect);
             }
             else
             {

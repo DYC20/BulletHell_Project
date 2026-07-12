@@ -34,6 +34,9 @@ public class ModifierSO : ProjectileModifierSO
 
     [Header("FX Prefab (ParticleSystem or VFX Graph)")]
     [SerializeField] private GameObject fullEffectPrefab;
+    
+    [Header("Electric Material")]
+    public Material tempEnemyMaterial;
 
 
     public override void Modify(ref ProjectileConfigSO config, ref ObjectPool pool)
@@ -72,7 +75,8 @@ public class ModifierSO : ProjectileModifierSO
             fireIntervalMul: fireIntervalMultiplier,
             durationSeconds: debuffDuration,
             damage: damagePerSconds,
-            makeBodyStatic: isStatic
+            makeBodyStatic: isStatic,
+            tempEnemyMaterial: tempEnemyMaterial
         );
 
         if (fullEffectPrefab != null)
@@ -121,7 +125,8 @@ public class ModifierSO : ProjectileModifierSO
                 fireIntervalMul: fireIntervalMultiplier,
                 durationSeconds: debuffDuration,
                 damage: damagePerSconds,
-                makeBodyStatic: isStatic
+                makeBodyStatic: isStatic,
+                tempEnemyMaterial: tempEnemyMaterial
             );
 
             // spawn FX on enemy and auto-destroy when done

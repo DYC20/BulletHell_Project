@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd0faba9dde93c940ab32c43397ab157, type: 3}
+  m_Name: ElectricModifier SO
+  m_EditorClassIdentifier: Assembly-CSharp::ModifierSO
+  bulletSet:
+    config: {fileID: 11400000, guid: f133e4ae7461d0741a698f2928d9292b, type: 2}
+    pool: {fileID: 11400000, guid: 22675279e1894144f81e68f91ab78706, type: 2}
+  shellSet:
+    config: {fileID: 11400000, guid: 5b934af6d49cc764a83dd9532654fdab, type: 2}
+    pool: {fileID: 11400000, guid: 719edbca415202044a2bbc631c5ce2e1, type: 2}
+  explosiveSet:
+    config: {fileID: 11400000, guid: 56211861c814d93448b4ffe76dfb6436, type: 2}
+    pool: {fileID: 11400000, guid: 72f0af024d9e5274fa0d2dc02426e56c, type: 2}
+  hitsToTrigger: 3
+  debuffDuration: 8
+  moveSpeedMultiplier: 2
+  fireIntervalMultiplier: 5
+  damagePerSconds: 0
+  damageFX: {fileID: 4129969376939518295, guid: 0131a0262b42d144f8588d7bd0b95453, type: 3}
+  isStatic: 0
+  fullEffectPrefab: {fileID: 1040110407622354698, guid: 7436eed9b23af2b45a97d555224d09c8, type: 3}
+  tempEnemyMaterial: {fileID: 2100000, guid: 61053a815dd3ac149b45daf3000c5351, type: 2}

@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: IceBullet_05_MAT
   m_Shader: {fileID: -6465566751694194690, guid: a3c8b31454ac2a84bb1b3fccd9043fe5, type: 3}
-  m_Parent: {fileID: 2100000, guid: a2640539437c8454c815a45a39f2c2f5, type: 2}
+  m_Parent: {fileID: 2100000, guid: 8f96be11034090b45b9e805448ec9f09, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -25,9 +25,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _Noise_Power: 5.22
     m_Colors:
-    - _Color: {r: 1.4197593, g: 1.8433778, b: 8.47419, a: 1}
+    - _Color: {r: 1.4944243, g: 3.1661825, b: 15.08657, a: 1}
+    - _Noise_Speed: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &6807234208576441684

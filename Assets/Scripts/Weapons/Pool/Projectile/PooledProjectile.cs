@@ -54,6 +54,7 @@ public class PooledProjectile : MonoBehaviour
     private int _particleCount;
     private bool trailIsAlive;
     private bool forceDespawn;
+    private List<ParticleSystem> trails;
     
 /*
     private void Awake()
@@ -83,6 +84,8 @@ public class PooledProjectile : MonoBehaviour
 
         if (bulletRenderer == null)
             bulletRenderer = GetComponentInChildren<Renderer>();
+        if (trailPS != null)
+            trails = new List<ParticleSystem>();
     }
 
     private void OnEnable()
@@ -111,8 +114,12 @@ public class PooledProjectile : MonoBehaviour
 
         if (trailPS != null)
         {
-            trailPS.Clear(true);
-            trailPS.Play(true);
+            foreach (var PS in trails)
+            {
+                PS.Clear(true);
+                PS.Play(true); 
+            }
+
         }
         
         Debug.LogWarning("SpeedOverride: " + speedOverride);
@@ -568,7 +575,11 @@ public class PooledProjectile : MonoBehaviour
             forceDespawn = true;
 
             // Stop creating new particles, but let existing particles finish.
-            trailPS.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+            foreach (var PS in trails)
+            {
+               PS.Stop(true, ParticleSystemStopBehavior.StopEmitting); 
+            }
+            
 
             Debug.Log("Started forced despawn, waiting for trail particles.");
             return;

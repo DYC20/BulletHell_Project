@@ -27,7 +27,8 @@ public class ModifierRuntimeState : MonoBehaviour
 
     private ScriptableObject currentModifier;
 
-    public bool isIce;
+    [HideInInspector] public bool isIce;
+    [HideInInspector] public bool isElectric;
 
     [HideInInspector] public bool isModified;
 
@@ -35,6 +36,9 @@ public class ModifierRuntimeState : MonoBehaviour
     private Gradient defaultBGFXGradient;
     private Coroutine uiRoutine;
     private bool defaultsCached;
+    private GameObject currentEnemy;
+    
+    GameObject currentModGO;
     
 
     private class Snapshot
@@ -50,6 +54,9 @@ public class ModifierRuntimeState : MonoBehaviour
 
         public bool hasPivot;
         public Transform weaponPivot;
+
+        public bool hasMaterial;
+        public Material material;
 
         public Coroutine revertRoutine;
         public Coroutine damageRoutine;
@@ -184,6 +191,10 @@ public class ModifierRuntimeState : MonoBehaviour
     {
         isIce = value;
     }
+    public void SetElectric(bool value)
+    {
+        isElectric = value;
+    }
 
     public void SetModifiedState(bool value)
     {
@@ -244,8 +255,10 @@ public class ModifierRuntimeState : MonoBehaviour
                     StopCoroutine(kv.Value.revertRoutine);
             }
         }
-
+        
         _snapshots.Remove(modKey);
+        Debug.Log("current Mod:" + currentModGO.name);
+        Destroy(currentModGO);
     }
 
     public void ApplyTimedDebuff(
@@ -256,9 +269,11 @@ public class ModifierRuntimeState : MonoBehaviour
         float fireIntervalMul,
         float durationSeconds,
         float damage,
-        bool makeBodyStatic
+        bool makeBodyStatic,
+        Material tempEnemyMaterial
     )
     {
+        currentEnemy = enemy;
         currentModifier = modifier;
         if (modifier == null || enemy == null) return;
 
@@ -304,7 +319,22 @@ public class ModifierRuntimeState : MonoBehaviour
                snap.weaponPivot = weaponPivot.WeaponPivot;
            }
            
+           var mat = enemy.GetComponentInParent<SpriteRenderer>();
+           if (mat != null)
+           {
+               snap.hasMaterial = true;
+               snap.material = mat.material;
+           }
+           
            perEnemy.Add(enemyKey, snap);
+        }
+        foreach (Transform child in currentEnemy.GetComponentsInChildren<Transform>(true))
+        {
+            if (child != currentEnemy.transform && child.CompareTag("ModifiedState"))
+            {
+                currentModGO = child.gameObject;
+                break;
+            }
         }
    
            if (snap.revertRoutine != null)
@@ -324,7 +354,13 @@ public class ModifierRuntimeState : MonoBehaviour
    
                snap.damageRoutine = StartCoroutine(DamageOverTime(enemy, damage, damageFX, durationSeconds, modifier));
            } 
-
+           
+           var ma = enemy.GetComponentInParent<SpriteRenderer>();
+           if (ma != null && snap.hasMaterial)
+           {
+               ma.material = tempEnemyMaterial;
+           }
+               
 
         if (makeBodyStatic)
         {
@@ -365,6 +401,11 @@ public class ModifierRuntimeState : MonoBehaviour
         var weaponPivot = enemy.GetComponentInParent<IWeaponPivot>();
         if (snap.weaponPivot)
             weaponPivot.WeaponPivot = snap.weaponPivot;
+        var ma = enemy.GetComponentInParent<SpriteRenderer>();
+        if (ma != null && snap.hasMaterial)
+        {
+            ma.material = snap.material;
+        }
             
         if (snap.damageRoutine != null)
             StopCoroutine(snap.damageRoutine);
