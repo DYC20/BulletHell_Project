@@ -4,6 +4,7 @@ using UnityEngine.VFX;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using VisualEffect = UnityEngine.VFX.VisualEffect;
 
 [RequireComponent(typeof(Collider2D))]
@@ -55,6 +56,8 @@ public class PooledProjectile : MonoBehaviour
     private bool trailIsAlive;
     private bool forceDespawn;
     private List<ParticleSystem> trails;
+    private Light2D light2D;
+    [SerializeField] private GameObject trailHolder;
     
 /*
     private void Awake()
@@ -74,7 +77,10 @@ public class PooledProjectile : MonoBehaviour
         shootEffect = GetComponent<ProjectileShootEffect>();
         shootEffectPS = GetComponent<ProjectileShootEffectPS>();
         notTrailObjects.SetActive(true);
+        light2D = trailHolder.GetComponentInChildren<Light2D>();
+        //trailHolder.SetActive(true);
         forceDespawn = false;
+        trailIsAlive = true;
     }
 
     private void Awake()
@@ -86,12 +92,19 @@ public class PooledProjectile : MonoBehaviour
             bulletRenderer = GetComponentInChildren<Renderer>();
         if (trailPS != null)
             trails = new List<ParticleSystem>();
+
+        light2D = trailHolder.GetComponentInChildren<Light2D>();
     }
 
     private void OnEnable()
     {
         // Important: ensure collider works immediately, but timer resets on Init
         _lifeTimer = 0f;
+        foreach (var PS in trailHolder.GetComponentsInChildren<ParticleSystem>())
+        {
+            trails.Add(PS);
+        }
+        trailIsAlive = true;
     }
 
     private void ChangeBulletColor(Color bulletNewColor)
@@ -117,7 +130,8 @@ public class PooledProjectile : MonoBehaviour
             foreach (var PS in trails)
             {
                 PS.Clear(true);
-                PS.Play(true); 
+                PS.Play(true);
+                trailIsAlive = true;
             }
 
         }
@@ -577,9 +591,20 @@ public class PooledProjectile : MonoBehaviour
             // Stop creating new particles, but let existing particles finish.
             foreach (var PS in trails)
             {
-               PS.Stop(true, ParticleSystemStopBehavior.StopEmitting); 
+               PS.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+   
             }
-            
+            foreach (var PS in trails)
+            {
+              if (PS.particleCount == 0)
+                  trailIsAlive = false;
+            }
+
+           if (trailHolder != null && !trailIsAlive)
+           {
+               light2D.gameObject.SetActive(false);
+           }
+                             
 
             Debug.Log("Started forced despawn, waiting for trail particles.");
             return;
