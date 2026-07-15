@@ -143,7 +143,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   freezeLight: {fileID: 3123442189569257360}
   freezeEffect: {fileID: 2944466993120710712}
-  lightDuration: 4
+  lightDuration: 8
   startRadius: 0.3
   endRadius: 1.2
   innerRadiusOffset: 0.7
@@ -191,7 +191,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   enablePreviewInEditMode: 1
   autoPreview: 1
-  previewTime: 0.58251166
+  previewTime: 0.94950396
 --- !u!1001 &8981693663063512168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -239,6 +239,14 @@ PrefabInstance:
     - target: {fileID: 1973923108521331870, guid: 6cd5df8c122e75c45818d184ee135308, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340453458385665016, guid: 6cd5df8c122e75c45818d184ee135308, type: 3}
+      propertyPath: m_PointLightInnerRadius
+      value: -0.33572552
+      objectReference: {fileID: 0}
+    - target: {fileID: 6340453458385665016, guid: 6cd5df8c122e75c45818d184ee135308, type: 3}
+      propertyPath: m_PointLightOuterRadius
+      value: 0.36427447
       objectReference: {fileID: 0}
     - target: {fileID: 6511476932335614048, guid: 6cd5df8c122e75c45818d184ee135308, type: 3}
       propertyPath: m_Name

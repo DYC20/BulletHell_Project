@@ -35197,11 +35197,11 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.18283042, y: -0.060318932}
-      - {x: 0.18225256, y: 0.0031541665}
-      - {x: 0.12178434, y: 0.0024461402}
-      - {x: 0.12113653, y: -0.1548391}
-      - {x: 0.18262294, y: -0.15838511}
+    - - {x: 0.1987552, y: -0.06403865}
+      - {x: 0.19954231, y: 0.04677636}
+      - {x: 0.1073762, y: 0.0470828}
+      - {x: 0.10642507, y: -0.18121532}
+      - {x: 0.19839604, y: -0.18070345}
   m_UseDelaunayMesh: 1
 --- !u!4 &394024463
 Transform:
@@ -35226,7 +35226,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394024461}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -38488,7 +38488,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 31.794626, y: -11.02362, z: 0}
+  m_LocalPosition: {x: 32.22895, y: -10.662671, z: 5.2314153}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -65846,6 +65846,11 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1125108758 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4451884784529968526, guid: 6c20f4593e9ae5b40996e11ec2419b9e, type: 3}
+  m_PrefabInstance: {fileID: 3704764648268133053}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1131303848
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -73150,6 +73155,69 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2759508638922692498, guid: 6c20f4593e9ae5b40996e11ec2419b9e, type: 3}
   m_PrefabInstance: {fileID: 3704764648268133053}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1254333728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1125108758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b5d7c088409d9a40b7b09aa707777f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineOrbitalFollow
+  TargetOffset: {x: 0, y: 0, z: 0}
+  TrackerSettings:
+    BindingMode: 4
+    PositionDamping: {x: 1, y: 1, z: 1}
+    AngularDampingMode: 0
+    RotationDamping: {x: 1, y: 1, z: 1}
+    QuaternionDamping: 1
+  OrbitStyle: 0
+  Radius: 5
+  Orbits:
+    Top:
+      Radius: 2
+      Height: 5
+    Center:
+      Radius: 4
+      Height: 2.25
+    Bottom:
+      Radius: 2.5
+      Height: 0.1
+    SplineCurvature: 0.5
+  RecenteringTarget: 2
+  HorizontalAxis:
+    Value: 0
+    Center: 0
+    Range: {x: -180, y: 180}
+    Wrap: 1
+    Recentering:
+      Enabled: 0
+      Wait: 1
+      Time: 2
+    Restrictions: 0
+  VerticalAxis:
+    Value: 17.5
+    Center: 17.5
+    Range: {x: -10, y: 45}
+    Wrap: 0
+    Recentering:
+      Enabled: 0
+      Wait: 1
+      Time: 2
+    Restrictions: 0
+  RadialAxis:
+    Value: 1
+    Center: 1
+    Range: {x: 1, y: 1}
+    Wrap: 0
+    Recentering:
+      Enabled: 0
+      Wait: 1
+      Time: 2
+    Restrictions: 0
 --- !u!1001 &1273699340
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -114178,15 +114246,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2759508638922692498, guid: 6c20f4593e9ae5b40996e11ec2419b9e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 29.158949
+      value: 32.22895
       objectReference: {fileID: 0}
     - target: {fileID: 2759508638922692498, guid: 6c20f4593e9ae5b40996e11ec2419b9e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -12.1662
+      value: -10.662671
       objectReference: {fileID: 0}
     - target: {fileID: 2759508638922692498, guid: 6c20f4593e9ae5b40996e11ec2419b9e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 5.2314153
       objectReference: {fileID: 0}
     - target: {fileID: 2759508638922692498, guid: 6c20f4593e9ae5b40996e11ec2419b9e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -114228,10 +114296,14 @@ PrefabInstance:
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 1008156724}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5734648133296453951, guid: 6c20f4593e9ae5b40996e11ec2419b9e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4451884784529968526, guid: 6c20f4593e9ae5b40996e11ec2419b9e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1254333728}
   m_SourcePrefab: {fileID: 100100000, guid: 6c20f4593e9ae5b40996e11ec2419b9e, type: 3}
 --- !u!199 &4065203211358659247
 ParticleSystemRenderer:
@@ -114549,7 +114621,7 @@ PrefabInstance:
       objectReference: {fileID: 2800000, guid: 9c0967a6ca656664485138b5bd2f8eac, type: 3}
     - target: {fileID: 4659646963908602787, guid: 459357575a167f94d9eb144a5932f3f1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.95
+      value: 27.02
       objectReference: {fileID: 0}
     - target: {fileID: 4659646963908602787, guid: 459357575a167f94d9eb144a5932f3f1, type: 3}
       propertyPath: m_LocalPosition.y

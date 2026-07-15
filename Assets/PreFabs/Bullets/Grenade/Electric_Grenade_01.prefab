@@ -4987,7 +4987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2c1918df5ea43d40bb87e33e59f8da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LightFllicker
-  light: {fileID: 4166434381459804641}
+  light2D: {fileID: 0}
   fllickerSpeed: 50
   fllickerRadiusSpeed: 0
   fllickerRadiusMax: 0
@@ -10136,7 +10136,7 @@ Transform:
   m_GameObject: {fileID: 7424088165934825474}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.2199993, y: -0.23200035, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

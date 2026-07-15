@@ -18,7 +18,7 @@ MonoBehaviour:
   - {fileID: 8926484042661615020}
   - {fileID: 8926484042661614558}
   - {fileID: 8926484042661615196}
-  m_UIPosition: {x: 755, y: -692}
+  m_UIPosition: {x: 755, y: -691}
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots: []
@@ -88,10 +88,10 @@ MonoBehaviour:
   - title: Minimal
     position:
       serializedVersion: 2
-      x: 729
-      y: -751
-      width: 477
-      height: 2145
+      x: 730
+      y: -750
+      width: 474
+      height: 2140
     contents:
     - model: {fileID: 114023846229194376}
       id: 0
@@ -107,9 +107,9 @@ MonoBehaviour:
   uiBounds:
     serializedVersion: 2
     x: -1029
-    y: -751
-    width: 2235
-    height: 2802
+    y: -750
+    width: 2233
+    height: 2798
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3301,7 +3301,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: UnityEngine.AnimationCurve, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
-      m_SerializableObject: '{"frames":[{"time":0.0,"value":80.0,"inTangent":-261.3034973144531,"outTangent":-1232.380859375,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":true},{"time":0.20000000298023225,"value":0.0,"inTangent":3.3737378120422365,"outTangent":-1.2898526191711426,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":true},{"time":0.5110243558883667,"value":0.7600021362304688,"inTangent":4.692824840545654,"outTangent":4.692824840545654,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":true},{"time":0.6343578696250916,"value":-0.8118424415588379,"inTangent":24.262603759765626,"outTangent":24.262603759765626,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":true},{"time":0.7323209047317505,"value":1.5286340713500977,"inTangent":21.6409969329834,"outTangent":21.6409969329834,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":true},{"time":0.877907931804657,"value":4.969040870666504,"inTangent":30.174036026000978,"outTangent":21.633764266967775,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":true},{"time":1.0,"value":80.0,"inTangent":351.3634033203125,"outTangent":1.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":true}],"preWrapMode":8,"postWrapMode":8,"version":1}'
+      m_SerializableObject: '{"frames":[{"time":0.0,"value":80.0,"inTangent":-261.3034973144531,"outTangent":-4706.07421875,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":true},{"time":0.04210205376148224,"value":1.415374755859375,"inTangent":3.3737378120422365,"outTangent":-1.2898526191711426,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":true},{"time":0.5110243558883667,"value":0.7600021362304688,"inTangent":4.692824840545654,"outTangent":4.692824840545654,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":true},{"time":0.6343578696250916,"value":-0.8118424415588379,"inTangent":24.262603759765626,"outTangent":24.262603759765626,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":true},{"time":0.7323209047317505,"value":1.5286340713500977,"inTangent":21.6409969329834,"outTangent":21.6409969329834,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":true},{"time":0.877907931804657,"value":4.969040870666504,"inTangent":30.174036026000978,"outTangent":21.633764266967775,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":true},{"time":1.0,"value":80.0,"inTangent":351.3634033203125,"outTangent":1.0,"tangentMode":0,"leftTangentMode":0,"rightTangentMode":0,"broken":true}],"preWrapMode":8,"postWrapMode":8,"version":1}'
     m_Space: -1
   m_Property:
     name: curve
@@ -6225,7 +6225,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 2
+      m_SerializableObject: 6
     m_Space: -1
   m_Property:
     name: Min
@@ -6259,7 +6259,7 @@ MonoBehaviour:
       m_Type:
         m_SerializableType: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
           PublicKeyToken=b77a5c561934e089
-      m_SerializableObject: 4
+      m_SerializableObject: 8
     m_Space: -1
   m_Property:
     name: Max

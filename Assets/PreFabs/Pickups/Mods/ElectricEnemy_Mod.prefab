@@ -59,14 +59,16 @@ MonoBehaviour:
   ElectricRevolverSprite: {fileID: 21300000, guid: 87f652187b6a98b4f9eb4f0db92e86c7, type: 3}
   shotgunFireEffect: {fileID: 6931151330811414991, guid: 288abc4fb92db174dbef78da1d36f6e8, type: 3}
   shotgunIceEffect: {fileID: 3935814070335767167, guid: 438e7b0e42c9f9741a586f756cbfed1c, type: 3}
-  shotgunElectricEffect: {fileID: 0}
+  shotgunElectricEffect: {fileID: 3935814070335767167, guid: 438e7b0e42c9f9741a586f756cbfed1c, type: 3}
   FireShotgunSprite: {fileID: 21300000, guid: 18b3a27f60143bc47ae01771ac0ccbb2, type: 3}
   IceShotgunSprite: {fileID: 21300000, guid: 3287e8638cf0b2d428315a6f9dd6be71, type: 3}
+  ElectricShotgunSprite: {fileID: 21300000, guid: c3f645e43ce9722438ce410e3fe4363b, type: 3}
   grenadeFireEffect: {fileID: 7270081221407595685, guid: cbff3601175cbdb48846d0ad5d83d18f, type: 3}
   grenadeIceEffect: {fileID: 5898786134405580525, guid: cfbf3c933c5853d429b3693f9c1629fb, type: 3}
-  grenadeElectricEffect: {fileID: 0}
+  grenadeElectricEffect: {fileID: 5898786134405580525, guid: cfbf3c933c5853d429b3693f9c1629fb, type: 3}
   FireGrenadeSprite: {fileID: 21300000, guid: c907f193d42ddd14dbcce956adfd4a3a, type: 3}
   IceGrenadeSprite: {fileID: 21300000, guid: a2f923cb8045afa45b58d042ab4966f7, type: 3}
+  ElectricGrenadeSprite: {fileID: 21300000, guid: a9196e1eb8963ab49b47641c6c4a0d14, type: 3}
 --- !u!70 &6789498977137230511
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -112,6 +114,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8043028199839810523}
     m_Modifications:
+    - target: {fileID: 3582162154842436982, guid: 679b5a0aec568fc428fd14a73de41b22, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4989177236710746041, guid: 679b5a0aec568fc428fd14a73de41b22, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -158,7 +164,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5815408948494975819, guid: 679b5a0aec568fc428fd14a73de41b22, type: 3}
       propertyPath: dontLoadScene
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7161381684748777573, guid: 679b5a0aec568fc428fd14a73de41b22, type: 3}
       propertyPath: m_IsActive

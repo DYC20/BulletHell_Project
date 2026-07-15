@@ -29,6 +29,7 @@ public class ModifierPickup : MonoBehaviour, IPickup
     [SerializeField] private GameObject shotgunElectricEffect;
     [SerializeField] private Sprite FireShotgunSprite;
     [SerializeField] private Sprite IceShotgunSprite;
+    [SerializeField] private Sprite ElectricShotgunSprite;
     private bool isShotgun;
      
     [Header("GrenadeFX")] 
@@ -37,6 +38,7 @@ public class ModifierPickup : MonoBehaviour, IPickup
     [SerializeField] private GameObject grenadeElectricEffect;
     [SerializeField] private Sprite FireGrenadeSprite;
     [SerializeField] private Sprite IceGrenadeSprite;
+    [SerializeField] private Sprite ElectricGrenadeSprite;
     private bool isGrenade;
      
     private Transform weaponFXtf;
@@ -155,6 +157,7 @@ public class ModifierPickup : MonoBehaviour, IPickup
             else if (isElectric)
             {
                 AssignWeaponFX(shotgunElectricEffect);
+                newSprite = ElectricShotgunSprite;
             }
             else
             {
@@ -177,6 +180,7 @@ public class ModifierPickup : MonoBehaviour, IPickup
             else if (isElectric)
             {
                 AssignWeaponFX(grenadeElectricEffect);
+                newSprite = ElectricGrenadeSprite;
             }
             else
             {

@@ -77,7 +77,7 @@ public class PooledProjectile : MonoBehaviour
         shootEffect = GetComponent<ProjectileShootEffect>();
         shootEffectPS = GetComponent<ProjectileShootEffectPS>();
         notTrailObjects.SetActive(true);
-        light2D = trailHolder.GetComponentInChildren<Light2D>();
+        //light2D = trailHolder.GetComponentInChildren<Light2D>();
         //trailHolder.SetActive(true);
         forceDespawn = false;
         trailIsAlive = true;
