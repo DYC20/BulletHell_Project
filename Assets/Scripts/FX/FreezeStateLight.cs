@@ -27,30 +27,43 @@ public class FreezeStateLight : MonoBehaviour
     [SerializeField] private bool enablePreviewInEditMode = true;
     [SerializeField] private bool autoPreview = true;
     [SerializeField, Range(0f, 1f)] private float previewTime = 0f;
+    
+    [ContextMenu("Stop Preview")]
+    private void StopPreview()
+    {
+        enablePreviewInEditMode = false;
+
+        if (freezeLight != null)
+            freezeLight.enabled = false;
+    }
 
     private Coroutine lightRoutine;
 
     private void OnEnable()
     {
-        if (freezeLight == null) return;
-
         if (!Application.isPlaying)
         {
-            ApplyPreview();
+            if (enablePreviewInEditMode)
+                ApplyPreview();
         }
         else
         {
-            freezeLight.enabled = false;
-            freezeLight.pointLightOuterRadius = 0f;
-            freezeLight.pointLightInnerRadius = 0f;
+            ResetLight();
         }
     }
 
     private void OnDisable()
     {
-        if (freezeLight == null) return;
+        if (lightRoutine != null)
+        {
+            StopCoroutine(lightRoutine);
+            lightRoutine = null;
+        }
 
-        freezeLight.enabled = false;
+        // Avoid changing scene lights during editor object deletion,
+        // recompilation, prefab editing, etc.
+        if (Application.isPlaying)
+            ResetLight();
     }
 
     private void Start()
@@ -67,20 +80,16 @@ public class FreezeStateLight : MonoBehaviour
 
     private void Update()
     {
-        if (freezeLight == null) return;
-
-        if (Application.isPlaying)
+        if (Application.isPlaying || freezeLight == null)
             return;
 
         if (!enablePreviewInEditMode)
-        {
-            freezeLight.enabled = false;
             return;
-        }
 
         if (autoPreview)
         {
             float safeDuration = Mathf.Max(0.0001f, lightDuration);
+
             previewTime += Time.deltaTime / safeDuration;
             previewTime %= 1f;
 
@@ -91,6 +100,7 @@ public class FreezeStateLight : MonoBehaviour
 
         ApplyPreview();
     }
+
 
     public void PlayEffect()
     {
@@ -135,12 +145,20 @@ public class FreezeStateLight : MonoBehaviour
 
     private void ApplyPreview()
     {
-       // freezeLight.transform.position = transform.position;
-        freezeLight.enabled = true;
-        //freezeLight.intensity = 1f;
+        if (freezeLight == null || !enablePreviewInEditMode)
+            return;
 
-        float normalized = Mathf.Clamp01(previewTime);
-        ApplyLightAtTime(normalized);
+        freezeLight.enabled = true;
+        ApplyLightAtTime(Mathf.Clamp01(previewTime));
+    }
+    private void ResetLight()
+    {
+        if (freezeLight == null)
+            return;
+
+        freezeLight.enabled = false;
+        freezeLight.pointLightOuterRadius = 0f;
+        freezeLight.pointLightInnerRadius = 0f;
     }
 
     private void ApplyLightAtTime(float normalized)
